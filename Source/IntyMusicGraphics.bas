@@ -312,14 +312,14 @@ Sprite16:
 
 '===MOV:28 == Chr:284===== [8,8]
 'Sprite28:
-	BITMAP "########"	'$FF
-	BITMAP "########"	'$FF
-	BITMAP "########"	'$FF
-	BITMAP "########"	'$FF
-	BITMAP "########"	'$FF
-	BITMAP "########"	'$FF
-	BITMAP "########"	'$FF
-	BITMAP "########"	'$FF
+	BITMAP " ..#####"	
+	BITMAP "  .#..##"	
+	BITMAP " ..#..##"	
+	BITMAP "   #..##"	
+	BITMAP " ..#..##"	
+	BITMAP "  .#...#"
+	BITMAP " ..#...#"
+	BITMAP "  .#####"	
 
 '===MOV:29 == Chr:285===== [8,8]
 'Sprite29:

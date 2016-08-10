@@ -1614,10 +1614,14 @@ ENDM
 ;; ======================================================================== ;;
 
 	;FILE IntyMusic.bas
-	;[1] 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 7/31/2016
+	;[1] 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/9/2016
 	SRCFILE "IntyMusic.bas",1
-	;[2] INCLUDE "constants.bas"
+	;[2] 
 	SRCFILE "IntyMusic.bas",2
+	;[3] '----Required----
+	SRCFILE "IntyMusic.bas",3
+	;[4] INCLUDE "constants.bas"
+	SRCFILE "IntyMusic.bas",4
 	;FILE C:\Apps\Intellivision\bin\constants.bas
 	;[1] 
 	SRCFILE "C:\Apps\Intellivision\bin\constants.bas",1
@@ -2753,34 +2757,98 @@ ENDM
 	SRCFILE "C:\Apps\Intellivision\bin\constants.bas",566
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[3] 
-	SRCFILE "IntyMusic.bas",3
-	;[4] '-----OPTIONS------
-	SRCFILE "IntyMusic.bas",4
-	;[5] CONST INTYMUSIC_STAFF_COLOR = FG_BLUE		'FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
+	;[5] PLAY FULL
 	SRCFILE "IntyMusic.bas",5
-	;[6] CONST INTYMUSIC_AUTO_SCROLL = 1			'0 to pause at notes, 1 to always scroll
-	SRCFILE "IntyMusic.bas",6
-	;[7] CONST INTYMUSIC_FANFOLD = 1				'1 to alternate colors, like classic dot-matrix fanfold paper
-	SRCFILE "IntyMusic.bas",7
-	;[8] 
-	SRCFILE "IntyMusic.bas",8
-	;[9] CONST INTYMUSIC_PIANO_HILITE1 = SPR_CYAN	'Piano hilite: (SPR_*: BLACK,BLUE,RED,TAN,DARKGREEN,GREEN,YELLOW,WHITE,GREY,CYAN,ORANGE,BROWN,PINK,LIGHTBLUE,YELLOWGREEN,PURPLE)
-	SRCFILE "IntyMusic.bas",9
-	;[10] CONST INTYMUSIC_PIANO_HILITE2 = SPR_YELLOWGREEN
-	SRCFILE "IntyMusic.bas",10
-	;[11] PLAY FULL
-	SRCFILE "IntyMusic.bas",11
 	MVII #5,R3
 	MVO R3,_music_mode
-	;[12] '-----Required------
+	;[6] DIM iMusicNoteColor(3)		'Note color 
+	SRCFILE "IntyMusic.bas",6
+	;[7] DIM #iMusicPianoColorA(3)
+	SRCFILE "IntyMusic.bas",7
+	;[8] DIM #iMusicPianoColorB(3)
+	SRCFILE "IntyMusic.bas",8
+	;[9] 
+	SRCFILE "IntyMusic.bas",9
+	;[10] '========================== Options you can modify =============================================
+	SRCFILE "IntyMusic.bas",10
+	;[11] CONST INTYMUSIC_STAFF_COLOR = FG_BLUE		'FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
+	SRCFILE "IntyMusic.bas",11
+	;[12] CONST INTYMUSIC_AUTO_SCROLL = 1			'0 to pause at notes, 1 to always scroll
 	SRCFILE "IntyMusic.bas",12
-	;[13] 
+	;[13] CONST INTYMUSIC_FANFOLD = 1				'1 to alternate colors, like classic dot-matrix paper
 	SRCFILE "IntyMusic.bas",13
-	;[14] 	
+	;[14] CONST INTYMUSIC_TITLE_COLOR=FG_BLUE			'---Song title Color ---- FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
 	SRCFILE "IntyMusic.bas",14
-	;[15] INCLUDE "IntyMusicPlayer.bas"
+	;[15] 
 	SRCFILE "IntyMusic.bas",15
+	;[16] '--- Note color, by voice channel ---- FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
+	SRCFILE "IntyMusic.bas",16
+	;[17] iMusicNoteColor(0)=FG_BLACK
+	SRCFILE "IntyMusic.bas",17
+	CLRR R0
+	MVO R0,Q3
+	;[18] iMusicNoteColor(1)=FG_RED
+	SRCFILE "IntyMusic.bas",18
+	MVII #2,R0
+	MVO R0,Q3+1
+	;[19] iMusicNoteColor(2)=SPR_DARKGREEN
+	SRCFILE "IntyMusic.bas",19
+	MVII #4,R0
+	MVO R0,Q3+2
+	;[20] 
+	SRCFILE "IntyMusic.bas",20
+	;[21] '--- Piano key color, by voice channel ---- 2nd set for flash effect. Use same colors on 2nd set to disable blink
+	SRCFILE "IntyMusic.bas",21
+	;[22] ' SPR_BLACK,SPR_BLUE,SPR_RED,SPR_TAN,SPR_DARKGREEN,SPR_GREEN,SPR_YELLOW,SPR_WHITE,SPR_GREY,SPR_CYAN,SPR_ORANGE,SPR_BROWN,SPR_PINK,SPR_LIGHTBLUE,SPR_YELLOWGREEN,SPR_PURPLE			7
+	SRCFILE "IntyMusic.bas",22
+	;[23] #iMusicPianoColorA(0)=SPR_BLACK
+	SRCFILE "IntyMusic.bas",23
+	CLRR R0
+	MVO R0,Q4
+	;[24] #iMusicPianoColorA(1)=SPR_RED
+	SRCFILE "IntyMusic.bas",24
+	MVII #2,R0
+	MVO R0,Q4+1
+	;[25] #iMusicPianoColorA(2)=SPR_DARKGREEN
+	SRCFILE "IntyMusic.bas",25
+	MVII #4,R0
+	MVO R0,Q4+2
+	;[26] 
+	SRCFILE "IntyMusic.bas",26
+	;[27] #iMusicPianoColorB(0)=SPR_GREY
+	SRCFILE "IntyMusic.bas",27
+	MVII #4096,R0
+	MVO R0,Q5
+	;[28] #iMusicPianoColorB(1)=SPR_ORANGE
+	SRCFILE "IntyMusic.bas",28
+	MVII #4098,R0
+	MVO R0,Q5+1
+	;[29] #iMusicPianoColorB(2)=SPR_GREEN
+	SRCFILE "IntyMusic.bas",29
+	MOVR R3,R0
+	MVO R0,Q5+2
+	;[30] 
+	SRCFILE "IntyMusic.bas",30
+	;[31] 'Alternating colors: STACK_BLACK,STACK_BLUE,STACK_RED,STACK_TAN,STACK_DARKGREEN,STACK_GREEN,STACK_YELLOW,STACK_WHITE,STACK_GREY,STACK_CYAN,STACK_ORANGE,STACK_BROWN,STACK_PINK,STACK_LIGHTBLUE,STACK_YELLOWGREEN,STACK_PURPLE
+	SRCFILE "IntyMusic.bas",31
+	;[32] MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
+	SRCFILE "IntyMusic.bas",32
+	MVII #29495,R0
+	MVO R0,_color
+	MVII #1,R0
+	MVO R0,_mode_select
+	;[33] 'MODE 0,STACK_GREY,STACK_LIGHTBLUE,STACK_WHITE,STACK_CYAN
+	SRCFILE "IntyMusic.bas",33
+	;[34] 
+	SRCFILE "IntyMusic.bas",34
+	;[35] '========================== Options End =============================================
+	SRCFILE "IntyMusic.bas",35
+	;[36] 
+	SRCFILE "IntyMusic.bas",36
+	;[37] '-----Required------ 
+	SRCFILE "IntyMusic.bas",37
+	;[38] INCLUDE "IntyMusicPlayer.bas"
+	SRCFILE "IntyMusic.bas",38
 	;FILE IntyMusicPlayer.bas
 	;[1] 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/3/2016
 	SRCFILE "IntyMusicPlayer.bas",1
@@ -2790,12 +2858,8 @@ ENDM
 	SRCFILE "IntyMusicPlayer.bas",3
 	;[4] 
 	SRCFILE "IntyMusicPlayer.bas",4
-	;[5] MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
+	;[5] 'MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
 	SRCFILE "IntyMusicPlayer.bas",5
-	MVII #29495,R0
-	MVO R0,_color
-	MVII #1,R0
-	MVO R0,_mode_select
 	;[6] WAIT
 	SRCFILE "IntyMusicPlayer.bas",6
 	CALL _wait
@@ -2812,7 +2876,7 @@ ENDM
 	MVO R0,_gram_target
 	MVII #16,R0
 	MVO R0,_gram_total
-	MVII #Q3,R0
+	MVII #Q6,R0
 	MVO R0,_gram_bitmap
 	CALL _wait
 	;[10] DEFINE 16,16,Sprite16
@@ -2820,7 +2884,7 @@ ENDM
 	MVII #16,R0
 	MVO R0,_gram_target
 	MVO R0,_gram_total
-	MVII #Q4,R0
+	MVII #Q7,R0
 	MVO R0,_gram_bitmap
 	;[11] 
 	SRCFILE "IntyMusicPlayer.bas",11
@@ -2847,7 +2911,7 @@ ENDM
 	;[22] IntyMusicReset:
 	SRCFILE "IntyMusicPlayer.bas",22
 	; INTYMUSICRESET
-Q11:	;[23] CLS
+Q14:	;[23] CLS
 	SRCFILE "IntyMusicPlayer.bas",23
 	CALL CLRSCR
 	MVII #512,R0
@@ -2892,103 +2956,105 @@ Q11:	;[23] CLS
 	SRCFILE "IntyMusicPlayer.bas",32
 	CLRR R0
 	MVO R0,V4
-	;[33] 
+	;[33] #IntyMusicBlink=0: IF INTYMUSIC_FANFOLD THEN #IntyMusicBlink=CS_ADVANCE
 	SRCFILE "IntyMusicPlayer.bas",33
-	;[34] '----initialize---
-	SRCFILE "IntyMusicPlayer.bas",34
-	;[35] WAIT
-	SRCFILE "IntyMusicPlayer.bas",35
-	CALL _wait
-	;[36] GOSUB IntyMusicInit
-	SRCFILE "IntyMusicPlayer.bas",36
-	CALL Q13
-	;[37] 
-	SRCFILE "IntyMusicPlayer.bas",37
-	;[38] '---- main loop -----
-	SRCFILE "IntyMusicPlayer.bas",38
-	;[39] PLAY MyMusic
-	SRCFILE "IntyMusicPlayer.bas",39
-	MVII #Q14,R0
-	CALL _play_music
-	;[40] PlayLoop:
-	SRCFILE "IntyMusicPlayer.bas",40
-	; PLAYLOOP
-Q15:	;[41] 	Toggle=Toggle XOR 1
-	SRCFILE "IntyMusicPlayer.bas",41
-	MVI V3,R0
-	XORI #1,R0
-	MVO R0,V3
-	;[42] 	
-	SRCFILE "IntyMusicPlayer.bas",42
-	;[43] 	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
-	SRCFILE "IntyMusicPlayer.bas",43
-	;[44] 	FOR iMusicX=0 to 2
-	SRCFILE "IntyMusicPlayer.bas",44
-	CLRR R0
+	MVO R0,V5
+	MVII #1,R0
+	TSTR R0
+	BEQ T1
+	MVII #8192,R0
 	MVO R0,V5
 T1:
-	;[45] 		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
+	;[34] 
+	SRCFILE "IntyMusicPlayer.bas",34
+	;[35] '----initialize---
+	SRCFILE "IntyMusicPlayer.bas",35
+	;[36] WAIT
+	SRCFILE "IntyMusicPlayer.bas",36
+	CALL _wait
+	;[37] GOSUB IntyMusicInit
+	SRCFILE "IntyMusicPlayer.bas",37
+	CALL Q16
+	;[38] 
+	SRCFILE "IntyMusicPlayer.bas",38
+	;[39] '---- main loop -----
+	SRCFILE "IntyMusicPlayer.bas",39
+	;[40] PLAY MyMusic
+	SRCFILE "IntyMusicPlayer.bas",40
+	MVII #Q17,R0
+	CALL _play_music
+	;[41] PlayLoop:
+	SRCFILE "IntyMusicPlayer.bas",41
+	; PLAYLOOP
+Q18:	;[42] 	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
+	SRCFILE "IntyMusicPlayer.bas",42
+	;[43] 	FOR iMusicX=0 to 2
+	SRCFILE "IntyMusicPlayer.bas",43
+	CLRR R0
+	MVO R0,V6
+T2:
+	;[44] 		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
+	SRCFILE "IntyMusicPlayer.bas",44
+	MVII #Q8,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVII #Q12,R3
+	ADD V6,R3
+	MVO@ R0,R3
+	;[45] 		iMusicVolumeLast(iMusicX)=#iMusicVol(iMusicX)
 	SRCFILE "IntyMusicPlayer.bas",45
-	MVII #Q5,R3
-	ADD V5,R3
-	MVI@ R3,R0
 	MVII #Q9,R3
-	ADD V5,R3
-	MVO@ R0,R3
-	;[46] 		iMusicVolumeLast(iMusicX)=#iMusicVol(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",46
-	MVII #Q6,R3
-	ADD V5,R3
+	ADD V6,R3
 	MVI@ R3,R0
-	MVII #Q10,R3
-	ADD V5,R3
+	MVII #Q13,R3
+	ADD V6,R3
 	MVO@ R0,R3
-	;[47] 	NEXT iMusicX	
-	SRCFILE "IntyMusicPlayer.bas",47
-	MVI V5,R0
+	;[46] 	NEXT iMusicX	
+	SRCFILE "IntyMusicPlayer.bas",46
+	MVI V6,R0
 	INCR R0
-	MVO R0,V5
+	MVO R0,V6
 	CMPI #2,R0
-	BLE T1
-	;[48] 	
+	BLE T2
+	;[47] 	
+	SRCFILE "IntyMusicPlayer.bas",47
+	;[48] 	'---- reset? ----
 	SRCFILE "IntyMusicPlayer.bas",48
-	;[49] 	'---- reset? ----
+	;[49] 	IF Cont.KEY=12 THEN 
 	SRCFILE "IntyMusicPlayer.bas",49
-	;[50] 	IF Cont.KEY=12 THEN 
-	SRCFILE "IntyMusicPlayer.bas",50
 	MVI _cnt1_key,R0
 	CMPI #12,R0
 	BNE $+4
 	MVI _cnt2_key,R0
 	CMPI #12,R0
-	BNE T2
-	;[51] 		KeyClear=1
-	SRCFILE "IntyMusicPlayer.bas",51
+	BNE T3
+	;[50] 		KeyClear=1
+	SRCFILE "IntyMusicPlayer.bas",50
 	MVII #1,R0
 	MVO R0,V4
-	;[52] 	ELSE
+	;[51] 	ELSE
+	SRCFILE "IntyMusicPlayer.bas",51
+	B T4
+T3:
+	;[52] 		IF KeyClear THEN 
 	SRCFILE "IntyMusicPlayer.bas",52
-	B T3
-T2:
-	;[53] 		IF KeyClear THEN 
-	SRCFILE "IntyMusicPlayer.bas",53
 	MVI V4,R0
 	TSTR R0
-	BEQ T4
-	;[54] 			IF Cont.KEY=10 THEN 
-	SRCFILE "IntyMusicPlayer.bas",54
+	BEQ T5
+	;[53] 			IF Cont.KEY=10 THEN 
+	SRCFILE "IntyMusicPlayer.bas",53
 	MVI _cnt1_key,R0
 	CMPI #12,R0
 	BNE $+4
 	MVI _cnt2_key,R0
 	CMPI #10,R0
-	BNE T5
-	;[55] 				PLAY OFF						
-	SRCFILE "IntyMusicPlayer.bas",55
+	BNE T6
+	;[54] 				PLAY OFF						
+	SRCFILE "IntyMusicPlayer.bas",54
 	CLRR R0
 	CALL _play_music
-	;[56] 				SOUND 0,1,0:	SOUND 1,1,0:	SOUND 2,1,0:SOUND 4,1,$38
-	SRCFILE "IntyMusicPlayer.bas",56
+	;[55] 				SOUND 0,1,0:	SOUND 1,1,0:	SOUND 2,1,0:SOUND 4,1,$38
+	SRCFILE "IntyMusicPlayer.bas",55
 	MVII #1,R0
 	MVO R0,496
 	SWAP R0
@@ -3011,206 +3077,207 @@ T2:
 	MVO R0,505
 	MVII #56,R0
 	MVO R0,504
-	;[57] 				CALL IMUSICKILL	'works too well...
+	;[56] 				CALL IMUSICKILL	'works too well...
+	SRCFILE "IntyMusicPlayer.bas",56
+	CALL F19
+	;[57] 				GOTO IntyMusicReset
 	SRCFILE "IntyMusicPlayer.bas",57
-	CALL F16
-	;[58] 				GOTO IntyMusicReset
+	B Q14
+	;[58] 			END IF
 	SRCFILE "IntyMusicPlayer.bas",58
-	B Q11
-	;[59] 			END IF
+T6:
+	;[59] 		END IF
 	SRCFILE "IntyMusicPlayer.bas",59
 T5:
-	;[60] 		END IF
+	;[60] 		KeyClear=0
 	SRCFILE "IntyMusicPlayer.bas",60
-T4:
-	;[61] 		KeyClear=0
-	SRCFILE "IntyMusicPlayer.bas",61
 	CLRR R0
 	MVO R0,V4
-	;[62] 	END IF	
+	;[61] 	END IF	
+	SRCFILE "IntyMusicPlayer.bas",61
+T4:
+	;[62] 	'-------------------
 	SRCFILE "IntyMusicPlayer.bas",62
-T3:
-	;[63] 	'-------------------
+	;[63] 	
 	SRCFILE "IntyMusicPlayer.bas",63
-	;[64] 	
+	;[64] 	'--Get values from IntyBasic_epilogue	
 	SRCFILE "IntyMusicPlayer.bas",64
-	;[65] 	'--Get values from IntyBasic_epilogue
+	;[65] 	Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
 	SRCFILE "IntyMusicPlayer.bas",65
-	;[66] 	WAIT
+	MVII #Q9,R0
+	MVII #Q8,R1
+	MVII #Q11,R2
+	MVII #Q10,R3
+	CALL F20
+	;[66] 	
 	SRCFILE "IntyMusicPlayer.bas",66
-	CALL _wait
-	;[67] 	Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
+	;[67] 	'Use IntyBasic music counter (_music_tc), if its 1 I can check if new notes are playing	
 	SRCFILE "IntyMusicPlayer.bas",67
-	MVII #Q6,R0
-	MVII #Q5,R1
-	MVII #Q8,R2
-	MVII #Q7,R3
-	CALL F17
-	;[68] 	
+	;[68] 	IF #iMusicTime(1)=#iMusicTime(0) THEN	 'IF Song Speed is 1, player will freeze.. use this code instead: 'IF #iMusicTime(1)=1 THEN	
 	SRCFILE "IntyMusicPlayer.bas",68
-	;[69] 	'Use IntyBasic music counter (_music_tc), if its 1 I can check if new notes are playing	
-	SRCFILE "IntyMusicPlayer.bas",69
-	;[70] 	IF #iMusicTime(1)=#iMusicTime(0) THEN	
-	SRCFILE "IntyMusicPlayer.bas",70
-	MVI Q8+1,R0
-	MVI Q8,R1
+	MVI Q11+1,R0
+	MVI Q11,R1
 	CMPR R1,R0
-	BNE T6
-	;[71] 		iMusicScroll=0		
-	SRCFILE "IntyMusicPlayer.bas",71
+	BNE T7
+	;[69] 	
+	SRCFILE "IntyMusicPlayer.bas",69
+	;[70] 		iMusicScroll=0		
+	SRCFILE "IntyMusicPlayer.bas",70
 	CLRR R0
 	MVO R0,V1
-	;[72] 		FOR iMusicX=0 to 2	
-	SRCFILE "IntyMusicPlayer.bas",72
-	MVO R0,V5
-T7:
-	;[73] 			IntyNote=0
-	SRCFILE "IntyMusicPlayer.bas",73
-	CLRR R0
+	;[71] 		FOR iMusicX=0 to 2	
+	SRCFILE "IntyMusicPlayer.bas",71
 	MVO R0,V6
-	;[74] 			IF iMusicNoteLast(iMusicX)<>#iMusicNote(iMusicX) THEN GOTO GotIntyNote	'note changed
-	SRCFILE "IntyMusicPlayer.bas",74
-	MVII #Q9,R3
-	ADD V5,R3
-	MVI@ R3,R0
-	MVII #Q5,R3
-	ADD V5,R3
-	CMP@ R3,R0
-	BNE Q18
-	;[75] 			
-	SRCFILE "IntyMusicPlayer.bas",75
-	;[76] 			'Same note? check last volume. piano: 14,13 clarinet: 13,14 bass: 12,13 flute:10,12
-	SRCFILE "IntyMusicPlayer.bas",76
-	;[77] 			iMusicVolCheck=#iMusicVol(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",77
-	MVII #Q6,R3
-	ADD V5,R3
-	MVI@ R3,R0
+T8:
+	;[72] 			IntyNote=0
+	SRCFILE "IntyMusicPlayer.bas",72
+	CLRR R0
 	MVO R0,V7
-	;[78] 			iMusicVolLast=iMusicVolumeLast(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",78
-	MVII #Q10,R3
-	ADD V5,R3
+	;[73] 			IF iMusicNoteLast(iMusicX)<>#iMusicNote(iMusicX) THEN GOTO GotIntyNote	'note changed
+	SRCFILE "IntyMusicPlayer.bas",73
+	MVII #Q12,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVII #Q8,R3
+	ADD V6,R3
+	CMP@ R3,R0
+	BNE Q21
+	;[74] 			
+	SRCFILE "IntyMusicPlayer.bas",74
+	;[75] 			'Same note? check last volume. piano: 14,13 clarinet: 13,14 bass: 12,13 flute:10,12
+	SRCFILE "IntyMusicPlayer.bas",75
+	;[76] 			iMusicVolCheck=#iMusicVol(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",76
+	MVII #Q9,R3
+	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V8
-	;[79] 			iMusicInst=#iMusicInst(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",79
-	MVII #Q7,R3
-	ADD V5,R3
+	;[77] 			iMusicVolLast=iMusicVolumeLast(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",77
+	MVII #Q13,R3
+	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V9
-	;[80] 			IF iMusicInst=0 THEN IF iMusicVolLast=14 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'piano
-	SRCFILE "IntyMusicPlayer.bas",80
-	MVI V9,R0
+	;[78] 			iMusicInst=#iMusicInst(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",78
+	MVII #Q10,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVO R0,V10
+	;[79] 			IF iMusicInst=0 THEN IF iMusicVolLast=14 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'piano
+	SRCFILE "IntyMusicPlayer.bas",79
+	MVI V10,R0
 	TSTR R0
-	BNE T9
-	MVI V8,R0
+	BNE T10
+	MVI V9,R0
 	CMPI #14,R0
 	MVII #-1,R0
 	BEQ $+3
 	INCR R0
-	MVI V7,R1
+	MVI V8,R1
 	CMPI #13,R1
 	MVII #-1,R1
 	BEQ $+3
 	INCR R1
 	ANDR R1,R0
-	BNE Q18
-T9:
-	;[81] 			IF iMusicInst=64 THEN IF iMusicVolLast=13 AND iMusicVolCheck=14 THEN GOTO GotIntyNote	'clarinet
-	SRCFILE "IntyMusicPlayer.bas",81
-	MVI V9,R0
+	BNE Q21
+T10:
+	;[80] 			IF iMusicInst=64 THEN IF iMusicVolLast=13 AND iMusicVolCheck=14 THEN GOTO GotIntyNote	'clarinet
+	SRCFILE "IntyMusicPlayer.bas",80
+	MVI V10,R0
 	CMPI #64,R0
-	BNE T11
-	MVI V8,R0
+	BNE T12
+	MVI V9,R0
 	CMPI #13,R0
 	MVII #-1,R0
 	BEQ $+3
 	INCR R0
-	MVI V7,R1
+	MVI V8,R1
 	CMPI #14,R1
 	MVII #-1,R1
 	BEQ $+3
 	INCR R1
 	ANDR R1,R0
-	BNE Q18
-T11:
-	;[82] 			IF iMusicInst=128 THEN IF iMusicVolLast=10 AND iMusicVolCheck=12 THEN GOTO GotIntyNote	'flute 
-	SRCFILE "IntyMusicPlayer.bas",82
-	MVI V9,R0
+	BNE Q21
+T12:
+	;[81] 			IF iMusicInst=128 THEN IF iMusicVolLast=10 AND iMusicVolCheck=12 THEN GOTO GotIntyNote	'flute 
+	SRCFILE "IntyMusicPlayer.bas",81
+	MVI V10,R0
 	CMPI #128,R0
-	BNE T13
-	MVI V8,R0
+	BNE T14
+	MVI V9,R0
 	CMPI #10,R0
 	MVII #-1,R0
 	BEQ $+3
 	INCR R0
-	MVI V7,R1
+	MVI V8,R1
 	CMPI #12,R1
 	MVII #-1,R1
 	BEQ $+3
 	INCR R1
 	ANDR R1,R0
-	BNE Q18
-T13:
-	;[83] 			IF iMusicInst=192 THEN IF iMusicVolLast=12 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'bass
-	SRCFILE "IntyMusicPlayer.bas",83
-	MVI V9,R0
+	BNE Q21
+T14:
+	;[82] 			IF iMusicInst=192 THEN IF iMusicVolLast=12 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'bass
+	SRCFILE "IntyMusicPlayer.bas",82
+	MVI V10,R0
 	CMPI #192,R0
-	BNE T15
-	MVI V8,R0
+	BNE T16
+	MVI V9,R0
 	CMPI #12,R0
 	MVII #-1,R0
 	BEQ $+3
 	INCR R0
-	MVI V7,R1
+	MVI V8,R1
 	CMPI #13,R1
 	MVII #-1,R1
 	BEQ $+3
 	INCR R1
 	ANDR R1,R0
-	BNE Q18
-T15:
-	;[84] 			GOTO GotIntyNoteFail
+	BNE Q21
+T16:
+	;[83] 			GOTO GotIntyNoteFail
+	SRCFILE "IntyMusicPlayer.bas",83
+	B Q22
+	;[84] 
 	SRCFILE "IntyMusicPlayer.bas",84
-	B Q19
-	;[85] 
+	;[85] 		GotIntyNote:			
 	SRCFILE "IntyMusicPlayer.bas",85
-	;[86] 		GotIntyNote:			
-	SRCFILE "IntyMusicPlayer.bas",86
 	; GOTINTYNOTE
-Q18:	;[87] 			IntyNote=1
-	SRCFILE "IntyMusicPlayer.bas",87
+Q21:	;[86] 			IntyNote=1
+	SRCFILE "IntyMusicPlayer.bas",86
 	MVII #1,R0
-	MVO R0,V6
-	;[88] 			
+	MVO R0,V7
+	;[87] 			
+	SRCFILE "IntyMusicPlayer.bas",87
+	;[88] 		GotIntyNoteFail:
 	SRCFILE "IntyMusicPlayer.bas",88
-	;[89] 		GotIntyNoteFail:
-	SRCFILE "IntyMusicPlayer.bas",89
 	; GOTINTYNOTEFAIL
-Q19:	;[90] 			iMusicDrawNote(iMusicX)=IntyNote
-	SRCFILE "IntyMusicPlayer.bas",90
-	MVI V6,R0
-	MVII #Q12,R3
-	ADD V5,R3
+Q22:	;[89] 			iMusicDrawNote(iMusicX)=IntyNote
+	SRCFILE "IntyMusicPlayer.bas",89
+	MVI V7,R0
+	MVII #Q15,R3
+	ADD V6,R3
 	MVO@ R0,R3
-	;[91] 			iMusicScroll=iMusicScroll+IntyNote
-	SRCFILE "IntyMusicPlayer.bas",91
+	;[90] 			iMusicScroll=iMusicScroll+IntyNote
+	SRCFILE "IntyMusicPlayer.bas",90
 	MVI V1,R0
-	ADD V6,R0
+	ADD V7,R0
 	MVO R0,V1
-	;[92] 			
+	;[91] 			
+	SRCFILE "IntyMusicPlayer.bas",91
+	;[92] 		NEXT iMusicX
 	SRCFILE "IntyMusicPlayer.bas",92
-	;[93] 		NEXT iMusicX
-	SRCFILE "IntyMusicPlayer.bas",93
-	MVI V5,R0
+	MVI V6,R0
 	INCR R0
-	MVO R0,V5
+	MVO R0,V6
 	CMPI #2,R0
-	BLE T7
-	;[94] 		'----------------
+	BLE T8
+	;[93] 		
+	SRCFILE "IntyMusicPlayer.bas",93
+	;[94] 		'---------------- SCROLL, DRAW MUSIC ----------------------------		
 	SRCFILE "IntyMusicPlayer.bas",94
-	;[95] 		
+	;[95] 		'--- Theres very little time after VBLANK, I had to rearrange things here to draw bottom display first
 	SRCFILE "IntyMusicPlayer.bas",95
 	;[96] 		IF (INTYMUSIC_AUTO_SCROLL OR iMusicScroll) THEN 			
 	SRCFILE "IntyMusicPlayer.bas",96
@@ -3219,516 +3286,618 @@ Q19:	;[90] 			iMusicDrawNote(iMusicX)=IntyNote
 	COMR R4
 	ANDR R4,R0
 	XOR V1,R0
-	BEQ T17
-	;[97] 			SCROLL 0,0,3	'Scroll upwards (move things down)
+	BEQ T18
+	;[97] 			Toggle=Toggle XOR 1	'Toggle piano key color
 	SRCFILE "IntyMusicPlayer.bas",97
+	MVI V3,R0
+	XORI #1,R0
+	MVO R0,V3
+	;[98] 			
+	SRCFILE "IntyMusicPlayer.bas",98
+	;[99] 			SCROLL 0,0,3			'Scroll upwards (move things down), just about...
+	SRCFILE "IntyMusicPlayer.bas",99
 	CLRR R0
 	MVO R0,_scroll_x
 	MVO R0,_scroll_y
 	MVII #3,R0
 	MVO R0,_scroll_d
-	;[98] 				
-	SRCFILE "IntyMusicPlayer.bas",98
-	;[99] 			'----Clear top line, from pre-stored data---
-	SRCFILE "IntyMusicPlayer.bas",99
-	;[100] 			'- also draw piano----
+	;[100] 			WAIT					'....NOW!
 	SRCFILE "IntyMusicPlayer.bas",100
-	;[101] 			WAIT	
-	SRCFILE "IntyMusicPlayer.bas",101
 	CALL _wait
-	;[102] 			FOR iMusicX=0 TO 19
+	;[101] 			
+	SRCFILE "IntyMusicPlayer.bas",101
+	;[102] 			'- Draw piano---
 	SRCFILE "IntyMusicPlayer.bas",102
-	CLRR R0
-	MVO R0,V5
-T18:
-	;[103] 				#BACKTAB(iMusicX)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR				
+	;[103] 			FOR iMusicX=0 TO 18
 	SRCFILE "IntyMusicPlayer.bas",103
-	MVII #Q22,R3
-	ADD V5,R3
-	MVI@ R3,R0
-	INCR R0
-	MVII #Q2,R3
-	ADD V5,R3
-	MVO@ R0,R3
-	;[104] 				#BACKTAB(200+iMusicX)= IntyPiano(iMusicX) 'GRAM + (Sprite24 * 8)
+	CLRR R0
+	MVO R0,V6
+T19:
+	;[104] 				#BACKTAB(200+iMusicX)= IntyPiano(iMusicX)
 	SRCFILE "IntyMusicPlayer.bas",104
 	MVII #Q2,R0
 	MVII #200,R1
-	ADD V5,R1
+	ADD V6,R1
 	ADDR R1,R0
-	MVII #Q23,R3
-	ADD V5,R3
-	MVI@ R3,R1
-	MOVR R0,R4
-	MVO@ R1,R4
-	;[105] 			NEXT iMusicX	
-	SRCFILE "IntyMusicPlayer.bas",105
-	MVI V5,R0
-	INCR R0
-	MVO R0,V5
-	CMPI #19,R0
-	BLE T18
-	;[106] 			
-	SRCFILE "IntyMusicPlayer.bas",106
-	;[107] 			'---Alternate colors,
-	SRCFILE "IntyMusicPlayer.bas",107
-	;[108] 			IF INTYMUSIC_FANFOLD THEN
-	SRCFILE "IntyMusicPlayer.bas",108
-	MVII #1,R0
-	TSTR R0
-	BEQ T19
-	;[109] 				#BACKTAB(0)=CS_ADVANCE
-	SRCFILE "IntyMusicPlayer.bas",109
-	MVII #8192,R0
-	MVO R0,Q2
-	;[110] 				#BACKTAB(20)=CS_ADVANCE
-	SRCFILE "IntyMusicPlayer.bas",110
-	MVO R0,Q2+20
-	;[111] 			END IF			
-	SRCFILE "IntyMusicPlayer.bas",111
-T19:
-	;[112] 			
-	SRCFILE "IntyMusicPlayer.bas",112
-	;[113] 			'--pick piano hilite color, idea was see if same key struck again, but I got instead cool flashy keys
-	SRCFILE "IntyMusicPlayer.bas",113
-	;[114] 			IF Toggle THEN #x=INTYMUSIC_PIANO_HILITE1 ELSE #x=INTYMUSIC_PIANO_HILITE2
-	SRCFILE "IntyMusicPlayer.bas",114
-	MVI V3,R0
-	TSTR R0
-	BEQ T20
-	MVII #4097,R0
-	MVO R0,V2
-	B T21
-T20:
-	MVII #4102,R0
-	MVO R0,V2
-T21:
-	;[115] 			
-	SRCFILE "IntyMusicPlayer.bas",115
-	;[116] 			'---Draw each note, also draw on lower bottom note data-----	
-	SRCFILE "IntyMusicPlayer.bas",116
-	;[117] 			PRINT AT 220 COLOR CS_WHITE: PRINT COLOR CS_ADVANCE," ":PRINT COLOR CS_BLUE		
-	SRCFILE "IntyMusicPlayer.bas",117
-	MVII #732,R0
-	MVO R0,_screen
-	MVII #7,R0
-	MVO R0,_color
-	MVII #8192,R0
-	MVO R0,_color
-	MVI _screen,R4
-	MVO@ R0,R4
-	MVO R4,_screen
-	MVII #1,R0
-	MVO R0,_color
-	;[118] 			FOR iMusicX=0 TO 2
-	SRCFILE "IntyMusicPlayer.bas",118
-	CLRR R0
-	MVO R0,V5
-T22:
-	;[119] 				IntyNote=#iMusicNote(iMusicX)	'Get note value to use in look-up tables 
-	SRCFILE "IntyMusicPlayer.bas",119
-	MVII #Q5,R3
-	ADD V5,R3
-	MVI@ R3,R0
-	MVO R0,V6
-	;[120] 
-	SRCFILE "IntyMusicPlayer.bas",120
-	;[121] 				IF iMusicDrawNote(iMusicX) THEN 
-	SRCFILE "IntyMusicPlayer.bas",121
-	MVII #Q12,R3
-	ADD V5,R3
-	MVI@ R3,R0
-	TSTR R0
-	BEQ T23
-	;[122] 					#BACKTAB(IntyNoteOnscreen(IntyNote))=IntyNoteGRAM(IntyNote)
-	SRCFILE "IntyMusicPlayer.bas",122
-	MVII #Q2,R0
-	MVII #Q24,R3
-	ADD V6,R3
-	ADD@ R3,R0
 	MVII #Q25,R3
 	ADD V6,R3
 	MVI@ R3,R1
 	MOVR R0,R4
 	MVO@ R1,R4
-	;[123] 					PRINT " \285" 
-	SRCFILE "IntyMusicPlayer.bas",123
+	;[105] 			NEXT iMusicX	
+	SRCFILE "IntyMusicPlayer.bas",105
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #18,R0
+	BLE T19
+	;[106] 			
+	SRCFILE "IntyMusicPlayer.bas",106
+	;[107] 			'---Alternate colors---
+	SRCFILE "IntyMusicPlayer.bas",107
+	;[108] 			'IF INTYMUSIC_FANFOLD THEN	#BACKTAB(0)=CS_ADVANCE			
+	SRCFILE "IntyMusicPlayer.bas",108
+	;[109] 			#BACKTAB(0)=#IntyMusicBlink			
+	SRCFILE "IntyMusicPlayer.bas",109
+	MVI V5,R0
+	MVO R0,Q2
+	;[110] 			PRINT AT 220, CS_ADVANCE
+	SRCFILE "IntyMusicPlayer.bas",110
+	MVII #732,R0
+	MVO R0,_screen
+	MVII #8192,R0
 	MVI _screen,R4
-	MVI _color,R0
-	MVO@ R0,R4
-	XORI #2280,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[124] 				ELSE 
-	SRCFILE "IntyMusicPlayer.bas",124
-	B T24
-T23:
-	;[125] 					PRINT ". " 									'note on/off (below)
-	SRCFILE "IntyMusicPlayer.bas",125
-	MVI _screen,R4
-	MVII #112,R0
-	XOR _color,R0
-	MVO@ R0,R4
-	XORI #112,R0
-	MVO@ R0,R4
-	MVO R4,_screen
-	;[126] 				END IF
-	SRCFILE "IntyMusicPlayer.bas",126
-T24:
-	;[127] 				
-	SRCFILE "IntyMusicPlayer.bas",127
-	;[128] 				PRINT IntyNoteLetter(IntyNote),IntyNoteOctave(IntyNote),IntyNoteSharp(IntyNote)	'Note text,ex. C5#
-	SRCFILE "IntyMusicPlayer.bas",128
-	MVII #Q26,R3
+	;[111] 			'---Draw lower bottom note data-----	
+	SRCFILE "IntyMusicPlayer.bas",111
+	;[112] 			FOR iMusicX=0 TO 2
+	SRCFILE "IntyMusicPlayer.bas",112
+	CLRR R0
+	MVO R0,V6
+T20:
+	;[113] 				IntyNote=#iMusicNote(iMusicX)	'Get note value to use in look-up tables 
+	SRCFILE "IntyMusicPlayer.bas",113
+	MVII #Q8,R3
 	ADD V6,R3
 	MVI@ R3,R0
+	MVO R0,V7
+	;[114] 				#x=iMusicNoteColor(iMusicX)	'Get note color
+	SRCFILE "IntyMusicPlayer.bas",114
+	MVII #Q3,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVO R0,V2
+	;[115] 				
+	SRCFILE "IntyMusicPlayer.bas",115
+	;[116] 				PRINT COLOR #x,2280 + iMusicDrawNote(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",116
+	MVO R0,_color
+	MVII #Q15,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	ADDI #2280,R0
+	MVI _screen,R4
+	MVO@ R0,R4
+	MVO R4,_screen
+	;[117] 				PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x		'Note text,ex. C5#
+	SRCFILE "IntyMusicPlayer.bas",117
+	MVII #Q26,R3
+	ADD V7,R3
+	MVI@ R3,R0
+	ADD V2,R0
 	MVI _screen,R4
 	MVO@ R0,R4
 	MVO R4,_screen
 	MVII #Q27,R3
-	ADD V6,R3
+	ADD V7,R3
 	MVI@ R3,R0
+	ADD V2,R0
 	MVI _screen,R4
 	MVO@ R0,R4
 	MVO R4,_screen
 	MVII #Q28,R3
-	ADD V6,R3
+	ADD V7,R3
 	MVI@ R3,R0
+	ADD V2,R0
 	MVI _screen,R4
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[129] 
-	SRCFILE "IntyMusicPlayer.bas",129
-	;[130] 				'---Use sprites to "hilite" piano key -----			
-	SRCFILE "IntyMusicPlayer.bas",130
-	;[131] 				SPRITE iMusicX,16 + VISIBLE + IntyPianoSpriteOffset(IntyNote),88 + ZOOMY2, IntyPianoSprite(IntyNote) + #x
-	SRCFILE "IntyMusicPlayer.bas",131
-	MVII #Q1,R0
-	ADD V5,R0
-	MOVR R0,R4
+	;[118] 			NEXT iMusicX
+	SRCFILE "IntyMusicPlayer.bas",118
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #2,R0
+	BLE T20
+	;[119] 						
+	SRCFILE "IntyMusicPlayer.bas",119
+	;[120] 			'--Print song name 
+	SRCFILE "IntyMusicPlayer.bas",120
+	;[121] 			#x=19
+	SRCFILE "IntyMusicPlayer.bas",121
+	MVII #19,R0
+	MVO R0,V2
+	;[122] 			FOR iMusicX=0 TO 11
+	SRCFILE "IntyMusicPlayer.bas",122
+	CLRR R0
+	MVO R0,V6
+T21:
+	;[123] 				#BACKTAB(#x)=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
+	SRCFILE "IntyMusicPlayer.bas",123
 	MVII #Q29,R3
 	ADD V6,R3
+	MVI@ R3,R0
+	SLL R0,2
+	ADDR R0,R0
+	INCR R0
+	MVII #Q2,R3
+	ADD V2,R3
+	MVO@ R0,R3
+	;[124] 				#x=#x+20
+	SRCFILE "IntyMusicPlayer.bas",124
+	MVI V2,R0
+	ADDI #20,R0
+	MVO R0,V2
+	;[125] 			NEXT iMusicX
+	SRCFILE "IntyMusicPlayer.bas",125
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #11,R0
+	BLE T21
+	;[126] 			
+	SRCFILE "IntyMusicPlayer.bas",126
+	;[127] 			'---Draw bottom left piano, lefmost key... to avoid erasing other keys that scrolled down. 
+	SRCFILE "IntyMusicPlayer.bas",127
+	;[128] 			PRINT 2272 'PRINT "\284"
+	SRCFILE "IntyMusicPlayer.bas",128
+	MVII #2272,R0
+	MVI _screen,R4
+	MVO@ R0,R4
+	MVO R4,_screen
+	;[129] 			'----Clear top line, draw staff---
+	SRCFILE "IntyMusicPlayer.bas",129
+	;[130] 			FOR iMusicX=1 TO 18
+	SRCFILE "IntyMusicPlayer.bas",130
+	MVII #1,R0
+	MVO R0,V6
+T22:
+	;[131] 				#BACKTAB(iMusicX)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
+	SRCFILE "IntyMusicPlayer.bas",131
+	MVII #Q30,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	INCR R0
+	MVII #Q2,R3
+	ADD V6,R3
+	MVO@ R0,R3
+	;[132] 			NEXT iMusicX
+	SRCFILE "IntyMusicPlayer.bas",132
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #18,R0
+	BLE T22
+	;[133] 			
+	SRCFILE "IntyMusicPlayer.bas",133
+	;[134] 			'---Use sprites to "hilite" piano keys and draw notes-----
+	SRCFILE "IntyMusicPlayer.bas",134
+	;[135] 			FOR iMusicX=0 TO 2
+	SRCFILE "IntyMusicPlayer.bas",135
+	CLRR R0
+	MVO R0,V6
+T23:
+	;[136] 				IntyNote=#iMusicNote(iMusicX)	'--Get note 
+	SRCFILE "IntyMusicPlayer.bas",136
+	MVII #Q8,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVO R0,V7
+	;[137] 				
+	SRCFILE "IntyMusicPlayer.bas",137
+	;[138] 				'Draw Note
+	SRCFILE "IntyMusicPlayer.bas",138
+	;[139] 				IF iMusicDrawNote(iMusicX) THEN #BACKTAB(IntyNoteOnscreen(IntyNote))=IntyNoteGRAM(IntyNote) + iMusicNoteColor(iMusicX)				
+	SRCFILE "IntyMusicPlayer.bas",139
+	MVII #Q15,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	TSTR R0
+	BEQ T24
+	MVII #Q32,R3
+	ADD V7,R3
+	MVI@ R3,R0
+	MVII #Q3,R3
+	ADD V6,R3
+	ADD@ R3,R0
+	MVII #Q2,R1
+	MVII #Q31,R3
+	ADD V7,R3
+	ADD@ R3,R1
+	MVO@ R0,R1
+T24:
+	;[140] 				
+	SRCFILE "IntyMusicPlayer.bas",140
+	;[141] 				'Overlay sprites on piano keys. Flash colors 
+	SRCFILE "IntyMusicPlayer.bas",141
+	;[142] 				IF Toggle THEN #x=#iMusicPianoColorA(iMusicX) ELSE #x=#iMusicPianoColorB(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",142
+	MVI V3,R0
+	TSTR R0
+	BEQ T25
+	MVII #Q4,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVO R0,V2
+	B T26
+T25:
+	MVII #Q5,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVO R0,V2
+T26:
+	;[143] 				SPRITE iMusicX,16 + VISIBLE + IntyPianoSpriteOffset(IntyNote),88 + ZOOMY2, IntyPianoSprite(IntyNote) + #x
+	SRCFILE "IntyMusicPlayer.bas",143
+	MVII #Q1,R0
+	ADD V6,R0
+	MOVR R0,R4
+	MVII #Q33,R3
+	ADD V7,R3
 	MVI@ R3,R0
 	ADDI #528,R0
 	MVO@ R0,R4
 	MVII #344,R0
 	ADDI #7,R4
 	MVO@ R0,R4
-	MVII #Q30,R3
-	ADD V6,R3
+	MVII #Q34,R3
+	ADD V7,R3
 	MVI@ R3,R0
 	ADD V2,R0
 	ADDI #7,R4
 	MVO@ R0,R4
-	;[132] 			NEXT iMusicX	
-	SRCFILE "IntyMusicPlayer.bas",132
-	MVI V5,R0
-	INCR R0
-	MVO R0,V5
-	CMPI #2,R0
-	BLE T22
-	;[133] 					
-	SRCFILE "IntyMusicPlayer.bas",133
-	;[134] 		END IF 'Scrolll
-	SRCFILE "IntyMusicPlayer.bas",134
-T17:
-	;[135] 	PRINT "    " 'last 3 chars, otherwise Ill see part of piano that has scrolled
-	SRCFILE "IntyMusicPlayer.bas",135
-	MVI _screen,R4
-	MVI _color,R0
-	MVO@ R0,R4
-	MVO@ R0,R4
-	MVO@ R0,R4
-	MVO@ R0,R4
-	NOP
-	MVO R4,_screen
-	;[136] 	END IF '#iMusicTime()
-	SRCFILE "IntyMusicPlayer.bas",136
-T6:
-	;[137] GOTO PlayLoop
-	SRCFILE "IntyMusicPlayer.bas",137
-	B Q15
-	;[138] 
-	SRCFILE "IntyMusicPlayer.bas",138
-	;[139] 
-	SRCFILE "IntyMusicPlayer.bas",139
-	;[140] '    _______________
-	SRCFILE "IntyMusicPlayer.bas",140
-	;[141] '___/ IMUSICGETINFO \________________________________________________________________
-	SRCFILE "IntyMusicPlayer.bas",141
-	;[142] 'Get IntyBasic_epilogue data onto IntyBasic. Ill copy note and volume
-	SRCFILE "IntyMusicPlayer.bas",142
-	;[143] 'Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
-	SRCFILE "IntyMusicPlayer.bas",143
-	;[144] ASM IMUSICGETINFO: PROC	
+	;[144] 			NEXT iMusicX		
 	SRCFILE "IntyMusicPlayer.bas",144
-IMUSICGETINFO: PROC	
-	;[145] 'r0 = 1st parameter, VARPTR #iMusicVol(0)
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #2,R0
+	BLE T23
+	;[145] 		END IF '<----- Scroll			
 	SRCFILE "IntyMusicPlayer.bas",145
-	;[146] 'r1 = 2nd parameter, VARPTR #iMusicNote(0)
+T18:
+	;[146] 	ELSE	
 	SRCFILE "IntyMusicPlayer.bas",146
-	;[147] 'r2 = 3rd parameter, VARPTR #iMusicTime(0)
+	B T27
+T7:
+	;[147] 		WAIT
 	SRCFILE "IntyMusicPlayer.bas",147
-	;[148] 'r3 = 4rd parameter, VARPTR #iInstrument(0)
+	CALL _wait
+	;[148] 	END IF '<-----#iMusicTime()
 	SRCFILE "IntyMusicPlayer.bas",148
-	;[149] 'asm pshr r5				;push return
+T27:
+	;[149] GOTO PlayLoop
 	SRCFILE "IntyMusicPlayer.bas",149
-	;[150] 		
+	B Q18
+	;[150] 
 	SRCFILE "IntyMusicPlayer.bas",150
-	;[151] '--- Get iIntruments ---------
+	;[151] '--Prints song name, after last PRINT position
 	SRCFILE "IntyMusicPlayer.bas",151
-	;[152] 	asm movr	r3,r4				; r3 --> r4 		
+	;[152] Print_Song_Name: PROCEDURE
 	SRCFILE "IntyMusicPlayer.bas",152
- movr	r3,r4				; r3 --> r4 		
-	;[153] 	asm mvi _music_i1,r3
+	; PRINT_SONG_NAME
+Q35:	PROC
+	BEGIN
+	;[153] 	FOR iMusicX=0 TO 11
 	SRCFILE "IntyMusicPlayer.bas",153
- mvi _music_i1,r3
-	;[154] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	CLRR R0
+	MVO R0,V6
+T28:
+	;[154] 		#BACKTAB(iMusicX+POS(0))=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
 	SRCFILE "IntyMusicPlayer.bas",154
- mvo@ r3,r4				; r3 --> [r4++]
-	;[155] 	asm mvi _music_i2,r3
+	MVI _screen,R0
+	SUBI #512,R0
+	ADD V6,R0
+	MVII #Q2,R1
+	ADDR R1,R0
+	MVII #Q29,R3
+	ADD V6,R3
+	MVI@ R3,R1
+	SLL R1,2
+	ADDR R1,R1
+	INCR R1
+	MOVR R0,R4
+	MVO@ R1,R4
+	;[155] 	NEXT iMusicX
 	SRCFILE "IntyMusicPlayer.bas",155
- mvi _music_i2,r3
-	;[156] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #11,R0
+	BLE T28
+	;[156] RETURN
 	SRCFILE "IntyMusicPlayer.bas",156
- mvo@ r3,r4				; r3 --> [r4++]
-	;[157] 	asm mvi _music_i3,r3
+	RETURN
+	;[157] END
 	SRCFILE "IntyMusicPlayer.bas",157
- mvi _music_i3,r3
-	;[158] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	ENDP
+	;[158] '    _______________
 	SRCFILE "IntyMusicPlayer.bas",158
- mvo@ r3,r4				; r3 --> [r4++]
-	;[159] 
+	;[159] '___/ IMUSICGETINFO \________________________________________________________________
 	SRCFILE "IntyMusicPlayer.bas",159
-	;[160] '---- get volume, to know when same note played again ---
+	;[160] 'Get IntyBasic_epilogue data onto IntyBasic. Ill copy note and volume
 	SRCFILE "IntyMusicPlayer.bas",160
-	;[161] 	asm movr	r0,r4			;r0 --> r4 (r4=r0=&#iMusicVol(0))
+	;[161] 'Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
 	SRCFILE "IntyMusicPlayer.bas",161
- movr	r0,r4			;r0 --> r4 (r4=r0=&#iMusicVol(0))
-	;[162] 	
+	;[162] ASM IMUSICGETINFO: PROC	
 	SRCFILE "IntyMusicPlayer.bas",162
-	;[163] 	asm mvi	_music_vol1,r3	;  --> r3	
+IMUSICGETINFO: PROC	
+	;[163] 'r0 = 1st parameter, VARPTR #iMusicVol(0)
 	SRCFILE "IntyMusicPlayer.bas",163
- mvi	_music_vol1,r3	;  --> r3	
-	;[164] 	asm mvo@ r3,r4			;r2 --> [r4++]
+	;[164] 'r1 = 2nd parameter, VARPTR #iMusicNote(0)
 	SRCFILE "IntyMusicPlayer.bas",164
- mvo@ r3,r4			;r2 --> [r4++]
-	;[165] 	asm mvi	_music_vol2,r3	; --> r3
+	;[165] 'r2 = 3rd parameter, VARPTR #iMusicTime(0)
 	SRCFILE "IntyMusicPlayer.bas",165
- mvi	_music_vol2,r3	; --> r3
-	;[166] 	asm mvo@ r3,r4			;r3 --> [r4++]
+	;[166] 'r3 = 4rd parameter, VARPTR #iInstrument(0)
 	SRCFILE "IntyMusicPlayer.bas",166
- mvo@ r3,r4			;r3 --> [r4++]
-	;[167] 	asm mvi	_music_vol3,r3	; --> r3
+	;[167] 'asm pshr r5				;push return
 	SRCFILE "IntyMusicPlayer.bas",167
- mvi	_music_vol3,r3	; --> r3
-	;[168] 	asm mvo@ r3,r4			;r3 --> [r4++]
+	;[168] 		
 	SRCFILE "IntyMusicPlayer.bas",168
- mvo@ r3,r4			;r3 --> [r4++]
-	;[169] 		
+	;[169] '--- Get iIntruments ---------
 	SRCFILE "IntyMusicPlayer.bas",169
-	;[170] '--- get notes ---
+	;[170] 	asm movr	r3,r4				; r3 --> r4 		
 	SRCFILE "IntyMusicPlayer.bas",170
-	;[171] 	asm movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
+ movr	r3,r4				; r3 --> r4 		
+	;[171] 	asm mvi _music_i1,r3
 	SRCFILE "IntyMusicPlayer.bas",171
- movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
-	;[172] 	asm mvi	_music_n1,r3		;_music_n1 --> r3
+ mvi _music_i1,r3
+	;[172] 	asm mvo@ r3,r4				; r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",172
- mvi	_music_n1,r3		;_music_n1 --> r3
-	;[173] 	asm mvo@ r3,r4			;r3 --> [r4++]
+ mvo@ r3,r4				; r3 --> [r4++]
+	;[173] 	asm mvi _music_i2,r3
 	SRCFILE "IntyMusicPlayer.bas",173
- mvo@ r3,r4			;r3 --> [r4++]
-	;[174] 	asm mvi	_music_n2,r3 	;_music_n2 --> r3
+ mvi _music_i2,r3
+	;[174] 	asm mvo@ r3,r4				; r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",174
- mvi	_music_n2,r3 	;_music_n2 --> r3
-	;[175] 	asm mvo@ r3,r4			;r3 --> [r4++]
+ mvo@ r3,r4				; r3 --> [r4++]
+	;[175] 	asm mvi _music_i3,r3
 	SRCFILE "IntyMusicPlayer.bas",175
- mvo@ r3,r4			;r3 --> [r4++]
-	;[176] 	asm mvi	_music_n3,r3		;_music_n3 --> r3
+ mvi _music_i3,r3
+	;[176] 	asm mvo@ r3,r4				; r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",176
- mvi	_music_n3,r3		;_music_n3 --> r3
-	;[177] 	asm mvo@ r3,r4			;r3 --> [r4++]
+ mvo@ r3,r4				; r3 --> [r4++]
+	;[177] 
 	SRCFILE "IntyMusicPlayer.bas",177
- mvo@ r3,r4			;r3 --> [r4++]
-	;[178] 	
+	;[178] '---- get volume, to know when same note played again ---
 	SRCFILE "IntyMusicPlayer.bas",178
-	;[179] '--- get time counter and time base --------
+	;[179] 	asm movr	r0,r4			;r0 --> r4 (r4=r0=&#iMusicVol(0))
 	SRCFILE "IntyMusicPlayer.bas",179
-	;[180] 	asm movr r2,r4				;r2 --> r4  (r4= &#iMusicTime(0))
+ movr	r0,r4			;r0 --> r4 (r4=r0=&#iMusicVol(0))
+	;[180] 	
 	SRCFILE "IntyMusicPlayer.bas",180
- movr r2,r4				;r2 --> r4  (r4= &#iMusicTime(0))
-	;[181] 	asm mvi _music_t,r3			; _music_t --> r3 (time base)
+	;[181] 	asm mvi	_music_vol1,r3	;  --> r3	
 	SRCFILE "IntyMusicPlayer.bas",181
- mvi _music_t,r3			; _music_t --> r3 (time base)
-	;[182] 	asm decr r3 					; r3--
+ mvi	_music_vol1,r3	;  --> r3	
+	;[182] 	asm mvo@ r3,r4			;r2 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",182
- decr r3 					; r3--
-	;[183] 	asm mvo@ r3,r4				; r3 --> [r4++]
+ mvo@ r3,r4			;r2 --> [r4++]
+	;[183] 	asm mvi	_music_vol2,r3	; --> r3
 	SRCFILE "IntyMusicPlayer.bas",183
- mvo@ r3,r4				; r3 --> [r4++]
-	;[184] 	asm mvi	_music_tc,r3			; _music_t --> r3 (time)	
+ mvi	_music_vol2,r3	; --> r3
+	;[184] 	asm mvo@ r3,r4			;r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",184
- mvi	_music_tc,r3			; _music_t --> r3 (time)	
-	;[185] 	asm mvo@ r3,r4				; r3 --> [r4++]
+ mvo@ r3,r4			;r3 --> [r4++]
+	;[185] 	asm mvi	_music_vol3,r3	; --> r3
 	SRCFILE "IntyMusicPlayer.bas",185
- mvo@ r3,r4				; r3 --> [r4++]
-	;[186] 
+ mvi	_music_vol3,r3	; --> r3
+	;[186] 	asm mvo@ r3,r4			;r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",186
-	;[187] '-------------------------------------------------------------	
+ mvo@ r3,r4			;r3 --> [r4++]
+	;[187] 		
 	SRCFILE "IntyMusicPlayer.bas",187
-	;[188] 	asm jr	r5				;return 
+	;[188] '--- get notes ---
 	SRCFILE "IntyMusicPlayer.bas",188
- jr	r5				;return 
-	;[189] 	
+	;[189] 	asm movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
 	SRCFILE "IntyMusicPlayer.bas",189
-	;[190] 	'asm	pulr pc				;return 
+ movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
+	;[190] 	asm mvi	_music_n1,r3		;_music_n1 --> r3
 	SRCFILE "IntyMusicPlayer.bas",190
-	;[191] 	'asm mvi@ r3,r3				; Get pointer, r3=[r3] 
+ mvi	_music_n1,r3		;_music_n1 --> r3
+	;[191] 	asm mvo@ r3,r4			;r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",191
-	;[192] 	'asm xorr	r3,r3 			; r3=0
+ mvo@ r3,r4			;r3 --> [r4++]
+	;[192] 	asm mvi	_music_n2,r3 	;_music_n2 --> r3
 	SRCFILE "IntyMusicPlayer.bas",192
-	;[193] asm ENDP
+ mvi	_music_n2,r3 	;_music_n2 --> r3
+	;[193] 	asm mvo@ r3,r4			;r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",193
- ENDP
-	;[194] 
+ mvo@ r3,r4			;r3 --> [r4++]
+	;[194] 	asm mvi	_music_n3,r3		;_music_n3 --> r3
 	SRCFILE "IntyMusicPlayer.bas",194
-	;[195] '    ____________
+ mvi	_music_n3,r3		;_music_n3 --> r3
+	;[195] 	asm mvo@ r3,r4			;r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",195
-	;[196] '___/ IMUSICKILL \________________________________________________________________
+ mvo@ r3,r4			;r3 --> [r4++]
+	;[196] 	
 	SRCFILE "IntyMusicPlayer.bas",196
-	;[197] 'PLAY NONE seems not to work....
+	;[197] '--- get time counter and time base --------
 	SRCFILE "IntyMusicPlayer.bas",197
-	;[198] ASM IMUSICKILL: PROC	
+	;[198] 	asm movr r2,r4				;r2 --> r4  (r4= &#iMusicTime(0))
 	SRCFILE "IntyMusicPlayer.bas",198
-IMUSICKILL: PROC	
-	;[199] 		
+ movr r2,r4				;r2 --> r4  (r4= &#iMusicTime(0))
+	;[199] 	asm mvi _music_t,r3			; _music_t --> r3 (time base)
 	SRCFILE "IntyMusicPlayer.bas",199
-	;[200] '--- kill notes ---
+ mvi _music_t,r3			; _music_t --> r3 (time base)
+	;[200] 	asm decr r3 					; r3--
 	SRCFILE "IntyMusicPlayer.bas",200
-	;[201] 	asm xorr r0,r0			;clear r0
+ decr r3 					; r3--
+	;[201] 	asm mvo@ r3,r4				; r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",201
- xorr r0,r0			;clear r0
-	;[202] 	asm mvo	r0,_music_n1
+ mvo@ r3,r4				; r3 --> [r4++]
+	;[202] 	asm mvi	_music_tc,r3			; _music_t --> r3 (time)	
 	SRCFILE "IntyMusicPlayer.bas",202
- mvo	r0,_music_n1
-	;[203] 	asm mvo	r0,_music_n2
+ mvi	_music_tc,r3			; _music_t --> r3 (time)	
+	;[203] 	asm mvo@ r3,r4				; r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",203
- mvo	r0,_music_n2
-	;[204] 	asm mvo 	r0,_music_n3
+ mvo@ r3,r4				; r3 --> [r4++]
+	;[204] 
 	SRCFILE "IntyMusicPlayer.bas",204
- mvo 	r0,_music_n3
-	;[205] 	asm jr	r5				;return 
+	;[205] '-------------------------------------------------------------	
 	SRCFILE "IntyMusicPlayer.bas",205
- jr	r5				;return 
-	;[206] asm ENDP
+	;[206] 	asm jr	r5				;return 
 	SRCFILE "IntyMusicPlayer.bas",206
- ENDP
-	;[207] 
+ jr	r5				;return 
+	;[207] 	
 	SRCFILE "IntyMusicPlayer.bas",207
-	;[208] 
+	;[208] 	'asm	pulr pc				;return 
 	SRCFILE "IntyMusicPlayer.bas",208
-	;[209] '============================================================================================================
+	;[209] 	'asm mvi@ r3,r3				; Get pointer, r3=[r3] 
 	SRCFILE "IntyMusicPlayer.bas",209
-	;[210] 'From IntyBasic_epilogue.asm
+	;[210] 	'asm xorr	r3,r3 			; r3=0
 	SRCFILE "IntyMusicPlayer.bas",210
-	;[211] '_music_table:	RMB 1	; Note table
+	;[211] asm ENDP
 	SRCFILE "IntyMusicPlayer.bas",211
-	;[212] '_music_start:	RMB 1	; Start of music
+ ENDP
+	;[212] 
 	SRCFILE "IntyMusicPlayer.bas",212
-	;[213] '_music_p:	RMB 1	; Pointer to music
+	;[213] '    ____________
 	SRCFILE "IntyMusicPlayer.bas",213
-	;[214] '- - - - - - -
+	;[214] '___/ IMUSICKILL \________________________________________________________________
 	SRCFILE "IntyMusicPlayer.bas",214
-	;[215] '_music_mode: RMB 1      ; Music mode (0= Not using PSG, 2= Simple, 4= Full, add 1 if using noise channel for drums)
+	;[215] 'PLAY NONE seems not to work....
 	SRCFILE "IntyMusicPlayer.bas",215
-	;[216] '_music_frame: RMB 1     ; Music frame (for 50 hz fixed)
+	;[216] ASM IMUSICKILL: PROC	
 	SRCFILE "IntyMusicPlayer.bas",216
-	;[217] '_music_tc:  RMB 1       ; Time counter
+IMUSICKILL: PROC	
+	;[217] 		
 	SRCFILE "IntyMusicPlayer.bas",217
-	;[218] '_music_t:   RMB 1       ; Time base
+	;[218] '--- kill notes ---
 	SRCFILE "IntyMusicPlayer.bas",218
-	;[219] '_music_i1:  RMB 1       ; Instrument 1 
+	;[219] 	asm xorr r0,r0			;clear r0
 	SRCFILE "IntyMusicPlayer.bas",219
-	;[220] '_music_s1:  RMB 1       ; Sample pointer 1
+ xorr r0,r0			;clear r0
+	;[220] 	asm mvo	r0,_music_n1
 	SRCFILE "IntyMusicPlayer.bas",220
-	;[221] '_music_n1:  RMB 1       ; Note 1
+ mvo	r0,_music_n1
+	;[221] 	asm mvo	r0,_music_n2
 	SRCFILE "IntyMusicPlayer.bas",221
-	;[222] '_music_i2:  RMB 1       ; Instrument 2
+ mvo	r0,_music_n2
+	;[222] 	asm mvo 	r0,_music_n3
 	SRCFILE "IntyMusicPlayer.bas",222
-	;[223] '_music_s2:  RMB 1       ; Sample pointer 2
+ mvo 	r0,_music_n3
+	;[223] 	asm jr	r5				;return 
 	SRCFILE "IntyMusicPlayer.bas",223
-	;[224] '_music_n2:  RMB 1       ; Note 2
+ jr	r5				;return 
+	;[224] asm ENDP
 	SRCFILE "IntyMusicPlayer.bas",224
-	;[225] '_music_i3:  RMB 1       ; Instrument 3
+ ENDP
+	;[225] 
 	SRCFILE "IntyMusicPlayer.bas",225
-	;[226] '_music_s3:  RMB 1       ; Sample pointer 3
+	;[226] 
 	SRCFILE "IntyMusicPlayer.bas",226
-	;[227] '_music_n3:  RMB 1       ; Note 3
+	;[227] '============================================================================================================
 	SRCFILE "IntyMusicPlayer.bas",227
-	;[228] '_music_s4:  RMB 1       ; Sample pointer 4
+	;[228] 'From IntyBasic_epilogue.asm
 	SRCFILE "IntyMusicPlayer.bas",228
-	;[229] '_music_n4:  RMB 1       ; Note 4 (really it's drum)
+	;[229] '_music_table:	RMB 1	; Note table
 	SRCFILE "IntyMusicPlayer.bas",229
-	;[230] '-----
+	;[230] '_music_start:	RMB 1	; Start of music
 	SRCFILE "IntyMusicPlayer.bas",230
-	;[231] '_music_freq10:	RMB 1   ; Low byte frequency A
+	;[231] '_music_p:	RMB 1	; Pointer to music
 	SRCFILE "IntyMusicPlayer.bas",231
-	;[232] '_music_freq20:	RMB 1   ; Low byte frequency B
+	;[232] '- - - - - - -
 	SRCFILE "IntyMusicPlayer.bas",232
-	;[233] '_music_freq30:	RMB 1   ; Low byte frequency C
+	;[233] '_music_mode: RMB 1      ; Music mode (0= Not using PSG, 2= Simple, 4= Full, add 1 if using noise channel for drums)
 	SRCFILE "IntyMusicPlayer.bas",233
-	;[234] '_music_freq11:	RMB 1   ; High byte frequency A
+	;[234] '_music_frame: RMB 1     ; Music frame (for 50 hz fixed)
 	SRCFILE "IntyMusicPlayer.bas",234
-	;[235] '_music_freq21:	RMB 1   ; High byte frequency B
+	;[235] '_music_tc:  RMB 1       ; Time counter
 	SRCFILE "IntyMusicPlayer.bas",235
-	;[236] '_music_freq31:	RMB 1   ; High byte frequency C
+	;[236] '_music_t:   RMB 1       ; Time base
 	SRCFILE "IntyMusicPlayer.bas",236
-	;[237] '_music_mix:	RMB 1   ; Mixer
+	;[237] '_music_i1:  RMB 1       ; Instrument 1 
 	SRCFILE "IntyMusicPlayer.bas",237
-	;[238] '_music_noise:	RMB 1   ; Noise
+	;[238] '_music_s1:  RMB 1       ; Sample pointer 1
 	SRCFILE "IntyMusicPlayer.bas",238
-	;[239] '_music_vol1:	RMB 1   ; Volume A
+	;[239] '_music_n1:  RMB 1       ; Note 1
 	SRCFILE "IntyMusicPlayer.bas",239
-	;[240] '_music_vol2:	RMB 1   ; Volume B
+	;[240] '_music_i2:  RMB 1       ; Instrument 2
 	SRCFILE "IntyMusicPlayer.bas",240
-	;[241] '_music_vol3:	RMB 1   ; Volume C
+	;[241] '_music_s2:  RMB 1       ; Sample pointer 2
 	SRCFILE "IntyMusicPlayer.bas",241
-	;[242] '_music_vol:	RMB 1	; Global music volume
+	;[242] '_music_n2:  RMB 1       ; Note 2
 	SRCFILE "IntyMusicPlayer.bas",242
-	;[243] 
+	;[243] '_music_i3:  RMB 1       ; Instrument 3
 	SRCFILE "IntyMusicPlayer.bas",243
-	;[244] 
+	;[244] '_music_s3:  RMB 1       ; Sample pointer 3
 	SRCFILE "IntyMusicPlayer.bas",244
-	;[245] '--- get volume, to know if note just started to play ---
+	;[245] '_music_n3:  RMB 1       ; Note 3
 	SRCFILE "IntyMusicPlayer.bas",245
-	;[246] '	asm movr	r0,r4			;r0 --> r4 (r4=r0=#iMusicVol)
+	;[246] '_music_s4:  RMB 1       ; Sample pointer 4
 	SRCFILE "IntyMusicPlayer.bas",246
-	;[247] '	asm mvi	_music_vol1,r3	;_music_vol1 --> r3
+	;[247] '_music_n4:  RMB 1       ; Note 4 (really it's drum)
 	SRCFILE "IntyMusicPlayer.bas",247
-	;[248] '	'asm mvi	_music_s1,r3		; --> r3
+	;[248] '-----
 	SRCFILE "IntyMusicPlayer.bas",248
-	;[249] '	asm mvo@ r3,r4			;r3 --> [r4++]
+	;[249] '_music_freq10:	RMB 1   ; Low byte frequency A
 	SRCFILE "IntyMusicPlayer.bas",249
-	;[250] '	
+	;[250] '_music_freq20:	RMB 1   ; Low byte frequency B
 	SRCFILE "IntyMusicPlayer.bas",250
-	;[251] '	asm mvi	_music_vol2,r3	;_music_vol2 --> r3
+	;[251] '_music_freq30:	RMB 1   ; Low byte frequency C
 	SRCFILE "IntyMusicPlayer.bas",251
-	;[252] '	'asm mvi	_music_s2,r3		; --> r3
+	;[252] '_music_freq11:	RMB 1   ; High byte frequency A
 	SRCFILE "IntyMusicPlayer.bas",252
-	;[253] '	asm mvo@ r3,r4			;r3 --> [r4++]
+	;[253] '_music_freq21:	RMB 1   ; High byte frequency B
 	SRCFILE "IntyMusicPlayer.bas",253
-	;[254] '
+	;[254] '_music_freq31:	RMB 1   ; High byte frequency C
 	SRCFILE "IntyMusicPlayer.bas",254
-	;[255] '	asm mvi	_music_vol3,r3	;_music_vol3 --> r3
+	;[255] '_music_mix:	RMB 1   ; Mixer
 	SRCFILE "IntyMusicPlayer.bas",255
-	;[256] '	'asm mvi	_music_s3,r3		; --> r3
+	;[256] '_music_noise:	RMB 1   ; Noise
 	SRCFILE "IntyMusicPlayer.bas",256
-	;[257] '	asm mvo@ r3,r4			;r3 --> [r4++]
+	;[257] '_music_vol1:	RMB 1   ; Volume A
 	SRCFILE "IntyMusicPlayer.bas",257
+	;[258] '_music_vol2:	RMB 1   ; Volume B
+	SRCFILE "IntyMusicPlayer.bas",258
+	;[259] '_music_vol3:	RMB 1   ; Volume C
+	SRCFILE "IntyMusicPlayer.bas",259
+	;[260] '_music_vol:	RMB 1	; Global music volume
+	SRCFILE "IntyMusicPlayer.bas",260
+	;[261] 
+	SRCFILE "IntyMusicPlayer.bas",261
+	;[262] 
+	SRCFILE "IntyMusicPlayer.bas",262
+	;[263] '--- get volume, to know if note just started to play ---
+	SRCFILE "IntyMusicPlayer.bas",263
+	;[264] '	asm movr	r0,r4			;r0 --> r4 (r4=r0=#iMusicVol)
+	SRCFILE "IntyMusicPlayer.bas",264
+	;[265] '	asm mvi	_music_vol1,r3	;_music_vol1 --> r3
+	SRCFILE "IntyMusicPlayer.bas",265
+	;[266] '	'asm mvi	_music_s1,r3		; --> r3
+	SRCFILE "IntyMusicPlayer.bas",266
+	;[267] '	asm mvo@ r3,r4			;r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",267
+	;[268] '	
+	SRCFILE "IntyMusicPlayer.bas",268
+	;[269] '	asm mvi	_music_vol2,r3	;_music_vol2 --> r3
+	SRCFILE "IntyMusicPlayer.bas",269
+	;[270] '	'asm mvi	_music_s2,r3		; --> r3
+	SRCFILE "IntyMusicPlayer.bas",270
+	;[271] '	asm mvo@ r3,r4			;r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",271
+	;[272] '
+	SRCFILE "IntyMusicPlayer.bas",272
+	;[273] '	asm mvi	_music_vol3,r3	;_music_vol3 --> r3
+	SRCFILE "IntyMusicPlayer.bas",273
+	;[274] '	'asm mvi	_music_s3,r3		; --> r3
+	SRCFILE "IntyMusicPlayer.bas",274
+	;[275] '	asm mvo@ r3,r4			;r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",275
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[16] INCLUDE "IntyMusicCredits.bas"		'<--- change this if you want to change initial screen
-	SRCFILE "IntyMusic.bas",16
+	;[39] INCLUDE "IntyMusicCredits.bas"		
+	SRCFILE "IntyMusic.bas",39
 	;FILE IntyMusicCredits.bas
 	;[1] 
 	SRCFILE "IntyMusicCredits.bas",1
@@ -3739,14 +3908,14 @@ IMUSICKILL: PROC
 	;[4] IntyMusicInit: PROCEDURE
 	SRCFILE "IntyMusicCredits.bas",4
 	; INTYMUSICINIT
-Q13:	PROC
+Q16:	PROC
 	BEGIN
 	;[5] 
 	SRCFILE "IntyMusicCredits.bas",5
 	;[6] 	iMusicX=0	
 	SRCFILE "IntyMusicCredits.bas",6
 	CLRR R0
-	MVO R0,V5
+	MVO R0,V6
 	;[7] 	WAIT		
 	SRCFILE "IntyMusicCredits.bas",7
 	CALL _wait
@@ -3756,11 +3925,11 @@ Q13:	PROC
 	SRCFILE "IntyMusicCredits.bas",9
 	CLRR R0
 	MVO R0,V2
-T25:
+T29:
 	;[10] 		#BACKTAB(#x)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
 	SRCFILE "IntyMusicCredits.bas",10
-	MVII #Q22,R3
-	ADD V5,R3
+	MVII #Q30,R3
+	ADD V6,R3
 	MVI@ R3,R0
 	INCR R0
 	MVII #Q2,R3
@@ -3768,67 +3937,28 @@ T25:
 	MVO@ R0,R3
 	;[11] 		iMusicX=iMusicX+1:IF iMusicX>19 THEN iMusicX=0
 	SRCFILE "IntyMusicCredits.bas",11
-	MVI V5,R0
+	MVI V6,R0
 	INCR R0
-	MVO R0,V5
-	MVI V5,R0
+	MVO R0,V6
+	MVI V6,R0
 	CMPI #19,R0
-	BLE T26
+	BLE T30
 	CLRR R0
-	MVO R0,V5
-T26:
+	MVO R0,V6
+T30:
 	;[12] 	NEXT #x
 	SRCFILE "IntyMusicCredits.bas",12
 	MVI V2,R0
 	INCR R0
 	MVO R0,V2
 	CMPI #60,R0
-	BLE T25
-	;[13] 	
+	BLE T29
+	;[13] 
 	SRCFILE "IntyMusicCredits.bas",13
-	;[14] 	'---Alternate colors
+	;[14] 	'Draw &
 	SRCFILE "IntyMusicCredits.bas",14
-	;[15] 	IF INTYMUSIC_FANFOLD THEN
+	;[15] 	PRINT AT 9 COLOR 0,"\277\269\272\261"
 	SRCFILE "IntyMusicCredits.bas",15
-	MVII #1,R0
-	TSTR R0
-	BEQ T27
-	;[16] 		iMusicX=0
-	SRCFILE "IntyMusicCredits.bas",16
-	CLRR R0
-	MVO R0,V5
-	;[17] 		FOR #x=1 TO 11
-	SRCFILE "IntyMusicCredits.bas",17
-	MVII #1,R0
-	MVO R0,V2
-T28:
-	;[18] 			#BACKTAB(iMusicX)=CS_ADVANCE			
-	SRCFILE "IntyMusicCredits.bas",18
-	MVII #8192,R0
-	MVII #Q2,R3
-	ADD V5,R3
-	MVO@ R0,R3
-	;[19] 			iMusicX=iMusicX+20
-	SRCFILE "IntyMusicCredits.bas",19
-	MVI V5,R0
-	ADDI #20,R0
-	MVO R0,V5
-	;[20] 		NEXT #x
-	SRCFILE "IntyMusicCredits.bas",20
-	MVI V2,R0
-	INCR R0
-	MVO R0,V2
-	CMPI #11,R0
-	BLE T28
-	;[21] 	END IF
-	SRCFILE "IntyMusicCredits.bas",21
-T27:
-	;[22] 	
-	SRCFILE "IntyMusicCredits.bas",22
-	;[23] 	'Draw &
-	SRCFILE "IntyMusicCredits.bas",23
-	;[24] 	PRINT AT 9 COLOR 0,"\277\269\272\261"
-	SRCFILE "IntyMusicCredits.bas",24
 	MVII #521,R0
 	MVO R0,_screen
 	CLRR R0
@@ -3844,8 +3974,8 @@ T27:
 	XORI #168,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[25] 	PRINT AT 29,"\278\270\273\262"
-	SRCFILE "IntyMusicCredits.bas",25
+	;[16] 	PRINT AT 29,"\278\270\273\262"
+	SRCFILE "IntyMusicCredits.bas",16
 	MVII #541,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -3859,12 +3989,12 @@ T27:
 	XORI #184,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[26] 	
-	SRCFILE "IntyMusicCredits.bas",26
-	;[27] 	'draw )
-	SRCFILE "IntyMusicCredits.bas",27
-	;[28] 	PRINT AT 5,"\271\263"
-	SRCFILE "IntyMusicCredits.bas",28
+	;[17] 	
+	SRCFILE "IntyMusicCredits.bas",17
+	;[18] 	'draw )
+	SRCFILE "IntyMusicCredits.bas",18
+	;[19] 	PRINT AT 5,"\271\263"
+	SRCFILE "IntyMusicCredits.bas",19
 	MVII #517,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -3874,8 +4004,8 @@ T27:
 	XORI #64,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[29] 	PRINT AT 25,"\273\262"
-	SRCFILE "IntyMusicCredits.bas",29
+	;[20] 	PRINT AT 25,"\273\262"
+	SRCFILE "IntyMusicCredits.bas",20
 	MVII #537,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -3885,8 +4015,8 @@ T27:
 	XORI #184,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[30] 	PRINT AT 46,"\279"
-	SRCFILE "IntyMusicCredits.bas",30
+	;[21] 	PRINT AT 46,"\279"
+	SRCFILE "IntyMusicCredits.bas",21
 	MVII #558,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -3894,10 +4024,47 @@ T27:
 	XOR _color,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[31] 	
-	SRCFILE "IntyMusicCredits.bas",31
-	;[32] 	PRINT AT 60 COLOR CS_BLUE,"\285"
-	SRCFILE "IntyMusicCredits.bas",32
+	;[22] 		
+	SRCFILE "IntyMusicCredits.bas",22
+	;[23] 	'- Draw piano---
+	SRCFILE "IntyMusicCredits.bas",23
+	;[24] 	FOR iMusicX=0 TO 19
+	SRCFILE "IntyMusicCredits.bas",24
+	CLRR R0
+	MVO R0,V6
+T31:
+	;[25] 		#BACKTAB(200+iMusicX)= IntyPiano(iMusicX)
+	SRCFILE "IntyMusicCredits.bas",25
+	MVII #Q2,R0
+	MVII #200,R1
+	ADD V6,R1
+	ADDR R1,R0
+	MVII #Q25,R3
+	ADD V6,R3
+	MVI@ R3,R1
+	MOVR R0,R4
+	MVO@ R1,R4
+	;[26] 	NEXT iMusicX	
+	SRCFILE "IntyMusicCredits.bas",26
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #19,R0
+	BLE T31
+	;[27] 	PRINT AT 220, CS_ADVANCE
+	SRCFILE "IntyMusicCredits.bas",27
+	MVII #732,R0
+	MVO R0,_screen
+	MVII #8192,R0
+	MVI _screen,R4
+	MVO@ R0,R4
+	MVO R4,_screen
+	;[28] 	
+	SRCFILE "IntyMusicCredits.bas",28
+	;[29] 	'---me---
+	SRCFILE "IntyMusicCredits.bas",29
+	;[30] 	PRINT AT 60 COLOR CS_BLUE,"\285"
+	SRCFILE "IntyMusicCredits.bas",30
 	MVII #572,R0
 	MVO R0,_screen
 	MVII #1,R0
@@ -3907,8 +4074,8 @@ T27:
 	XOR _color,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[33] 	PRINT COLOR CS_BLACK," IntyMusic Player "
-	SRCFILE "IntyMusicCredits.bas",33
+	;[31] 	PRINT COLOR CS_BLACK," IntyMusic Player "
+	SRCFILE "IntyMusicCredits.bas",31
 	CLRR R0
 	MVO R0,_color
 	MVI _screen,R4
@@ -3948,8 +4115,8 @@ T27:
 	XORI #656,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[34] 	PRINT COLOR CS_BLUE,"\285"
-	SRCFILE "IntyMusicCredits.bas",34
+	;[32] 	PRINT COLOR CS_BLUE,"\285"
+	SRCFILE "IntyMusicCredits.bas",32
 	MVII #1,R0
 	MVO R0,_color
 	MVI _screen,R4
@@ -3957,8 +4124,8 @@ T27:
 	XOR _color,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[35] 	PRINT COLOR CS_BLACK,"by Marco A. Marrero "
-	SRCFILE "IntyMusicCredits.bas",35
+	;[33] 	PRINT COLOR CS_BLACK,"by Marco A. Marrero "
+	SRCFILE "IntyMusicCredits.bas",33
 	CLRR R0
 	MVO R0,_color
 	MVI _screen,R4
@@ -4003,24 +4170,15 @@ T27:
 	XORI #632,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[36] 
+	;[34] 
+	SRCFILE "IntyMusicCredits.bas",34
+	;[35] 	GOSUB IntyMusicInit_Credits
+	SRCFILE "IntyMusicCredits.bas",35
+	CALL Q37
+	;[36] 	
 	SRCFILE "IntyMusicCredits.bas",36
-	;[37] 	'---------------- ADD YOUR INFORMATION HERE -------------------------
+	;[37] 	PRINT AT 220,"Press button to play"		
 	SRCFILE "IntyMusicCredits.bas",37
-	;[38] 	PRINT AT 120,""
-	SRCFILE "IntyMusicCredits.bas",38
-	MVII #632,R0
-	MVO R0,_screen
-	MOVR R0,R4
-	MVO R4,_screen
-	;[39] 	'-----------------------------------------------------------------
-	SRCFILE "IntyMusicCredits.bas",39
-	;[40] 	
-	SRCFILE "IntyMusicCredits.bas",40
-	;[41] 	
-	SRCFILE "IntyMusicCredits.bas",41
-	;[42] 	PRINT AT 220,"Press button to play"		
-	SRCFILE "IntyMusicCredits.bas",42
 	MVII #732,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -4064,60 +4222,103 @@ T27:
 	XORI #192,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[43] 	GOSUB WaitForKeyDownThenUp	
-	SRCFILE "IntyMusicCredits.bas",43
-	CALL Q32
-	;[44] RETURN
-	SRCFILE "IntyMusicCredits.bas",44
-	RETURN
-	;[45] END
-	SRCFILE "IntyMusicCredits.bas",45
-	ENDP
-	;[46] 
-	SRCFILE "IntyMusicCredits.bas",46
-	;[47] WaitForKeyDownThenUp: procedure
-	SRCFILE "IntyMusicCredits.bas",47
-	; WAITFORKEYDOWNTHENUP
-Q32:	PROC
-	BEGIN
-	;[48] 	' Wait for a key to be pressed.
-	SRCFILE "IntyMusicCredits.bas",48
-	;[49] 	do while cont=0
-	SRCFILE "IntyMusicCredits.bas",49
-T29:
-	MVI 510,R0
-	XOR 511,R0
-	BNE T30
-	;[50] 		wait
-	SRCFILE "IntyMusicCredits.bas",50
-	CALL _wait
-	;[51] 	loop	
-	SRCFILE "IntyMusicCredits.bas",51
-	B T29
-T30:
-	;[52] 	' Wait for a key to be released.
-	SRCFILE "IntyMusicCredits.bas",52
-	;[53] 	do while cont<>0
-	SRCFILE "IntyMusicCredits.bas",53
-T31:
-	MVI 510,R0
-	XOR 511,R0
+	;[38] 	
+	SRCFILE "IntyMusicCredits.bas",38
+	;[39] 	'---Alternate colors
+	SRCFILE "IntyMusicCredits.bas",39
+	;[40] 	IF INTYMUSIC_FANFOLD THEN
+	SRCFILE "IntyMusicCredits.bas",40
+	MVII #1,R0
+	TSTR R0
 	BEQ T32
-	;[54] 		wait
-	SRCFILE "IntyMusicCredits.bas",54
-	CALL _wait
-	;[55] 	loop	
-	SRCFILE "IntyMusicCredits.bas",55
-	B T31
+	;[41] 		iMusicX=0
+	SRCFILE "IntyMusicCredits.bas",41
+	CLRR R0
+	MVO R0,V6
+	;[42] 		FOR #x=1 TO 12
+	SRCFILE "IntyMusicCredits.bas",42
+	MVII #1,R0
+	MVO R0,V2
+T33:
+	;[43] 			#BACKTAB(iMusicX)=#BACKTAB(iMusicX) OR CS_ADVANCE			
+	SRCFILE "IntyMusicCredits.bas",43
+	MVII #Q2,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	ANDI #-8193,R0
+	XORI #8192,R0
+	MVO@ R0,R3
+	;[44] 			iMusicX=iMusicX+20
+	SRCFILE "IntyMusicCredits.bas",44
+	MVI V6,R0
+	ADDI #20,R0
+	MVO R0,V6
+	;[45] 		NEXT #x
+	SRCFILE "IntyMusicCredits.bas",45
+	MVI V2,R0
+	INCR R0
+	MVO R0,V2
+	CMPI #12,R0
+	BLE T33
+	;[46] 	END IF
+	SRCFILE "IntyMusicCredits.bas",46
 T32:
-	;[56] end
+	;[47] 	
+	SRCFILE "IntyMusicCredits.bas",47
+	;[48] 	GOSUB WaitForKeyDownThenUp	
+	SRCFILE "IntyMusicCredits.bas",48
+	CALL Q38
+	;[49] RETURN
+	SRCFILE "IntyMusicCredits.bas",49
+	RETURN
+	;[50] END
+	SRCFILE "IntyMusicCredits.bas",50
+	ENDP
+	;[51] 
+	SRCFILE "IntyMusicCredits.bas",51
+	;[52] WaitForKeyDownThenUp: procedure
+	SRCFILE "IntyMusicCredits.bas",52
+	; WAITFORKEYDOWNTHENUP
+Q38:	PROC
+	BEGIN
+	;[53] 	' Wait for a key to be pressed.
+	SRCFILE "IntyMusicCredits.bas",53
+	;[54] 	do while cont=0
+	SRCFILE "IntyMusicCredits.bas",54
+T34:
+	MVI 510,R0
+	XOR 511,R0
+	BNE T35
+	;[55] 		wait
+	SRCFILE "IntyMusicCredits.bas",55
+	CALL _wait
+	;[56] 	loop	
 	SRCFILE "IntyMusicCredits.bas",56
+	B T34
+T35:
+	;[57] 	' Wait for a key to be released.
+	SRCFILE "IntyMusicCredits.bas",57
+	;[58] 	do while cont<>0
+	SRCFILE "IntyMusicCredits.bas",58
+T36:
+	MVI 510,R0
+	XOR 511,R0
+	BEQ T37
+	;[59] 		wait
+	SRCFILE "IntyMusicCredits.bas",59
+	CALL _wait
+	;[60] 	loop	
+	SRCFILE "IntyMusicCredits.bas",60
+	B T36
+T37:
+	;[61] end
+	SRCFILE "IntyMusicCredits.bas",61
 	RETURN
 	ENDP
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[17] INCLUDE "IntyMusicGraphics.bas"
-	SRCFILE "IntyMusic.bas",17
+	;[40] INCLUDE "IntyMusicGraphics.bas"
+	SRCFILE "IntyMusic.bas",40
 	;FILE IntyMusicGraphics.bas
 	;[1] '---- Source: C:\Users\mmarr\GD\Intellivision\IntyMusic5.png
 	SRCFILE "IntyMusicGraphics.bas",1
@@ -4132,7 +4333,7 @@ T32:
 	;[6] Sprite0:
 	SRCFILE "IntyMusicGraphics.bas",6
 	; SPRITE0
-Q3:	;[7] 	BITMAP ".#......"	'$40
+Q6:	;[7] 	BITMAP ".#......"	'$40
 	SRCFILE "IntyMusicGraphics.bas",7
 	;[8] 	BITMAP ".#......"	'$40
 	SRCFILE "IntyMusicGraphics.bas",8
@@ -4549,7 +4750,7 @@ Q3:	;[7] 	BITMAP ".#......"	'$40
 	;[182] Sprite16:
 	SRCFILE "IntyMusicGraphics.bas",182
 	; SPRITE16
-Q4:	;[183] 	BITMAP "........"	'$00
+Q7:	;[183] 	BITMAP "........"	'$00
 	SRCFILE "IntyMusicGraphics.bas",183
 	;[184] 	BITMAP "#......."	'$80
 	SRCFILE "IntyMusicGraphics.bas",184
@@ -4861,26 +5062,26 @@ Q4:	;[183] 	BITMAP "........"	'$00
 	SRCFILE "IntyMusicGraphics.bas",313
 	;[314] 'Sprite28:
 	SRCFILE "IntyMusicGraphics.bas",314
-	;[315] 	BITMAP "########"	'$FF
+	;[315] 	BITMAP " ..#####"	
 	SRCFILE "IntyMusicGraphics.bas",315
-	;[316] 	BITMAP "########"	'$FF
+	;[316] 	BITMAP "  .#..##"	
 	SRCFILE "IntyMusicGraphics.bas",316
-	DECLE 65535
-	;[317] 	BITMAP "########"	'$FF
+	DECLE 4895
+	;[317] 	BITMAP " ..#..##"	
 	SRCFILE "IntyMusicGraphics.bas",317
-	;[318] 	BITMAP "########"	'$FF
+	;[318] 	BITMAP "   #..##"	
 	SRCFILE "IntyMusicGraphics.bas",318
-	DECLE 65535
-	;[319] 	BITMAP "########"	'$FF
+	DECLE 4883
+	;[319] 	BITMAP " ..#..##"	
 	SRCFILE "IntyMusicGraphics.bas",319
-	;[320] 	BITMAP "########"	'$FF
+	;[320] 	BITMAP "  .#...#"
 	SRCFILE "IntyMusicGraphics.bas",320
-	DECLE 65535
-	;[321] 	BITMAP "########"	'$FF
+	DECLE 4371
+	;[321] 	BITMAP " ..#...#"
 	SRCFILE "IntyMusicGraphics.bas",321
-	;[322] 	BITMAP "########"	'$FF
+	;[322] 	BITMAP "  .#####"	
 	SRCFILE "IntyMusicGraphics.bas",322
-	DECLE 65535
+	DECLE 7953
 	;[323] 
 	SRCFILE "IntyMusicGraphics.bas",323
 	;[324] '===MOV:29 == Chr:285===== [8,8]
@@ -4967,113 +5168,105 @@ Q4:	;[183] 	BITMAP "........"	'$00
 	SRCFILE "IntyMusicGraphics.bas",358
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[18] INCLUDE "IntyMusicData.bas"
-	SRCFILE "IntyMusic.bas",18
+	;[41] INCLUDE "IntyMusicData.bas"
+	SRCFILE "IntyMusic.bas",41
 	;FILE IntyMusicData.bas
 	;[1] 'IntyMusic by Marco A. Marrero.  Started on 7/30/2016
 	SRCFILE "IntyMusicData.bas",1
-	;[2] '
+	;[2] 'Revision 8/9/2016. Bug: Note G5#? was shown as line, had wrong value in Excel
 	SRCFILE "IntyMusicData.bas",2
-	;[3] 'IntyBasic notes are values from 1 to 61, C2 to C7. In most of these first value is dummy, notes start from 1-18
+	;[3] '-------
 	SRCFILE "IntyMusicData.bas",3
-	;[4] 
+	;[4] 'IntyBasic notes are values from 1 to 61, C2 to C7. In most of these first value is dummy, notes start from 1-18
 	SRCFILE "IntyMusicData.bas",4
-	;[5] 'Feel free to contact me if you need the spreadsheet and source images I used to get all these values. 
+	;[5] 
 	SRCFILE "IntyMusicData.bas",5
-	;[6] 'It will make a lot easier to figure out where all these numbers came from.
+	;[6] '---Note relative position (1-36)... according to note value (1-61). 
 	SRCFILE "IntyMusicData.bas",6
-	;[7] '
+	;[7] 'IntyNotePosition:
 	SRCFILE "IntyMusicData.bas",7
-	;[8] 
+	;[8] 'DATA 0,1,1,2,2,3,4,4,5,5,6,6,7,8,8,9,9,10,11,11,12,12,13,13,14,15,15,16,16,17,18,18,19,19,20,20,21,22,22,23,23,24,25,25,26,26,27,27,28,29,29,30,30,31,32,32,33,33,34,34,35,36
 	SRCFILE "IntyMusicData.bas",8
-	;[9] '---Note relative position (1-36)... according to note value (1-61). 
+	;[9] 
 	SRCFILE "IntyMusicData.bas",9
-	;[10] 'IntyNotePosition:
+	;[10] '---Note relative to screen (1-18). I am using 2 notes per card
 	SRCFILE "IntyMusicData.bas",10
-	;[11] 'DATA 0,1,1,2,2,3,4,4,5,5,6,6,7,8,8,9,9,10,11,11,12,12,13,13,14,15,15,16,16,17,18,18,19,19,20,20,21,22,22,23,23,24,25,25,26,26,27,27,28,29,29,30,30,31,32,32,33,33,34,34,35,36
+	;[11] IntyNoteOnscreen:
 	SRCFILE "IntyMusicData.bas",11
-	;[12] 
-	SRCFILE "IntyMusicData.bas",12
-	;[13] '---Note relative to screen (1-18). I am using 2 notes per card
-	SRCFILE "IntyMusicData.bas",13
-	;[14] IntyNoteOnscreen:
-	SRCFILE "IntyMusicData.bas",14
 	; INTYNOTEONSCREEN
-Q24:	;[15] DATA 0,1,1,1,1,2,2,2,3,3,3,3,4,4,4,5,5,5,6,6,6,6,7,7,7,8,8,8,8,9,9,9,10,10,10,10,11,11,11,12,12,12,13,13,13,13,14,14,14,15,15,15,15,16,16,16,17,17,17,17,18,18
+Q31:	;[12] DATA 0,1,1,1,1,2,2,2,3,3,3,3,4,4,4,5,5,5,6,6,6,6,7,7,7,8,8,8,8,9,9,9,10,10,10,10,11,11,11,12,12,12,13,13,13,13,14,14,14,15,15,15,15,16,16,16,17,17,17,17,18,18
+	SRCFILE "IntyMusicData.bas",12
+	DECLE 0
+	DECLE 1
+	DECLE 1
+	DECLE 1
+	DECLE 1
+	DECLE 2
+	DECLE 2
+	DECLE 2
+	DECLE 3
+	DECLE 3
+	DECLE 3
+	DECLE 3
+	DECLE 4
+	DECLE 4
+	DECLE 4
+	DECLE 5
+	DECLE 5
+	DECLE 5
+	DECLE 6
+	DECLE 6
+	DECLE 6
+	DECLE 6
+	DECLE 7
+	DECLE 7
+	DECLE 7
+	DECLE 8
+	DECLE 8
+	DECLE 8
+	DECLE 8
+	DECLE 9
+	DECLE 9
+	DECLE 9
+	DECLE 10
+	DECLE 10
+	DECLE 10
+	DECLE 10
+	DECLE 11
+	DECLE 11
+	DECLE 11
+	DECLE 12
+	DECLE 12
+	DECLE 12
+	DECLE 13
+	DECLE 13
+	DECLE 13
+	DECLE 13
+	DECLE 14
+	DECLE 14
+	DECLE 14
+	DECLE 15
+	DECLE 15
+	DECLE 15
+	DECLE 15
+	DECLE 16
+	DECLE 16
+	DECLE 16
+	DECLE 17
+	DECLE 17
+	DECLE 17
+	DECLE 17
+	DECLE 18
+	DECLE 18
+	;[13] 
+	SRCFILE "IntyMusicData.bas",13
+	;[14] '--Note Alpha/letter... GROM card values. C,D,E,F,G,A or B etc..  no # here
+	SRCFILE "IntyMusicData.bas",14
+	;[15] IntyNoteLetter:
 	SRCFILE "IntyMusicData.bas",15
-	DECLE 0
-	DECLE 1
-	DECLE 1
-	DECLE 1
-	DECLE 1
-	DECLE 2
-	DECLE 2
-	DECLE 2
-	DECLE 3
-	DECLE 3
-	DECLE 3
-	DECLE 3
-	DECLE 4
-	DECLE 4
-	DECLE 4
-	DECLE 5
-	DECLE 5
-	DECLE 5
-	DECLE 6
-	DECLE 6
-	DECLE 6
-	DECLE 6
-	DECLE 7
-	DECLE 7
-	DECLE 7
-	DECLE 8
-	DECLE 8
-	DECLE 8
-	DECLE 8
-	DECLE 9
-	DECLE 9
-	DECLE 9
-	DECLE 10
-	DECLE 10
-	DECLE 10
-	DECLE 10
-	DECLE 11
-	DECLE 11
-	DECLE 11
-	DECLE 12
-	DECLE 12
-	DECLE 12
-	DECLE 13
-	DECLE 13
-	DECLE 13
-	DECLE 13
-	DECLE 14
-	DECLE 14
-	DECLE 14
-	DECLE 15
-	DECLE 15
-	DECLE 15
-	DECLE 15
-	DECLE 16
-	DECLE 16
-	DECLE 16
-	DECLE 17
-	DECLE 17
-	DECLE 17
-	DECLE 17
-	DECLE 18
-	DECLE 18
-	;[16] 
-	SRCFILE "IntyMusicData.bas",16
-	;[17] '--Note letter... GROM card values.
-	SRCFILE "IntyMusicData.bas",17
-	;[18] IntyNoteLetter:
-	SRCFILE "IntyMusicData.bas",18
 	; INTYNOTELETTER
-Q26:	;[19] 
-	SRCFILE "IntyMusicData.bas",19
-	;[20] DATA 0,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280
-	SRCFILE "IntyMusicData.bas",20
+Q26:	;[16] DATA 0,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280,280,288,288,296,304,304,312,312,264,264,272,280
+	SRCFILE "IntyMusicData.bas",16
 	DECLE 0
 	DECLE 280
 	DECLE 280
@@ -5136,89 +5329,87 @@ Q26:	;[19]
 	DECLE 264
 	DECLE 272
 	DECLE 280
-	;[21] 
+	;[17] 
+	SRCFILE "IntyMusicData.bas",17
+	;[18] '--Sharp notes, according to value. 24=GROM Card #
+	SRCFILE "IntyMusicData.bas",18
+	;[19] IntyNoteSharp:
+	SRCFILE "IntyMusicData.bas",19
+	; INTYNOTESHARP
+Q28:	;[20] 'DATA " "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," "
+	SRCFILE "IntyMusicData.bas",20
+	;[21] DATA 0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0
 	SRCFILE "IntyMusicData.bas",21
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
+	DECLE 24
+	DECLE 0
 	;[22] 
 	SRCFILE "IntyMusicData.bas",22
-	;[23] '--Sharp notes. 24=GROM Card #
+	;[23] '--- Ocatave according to note value, =(Octave*8)+(16*8) = GROM card # for 2,3,4,5,6,7
 	SRCFILE "IntyMusicData.bas",23
-	;[24] IntyNoteSharp:
+	;[24] IntyNoteOctave:
 	SRCFILE "IntyMusicData.bas",24
-	; INTYNOTESHARP
-Q28:	;[25] 'DATA " "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," ","#"," ","#"," "," ","#"," ","#"," ","#"," "," "
-	SRCFILE "IntyMusicData.bas",25
-	;[26] DATA 0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0,0,24,0,24,0,0,24,0,24,0,24,0
-	SRCFILE "IntyMusicData.bas",26
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	DECLE 24
-	DECLE 0
-	;[27] 
-	SRCFILE "IntyMusicData.bas",27
-	;[28] '--- Ocataves, =(Octave*8)+(16*8) = GROM card # for 2,3,4,5,6,7
-	SRCFILE "IntyMusicData.bas",28
-	;[29] IntyNoteOctave:
-	SRCFILE "IntyMusicData.bas",29
 	; INTYNOTEOCTAVE
-Q27:	;[30] DATA 0,144,144,144,144,144,144,144,144,144,144,144,144,152,152,152,152,152,152,152,152,152,152,152,152,160,160,160,160,160,160,160,160,160,160,160,160,168,168,168,168,168,168,168,168,168,168,168,168,176,176,176,176,176,176,176,176,176,176,176,176,184
-	SRCFILE "IntyMusicData.bas",30
+Q27:	;[25] DATA 0,144,144,144,144,144,144,144,144,144,144,144,144,152,152,152,152,152,152,152,152,152,152,152,152,160,160,160,160,160,160,160,160,160,160,160,160,168,168,168,168,168,168,168,168,168,168,168,168,176,176,176,176,176,176,176,176,176,176,176,176,184
+	SRCFILE "IntyMusicData.bas",25
 	DECLE 0
 	DECLE 144
 	DECLE 144
@@ -5281,21 +5472,17 @@ Q27:	;[30] DATA 0,144,144,144,144,144,144,144,144,144,144,144,144,152,152,152,15
 	DECLE 176
 	DECLE 176
 	DECLE 184
-	;[31] 
-	SRCFILE "IntyMusicData.bas",31
-	;[32] 
-	SRCFILE "IntyMusicData.bas",32
-	;[33] '--GRAM Card to use------- Positioned horizontally -----
-	SRCFILE "IntyMusicData.bas",33
-	;[34] 'I combined GRAM cards. 2 notes per card. I wont display adjacent notes, only 1 will be shown
-	SRCFILE "IntyMusicData.bas",34
-	;[35] 
-	SRCFILE "IntyMusicData.bas",35
-	;[36] IntyNoteGRAM:
-	SRCFILE "IntyMusicData.bas",36
+	;[26] 
+	SRCFILE "IntyMusicData.bas",26
+	;[27] '--GRAM Card to use------- Positioned horizontally -----
+	SRCFILE "IntyMusicData.bas",27
+	;[28] 'I combined GRAM cards. 2 notes per card. I wont display adjacent notes, only 1 will be shown
+	SRCFILE "IntyMusicData.bas",28
+	;[29] IntyNoteGRAM:
+	SRCFILE "IntyMusicData.bas",29
 	; INTYNOTEGRAM
-Q25:	;[37] DATA 0,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2056,2072,2064,2080,2056,2072,2064,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2080,2056,2064,2080,2056,2072,2048,2056,2072,2064,2080,2056,2072,2064,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2080,2056,2064
-	SRCFILE "IntyMusicData.bas",37
+Q32:	;[30] DATA 0,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2056,2072,2064,2080,2056,2072,2064,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2080,2056,2064,2080,2056,2072,2056,2056,2072,2064,2080,2056,2072,2064,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2080,2056,2064
+	SRCFILE "IntyMusicData.bas",30
 	DECLE 0
 	DECLE 2056
 	DECLE 2072
@@ -5337,175 +5524,175 @@ Q25:	;[37] DATA 0,2056,2072,2064,2080,2056,2064,2080,2056,2072,2064,2080,2056,20
 	DECLE 2080
 	DECLE 2056
 	DECLE 2072
+	DECLE 2056
+	DECLE 2056
+	DECLE 2072
+	DECLE 2064
+	DECLE 2080
+	DECLE 2056
+	DECLE 2072
+	DECLE 2064
+	DECLE 2056
+	DECLE 2072
+	DECLE 2064
+	DECLE 2080
+	DECLE 2056
+	DECLE 2064
+	DECLE 2080
+	DECLE 2056
+	DECLE 2072
+	DECLE 2064
+	DECLE 2080
+	DECLE 2056
+	DECLE 2064
+	;[31] 
+	SRCFILE "IntyMusicData.bas",31
+	;[32] IntyNoteBlankLine:
+	SRCFILE "IntyMusicData.bas",32
+	; INTYNOTEBLANKLINE
+Q30:	;[33] DATA 2112,2112,2112,2048,2048,2048,2048,2048,2112,2048,2048,2048,2048,2048,2112,2112,2112,2112,2112,2112,2112
+	SRCFILE "IntyMusicData.bas",33
+	DECLE 2112
+	DECLE 2112
+	DECLE 2112
 	DECLE 2048
-	DECLE 2056
-	DECLE 2072
-	DECLE 2064
-	DECLE 2080
-	DECLE 2056
-	DECLE 2072
-	DECLE 2064
-	DECLE 2056
-	DECLE 2072
-	DECLE 2064
-	DECLE 2080
-	DECLE 2056
-	DECLE 2064
-	DECLE 2080
-	DECLE 2056
-	DECLE 2072
-	DECLE 2064
-	DECLE 2080
-	DECLE 2056
-	DECLE 2064
+	DECLE 2048
+	DECLE 2048
+	DECLE 2048
+	DECLE 2048
+	DECLE 2112
+	DECLE 2048
+	DECLE 2048
+	DECLE 2048
+	DECLE 2048
+	DECLE 2048
+	DECLE 2112
+	DECLE 2112
+	DECLE 2112
+	DECLE 2112
+	DECLE 2112
+	DECLE 2112
+	DECLE 2112
+	;[34] 
+	SRCFILE "IntyMusicData.bas",34
+	;[35] '----Piano! GRAM+(Sprite24*8),GRAM+(Sprite25*8), etc-----
+	SRCFILE "IntyMusicData.bas",35
+	;[36] 'There are 2 1/2 key per GRAM card for the piano, 4 different sprites for hilite. 7 combinations 2 octaves...
+	SRCFILE "IntyMusicData.bas",36
+	;[37] 'GRAM cards: CD,EF,GA,BC*,DE*,FG*,AB.  (*=same cards as EF,AB,CD)
+	SRCFILE "IntyMusicData.bas",37
 	;[38] 
 	SRCFILE "IntyMusicData.bas",38
-	;[39] IntyNoteBlankLine:
+	;[39] IntyPiano:
 	SRCFILE "IntyMusicData.bas",39
-	; INTYNOTEBLANKLINE
-Q22:	;[40] DATA 2112,2112,2112,2048,2048,2048,2048,2048,2112,2048,2048,2048,2048,2048,2112,2112,2112,2112,2112,2112,2112
+	; INTYPIANO
+Q25:	;[40] DATA 2296,2208,2192,2200,2192,2296,2208,2296,2208,2192,2200,2192,2296,2208,2296,2208,2192,2200,2192,2296,2208
 	SRCFILE "IntyMusicData.bas",40
-	DECLE 2112
-	DECLE 2112
-	DECLE 2112
-	DECLE 2048
-	DECLE 2048
-	DECLE 2048
-	DECLE 2048
-	DECLE 2048
-	DECLE 2112
-	DECLE 2048
-	DECLE 2048
-	DECLE 2048
-	DECLE 2048
-	DECLE 2048
-	DECLE 2112
-	DECLE 2112
-	DECLE 2112
-	DECLE 2112
-	DECLE 2112
-	DECLE 2112
-	DECLE 2112
+	DECLE 2296
+	DECLE 2208
+	DECLE 2192
+	DECLE 2200
+	DECLE 2192
+	DECLE 2296
+	DECLE 2208
+	DECLE 2296
+	DECLE 2208
+	DECLE 2192
+	DECLE 2200
+	DECLE 2192
+	DECLE 2296
+	DECLE 2208
+	DECLE 2296
+	DECLE 2208
+	DECLE 2192
+	DECLE 2200
+	DECLE 2192
+	DECLE 2296
+	DECLE 2208
 	;[41] 
 	SRCFILE "IntyMusicData.bas",41
-	;[42] '----Piano! GRAM+(Sprite24*8),GRAM+(Sprite25*8), etc-----
+	;[42] 'Sprite to show. 1st one is not dummy, but it wont be played. 
 	SRCFILE "IntyMusicData.bas",42
-	;[43] 'There are 2 1/2 key per GRAM card for the piano, 4 different sprites for hilite. 7 combinations 2 octaves...
+	;[43] IntyPianoSprite:
 	SRCFILE "IntyMusicData.bas",43
-	;[44] 'GRAM cards: CD,EF,GA,BC*,DE*,FG*,AB.  (*=same cards as EF,AB,CD)
+	; INTYPIANOSPRITE
+Q34:	;[44] DATA 2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264
 	SRCFILE "IntyMusicData.bas",44
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
+	DECLE 2248
+	DECLE 2240
+	DECLE 2256
+	DECLE 2240
+	DECLE 2264
 	;[45] 
 	SRCFILE "IntyMusicData.bas",45
-	;[46] IntyPiano:
+	;[46] 'Its position... on the source spreadsheet its a row of offsets (0-7) + card position (0,8,16,etc)
 	SRCFILE "IntyMusicData.bas",46
-	; INTYPIANO
-Q23:	;[47] DATA 2296,2208,2192,2200,2192,2296,2208,2296,2208,2192,2200,2192,2296,2208,2296,2208,2192,2200,2192,2296,2208
+	;[47] IntyPianoSpriteOffset:
 	SRCFILE "IntyMusicData.bas",47
-	DECLE 2296
-	DECLE 2208
-	DECLE 2192
-	DECLE 2200
-	DECLE 2192
-	DECLE 2296
-	DECLE 2208
-	DECLE 2296
-	DECLE 2208
-	DECLE 2192
-	DECLE 2200
-	DECLE 2192
-	DECLE 2296
-	DECLE 2208
-	DECLE 2296
-	DECLE 2208
-	DECLE 2192
-	DECLE 2200
-	DECLE 2192
-	DECLE 2296
-	DECLE 2208
-	;[48] 
-	SRCFILE "IntyMusicData.bas",48
-	;[49] 'Sprite to show. 1st one is not dummy, but it wont be played. 
-	SRCFILE "IntyMusicData.bas",49
-	;[50] IntyPianoSprite:
-	SRCFILE "IntyMusicData.bas",50
-	; INTYPIANOSPRITE
-Q30:	;[51] DATA 2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264,2248,2240,2256,2240,2256,2240,2264,2248,2240,2256,2240,2264
-	SRCFILE "IntyMusicData.bas",51
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	DECLE 2248
-	DECLE 2240
-	DECLE 2256
-	DECLE 2240
-	DECLE 2264
-	;[52] 
-	SRCFILE "IntyMusicData.bas",52
-	;[53] 'Its position... on the source spreadsheet its a row of offsets (0-7) + card position (0,8,16,etc)
-	SRCFILE "IntyMusicData.bas",53
-	;[54] IntyPianoSpriteOffset:
-	SRCFILE "IntyMusicData.bas",54
 	; INTYPIANOSPRITEOFFSET
-Q29:	;[55] DATA 4,0,2,4,6,8,12,14,16,18,20,22,24,28,30,32,34,36,40,42,44,46,48,50,52,56,58,60,62,64,68,70,72,74,76,78,80,84,86,88,90,92,96,98,100,102,104,106,108,112,114,116,118,120,124,126,128,130,132,134,136,140,142,144,146,148,152,154,156
-	SRCFILE "IntyMusicData.bas",55
+Q33:	;[48] DATA 4,0,2,4,6,8,12,14,16,18,20,22,24,28,30,32,34,36,40,42,44,46,48,50,52,56,58,60,62,64,68,70,72,74,76,78,80,84,86,88,90,92,96,98,100,102,104,106,108,112,114,116,118,120,124,126,128,130,132,134,136,140,142,144,146,148,152,154,156
+	SRCFILE "IntyMusicData.bas",48
 	DECLE 4
 	DECLE 0
 	DECLE 2
@@ -5575,5024 +5762,8353 @@ Q29:	;[55] DATA 4,0,2,4,6,8,12,14,16,18,20,22,24,28,30,32,34,36,40,42,44,46,48,5
 	DECLE 152
 	DECLE 154
 	DECLE 156
-	;[56] 
-	SRCFILE "IntyMusicData.bas",56
-	;[57] 
-	SRCFILE "IntyMusicData.bas",57
-	;[58] 
-	SRCFILE "IntyMusicData.bas",58
-	;[59] 
-	SRCFILE "IntyMusicData.bas",59
+	;[49] 
+	SRCFILE "IntyMusicData.bas",49
+	;[50] 
+	SRCFILE "IntyMusicData.bas",50
+	;[51] 
+	SRCFILE "IntyMusicData.bas",51
+	;[52] 
+	SRCFILE "IntyMusicData.bas",52
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[19] 
-	SRCFILE "IntyMusic.bas",19
-	;[20] '-----Music to use------
-	SRCFILE "IntyMusic.bas",20
-	;[21] 'MyMusic:
-	SRCFILE "IntyMusic.bas",21
-	;[22] asm org $A000
-	SRCFILE "IntyMusic.bas",22
+	;[42] 
+	SRCFILE "IntyMusic.bas",42
+	;[43] '========== More Options =======================
+	SRCFILE "IntyMusic.bas",43
+	;[44] IntyMusicInit_Credits: PROCEDURE
+	SRCFILE "IntyMusic.bas",44
+	; INTYMUSICINIT_CREDITS
+Q37:	PROC
+	BEGIN
+	;[45] 	'---------------- ADD INFORMATION BELOW -------------------------
+	SRCFILE "IntyMusic.bas",45
+	;[46] 	PRINT AT 120,"Song:Space Harrier"   	'<
+	SRCFILE "IntyMusic.bas",46
+	MVII #632,R0
+	MVO R0,_screen
+	MOVR R0,R4
+	MVII #408,R0
+	XOR _color,R0
+	MVO@ R0,R4
+	XORI #992,R0
+	MVO@ R0,R4
+	XORI #8,R0
+	MVO@ R0,R4
+	XORI #72,R0
+	MVO@ R0,R4
+	XORI #744,R0
+	MVO@ R0,R4
+	XORI #328,R0
+	MVO@ R0,R4
+	XORI #792,R0
+	MVO@ R0,R4
+	XORI #136,R0
+	MVO@ R0,R4
+	XORI #16,R0
+	MVO@ R0,R4
+	XORI #48,R0
+	MVO@ R0,R4
+	XORI #552,R0
+	MVO@ R0,R4
+	XORI #320,R0
+	MVO@ R0,R4
+	XORI #840,R0
+	MVO@ R0,R4
+	XORI #152,R0
+	MVO@ R0,R4
+	MVO@ R0,R4
+	XORI #216,R0
+	MVO@ R0,R4
+	XORI #96,R0
+	MVO@ R0,R4
+	XORI #184,R0
+	MVO@ R0,R4
+	MVO R4,_screen
+	;[47] 	'GOSUB Print_Song_Name					'<-- use the same text from vertical print
+	SRCFILE "IntyMusic.bas",47
+	;[48] 	
+	SRCFILE "IntyMusic.bas",48
+	;[49] 	PRINT AT 140,"From:C64 Hi-Score"
+	SRCFILE "IntyMusic.bas",49
+	MVII #652,R0
+	MVO R0,_screen
+	MOVR R0,R4
+	MVII #304,R0
+	XOR _color,R0
+	MVO@ R0,R4
+	XORI #928,R0
+	MVO@ R0,R4
+	XORI #232,R0
+	MVO@ R0,R4
+	XORI #16,R0
+	MVO@ R0,R4
+	XORI #696,R0
+	MVO@ R0,R4
+	XORI #456,R0
+	MVO@ R0,R4
+	XORI #424,R0
+	MVO@ R0,R4
+	XORI #16,R0
+	MVO@ R0,R4
+	XORI #160,R0
+	MVO@ R0,R4
+	XORI #320,R0
+	MVO@ R0,R4
+	XORI #776,R0
+	MVO@ R0,R4
+	XORI #544,R0
+	MVO@ R0,R4
+	XORI #496,R0
+	MVO@ R0,R4
+	XORI #896,R0
+	MVO@ R0,R4
+	XORI #96,R0
+	MVO@ R0,R4
+	XORI #232,R0
+	MVO@ R0,R4
+	XORI #184,R0
+	MVO@ R0,R4
+	MVO R4,_screen
+	;[50] 	PRINT AT 160,"  By:Mark Cooksey"
+	SRCFILE "IntyMusic.bas",50
+	MVII #672,R0
+	MVO R0,_screen
+	MOVR R0,R4
+	MVI _color,R0
+	MVO@ R0,R4
+	MVO@ R0,R4
+	XORI #272,R0
+	MVO@ R0,R4
+	XORI #984,R0
+	MVO@ R0,R4
+	XORI #536,R0
+	MVO@ R0,R4
+	XORI #440,R0
+	MVO@ R0,R4
+	XORI #864,R0
+	MVO@ R0,R4
+	XORI #152,R0
+	MVO@ R0,R4
+	XORI #200,R0
+	MVO@ R0,R4
+	XORI #600,R0
+	MVO@ R0,R4
+	XORI #280,R0
+	MVO@ R0,R4
+	XORI #864,R0
+	MVO@ R0,R4
+	MVO@ R0,R4
+	XORI #32,R0
+	MVO@ R0,R4
+	XORI #192,R0
+	MVO@ R0,R4
+	XORI #176,R0
+	MVO@ R0,R4
+	XORI #224,R0
+	MVO@ R0,R4
+	MVO R4,_screen
+	;[51] 	'-----------------------------------------------------------------
+	SRCFILE "IntyMusic.bas",51
+	;[52] RETURN
+	SRCFILE "IntyMusic.bas",52
+	RETURN
+	;[53] END	
+	SRCFILE "IntyMusic.bas",53
+	ENDP
+	;[54] 
+	SRCFILE "IntyMusic.bas",54
+	;[55] '-----Music to use------
+	SRCFILE "IntyMusic.bas",55
+	;[56] 'MyMusic:
+	SRCFILE "IntyMusic.bas",56
+	;[57] asm org $A000
+	SRCFILE "IntyMusic.bas",57
  org $A000
-	;[23] INCLUDE "requiem.bas"	 '<---- Music data. Data label *must* be named "MyMusic"
-	SRCFILE "IntyMusic.bas",23
-	;FILE requiem.bas
-	;[1] REM --------------------------------------------
-	SRCFILE "requiem.bas",1
-	;[2] REM Kyrie Eleison, from The Music Studio, by Activision/Audio Light
-	SRCFILE "requiem.bas",2
-	;[3] REM Coverted to .MID, to .MOD, then to IntyBasic by Marco A. Marrero
-	SRCFILE "requiem.bas",3
-	;[4] REM Thanks to the OpenMT software
-	SRCFILE "requiem.bas",4
-	;[5] REM --------------------------------------------
-	SRCFILE "requiem.bas",5
-	;[6] 
-	SRCFILE "requiem.bas",6
-	;[7] MyMusic:
-	SRCFILE "requiem.bas",7
+	;[58] INCLUDE "Songs\SHarrierC64.bas"		 '<---- Music data. Data label *must* be named "MyMusic"
+	SRCFILE "IntyMusic.bas",58
+	;FILE Songs\SHarrierC64.bas
+	;[1] 'Space Harrier C64 hi-score, from MIDI source file.
+	SRCFILE "Songs\SHarrierC64.bas",1
+	;[2] '
+	SRCFILE "Songs\SHarrierC64.bas",2
+	;[3] 
+	SRCFILE "Songs\SHarrierC64.bas",3
+	;[4] MyMusic:
+	SRCFILE "Songs\SHarrierC64.bas",4
 	; MYMUSIC
-Q14:	;[8] DATA 3
-	SRCFILE "requiem.bas",8
-	DECLE 3
-	;[9] 
-	SRCFILE "requiem.bas",9
-	;[10] MUSIC A3,s,s
-	SRCFILE "requiem.bas",10
-	DECLE 16150,63
+Q17:	;[5] 
+	SRCFILE "Songs\SHarrierC64.bas",5
+	;[6] DATA 2
+	SRCFILE "Songs\SHarrierC64.bas",6
+	DECLE 2
+	;[7] 
+	SRCFILE "Songs\SHarrierC64.bas",7
+	;[8] 
+	SRCFILE "Songs\SHarrierC64.bas",8
+	;[9] MUSIC E3,G4,B4
+	SRCFILE "Songs\SHarrierC64.bas",9
+	DECLE 8209,36
+	;[10] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",10
+	DECLE 16191,63
 	;[11] MUSIC s,s,s
-	SRCFILE "requiem.bas",11
+	SRCFILE "Songs\SHarrierC64.bas",11
 	DECLE 16191,63
 	;[12] MUSIC s,s,s
-	SRCFILE "requiem.bas",12
+	SRCFILE "Songs\SHarrierC64.bas",12
 	DECLE 16191,63
 	;[13] MUSIC s,s,s
-	SRCFILE "requiem.bas",13
+	SRCFILE "Songs\SHarrierC64.bas",13
 	DECLE 16191,63
 	;[14] MUSIC s,s,s
-	SRCFILE "requiem.bas",14
+	SRCFILE "Songs\SHarrierC64.bas",14
 	DECLE 16191,63
 	;[15] MUSIC s,s,s
-	SRCFILE "requiem.bas",15
+	SRCFILE "Songs\SHarrierC64.bas",15
 	DECLE 16191,63
 	;[16] MUSIC s,s,s
-	SRCFILE "requiem.bas",16
+	SRCFILE "Songs\SHarrierC64.bas",16
 	DECLE 16191,63
 	;[17] MUSIC s,s,s
-	SRCFILE "requiem.bas",17
+	SRCFILE "Songs\SHarrierC64.bas",17
 	DECLE 16191,63
 	;[18] MUSIC s,s,s
-	SRCFILE "requiem.bas",18
+	SRCFILE "Songs\SHarrierC64.bas",18
 	DECLE 16191,63
 	;[19] MUSIC s,s,s
-	SRCFILE "requiem.bas",19
+	SRCFILE "Songs\SHarrierC64.bas",19
 	DECLE 16191,63
 	;[20] MUSIC s,s,s
-	SRCFILE "requiem.bas",20
+	SRCFILE "Songs\SHarrierC64.bas",20
 	DECLE 16191,63
-	;[21] MUSIC s,s,s
-	SRCFILE "requiem.bas",21
+	;[21] MUSIC G3,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",21
+	DECLE 16148,39
+	;[22] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",22
 	DECLE 16191,63
-	;[22] MUSIC A3,s,s
-	SRCFILE "requiem.bas",22
-	DECLE 16150,63
 	;[23] MUSIC s,s,s
-	SRCFILE "requiem.bas",23
+	SRCFILE "Songs\SHarrierC64.bas",23
 	DECLE 16191,63
 	;[24] MUSIC s,s,s
-	SRCFILE "requiem.bas",24
+	SRCFILE "Songs\SHarrierC64.bas",24
 	DECLE 16191,63
-	;[25] MUSIC s,s,s
-	SRCFILE "requiem.bas",25
+	;[25] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",25
+	DECLE 6975,35
+	;[26] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",26
 	DECLE 16191,63
-	;[26] MUSIC F3,s,s
-	SRCFILE "requiem.bas",26
-	DECLE 16146,63
 	;[27] MUSIC s,s,s
-	SRCFILE "requiem.bas",27
+	SRCFILE "Songs\SHarrierC64.bas",27
 	DECLE 16191,63
 	;[28] MUSIC s,s,s
-	SRCFILE "requiem.bas",28
+	SRCFILE "Songs\SHarrierC64.bas",28
 	DECLE 16191,63
-	;[29] MUSIC s,s,s
-	SRCFILE "requiem.bas",29
-	DECLE 16191,63
+	;[29] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",29
+	DECLE 6463,34
 	;[30] MUSIC s,s,s
-	SRCFILE "requiem.bas",30
+	SRCFILE "Songs\SHarrierC64.bas",30
 	DECLE 16191,63
 	;[31] MUSIC s,s,s
-	SRCFILE "requiem.bas",31
+	SRCFILE "Songs\SHarrierC64.bas",31
 	DECLE 16191,63
 	;[32] MUSIC s,s,s
-	SRCFILE "requiem.bas",32
+	SRCFILE "Songs\SHarrierC64.bas",32
 	DECLE 16191,63
-	;[33] MUSIC s,s,s
-	SRCFILE "requiem.bas",33
+	;[33] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",33
+	DECLE 6975,35
+	;[34] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",34
 	DECLE 16191,63
-	;[34] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",34
-	DECLE 16151,63
 	;[35] MUSIC s,s,s
-	SRCFILE "requiem.bas",35
+	SRCFILE "Songs\SHarrierC64.bas",35
 	DECLE 16191,63
 	;[36] MUSIC s,s,s
-	SRCFILE "requiem.bas",36
+	SRCFILE "Songs\SHarrierC64.bas",36
 	DECLE 16191,63
-	;[37] MUSIC s,s,s
-	SRCFILE "requiem.bas",37
-	DECLE 16191,63
+	;[37] MUSIC A3#,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",37
+	DECLE 16151,32
 	;[38] MUSIC s,s,s
-	SRCFILE "requiem.bas",38
+	SRCFILE "Songs\SHarrierC64.bas",38
 	DECLE 16191,63
 	;[39] MUSIC s,s,s
-	SRCFILE "requiem.bas",39
+	SRCFILE "Songs\SHarrierC64.bas",39
 	DECLE 16191,63
 	;[40] MUSIC s,s,s
-	SRCFILE "requiem.bas",40
+	SRCFILE "Songs\SHarrierC64.bas",40
 	DECLE 16191,63
-	;[41] MUSIC s,s,s
-	SRCFILE "requiem.bas",41
+	;[41] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",41
+	DECLE 6975,35
+	;[42] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",42
 	DECLE 16191,63
-	;[42] MUSIC C3#,s,s
-	SRCFILE "requiem.bas",42
-	DECLE 16142,63
 	;[43] MUSIC s,s,s
-	SRCFILE "requiem.bas",43
+	SRCFILE "Songs\SHarrierC64.bas",43
 	DECLE 16191,63
 	;[44] MUSIC s,s,s
-	SRCFILE "requiem.bas",44
+	SRCFILE "Songs\SHarrierC64.bas",44
 	DECLE 16191,63
-	;[45] MUSIC s,s,s
-	SRCFILE "requiem.bas",45
+	;[45] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",45
+	DECLE 6463,34
+	;[46] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",46
 	DECLE 16191,63
-	;[46] MUSIC s,E4,s
-	SRCFILE "requiem.bas",46
-	DECLE 7487,63
 	;[47] MUSIC s,s,s
-	SRCFILE "requiem.bas",47
+	SRCFILE "Songs\SHarrierC64.bas",47
 	DECLE 16191,63
 	;[48] MUSIC s,s,s
-	SRCFILE "requiem.bas",48
+	SRCFILE "Songs\SHarrierC64.bas",48
 	DECLE 16191,63
-	;[49] MUSIC s,s,s
-	SRCFILE "requiem.bas",49
+	;[49] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",49
+	DECLE 6975,35
+	;[50] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",50
 	DECLE 16191,63
-	;[50] MUSIC s,E4,s
-	SRCFILE "requiem.bas",50
-	DECLE 7487,63
 	;[51] MUSIC s,s,s
-	SRCFILE "requiem.bas",51
+	SRCFILE "Songs\SHarrierC64.bas",51
 	DECLE 16191,63
 	;[52] MUSIC s,s,s
-	SRCFILE "requiem.bas",52
+	SRCFILE "Songs\SHarrierC64.bas",52
 	DECLE 16191,63
-	;[53] MUSIC s,s,s
-	SRCFILE "requiem.bas",53
+	;[53] MUSIC G3,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",53
+	DECLE 16148,39
+	;[54] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",54
 	DECLE 16191,63
-	;[54] MUSIC E4,C3#,s
-	SRCFILE "requiem.bas",54
-	DECLE 3613,63
 	;[55] MUSIC s,s,s
-	SRCFILE "requiem.bas",55
+	SRCFILE "Songs\SHarrierC64.bas",55
 	DECLE 16191,63
 	;[56] MUSIC s,s,s
-	SRCFILE "requiem.bas",56
+	SRCFILE "Songs\SHarrierC64.bas",56
 	DECLE 16191,63
-	;[57] MUSIC s,s,s
-	SRCFILE "requiem.bas",57
+	;[57] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",57
+	DECLE 6975,35
+	;[58] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",58
 	DECLE 16191,63
-	;[58] MUSIC F4,D3,s
-	SRCFILE "requiem.bas",58
-	DECLE 3870,63
 	;[59] MUSIC s,s,s
-	SRCFILE "requiem.bas",59
+	SRCFILE "Songs\SHarrierC64.bas",59
 	DECLE 16191,63
-	;[60] MUSIC G4,s,s
-	SRCFILE "requiem.bas",60
-	DECLE 16160,63
-	;[61] MUSIC s,s,s
-	SRCFILE "requiem.bas",61
+	;[60] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",60
 	DECLE 16191,63
-	;[62] MUSIC F4,s,s
-	SRCFILE "requiem.bas",62
-	DECLE 16158,63
+	;[61] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",61
+	DECLE 6463,34
+	;[62] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",62
+	DECLE 16191,63
 	;[63] MUSIC s,s,s
-	SRCFILE "requiem.bas",63
+	SRCFILE "Songs\SHarrierC64.bas",63
 	DECLE 16191,63
-	;[64] MUSIC E4,s,s
-	SRCFILE "requiem.bas",64
-	DECLE 16157,63
-	;[65] MUSIC s,s,s
-	SRCFILE "requiem.bas",65
+	;[64] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",64
 	DECLE 16191,63
-	;[66] MUSIC F4,s,s
-	SRCFILE "requiem.bas",66
-	DECLE 16158,63
+	;[65] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",65
+	DECLE 6975,35
+	;[66] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",66
+	DECLE 16191,63
 	;[67] MUSIC s,s,s
-	SRCFILE "requiem.bas",67
+	SRCFILE "Songs\SHarrierC64.bas",67
 	DECLE 16191,63
-	;[68] MUSIC G4,s,s
-	SRCFILE "requiem.bas",68
-	DECLE 16160,63
-	;[69] MUSIC s,s,s
-	SRCFILE "requiem.bas",69
+	;[68] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",68
 	DECLE 16191,63
-	;[70] MUSIC E4,D3,s
-	SRCFILE "requiem.bas",70
-	DECLE 3869,63
+	;[69] MUSIC A3#,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",69
+	DECLE 16151,32
+	;[70] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",70
+	DECLE 16191,63
 	;[71] MUSIC s,s,s
-	SRCFILE "requiem.bas",71
+	SRCFILE "Songs\SHarrierC64.bas",71
 	DECLE 16191,63
-	;[72] MUSIC F4,s,s
-	SRCFILE "requiem.bas",72
-	DECLE 16158,63
-	;[73] MUSIC s,s,s
-	SRCFILE "requiem.bas",73
+	;[72] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",72
 	DECLE 16191,63
-	;[74] MUSIC G4,E3,s
-	SRCFILE "requiem.bas",74
-	DECLE 4384,63
+	;[73] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",73
+	DECLE 6975,35
+	;[74] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",74
+	DECLE 16191,63
 	;[75] MUSIC s,s,s
-	SRCFILE "requiem.bas",75
+	SRCFILE "Songs\SHarrierC64.bas",75
 	DECLE 16191,63
-	;[76] MUSIC A4,s,s
-	SRCFILE "requiem.bas",76
-	DECLE 16162,63
-	;[77] MUSIC s,s,s
-	SRCFILE "requiem.bas",77
+	;[76] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",76
 	DECLE 16191,63
-	;[78] MUSIC G4,s,s
-	SRCFILE "requiem.bas",78
-	DECLE 16160,63
+	;[77] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",77
+	DECLE 6463,34
+	;[78] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",78
+	DECLE 16191,63
 	;[79] MUSIC s,s,s
-	SRCFILE "requiem.bas",79
+	SRCFILE "Songs\SHarrierC64.bas",79
 	DECLE 16191,63
-	;[80] MUSIC F4,s,s
-	SRCFILE "requiem.bas",80
-	DECLE 16158,63
-	;[81] MUSIC s,s,s
-	SRCFILE "requiem.bas",81
+	;[80] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",80
 	DECLE 16191,63
-	;[82] MUSIC G4,s,s
-	SRCFILE "requiem.bas",82
-	DECLE 16160,63
+	;[81] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",81
+	DECLE 6975,35
+	;[82] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",82
+	DECLE 16191,63
 	;[83] MUSIC s,s,s
-	SRCFILE "requiem.bas",83
+	SRCFILE "Songs\SHarrierC64.bas",83
 	DECLE 16191,63
-	;[84] MUSIC A4,s,s
-	SRCFILE "requiem.bas",84
-	DECLE 16162,63
-	;[85] MUSIC s,s,s
-	SRCFILE "requiem.bas",85
+	;[84] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",84
 	DECLE 16191,63
-	;[86] MUSIC F4,D3,s
-	SRCFILE "requiem.bas",86
-	DECLE 3870,63
+	;[85] MUSIC G3,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",85
+	DECLE 16148,40
+	;[86] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",86
+	DECLE 16191,63
 	;[87] MUSIC s,s,s
-	SRCFILE "requiem.bas",87
+	SRCFILE "Songs\SHarrierC64.bas",87
 	DECLE 16191,63
-	;[88] MUSIC G4,E3,s
-	SRCFILE "requiem.bas",88
-	DECLE 4384,63
-	;[89] MUSIC s,s,s
-	SRCFILE "requiem.bas",89
+	;[88] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",88
 	DECLE 16191,63
-	;[90] MUSIC A4,F3,s
-	SRCFILE "requiem.bas",90
-	DECLE 4642,63
+	;[89] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",89
+	DECLE 7231,37
+	;[90] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",90
+	DECLE 16191,63
 	;[91] MUSIC s,s,s
-	SRCFILE "requiem.bas",91
+	SRCFILE "Songs\SHarrierC64.bas",91
 	DECLE 16191,63
 	;[92] MUSIC s,s,s
-	SRCFILE "requiem.bas",92
+	SRCFILE "Songs\SHarrierC64.bas",92
 	DECLE 16191,63
-	;[93] MUSIC s,s,s
-	SRCFILE "requiem.bas",93
+	;[93] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",93
+	DECLE 6975,36
+	;[94] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",94
 	DECLE 16191,63
-	;[94] MUSIC A4#,E3,s
-	SRCFILE "requiem.bas",94
-	DECLE 4387,63
 	;[95] MUSIC s,s,s
-	SRCFILE "requiem.bas",95
+	SRCFILE "Songs\SHarrierC64.bas",95
 	DECLE 16191,63
-	;[96] MUSIC A4,F3,s
-	SRCFILE "requiem.bas",96
-	DECLE 4642,63
-	;[97] MUSIC s,s,s
-	SRCFILE "requiem.bas",97
+	;[96] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",96
 	DECLE 16191,63
-	;[98] MUSIC G4,G3,s
-	SRCFILE "requiem.bas",98
-	DECLE 5152,63
+	;[97] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",97
+	DECLE 7231,37
+	;[98] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",98
+	DECLE 16191,63
 	;[99] MUSIC s,s,s
-	SRCFILE "requiem.bas",99
+	SRCFILE "Songs\SHarrierC64.bas",99
 	DECLE 16191,63
-	;[100] MUSIC F4,s,s
-	SRCFILE "requiem.bas",100
-	DECLE 16158,63
-	;[101] MUSIC s,s,s
-	SRCFILE "requiem.bas",101
+	;[100] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",100
 	DECLE 16191,63
-	;[102] MUSIC E4,F3,s
-	SRCFILE "requiem.bas",102
-	DECLE 4637,63
+	;[101] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",101
+	DECLE 6463,32
+	;[102] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",102
+	DECLE 16191,63
 	;[103] MUSIC s,s,s
-	SRCFILE "requiem.bas",103
+	SRCFILE "Songs\SHarrierC64.bas",103
 	DECLE 16191,63
-	;[104] MUSIC D4,G3,s
-	SRCFILE "requiem.bas",104
-	DECLE 5147,63
-	;[105] MUSIC s,s,s
-	SRCFILE "requiem.bas",105
+	;[104] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",104
 	DECLE 16191,63
-	;[106] MUSIC C4#,A3,s
-	SRCFILE "requiem.bas",106
-	DECLE 5658,63
+	;[105] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",105
+	DECLE 7231,37
+	;[106] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",106
+	DECLE 16191,63
 	;[107] MUSIC s,s,s
-	SRCFILE "requiem.bas",107
+	SRCFILE "Songs\SHarrierC64.bas",107
 	DECLE 16191,63
 	;[108] MUSIC s,s,s
-	SRCFILE "requiem.bas",108
+	SRCFILE "Songs\SHarrierC64.bas",108
 	DECLE 16191,63
-	;[109] MUSIC s,s,s
-	SRCFILE "requiem.bas",109
+	;[109] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",109
+	DECLE 6975,36
+	;[110] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",110
 	DECLE 16191,63
-	;[110] MUSIC E4,G3,s
-	SRCFILE "requiem.bas",110
-	DECLE 5149,63
 	;[111] MUSIC s,s,s
-	SRCFILE "requiem.bas",111
+	SRCFILE "Songs\SHarrierC64.bas",111
 	DECLE 16191,63
 	;[112] MUSIC s,s,s
-	SRCFILE "requiem.bas",112
+	SRCFILE "Songs\SHarrierC64.bas",112
 	DECLE 16191,63
-	;[113] MUSIC s,s,s
-	SRCFILE "requiem.bas",113
+	;[113] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",113
+	DECLE 7231,37
+	;[114] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",114
 	DECLE 16191,63
-	;[114] MUSIC A4,F3,s
-	SRCFILE "requiem.bas",114
-	DECLE 4642,63
 	;[115] MUSIC s,s,s
-	SRCFILE "requiem.bas",115
+	SRCFILE "Songs\SHarrierC64.bas",115
 	DECLE 16191,63
 	;[116] MUSIC s,s,s
-	SRCFILE "requiem.bas",116
+	SRCFILE "Songs\SHarrierC64.bas",116
 	DECLE 16191,63
-	;[117] MUSIC s,s,s
-	SRCFILE "requiem.bas",117
+	;[117] MUSIC G3,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",117
+	DECLE 16148,40
+	;[118] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",118
 	DECLE 16191,63
-	;[118] MUSIC G4,E3,s
-	SRCFILE "requiem.bas",118
-	DECLE 4384,63
 	;[119] MUSIC s,s,s
-	SRCFILE "requiem.bas",119
+	SRCFILE "Songs\SHarrierC64.bas",119
 	DECLE 16191,63
 	;[120] MUSIC s,s,s
-	SRCFILE "requiem.bas",120
+	SRCFILE "Songs\SHarrierC64.bas",120
 	DECLE 16191,63
-	;[121] MUSIC s,s,s
-	SRCFILE "requiem.bas",121
+	;[121] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",121
+	DECLE 7231,37
+	;[122] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",122
 	DECLE 16191,63
-	;[122] MUSIC F4,D3,D5
-	SRCFILE "requiem.bas",122
-	DECLE 3870,39
 	;[123] MUSIC s,s,s
-	SRCFILE "requiem.bas",123
+	SRCFILE "Songs\SHarrierC64.bas",123
 	DECLE 16191,63
 	;[124] MUSIC s,s,s
-	SRCFILE "requiem.bas",124
+	SRCFILE "Songs\SHarrierC64.bas",124
 	DECLE 16191,63
-	;[125] MUSIC s,s,s
-	SRCFILE "requiem.bas",125
+	;[125] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",125
+	DECLE 6975,36
+	;[126] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",126
 	DECLE 16191,63
-	;[126] MUSIC E4,C3,s
-	SRCFILE "requiem.bas",126
-	DECLE 3357,63
 	;[127] MUSIC s,s,s
-	SRCFILE "requiem.bas",127
+	SRCFILE "Songs\SHarrierC64.bas",127
 	DECLE 16191,63
-	;[128] MUSIC F4,s,B2
-	SRCFILE "requiem.bas",128
-	DECLE 16158,12
-	;[129] MUSIC s,s,s
-	SRCFILE "requiem.bas",129
+	;[128] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",128
 	DECLE 16191,63
-	;[130] MUSIC D4,s,s
-	SRCFILE "requiem.bas",130
-	DECLE 16155,63
+	;[129] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",129
+	DECLE 7231,37
+	;[130] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",130
+	DECLE 16191,63
 	;[131] MUSIC s,s,s
-	SRCFILE "requiem.bas",131
+	SRCFILE "Songs\SHarrierC64.bas",131
 	DECLE 16191,63
-	;[132] MUSIC E4,s,s
-	SRCFILE "requiem.bas",132
-	DECLE 16157,63
-	;[133] MUSIC s,s,s
-	SRCFILE "requiem.bas",133
+	;[132] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",132
 	DECLE 16191,63
-	;[134] MUSIC F4#,E3,D5
-	SRCFILE "requiem.bas",134
-	DECLE 4383,39
+	;[133] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",133
+	DECLE 6463,32
+	;[134] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",134
+	DECLE 16191,63
 	;[135] MUSIC s,s,s
-	SRCFILE "requiem.bas",135
+	SRCFILE "Songs\SHarrierC64.bas",135
 	DECLE 16191,63
-	;[136] MUSIC G4#,s,s
-	SRCFILE "requiem.bas",136
-	DECLE 16161,63
-	;[137] MUSIC s,s,s
-	SRCFILE "requiem.bas",137
+	;[136] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",136
 	DECLE 16191,63
-	;[138] MUSIC A4,C5,s
-	SRCFILE "requiem.bas",138
-	DECLE 9506,63
+	;[137] 
+	SRCFILE "Songs\SHarrierC64.bas",137
+	;[138] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",138
+	DECLE 7231,37
 	;[139] MUSIC s,s,s
-	SRCFILE "requiem.bas",139
+	SRCFILE "Songs\SHarrierC64.bas",139
 	DECLE 16191,63
 	;[140] MUSIC s,s,s
-	SRCFILE "requiem.bas",140
+	SRCFILE "Songs\SHarrierC64.bas",140
 	DECLE 16191,63
 	;[141] MUSIC s,s,s
-	SRCFILE "requiem.bas",141
+	SRCFILE "Songs\SHarrierC64.bas",141
 	DECLE 16191,63
-	;[142] MUSIC s,s,F3
-	SRCFILE "requiem.bas",142
-	DECLE 16191,18
+	;[142] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",142
+	DECLE 6975,36
 	;[143] MUSIC s,s,s
-	SRCFILE "requiem.bas",143
+	SRCFILE "Songs\SHarrierC64.bas",143
 	DECLE 16191,63
-	;[144] MUSIC s,s,E3
-	SRCFILE "requiem.bas",144
-	DECLE 16191,17
+	;[144] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",144
+	DECLE 16191,63
 	;[145] MUSIC s,s,s
-	SRCFILE "requiem.bas",145
+	SRCFILE "Songs\SHarrierC64.bas",145
 	DECLE 16191,63
-	;[146] MUSIC D3,F5,s
-	SRCFILE "requiem.bas",146
-	DECLE 10767,63
+	;[146] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",146
+	DECLE 7231,37
 	;[147] MUSIC s,s,s
-	SRCFILE "requiem.bas",147
+	SRCFILE "Songs\SHarrierC64.bas",147
 	DECLE 16191,63
-	;[148] MUSIC B2,s,s
-	SRCFILE "requiem.bas",148
-	DECLE 16140,63
+	;[148] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",148
+	DECLE 16191,63
 	;[149] MUSIC s,s,s
-	SRCFILE "requiem.bas",149
+	SRCFILE "Songs\SHarrierC64.bas",149
 	DECLE 16191,63
-	;[150] MUSIC C3,s,s
-	SRCFILE "requiem.bas",150
-	DECLE 16141,63
+	;[150] MUSIC F3#,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",150
+	DECLE 16147,39
 	;[151] MUSIC s,s,s
-	SRCFILE "requiem.bas",151
+	SRCFILE "Songs\SHarrierC64.bas",151
 	DECLE 16191,63
-	;[152] MUSIC D3,s,s
-	SRCFILE "requiem.bas",152
-	DECLE 16143,63
+	;[152] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",152
+	DECLE 16191,63
 	;[153] MUSIC s,s,s
-	SRCFILE "requiem.bas",153
+	SRCFILE "Songs\SHarrierC64.bas",153
 	DECLE 16191,63
-	;[154] MUSIC E3,G4#,s
-	SRCFILE "requiem.bas",154
-	DECLE 8465,63
+	;[154] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",154
+	DECLE 6975,34
 	;[155] MUSIC s,s,s
-	SRCFILE "requiem.bas",155
+	SRCFILE "Songs\SHarrierC64.bas",155
 	DECLE 16191,63
 	;[156] MUSIC s,s,s
-	SRCFILE "requiem.bas",156
+	SRCFILE "Songs\SHarrierC64.bas",156
 	DECLE 16191,63
 	;[157] MUSIC s,s,s
-	SRCFILE "requiem.bas",157
+	SRCFILE "Songs\SHarrierC64.bas",157
 	DECLE 16191,63
-	;[158] MUSIC s,s,B3
-	SRCFILE "requiem.bas",158
-	DECLE 16191,24
+	;[158] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",158
+	DECLE 6463,32
 	;[159] MUSIC s,s,s
-	SRCFILE "requiem.bas",159
+	SRCFILE "Songs\SHarrierC64.bas",159
 	DECLE 16191,63
 	;[160] MUSIC s,s,s
-	SRCFILE "requiem.bas",160
+	SRCFILE "Songs\SHarrierC64.bas",160
 	DECLE 16191,63
 	;[161] MUSIC s,s,s
-	SRCFILE "requiem.bas",161
+	SRCFILE "Songs\SHarrierC64.bas",161
 	DECLE 16191,63
-	;[162] MUSIC B3,s,s
-	SRCFILE "requiem.bas",162
-	DECLE 16152,63
+	;[162] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",162
+	DECLE 6975,34
 	;[163] MUSIC s,s,s
-	SRCFILE "requiem.bas",163
+	SRCFILE "Songs\SHarrierC64.bas",163
 	DECLE 16191,63
 	;[164] MUSIC s,s,s
-	SRCFILE "requiem.bas",164
+	SRCFILE "Songs\SHarrierC64.bas",164
 	DECLE 16191,63
 	;[165] MUSIC s,s,s
-	SRCFILE "requiem.bas",165
+	SRCFILE "Songs\SHarrierC64.bas",165
 	DECLE 16191,63
-	;[166] MUSIC B3,E3,G4#
-	SRCFILE "requiem.bas",166
-	DECLE 4376,33
+	;[166] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",166
+	DECLE 16150,31
 	;[167] MUSIC s,s,s
-	SRCFILE "requiem.bas",167
+	SRCFILE "Songs\SHarrierC64.bas",167
 	DECLE 16191,63
 	;[168] MUSIC s,s,s
-	SRCFILE "requiem.bas",168
+	SRCFILE "Songs\SHarrierC64.bas",168
 	DECLE 16191,63
 	;[169] MUSIC s,s,s
-	SRCFILE "requiem.bas",169
+	SRCFILE "Songs\SHarrierC64.bas",169
 	DECLE 16191,63
-	;[170] MUSIC C4,A3,A4
-	SRCFILE "requiem.bas",170
-	DECLE 5657,34
+	;[170] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",170
+	DECLE 6975,34
 	;[171] MUSIC s,s,s
-	SRCFILE "requiem.bas",171
+	SRCFILE "Songs\SHarrierC64.bas",171
 	DECLE 16191,63
-	;[172] MUSIC D4,s,s
-	SRCFILE "requiem.bas",172
-	DECLE 16155,63
+	;[172] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",172
+	DECLE 16191,63
 	;[173] MUSIC s,s,s
-	SRCFILE "requiem.bas",173
+	SRCFILE "Songs\SHarrierC64.bas",173
 	DECLE 16191,63
-	;[174] MUSIC C4,s,s
-	SRCFILE "requiem.bas",174
-	DECLE 16153,63
+	;[174] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",174
+	DECLE 6463,32
 	;[175] MUSIC s,s,s
-	SRCFILE "requiem.bas",175
+	SRCFILE "Songs\SHarrierC64.bas",175
 	DECLE 16191,63
-	;[176] MUSIC B3,s,s
-	SRCFILE "requiem.bas",176
-	DECLE 16152,63
+	;[176] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",176
+	DECLE 16191,63
 	;[177] MUSIC s,s,s
-	SRCFILE "requiem.bas",177
+	SRCFILE "Songs\SHarrierC64.bas",177
 	DECLE 16191,63
-	;[178] MUSIC C4,A3,s
-	SRCFILE "requiem.bas",178
-	DECLE 5657,63
+	;[178] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",178
+	DECLE 6975,34
 	;[179] MUSIC s,s,s
-	SRCFILE "requiem.bas",179
+	SRCFILE "Songs\SHarrierC64.bas",179
 	DECLE 16191,63
-	;[180] MUSIC D4,s,s
-	SRCFILE "requiem.bas",180
-	DECLE 16155,63
+	;[180] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",180
+	DECLE 16191,63
 	;[181] MUSIC s,s,s
-	SRCFILE "requiem.bas",181
+	SRCFILE "Songs\SHarrierC64.bas",181
 	DECLE 16191,63
-	;[182] MUSIC B3,s,A4
-	SRCFILE "requiem.bas",182
-	DECLE 16152,34
+	;[182] MUSIC F3#,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",182
+	DECLE 16147,39
 	;[183] MUSIC s,s,s
-	SRCFILE "requiem.bas",183
+	SRCFILE "Songs\SHarrierC64.bas",183
 	DECLE 16191,63
-	;[184] MUSIC C4,s,s
-	SRCFILE "requiem.bas",184
-	DECLE 16153,63
+	;[184] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",184
+	DECLE 16191,63
 	;[185] MUSIC s,s,s
-	SRCFILE "requiem.bas",185
+	SRCFILE "Songs\SHarrierC64.bas",185
 	DECLE 16191,63
-	;[186] MUSIC D4,s,B4
-	SRCFILE "requiem.bas",186
-	DECLE 16155,36
+	;[186] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",186
+	DECLE 6975,34
 	;[187] MUSIC s,s,s
-	SRCFILE "requiem.bas",187
+	SRCFILE "Songs\SHarrierC64.bas",187
 	DECLE 16191,63
-	;[188] MUSIC E4,s,s
-	SRCFILE "requiem.bas",188
-	DECLE 16157,63
+	;[188] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",188
+	DECLE 16191,63
 	;[189] MUSIC s,s,s
-	SRCFILE "requiem.bas",189
+	SRCFILE "Songs\SHarrierC64.bas",189
 	DECLE 16191,63
-	;[190] MUSIC D4,s,s
-	SRCFILE "requiem.bas",190
-	DECLE 16155,63
+	;[190] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",190
+	DECLE 6463,32
 	;[191] MUSIC s,s,s
-	SRCFILE "requiem.bas",191
+	SRCFILE "Songs\SHarrierC64.bas",191
 	DECLE 16191,63
-	;[192] MUSIC C4,s,s
-	SRCFILE "requiem.bas",192
-	DECLE 16153,63
+	;[192] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",192
+	DECLE 16191,63
 	;[193] MUSIC s,s,s
-	SRCFILE "requiem.bas",193
+	SRCFILE "Songs\SHarrierC64.bas",193
 	DECLE 16191,63
-	;[194] MUSIC D4,G3,s
-	SRCFILE "requiem.bas",194
-	DECLE 5147,63
+	;[194] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",194
+	DECLE 6975,34
 	;[195] MUSIC s,s,s
-	SRCFILE "requiem.bas",195
+	SRCFILE "Songs\SHarrierC64.bas",195
 	DECLE 16191,63
-	;[196] MUSIC E4,F3,s
-	SRCFILE "requiem.bas",196
-	DECLE 4637,63
+	;[196] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",196
+	DECLE 16191,63
 	;[197] MUSIC s,s,s
-	SRCFILE "requiem.bas",197
+	SRCFILE "Songs\SHarrierC64.bas",197
 	DECLE 16191,63
-	;[198] MUSIC C4,A4,E3
-	SRCFILE "requiem.bas",198
-	DECLE 8729,17
+	;[198] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",198
+	DECLE 16150,31
 	;[199] MUSIC s,s,s
-	SRCFILE "requiem.bas",199
+	SRCFILE "Songs\SHarrierC64.bas",199
 	DECLE 16191,63
-	;[200] MUSIC D4,B4,D3
-	SRCFILE "requiem.bas",200
-	DECLE 9243,15
+	;[200] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",200
+	DECLE 16191,63
 	;[201] MUSIC s,s,s
-	SRCFILE "requiem.bas",201
+	SRCFILE "Songs\SHarrierC64.bas",201
 	DECLE 16191,63
-	;[202] MUSIC C5,E4,C3
-	SRCFILE "requiem.bas",202
-	DECLE 7461,13
+	;[202] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",202
+	DECLE 6975,34
 	;[203] MUSIC s,s,s
-	SRCFILE "requiem.bas",203
+	SRCFILE "Songs\SHarrierC64.bas",203
 	DECLE 16191,63
 	;[204] MUSIC s,s,s
-	SRCFILE "requiem.bas",204
+	SRCFILE "Songs\SHarrierC64.bas",204
 	DECLE 16191,63
 	;[205] MUSIC s,s,s
-	SRCFILE "requiem.bas",205
+	SRCFILE "Songs\SHarrierC64.bas",205
 	DECLE 16191,63
-	;[206] MUSIC B4,F4,s
-	SRCFILE "requiem.bas",206
-	DECLE 7716,63
+	;[206] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",206
+	DECLE 6463,32
 	;[207] MUSIC s,s,s
-	SRCFILE "requiem.bas",207
+	SRCFILE "Songs\SHarrierC64.bas",207
 	DECLE 16191,63
-	;[208] MUSIC C5,E4,s
-	SRCFILE "requiem.bas",208
-	DECLE 7461,63
+	;[208] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",208
+	DECLE 16191,63
 	;[209] MUSIC s,s,s
-	SRCFILE "requiem.bas",209
+	SRCFILE "Songs\SHarrierC64.bas",209
 	DECLE 16191,63
-	;[210] MUSIC D4,D5,B2
-	SRCFILE "requiem.bas",210
-	DECLE 10011,12
+	;[210] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",210
+	DECLE 6975,34
 	;[211] MUSIC s,s,s
-	SRCFILE "requiem.bas",211
+	SRCFILE "Songs\SHarrierC64.bas",211
 	DECLE 16191,63
-	;[212] MUSIC C4,s,s
-	SRCFILE "requiem.bas",212
-	DECLE 16153,63
+	;[212] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",212
+	DECLE 16191,63
 	;[213] MUSIC s,s,s
-	SRCFILE "requiem.bas",213
+	SRCFILE "Songs\SHarrierC64.bas",213
 	DECLE 16191,63
-	;[214] MUSIC C5,B3,F3
-	SRCFILE "requiem.bas",214
-	DECLE 6181,18
+	;[214] MUSIC G3,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",214
+	DECLE 16148,35
 	;[215] MUSIC s,s,s
-	SRCFILE "requiem.bas",215
+	SRCFILE "Songs\SHarrierC64.bas",215
 	DECLE 16191,63
-	;[216] MUSIC D5,A3,s
-	SRCFILE "requiem.bas",216
-	DECLE 5671,63
+	;[216] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",216
+	DECLE 16191,63
 	;[217] MUSIC s,s,s
-	SRCFILE "requiem.bas",217
+	SRCFILE "Songs\SHarrierC64.bas",217
 	DECLE 16191,63
-	;[218] MUSIC E5,G3#,E3
-	SRCFILE "requiem.bas",218
-	DECLE 5417,17
+	;[218] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",218
+	DECLE 6975,32
 	;[219] MUSIC s,s,s
-	SRCFILE "requiem.bas",219
+	SRCFILE "Songs\SHarrierC64.bas",219
 	DECLE 16191,63
 	;[220] MUSIC s,s,s
-	SRCFILE "requiem.bas",220
+	SRCFILE "Songs\SHarrierC64.bas",220
 	DECLE 16191,63
 	;[221] MUSIC s,s,s
-	SRCFILE "requiem.bas",221
+	SRCFILE "Songs\SHarrierC64.bas",221
 	DECLE 16191,63
-	;[222] MUSIC D5,B3,s
-	SRCFILE "requiem.bas",222
-	DECLE 6183,63
+	;[222] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",222
+	DECLE 6463,31
 	;[223] MUSIC s,s,s
-	SRCFILE "requiem.bas",223
+	SRCFILE "Songs\SHarrierC64.bas",223
 	DECLE 16191,63
-	;[224] MUSIC s,s,F3#
-	SRCFILE "requiem.bas",224
-	DECLE 16191,19
+	;[224] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",224
+	DECLE 16191,63
 	;[225] MUSIC s,s,s
-	SRCFILE "requiem.bas",225
+	SRCFILE "Songs\SHarrierC64.bas",225
 	DECLE 16191,63
-	;[226] MUSIC G3#,C5,E4
-	SRCFILE "requiem.bas",226
-	DECLE 9493,29
+	;[226] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",226
+	DECLE 6975,32
 	;[227] MUSIC s,s,s
-	SRCFILE "requiem.bas",227
+	SRCFILE "Songs\SHarrierC64.bas",227
 	DECLE 16191,63
-	;[228] MUSIC A3,s,s
-	SRCFILE "requiem.bas",228
-	DECLE 16150,63
+	;[228] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",228
+	DECLE 16191,63
 	;[229] MUSIC s,s,s
-	SRCFILE "requiem.bas",229
+	SRCFILE "Songs\SHarrierC64.bas",229
 	DECLE 16191,63
-	;[230] MUSIC F3#,D4,B4
-	SRCFILE "requiem.bas",230
-	DECLE 6931,36
+	;[230] MUSIC A3#,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",230
+	DECLE 16151,27
 	;[231] MUSIC s,s,s
-	SRCFILE "requiem.bas",231
+	SRCFILE "Songs\SHarrierC64.bas",231
 	DECLE 16191,63
-	;[232] MUSIC G3#,s,s
-	SRCFILE "requiem.bas",232
-	DECLE 16149,63
+	;[232] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",232
+	DECLE 16191,63
 	;[233] MUSIC s,s,s
-	SRCFILE "requiem.bas",233
+	SRCFILE "Songs\SHarrierC64.bas",233
 	DECLE 16191,63
-	;[234] MUSIC C4,A4,A3
-	SRCFILE "requiem.bas",234
-	DECLE 8729,22
+	;[234] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",234
+	DECLE 6975,32
 	;[235] MUSIC s,s,s
-	SRCFILE "requiem.bas",235
+	SRCFILE "Songs\SHarrierC64.bas",235
 	DECLE 16191,63
 	;[236] MUSIC s,s,s
-	SRCFILE "requiem.bas",236
+	SRCFILE "Songs\SHarrierC64.bas",236
 	DECLE 16191,63
 	;[237] MUSIC s,s,s
-	SRCFILE "requiem.bas",237
+	SRCFILE "Songs\SHarrierC64.bas",237
 	DECLE 16191,63
-	;[238] MUSIC C4#,G5,s
-	SRCFILE "requiem.bas",238
-	DECLE 11290,63
+	;[238] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",238
+	DECLE 6463,31
 	;[239] MUSIC s,s,s
-	SRCFILE "requiem.bas",239
+	SRCFILE "Songs\SHarrierC64.bas",239
 	DECLE 16191,63
 	;[240] MUSIC s,s,s
-	SRCFILE "requiem.bas",240
+	SRCFILE "Songs\SHarrierC64.bas",240
 	DECLE 16191,63
 	;[241] MUSIC s,s,s
-	SRCFILE "requiem.bas",241
+	SRCFILE "Songs\SHarrierC64.bas",241
 	DECLE 16191,63
-	;[242] MUSIC F5,D4,B3
-	SRCFILE "requiem.bas",242
-	DECLE 6954,24
+	;[242] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",242
+	DECLE 6975,32
 	;[243] MUSIC s,s,s
-	SRCFILE "requiem.bas",243
+	SRCFILE "Songs\SHarrierC64.bas",243
 	DECLE 16191,63
 	;[244] MUSIC s,s,s
-	SRCFILE "requiem.bas",244
+	SRCFILE "Songs\SHarrierC64.bas",244
 	DECLE 16191,63
 	;[245] MUSIC s,s,s
-	SRCFILE "requiem.bas",245
+	SRCFILE "Songs\SHarrierC64.bas",245
 	DECLE 16191,63
-	;[246] MUSIC E5,A4,E4
-	SRCFILE "requiem.bas",246
-	DECLE 8745,29
+	;[246] MUSIC G3,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",246
+	DECLE 16148,35
 	;[247] MUSIC s,s,s
-	SRCFILE "requiem.bas",247
+	SRCFILE "Songs\SHarrierC64.bas",247
 	DECLE 16191,63
 	;[248] MUSIC s,s,s
-	SRCFILE "requiem.bas",248
+	SRCFILE "Songs\SHarrierC64.bas",248
 	DECLE 16191,63
 	;[249] MUSIC s,s,s
-	SRCFILE "requiem.bas",249
+	SRCFILE "Songs\SHarrierC64.bas",249
 	DECLE 16191,63
-	;[250] MUSIC A3,D5,F4
-	SRCFILE "requiem.bas",250
-	DECLE 10006,30
+	;[250] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",250
+	DECLE 6975,32
 	;[251] MUSIC s,s,s
-	SRCFILE "requiem.bas",251
+	SRCFILE "Songs\SHarrierC64.bas",251
 	DECLE 16191,63
 	;[252] MUSIC s,s,s
-	SRCFILE "requiem.bas",252
+	SRCFILE "Songs\SHarrierC64.bas",252
 	DECLE 16191,63
 	;[253] MUSIC s,s,s
-	SRCFILE "requiem.bas",253
+	SRCFILE "Songs\SHarrierC64.bas",253
 	DECLE 16191,63
-	;[254] MUSIC D3,s,s
-	SRCFILE "requiem.bas",254
-	DECLE 16143,63
+	;[254] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",254
+	DECLE 6463,31
 	;[255] MUSIC s,s,s
-	SRCFILE "requiem.bas",255
+	SRCFILE "Songs\SHarrierC64.bas",255
 	DECLE 16191,63
 	;[256] MUSIC s,s,s
-	SRCFILE "requiem.bas",256
+	SRCFILE "Songs\SHarrierC64.bas",256
 	DECLE 16191,63
 	;[257] MUSIC s,s,s
-	SRCFILE "requiem.bas",257
+	SRCFILE "Songs\SHarrierC64.bas",257
 	DECLE 16191,63
-	;[258] MUSIC G3,A4#,s
-	SRCFILE "requiem.bas",258
-	DECLE 8980,63
+	;[258] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",258
+	DECLE 6975,32
 	;[259] MUSIC s,s,s
-	SRCFILE "requiem.bas",259
+	SRCFILE "Songs\SHarrierC64.bas",259
 	DECLE 16191,63
 	;[260] MUSIC s,s,s
-	SRCFILE "requiem.bas",260
+	SRCFILE "Songs\SHarrierC64.bas",260
 	DECLE 16191,63
 	;[261] MUSIC s,s,s
-	SRCFILE "requiem.bas",261
+	SRCFILE "Songs\SHarrierC64.bas",261
 	DECLE 16191,63
-	;[262] MUSIC F3,s,D4
-	SRCFILE "requiem.bas",262
-	DECLE 16146,27
+	;[262] MUSIC A3#,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",262
+	DECLE 16151,27
 	;[263] MUSIC s,s,s
-	SRCFILE "requiem.bas",263
+	SRCFILE "Songs\SHarrierC64.bas",263
 	DECLE 16191,63
 	;[264] MUSIC s,s,s
-	SRCFILE "requiem.bas",264
+	SRCFILE "Songs\SHarrierC64.bas",264
 	DECLE 16191,63
 	;[265] MUSIC s,s,s
-	SRCFILE "requiem.bas",265
+	SRCFILE "Songs\SHarrierC64.bas",265
 	DECLE 16191,63
-	;[266] MUSIC E3,G4,C4#
-	SRCFILE "requiem.bas",266
-	DECLE 8209,26
-	;[267] MUSIC s,s,s
-	SRCFILE "requiem.bas",267
-	DECLE 16191,63
+	;[266] 
+	SRCFILE "Songs\SHarrierC64.bas",266
+	;[267] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",267
+	DECLE 6975,32
 	;[268] MUSIC s,s,s
-	SRCFILE "requiem.bas",268
+	SRCFILE "Songs\SHarrierC64.bas",268
 	DECLE 16191,63
 	;[269] MUSIC s,s,s
-	SRCFILE "requiem.bas",269
+	SRCFILE "Songs\SHarrierC64.bas",269
 	DECLE 16191,63
-	;[270] MUSIC G3,s,E3
-	SRCFILE "requiem.bas",270
-	DECLE 16148,17
-	;[271] MUSIC s,s,s
-	SRCFILE "requiem.bas",271
+	;[270] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",270
 	DECLE 16191,63
+	;[271] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",271
+	DECLE 6463,31
 	;[272] MUSIC s,s,s
-	SRCFILE "requiem.bas",272
+	SRCFILE "Songs\SHarrierC64.bas",272
 	DECLE 16191,63
 	;[273] MUSIC s,s,s
-	SRCFILE "requiem.bas",273
+	SRCFILE "Songs\SHarrierC64.bas",273
 	DECLE 16191,63
-	;[274] MUSIC E3,s,A3#
-	SRCFILE "requiem.bas",274
-	DECLE 16145,23
-	;[275] MUSIC s,s,s
-	SRCFILE "requiem.bas",275
+	;[274] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",274
 	DECLE 16191,63
+	;[275] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",275
+	DECLE 6975,32
 	;[276] MUSIC s,s,s
-	SRCFILE "requiem.bas",276
+	SRCFILE "Songs\SHarrierC64.bas",276
 	DECLE 16191,63
 	;[277] MUSIC s,s,s
-	SRCFILE "requiem.bas",277
+	SRCFILE "Songs\SHarrierC64.bas",277
 	DECLE 16191,63
-	;[278] MUSIC F4,C4#,E3
-	SRCFILE "requiem.bas",278
-	DECLE 6686,17
-	;[279] MUSIC s,s,s
-	SRCFILE "requiem.bas",279
+	;[278] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",278
 	DECLE 16191,63
-	;[280] MUSIC E4,s,s
-	SRCFILE "requiem.bas",280
-	DECLE 16157,63
+	;[279] MUSIC D3#,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",279
+	DECLE 16144,37
+	;[280] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",280
+	DECLE 16191,63
 	;[281] MUSIC s,s,s
-	SRCFILE "requiem.bas",281
+	SRCFILE "Songs\SHarrierC64.bas",281
 	DECLE 16191,63
-	;[282] MUSIC F3,A4,D4
-	SRCFILE "requiem.bas",282
-	DECLE 8722,27
-	;[283] MUSIC s,s,s
-	SRCFILE "requiem.bas",283
+	;[282] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",282
 	DECLE 16191,63
-	;[284] MUSIC G3,s,s
-	SRCFILE "requiem.bas",284
-	DECLE 16148,63
+	;[283] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",283
+	DECLE 6463,32
+	;[284] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",284
+	DECLE 16191,63
 	;[285] MUSIC s,s,s
-	SRCFILE "requiem.bas",285
+	SRCFILE "Songs\SHarrierC64.bas",285
 	DECLE 16191,63
-	;[286] MUSIC F3,s,D4
-	SRCFILE "requiem.bas",286
-	DECLE 16146,27
-	;[287] MUSIC s,s,s
-	SRCFILE "requiem.bas",287
+	;[286] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",286
 	DECLE 16191,63
-	;[288] MUSIC E3,s,s
-	SRCFILE "requiem.bas",288
-	DECLE 16145,63
+	;[287] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",287
+	DECLE 16150,31
+	;[288] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",288
+	DECLE 16191,63
 	;[289] MUSIC s,s,s
-	SRCFILE "requiem.bas",289
+	SRCFILE "Songs\SHarrierC64.bas",289
 	DECLE 16191,63
-	;[290] MUSIC F3,D5,s
-	SRCFILE "requiem.bas",290
-	DECLE 10002,63
-	;[291] MUSIC s,s,s
-	SRCFILE "requiem.bas",291
+	;[290] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",290
 	DECLE 16191,63
-	;[292] MUSIC G3,s,s
-	SRCFILE "requiem.bas",292
-	DECLE 16148,63
+	;[291] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",291
+	DECLE 6463,32
+	;[292] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",292
+	DECLE 16191,63
 	;[293] MUSIC s,s,s
-	SRCFILE "requiem.bas",293
+	SRCFILE "Songs\SHarrierC64.bas",293
 	DECLE 16191,63
-	;[294] MUSIC E3,s,D4
-	SRCFILE "requiem.bas",294
-	DECLE 16145,27
-	;[295] MUSIC s,s,s
-	SRCFILE "requiem.bas",295
+	;[294] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",294
 	DECLE 16191,63
-	;[296] MUSIC F3,s,s
-	SRCFILE "requiem.bas",296
-	DECLE 16146,63
+	;[295] MUSIC s,G3,D4#
+	SRCFILE "Songs\SHarrierC64.bas",295
+	DECLE 5183,28
+	;[296] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",296
+	DECLE 16191,63
 	;[297] MUSIC s,s,s
-	SRCFILE "requiem.bas",297
+	SRCFILE "Songs\SHarrierC64.bas",297
 	DECLE 16191,63
-	;[298] MUSIC G3,s,E4
-	SRCFILE "requiem.bas",298
-	DECLE 16148,29
-	;[299] MUSIC s,s,s
-	SRCFILE "requiem.bas",299
+	;[298] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",298
 	DECLE 16191,63
-	;[300] MUSIC A3,s,s
-	SRCFILE "requiem.bas",300
-	DECLE 16150,63
+	;[299] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",299
+	DECLE 6463,32
+	;[300] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",300
+	DECLE 16191,63
 	;[301] MUSIC s,s,s
-	SRCFILE "requiem.bas",301
+	SRCFILE "Songs\SHarrierC64.bas",301
 	DECLE 16191,63
-	;[302] MUSIC G3,s,s
-	SRCFILE "requiem.bas",302
-	DECLE 16148,63
-	;[303] MUSIC s,s,s
-	SRCFILE "requiem.bas",303
+	;[302] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",302
 	DECLE 16191,63
-	;[304] MUSIC F3,s,s
-	SRCFILE "requiem.bas",304
-	DECLE 16146,63
+	;[303] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",303
+	DECLE 16150,31
+	;[304] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",304
+	DECLE 16191,63
 	;[305] MUSIC s,s,s
-	SRCFILE "requiem.bas",305
+	SRCFILE "Songs\SHarrierC64.bas",305
 	DECLE 16191,63
-	;[306] MUSIC G3,D5,s
-	SRCFILE "requiem.bas",306
-	DECLE 10004,63
-	;[307] MUSIC s,s,s
-	SRCFILE "requiem.bas",307
+	;[306] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",306
 	DECLE 16191,63
-	;[308] MUSIC A3,s,s
-	SRCFILE "requiem.bas",308
-	DECLE 16150,63
+	;[307] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",307
+	DECLE 6463,32
+	;[308] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",308
+	DECLE 16191,63
 	;[309] MUSIC s,s,s
-	SRCFILE "requiem.bas",309
+	SRCFILE "Songs\SHarrierC64.bas",309
 	DECLE 16191,63
-	;[310] MUSIC F3,s,D4
-	SRCFILE "requiem.bas",310
-	DECLE 16146,27
-	;[311] MUSIC s,s,s
-	SRCFILE "requiem.bas",311
+	;[310] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",310
 	DECLE 16191,63
-	;[312] MUSIC G3,s,E4
-	SRCFILE "requiem.bas",312
-	DECLE 16148,29
+	;[311] MUSIC D3#,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",311
+	DECLE 16144,37
+	;[312] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",312
+	DECLE 16191,63
 	;[313] MUSIC s,s,s
-	SRCFILE "requiem.bas",313
+	SRCFILE "Songs\SHarrierC64.bas",313
 	DECLE 16191,63
-	;[314] MUSIC F4,s,A3
-	SRCFILE "requiem.bas",314
-	DECLE 16158,22
-	;[315] MUSIC s,s,s
-	SRCFILE "requiem.bas",315
+	;[314] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",314
 	DECLE 16191,63
+	;[315] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",315
+	DECLE 6463,32
 	;[316] MUSIC s,s,s
-	SRCFILE "requiem.bas",316
+	SRCFILE "Songs\SHarrierC64.bas",316
 	DECLE 16191,63
 	;[317] MUSIC s,s,s
-	SRCFILE "requiem.bas",317
+	SRCFILE "Songs\SHarrierC64.bas",317
 	DECLE 16191,63
-	;[318] MUSIC E4,A3#,C5#
-	SRCFILE "requiem.bas",318
-	DECLE 5917,38
-	;[319] MUSIC s,s,s
-	SRCFILE "requiem.bas",319
+	;[318] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",318
 	DECLE 16191,63
-	;[320] MUSIC F4,A3,D5
-	SRCFILE "requiem.bas",320
-	DECLE 5662,39
+	;[319] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",319
+	DECLE 16150,31
+	;[320] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",320
+	DECLE 16191,63
 	;[321] MUSIC s,s,s
-	SRCFILE "requiem.bas",321
+	SRCFILE "Songs\SHarrierC64.bas",321
 	DECLE 16191,63
-	;[322] MUSIC G3,G4,E5
-	SRCFILE "requiem.bas",322
-	DECLE 8212,41
-	;[323] MUSIC s,s,s
-	SRCFILE "requiem.bas",323
+	;[322] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",322
 	DECLE 16191,63
-	;[324] MUSIC F3,s,s
-	SRCFILE "requiem.bas",324
-	DECLE 16146,63
+	;[323] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",323
+	DECLE 6463,32
+	;[324] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",324
+	DECLE 16191,63
 	;[325] MUSIC s,s,s
-	SRCFILE "requiem.bas",325
+	SRCFILE "Songs\SHarrierC64.bas",325
 	DECLE 16191,63
-	;[326] MUSIC F4,E3,s
-	SRCFILE "requiem.bas",326
-	DECLE 4382,63
-	;[327] MUSIC s,s,s
-	SRCFILE "requiem.bas",327
+	;[326] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",326
 	DECLE 16191,63
-	;[328] MUSIC G4,D3,s
-	SRCFILE "requiem.bas",328
-	DECLE 3872,63
+	;[327] MUSIC G3,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",327
+	DECLE 16148,28
+	;[328] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",328
+	DECLE 16191,63
 	;[329] MUSIC s,s,s
-	SRCFILE "requiem.bas",329
+	SRCFILE "Songs\SHarrierC64.bas",329
 	DECLE 16191,63
-	;[330] MUSIC A4,C3#,s
-	SRCFILE "requiem.bas",330
-	DECLE 3618,63
-	;[331] MUSIC s,s,s
-	SRCFILE "requiem.bas",331
+	;[330] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",330
 	DECLE 16191,63
+	;[331] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",331
+	DECLE 6463,32
 	;[332] MUSIC s,s,s
-	SRCFILE "requiem.bas",332
+	SRCFILE "Songs\SHarrierC64.bas",332
 	DECLE 16191,63
 	;[333] MUSIC s,s,s
-	SRCFILE "requiem.bas",333
+	SRCFILE "Songs\SHarrierC64.bas",333
 	DECLE 16191,63
-	;[334] MUSIC G4,E3,s
-	SRCFILE "requiem.bas",334
-	DECLE 4384,63
-	;[335] MUSIC s,s,s
-	SRCFILE "requiem.bas",335
+	;[334] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",334
 	DECLE 16191,63
+	;[335] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",335
+	DECLE 16150,31
 	;[336] MUSIC s,s,s
-	SRCFILE "requiem.bas",336
+	SRCFILE "Songs\SHarrierC64.bas",336
 	DECLE 16191,63
 	;[337] MUSIC s,s,s
-	SRCFILE "requiem.bas",337
+	SRCFILE "Songs\SHarrierC64.bas",337
 	DECLE 16191,63
-	;[338] MUSIC F4,D5,A3
-	SRCFILE "requiem.bas",338
-	DECLE 10014,22
-	;[339] MUSIC s,s,s
-	SRCFILE "requiem.bas",339
+	;[338] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",338
 	DECLE 16191,63
+	;[339] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",339
+	DECLE 6463,32
 	;[340] MUSIC s,s,s
-	SRCFILE "requiem.bas",340
+	SRCFILE "Songs\SHarrierC64.bas",340
 	DECLE 16191,63
 	;[341] MUSIC s,s,s
-	SRCFILE "requiem.bas",341
+	SRCFILE "Songs\SHarrierC64.bas",341
 	DECLE 16191,63
-	;[342] MUSIC E4,G3,C5#
-	SRCFILE "requiem.bas",342
-	DECLE 5149,38
-	;[343] MUSIC s,s,s
-	SRCFILE "requiem.bas",343
+	;[342] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",342
 	DECLE 16191,63
+	;[343] MUSIC D3,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",343
+	DECLE 16143,35
 	;[344] MUSIC s,s,s
-	SRCFILE "requiem.bas",344
+	SRCFILE "Songs\SHarrierC64.bas",344
 	DECLE 16191,63
 	;[345] MUSIC s,s,s
-	SRCFILE "requiem.bas",345
+	SRCFILE "Songs\SHarrierC64.bas",345
 	DECLE 16191,63
-	;[346] MUSIC F3,D4,D5
-	SRCFILE "requiem.bas",346
-	DECLE 6930,39
-	;[347] MUSIC s,s,s
-	SRCFILE "requiem.bas",347
+	;[346] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",346
 	DECLE 16191,63
-	;[348] MUSIC E3,s,s
-	SRCFILE "requiem.bas",348
-	DECLE 16145,63
+	;[347] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",347
+	DECLE 5951,32
+	;[348] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",348
+	DECLE 16191,63
 	;[349] MUSIC s,s,s
-	SRCFILE "requiem.bas",349
+	SRCFILE "Songs\SHarrierC64.bas",349
 	DECLE 16191,63
-	;[350] MUSIC D3,s,s
-	SRCFILE "requiem.bas",350
-	DECLE 16143,63
-	;[351] MUSIC s,s,s
-	SRCFILE "requiem.bas",351
+	;[350] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",350
 	DECLE 16191,63
-	;[352] MUSIC C3,E4,s
-	SRCFILE "requiem.bas",352
-	DECLE 7437,63
+	;[351] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",351
+	DECLE 16150,31
+	;[352] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",352
+	DECLE 16191,63
 	;[353] MUSIC s,s,s
-	SRCFILE "requiem.bas",353
+	SRCFILE "Songs\SHarrierC64.bas",353
 	DECLE 16191,63
-	;[354] MUSIC F4#,B2,s
-	SRCFILE "requiem.bas",354
-	DECLE 3103,63
-	;[355] MUSIC s,s,s
-	SRCFILE "requiem.bas",355
+	;[354] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",354
 	DECLE 16191,63
+	;[355] MUSIC A3#,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",355
+	DECLE 8215,63
 	;[356] MUSIC s,s,s
-	SRCFILE "requiem.bas",356
+	SRCFILE "Songs\SHarrierC64.bas",356
 	DECLE 16191,63
 	;[357] MUSIC s,s,s
-	SRCFILE "requiem.bas",357
+	SRCFILE "Songs\SHarrierC64.bas",357
 	DECLE 16191,63
-	;[358] MUSIC G4#,s,D4
-	SRCFILE "requiem.bas",358
-	DECLE 16161,27
-	;[359] MUSIC s,s,s
-	SRCFILE "requiem.bas",359
+	;[358] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",358
 	DECLE 16191,63
+	;[359] MUSIC s,G3,D4
+	SRCFILE "Songs\SHarrierC64.bas",359
+	DECLE 5183,27
 	;[360] MUSIC s,s,s
-	SRCFILE "requiem.bas",360
+	SRCFILE "Songs\SHarrierC64.bas",360
 	DECLE 16191,63
 	;[361] MUSIC s,s,s
-	SRCFILE "requiem.bas",361
+	SRCFILE "Songs\SHarrierC64.bas",361
 	DECLE 16191,63
-	;[362] MUSIC A4,C4,C3
-	SRCFILE "requiem.bas",362
-	DECLE 6434,13
-	;[363] MUSIC s,s,s
-	SRCFILE "requiem.bas",363
+	;[362] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",362
 	DECLE 16191,63
+	;[363] MUSIC A3#,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",363
+	DECLE 8215,63
 	;[364] MUSIC s,s,s
-	SRCFILE "requiem.bas",364
+	SRCFILE "Songs\SHarrierC64.bas",364
 	DECLE 16191,63
 	;[365] MUSIC s,s,s
-	SRCFILE "requiem.bas",365
+	SRCFILE "Songs\SHarrierC64.bas",365
 	DECLE 16191,63
-	;[366] MUSIC E4,s,s
-	SRCFILE "requiem.bas",366
-	DECLE 16157,63
-	;[367] MUSIC s,s,s
-	SRCFILE "requiem.bas",367
+	;[366] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",366
 	DECLE 16191,63
+	;[367] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",367
+	DECLE 5695,31
 	;[368] MUSIC s,s,s
-	SRCFILE "requiem.bas",368
+	SRCFILE "Songs\SHarrierC64.bas",368
 	DECLE 16191,63
 	;[369] MUSIC s,s,s
-	SRCFILE "requiem.bas",369
+	SRCFILE "Songs\SHarrierC64.bas",369
 	DECLE 16191,63
-	;[370] MUSIC F4,D3,s
-	SRCFILE "requiem.bas",370
-	DECLE 3870,63
-	;[371] MUSIC s,s,s
-	SRCFILE "requiem.bas",371
+	;[370] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",370
 	DECLE 16191,63
+	;[371] MUSIC G4,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",371
+	DECLE 5920,63
 	;[372] MUSIC s,s,s
-	SRCFILE "requiem.bas",372
+	SRCFILE "Songs\SHarrierC64.bas",372
 	DECLE 16191,63
 	;[373] MUSIC s,s,s
-	SRCFILE "requiem.bas",373
+	SRCFILE "Songs\SHarrierC64.bas",373
 	DECLE 16191,63
-	;[374] MUSIC s,s,D4
-	SRCFILE "requiem.bas",374
-	DECLE 16191,27
-	;[375] MUSIC s,s,s
-	SRCFILE "requiem.bas",375
+	;[374] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",374
 	DECLE 16191,63
-	;[376] MUSIC s,s,C4
-	SRCFILE "requiem.bas",376
-	DECLE 16191,25
+	;[375] MUSIC s,D3,A4#
+	SRCFILE "Songs\SHarrierC64.bas",375
+	DECLE 3903,35
+	;[376] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",376
+	DECLE 16191,63
 	;[377] MUSIC s,s,s
-	SRCFILE "requiem.bas",377
+	SRCFILE "Songs\SHarrierC64.bas",377
 	DECLE 16191,63
-	;[378] MUSIC B3,G3#,s
-	SRCFILE "requiem.bas",378
-	DECLE 5400,63
-	;[379] MUSIC s,s,s
-	SRCFILE "requiem.bas",379
+	;[378] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",378
 	DECLE 16191,63
+	;[379] MUSIC A3#,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",379
+	DECLE 16151,32
 	;[380] MUSIC s,s,s
-	SRCFILE "requiem.bas",380
+	SRCFILE "Songs\SHarrierC64.bas",380
 	DECLE 16191,63
 	;[381] MUSIC s,s,s
-	SRCFILE "requiem.bas",381
+	SRCFILE "Songs\SHarrierC64.bas",381
 	DECLE 16191,63
-	;[382] MUSIC s,s,B4
-	SRCFILE "requiem.bas",382
-	DECLE 16191,36
-	;[383] MUSIC s,s,s
-	SRCFILE "requiem.bas",383
+	;[382] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",382
 	DECLE 16191,63
+	;[383] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",383
+	DECLE 5695,31
 	;[384] MUSIC s,s,s
-	SRCFILE "requiem.bas",384
+	SRCFILE "Songs\SHarrierC64.bas",384
 	DECLE 16191,63
 	;[385] MUSIC s,s,s
-	SRCFILE "requiem.bas",385
+	SRCFILE "Songs\SHarrierC64.bas",385
 	DECLE 16191,63
-	;[386] MUSIC B4,s,s
-	SRCFILE "requiem.bas",386
-	DECLE 16164,63
-	;[387] MUSIC s,s,s
-	SRCFILE "requiem.bas",387
+	;[386] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",386
 	DECLE 16191,63
+	;[387] MUSIC G4,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",387
+	DECLE 5920,63
 	;[388] MUSIC s,s,s
-	SRCFILE "requiem.bas",388
+	SRCFILE "Songs\SHarrierC64.bas",388
 	DECLE 16191,63
 	;[389] MUSIC s,s,s
-	SRCFILE "requiem.bas",389
+	SRCFILE "Songs\SHarrierC64.bas",389
 	DECLE 16191,63
-	;[390] MUSIC B4,G3#,E3
-	SRCFILE "requiem.bas",390
-	DECLE 5412,17
-	;[391] MUSIC s,s,s
-	SRCFILE "requiem.bas",391
+	;[390] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",390
 	DECLE 16191,63
+	;[391] MUSIC s,G3,D4
+	SRCFILE "Songs\SHarrierC64.bas",391
+	DECLE 5183,27
 	;[392] MUSIC s,s,s
-	SRCFILE "requiem.bas",392
+	SRCFILE "Songs\SHarrierC64.bas",392
 	DECLE 16191,63
 	;[393] MUSIC s,s,s
-	SRCFILE "requiem.bas",393
+	SRCFILE "Songs\SHarrierC64.bas",393
 	DECLE 16191,63
-	;[394] MUSIC C5,A3,s
-	SRCFILE "requiem.bas",394
-	DECLE 5669,63
-	;[395] MUSIC s,s,s
-	SRCFILE "requiem.bas",395
+	;[394] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",394
 	DECLE 16191,63
-	;[396] MUSIC D5,s,s
-	SRCFILE "requiem.bas",396
-	DECLE 16167,63
+	;[395] 
+	SRCFILE "Songs\SHarrierC64.bas",395
+	;[396] MUSIC A3#,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",396
+	DECLE 16151,32
 	;[397] MUSIC s,s,s
-	SRCFILE "requiem.bas",397
+	SRCFILE "Songs\SHarrierC64.bas",397
 	DECLE 16191,63
-	;[398] MUSIC C5,s,E4
-	SRCFILE "requiem.bas",398
-	DECLE 16165,29
+	;[398] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",398
+	DECLE 16191,63
 	;[399] MUSIC s,s,s
-	SRCFILE "requiem.bas",399
+	SRCFILE "Songs\SHarrierC64.bas",399
 	DECLE 16191,63
-	;[400] MUSIC B4,s,s
-	SRCFILE "requiem.bas",400
-	DECLE 16164,63
+	;[400] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",400
+	DECLE 5695,31
 	;[401] MUSIC s,s,s
-	SRCFILE "requiem.bas",401
+	SRCFILE "Songs\SHarrierC64.bas",401
 	DECLE 16191,63
-	;[402] MUSIC C5,s,A4
-	SRCFILE "requiem.bas",402
-	DECLE 16165,34
+	;[402] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",402
+	DECLE 16191,63
 	;[403] MUSIC s,s,s
-	SRCFILE "requiem.bas",403
+	SRCFILE "Songs\SHarrierC64.bas",403
 	DECLE 16191,63
-	;[404] MUSIC D5,G3,s
-	SRCFILE "requiem.bas",404
-	DECLE 5159,63
+	;[404] MUSIC G4,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",404
+	DECLE 5920,63
 	;[405] MUSIC s,s,s
-	SRCFILE "requiem.bas",405
+	SRCFILE "Songs\SHarrierC64.bas",405
 	DECLE 16191,63
-	;[406] MUSIC B4,F3,A3
-	SRCFILE "requiem.bas",406
-	DECLE 4644,22
+	;[406] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",406
+	DECLE 16191,63
 	;[407] MUSIC s,s,s
-	SRCFILE "requiem.bas",407
+	SRCFILE "Songs\SHarrierC64.bas",407
 	DECLE 16191,63
-	;[408] MUSIC C5,E3,s
-	SRCFILE "requiem.bas",408
-	DECLE 4389,63
+	;[408] MUSIC s,D3,A4
+	SRCFILE "Songs\SHarrierC64.bas",408
+	DECLE 3903,34
 	;[409] MUSIC s,s,s
-	SRCFILE "requiem.bas",409
+	SRCFILE "Songs\SHarrierC64.bas",409
 	DECLE 16191,63
-	;[410] MUSIC D5,F3,s
-	SRCFILE "requiem.bas",410
-	DECLE 4647,63
+	;[410] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",410
+	DECLE 16191,63
 	;[411] MUSIC s,s,s
-	SRCFILE "requiem.bas",411
+	SRCFILE "Songs\SHarrierC64.bas",411
 	DECLE 16191,63
-	;[412] MUSIC E5,s,G4
-	SRCFILE "requiem.bas",412
-	DECLE 16169,32
+	;[412] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",412
+	DECLE 16150,31
 	;[413] MUSIC s,s,s
-	SRCFILE "requiem.bas",413
+	SRCFILE "Songs\SHarrierC64.bas",413
 	DECLE 16191,63
-	;[414] MUSIC D5,F4,D3
-	SRCFILE "requiem.bas",414
-	DECLE 7719,15
+	;[414] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",414
+	DECLE 16191,63
 	;[415] MUSIC s,s,s
-	SRCFILE "requiem.bas",415
+	SRCFILE "Songs\SHarrierC64.bas",415
 	DECLE 16191,63
-	;[416] MUSIC C5,E4,s
-	SRCFILE "requiem.bas",416
-	DECLE 7461,63
+	;[416] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",416
+	DECLE 5183,29
 	;[417] MUSIC s,s,s
-	SRCFILE "requiem.bas",417
+	SRCFILE "Songs\SHarrierC64.bas",417
 	DECLE 16191,63
-	;[418] MUSIC D5,F4,G3
-	SRCFILE "requiem.bas",418
-	DECLE 7719,20
+	;[418] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",418
+	DECLE 16191,63
 	;[419] MUSIC s,s,s
-	SRCFILE "requiem.bas",419
+	SRCFILE "Songs\SHarrierC64.bas",419
 	DECLE 16191,63
-	;[420] MUSIC E5,s,s
-	SRCFILE "requiem.bas",420
-	DECLE 16169,63
+	;[420] MUSIC F4#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",420
+	DECLE 5663,63
 	;[421] MUSIC s,s,s
-	SRCFILE "requiem.bas",421
+	SRCFILE "Songs\SHarrierC64.bas",421
 	DECLE 16191,63
-	;[422] MUSIC C5,A3,G4
-	SRCFILE "requiem.bas",422
-	DECLE 5669,32
+	;[422] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",422
+	DECLE 16191,63
 	;[423] MUSIC s,s,s
-	SRCFILE "requiem.bas",423
+	SRCFILE "Songs\SHarrierC64.bas",423
 	DECLE 16191,63
-	;[424] MUSIC D5,B3,F4
-	SRCFILE "requiem.bas",424
-	DECLE 6183,30
+	;[424] MUSIC s,F3#,D4
+	SRCFILE "Songs\SHarrierC64.bas",424
+	DECLE 4927,27
 	;[425] MUSIC s,s,s
-	SRCFILE "requiem.bas",425
+	SRCFILE "Songs\SHarrierC64.bas",425
 	DECLE 16191,63
-	;[426] MUSIC E5,E4,C4
-	SRCFILE "requiem.bas",426
-	DECLE 7465,25
+	;[426] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",426
+	DECLE 16191,63
 	;[427] MUSIC s,s,s
-	SRCFILE "requiem.bas",427
+	SRCFILE "Songs\SHarrierC64.bas",427
 	DECLE 16191,63
-	;[428] MUSIC s,s,s
-	SRCFILE "requiem.bas",428
-	DECLE 16191,63
+	;[428] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",428
+	DECLE 16150,31
 	;[429] MUSIC s,s,s
-	SRCFILE "requiem.bas",429
+	SRCFILE "Songs\SHarrierC64.bas",429
 	DECLE 16191,63
-	;[430] MUSIC B3,F5,A3
-	SRCFILE "requiem.bas",430
-	DECLE 10776,22
+	;[430] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",430
+	DECLE 16191,63
 	;[431] MUSIC s,s,s
-	SRCFILE "requiem.bas",431
+	SRCFILE "Songs\SHarrierC64.bas",431
 	DECLE 16191,63
-	;[432] MUSIC E5,C4,s
-	SRCFILE "requiem.bas",432
-	DECLE 6441,63
+	;[432] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",432
+	DECLE 5183,29
 	;[433] MUSIC s,s,s
-	SRCFILE "requiem.bas",433
+	SRCFILE "Songs\SHarrierC64.bas",433
 	DECLE 16191,63
-	;[434] MUSIC D5,D4,F3
-	SRCFILE "requiem.bas",434
-	DECLE 6951,18
+	;[434] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",434
+	DECLE 16191,63
 	;[435] MUSIC s,s,s
-	SRCFILE "requiem.bas",435
+	SRCFILE "Songs\SHarrierC64.bas",435
 	DECLE 16191,63
-	;[436] MUSIC C5,s,s
-	SRCFILE "requiem.bas",436
-	DECLE 16165,63
+	;[436] MUSIC F4#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",436
+	DECLE 5663,63
 	;[437] MUSIC s,s,s
-	SRCFILE "requiem.bas",437
+	SRCFILE "Songs\SHarrierC64.bas",437
 	DECLE 16191,63
-	;[438] MUSIC B4,C4,s
-	SRCFILE "requiem.bas",438
-	DECLE 6436,63
+	;[438] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",438
+	DECLE 16191,63
 	;[439] MUSIC s,s,s
-	SRCFILE "requiem.bas",439
+	SRCFILE "Songs\SHarrierC64.bas",439
 	DECLE 16191,63
-	;[440] MUSIC A4,D4,s
-	SRCFILE "requiem.bas",440
-	DECLE 6946,63
+	;[440] MUSIC s,D3,A4
+	SRCFILE "Songs\SHarrierC64.bas",440
+	DECLE 3903,34
 	;[441] MUSIC s,s,s
-	SRCFILE "requiem.bas",441
+	SRCFILE "Songs\SHarrierC64.bas",441
 	DECLE 16191,63
-	;[442] MUSIC E4,G4#,E3
-	SRCFILE "requiem.bas",442
-	DECLE 8477,17
+	;[442] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",442
+	DECLE 16191,63
 	;[443] MUSIC s,s,s
-	SRCFILE "requiem.bas",443
+	SRCFILE "Songs\SHarrierC64.bas",443
 	DECLE 16191,63
-	;[444] MUSIC s,s,s
-	SRCFILE "requiem.bas",444
-	DECLE 16191,63
+	;[444] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",444
+	DECLE 16150,31
 	;[445] MUSIC s,s,s
-	SRCFILE "requiem.bas",445
+	SRCFILE "Songs\SHarrierC64.bas",445
 	DECLE 16191,63
-	;[446] MUSIC D4,B4,E4
-	SRCFILE "requiem.bas",446
-	DECLE 9243,29
+	;[446] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",446
+	DECLE 16191,63
 	;[447] MUSIC s,s,s
-	SRCFILE "requiem.bas",447
+	SRCFILE "Songs\SHarrierC64.bas",447
 	DECLE 16191,63
-	;[448] MUSIC s,s,s
-	SRCFILE "requiem.bas",448
-	DECLE 16191,63
+	;[448] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",448
+	DECLE 5183,29
 	;[449] MUSIC s,s,s
-	SRCFILE "requiem.bas",449
+	SRCFILE "Songs\SHarrierC64.bas",449
 	DECLE 16191,63
-	;[450] MUSIC C4,F4#,E5
-	SRCFILE "requiem.bas",450
-	DECLE 7961,41
+	;[450] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",450
+	DECLE 16191,63
 	;[451] MUSIC s,s,s
-	SRCFILE "requiem.bas",451
+	SRCFILE "Songs\SHarrierC64.bas",451
 	DECLE 16191,63
-	;[452] MUSIC s,s,s
-	SRCFILE "requiem.bas",452
-	DECLE 16191,63
+	;[452] MUSIC F4#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",452
+	DECLE 5663,63
 	;[453] MUSIC s,s,s
-	SRCFILE "requiem.bas",453
+	SRCFILE "Songs\SHarrierC64.bas",453
 	DECLE 16191,63
-	;[454] MUSIC B3,D5,G4
-	SRCFILE "requiem.bas",454
-	DECLE 10008,32
+	;[454] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",454
+	DECLE 16191,63
 	;[455] MUSIC s,s,s
-	SRCFILE "requiem.bas",455
+	SRCFILE "Songs\SHarrierC64.bas",455
 	DECLE 16191,63
-	;[456] MUSIC s,s,s
-	SRCFILE "requiem.bas",456
-	DECLE 16191,63
+	;[456] MUSIC s,F3#,D4
+	SRCFILE "Songs\SHarrierC64.bas",456
+	DECLE 4927,27
 	;[457] MUSIC s,s,s
-	SRCFILE "requiem.bas",457
+	SRCFILE "Songs\SHarrierC64.bas",457
 	DECLE 16191,63
-	;[458] MUSIC C5,A3,A4
-	SRCFILE "requiem.bas",458
-	DECLE 5669,34
+	;[458] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",458
+	DECLE 16191,63
 	;[459] MUSIC s,s,s
-	SRCFILE "requiem.bas",459
+	SRCFILE "Songs\SHarrierC64.bas",459
 	DECLE 16191,63
-	;[460] MUSIC B4,B3,s
-	SRCFILE "requiem.bas",460
-	DECLE 6180,63
+	;[460] MUSIC A3,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",460
+	DECLE 16150,31
 	;[461] MUSIC s,s,s
-	SRCFILE "requiem.bas",461
+	SRCFILE "Songs\SHarrierC64.bas",461
 	DECLE 16191,63
-	;[462] MUSIC A3,A4,C4
-	SRCFILE "requiem.bas",462
-	DECLE 8726,25
-	;[463] MUSIC G3,s,s
-	SRCFILE "requiem.bas",463
-	DECLE 16148,63
-	;[464] MUSIC F3,s,s
-	SRCFILE "requiem.bas",464
-	DECLE 16146,63
+	;[462] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",462
+	DECLE 16191,63
+	;[463] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",463
+	DECLE 16191,63
+	;[464] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",464
+	DECLE 5183,29
 	;[465] MUSIC s,s,s
-	SRCFILE "requiem.bas",465
+	SRCFILE "Songs\SHarrierC64.bas",465
 	DECLE 16191,63
 	;[466] MUSIC s,s,s
-	SRCFILE "requiem.bas",466
+	SRCFILE "Songs\SHarrierC64.bas",466
 	DECLE 16191,63
 	;[467] MUSIC s,s,s
-	SRCFILE "requiem.bas",467
+	SRCFILE "Songs\SHarrierC64.bas",467
 	DECLE 16191,63
-	;[468] MUSIC A4#,s,s
-	SRCFILE "requiem.bas",468
-	DECLE 16163,63
+	;[468] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",468
+	DECLE 5695,31
 	;[469] MUSIC s,s,s
-	SRCFILE "requiem.bas",469
+	SRCFILE "Songs\SHarrierC64.bas",469
 	DECLE 16191,63
-	;[470] MUSIC G4,C4#,D3#
-	SRCFILE "requiem.bas",470
-	DECLE 6688,16
+	;[470] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",470
+	DECLE 16191,63
 	;[471] MUSIC s,s,s
-	SRCFILE "requiem.bas",471
+	SRCFILE "Songs\SHarrierC64.bas",471
 	DECLE 16191,63
-	;[472] MUSIC A4,s,s
-	SRCFILE "requiem.bas",472
-	DECLE 16162,63
+	;[472] MUSIC G3,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",472
+	DECLE 16148,32
 	;[473] MUSIC s,s,s
-	SRCFILE "requiem.bas",473
+	SRCFILE "Songs\SHarrierC64.bas",473
 	DECLE 16191,63
-	;[474] MUSIC D4,F4#,D3
-	SRCFILE "requiem.bas",474
-	DECLE 7963,15
+	;[474] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",474
+	DECLE 16191,63
 	;[475] MUSIC s,s,s
-	SRCFILE "requiem.bas",475
+	SRCFILE "Songs\SHarrierC64.bas",475
 	DECLE 16191,63
-	;[476] MUSIC s,s,s
-	SRCFILE "requiem.bas",476
-	DECLE 16191,63
+	;[476] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",476
+	DECLE 6975,63
 	;[477] MUSIC s,s,s
-	SRCFILE "requiem.bas",477
+	SRCFILE "Songs\SHarrierC64.bas",477
 	DECLE 16191,63
-	;[478] MUSIC A4,s,D3
-	SRCFILE "requiem.bas",478
-	DECLE 16162,15
+	;[478] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",478
+	DECLE 16191,63
 	;[479] MUSIC s,s,s
-	SRCFILE "requiem.bas",479
+	SRCFILE "Songs\SHarrierC64.bas",479
 	DECLE 16191,63
-	;[480] MUSIC s,s,s
-	SRCFILE "requiem.bas",480
-	DECLE 16191,63
+	;[480] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",480
+	DECLE 6463,63
 	;[481] MUSIC s,s,s
-	SRCFILE "requiem.bas",481
+	SRCFILE "Songs\SHarrierC64.bas",481
 	DECLE 16191,63
-	;[482] MUSIC G4#,E3,D5
-	SRCFILE "requiem.bas",482
-	DECLE 4385,39
+	;[482] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",482
+	DECLE 16191,63
 	;[483] MUSIC s,s,s
-	SRCFILE "requiem.bas",483
+	SRCFILE "Songs\SHarrierC64.bas",483
 	DECLE 16191,63
-	;[484] MUSIC s,s,s
-	SRCFILE "requiem.bas",484
-	DECLE 16191,63
+	;[484] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",484
+	DECLE 6975,63
 	;[485] MUSIC s,s,s
-	SRCFILE "requiem.bas",485
+	SRCFILE "Songs\SHarrierC64.bas",485
 	DECLE 16191,63
-	;[486] MUSIC A4,F3#,C5
-	SRCFILE "requiem.bas",486
-	DECLE 4898,37
+	;[486] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",486
+	DECLE 16191,63
 	;[487] MUSIC s,s,s
-	SRCFILE "requiem.bas",487
+	SRCFILE "Songs\SHarrierC64.bas",487
 	DECLE 16191,63
-	;[488] MUSIC s,s,s
-	SRCFILE "requiem.bas",488
-	DECLE 16191,63
+	;[488] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",488
+	DECLE 5951,63
 	;[489] MUSIC s,s,s
-	SRCFILE "requiem.bas",489
+	SRCFILE "Songs\SHarrierC64.bas",489
 	DECLE 16191,63
-	;[490] MUSIC A4#,G3,D4
-	SRCFILE "requiem.bas",490
-	DECLE 5155,27
+	;[490] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",490
+	DECLE 16191,63
 	;[491] MUSIC s,s,s
-	SRCFILE "requiem.bas",491
+	SRCFILE "Songs\SHarrierC64.bas",491
 	DECLE 16191,63
-	;[492] MUSIC A4,A3,s
-	SRCFILE "requiem.bas",492
-	DECLE 5666,63
+	;[492] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",492
+	DECLE 6975,63
 	;[493] MUSIC s,s,s
-	SRCFILE "requiem.bas",493
+	SRCFILE "Songs\SHarrierC64.bas",493
 	DECLE 16191,63
-	;[494] MUSIC G3,G4,A3#
-	SRCFILE "requiem.bas",494
-	DECLE 8212,23
+	;[494] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",494
+	DECLE 16191,63
 	;[495] MUSIC s,s,s
-	SRCFILE "requiem.bas",495
+	SRCFILE "Songs\SHarrierC64.bas",495
 	DECLE 16191,63
-	;[496] MUSIC F3,s,s
-	SRCFILE "requiem.bas",496
-	DECLE 16146,63
+	;[496] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",496
+	DECLE 5695,63
 	;[497] MUSIC s,s,s
-	SRCFILE "requiem.bas",497
+	SRCFILE "Songs\SHarrierC64.bas",497
 	DECLE 16191,63
-	;[498] MUSIC E3,s,s
-	SRCFILE "requiem.bas",498
-	DECLE 16145,63
+	;[498] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",498
+	DECLE 16191,63
 	;[499] MUSIC s,s,s
-	SRCFILE "requiem.bas",499
+	SRCFILE "Songs\SHarrierC64.bas",499
 	DECLE 16191,63
-	;[500] MUSIC s,A4,s
-	SRCFILE "requiem.bas",500
-	DECLE 8767,63
+	;[500] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",500
+	DECLE 6975,63
 	;[501] MUSIC s,s,s
-	SRCFILE "requiem.bas",501
+	SRCFILE "Songs\SHarrierC64.bas",501
 	DECLE 16191,63
-	;[502] MUSIC F4,D3,B3
-	SRCFILE "requiem.bas",502
-	DECLE 3870,24
+	;[502] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",502
+	DECLE 16191,63
 	;[503] MUSIC s,s,s
-	SRCFILE "requiem.bas",503
+	SRCFILE "Songs\SHarrierC64.bas",503
 	DECLE 16191,63
-	;[504] MUSIC G4,s,s
-	SRCFILE "requiem.bas",504
-	DECLE 16160,63
-	;[505] MUSIC s,s,s
-	SRCFILE "requiem.bas",505
+	;[504] MUSIC s,D3,A4
+	SRCFILE "Songs\SHarrierC64.bas",504
+	DECLE 3903,34
+	;[505] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",505
+	DECLE 16143,63
+	;[506] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",506
 	DECLE 16191,63
-	;[506] MUSIC C4,E4,C5
-	SRCFILE "requiem.bas",506
-	DECLE 7449,37
 	;[507] MUSIC s,s,s
-	SRCFILE "requiem.bas",507
+	SRCFILE "Songs\SHarrierC64.bas",507
 	DECLE 16191,63
-	;[508] MUSIC s,s,s
-	SRCFILE "requiem.bas",508
-	DECLE 16191,63
+	;[508] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",508
+	DECLE 6975,63
 	;[509] MUSIC s,s,s
-	SRCFILE "requiem.bas",509
+	SRCFILE "Songs\SHarrierC64.bas",509
 	DECLE 16191,63
-	;[510] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",510
-	DECLE 16151,63
+	;[510] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",510
+	DECLE 16191,63
 	;[511] MUSIC s,s,s
-	SRCFILE "requiem.bas",511
+	SRCFILE "Songs\SHarrierC64.bas",511
 	DECLE 16191,63
-	;[512] MUSIC s,s,s
-	SRCFILE "requiem.bas",512
-	DECLE 16191,63
+	;[512] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",512
+	DECLE 6463,63
 	;[513] MUSIC s,s,s
-	SRCFILE "requiem.bas",513
+	SRCFILE "Songs\SHarrierC64.bas",513
 	DECLE 16191,63
-	;[514] MUSIC A3,F4,D3
-	SRCFILE "requiem.bas",514
-	DECLE 7702,15
+	;[514] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",514
+	DECLE 16191,63
 	;[515] MUSIC s,s,s
-	SRCFILE "requiem.bas",515
+	SRCFILE "Songs\SHarrierC64.bas",515
 	DECLE 16191,63
-	;[516] MUSIC s,s,s
-	SRCFILE "requiem.bas",516
-	DECLE 16191,63
+	;[516] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",516
+	DECLE 6975,63
 	;[517] MUSIC s,s,s
-	SRCFILE "requiem.bas",517
+	SRCFILE "Songs\SHarrierC64.bas",517
 	DECLE 16191,63
-	;[518] MUSIC G3,G4,C5
-	SRCFILE "requiem.bas",518
-	DECLE 8212,37
+	;[518] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",518
+	DECLE 16191,63
 	;[519] MUSIC s,s,s
-	SRCFILE "requiem.bas",519
+	SRCFILE "Songs\SHarrierC64.bas",519
 	DECLE 16191,63
-	;[520] MUSIC s,s,s
-	SRCFILE "requiem.bas",520
+	;[520] MUSIC s,A3,F5#
+	SRCFILE "Songs\SHarrierC64.bas",520
+	DECLE 5695,43
+	;[521] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",521
+	DECLE 16143,63
+	;[522] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",522
 	DECLE 16191,63
-	;[521] MUSIC s,s,s
-	SRCFILE "requiem.bas",521
-	DECLE 16191,63
-	;[522] MUSIC A3,A4,C4
-	SRCFILE "requiem.bas",522
-	DECLE 8726,25
 	;[523] MUSIC s,s,s
-	SRCFILE "requiem.bas",523
+	SRCFILE "Songs\SHarrierC64.bas",523
 	DECLE 16191,63
-	;[524] MUSIC F3,s,s
-	SRCFILE "requiem.bas",524
-	DECLE 16146,63
-	;[525] MUSIC s,s,s
-	SRCFILE "requiem.bas",525
+	;[524] 
+	SRCFILE "Songs\SHarrierC64.bas",524
+	;[525] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",525
+	DECLE 6975,63
+	;[526] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",526
 	DECLE 16191,63
-	;[526] MUSIC G3,s,s
-	SRCFILE "requiem.bas",526
-	DECLE 16148,63
 	;[527] MUSIC s,s,s
-	SRCFILE "requiem.bas",527
+	SRCFILE "Songs\SHarrierC64.bas",527
 	DECLE 16191,63
-	;[528] MUSIC A3,s,s
-	SRCFILE "requiem.bas",528
-	DECLE 16150,63
-	;[529] MUSIC s,s,s
-	SRCFILE "requiem.bas",529
+	;[528] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",528
 	DECLE 16191,63
-	;[530] MUSIC A3#,D5,s
-	SRCFILE "requiem.bas",530
-	DECLE 10007,63
+	;[529] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",529
+	DECLE 6463,63
+	;[530] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",530
+	DECLE 16191,63
 	;[531] MUSIC s,s,s
-	SRCFILE "requiem.bas",531
+	SRCFILE "Songs\SHarrierC64.bas",531
 	DECLE 16191,63
-	;[532] MUSIC G3,s,s
-	SRCFILE "requiem.bas",532
-	DECLE 16148,63
-	;[533] MUSIC s,s,s
-	SRCFILE "requiem.bas",533
+	;[532] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",532
 	DECLE 16191,63
-	;[534] MUSIC A3,s,s
-	SRCFILE "requiem.bas",534
-	DECLE 16150,63
+	;[533] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",533
+	DECLE 6975,63
+	;[534] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",534
+	DECLE 16191,63
 	;[535] MUSIC s,s,s
-	SRCFILE "requiem.bas",535
+	SRCFILE "Songs\SHarrierC64.bas",535
 	DECLE 16191,63
-	;[536] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",536
-	DECLE 16151,63
-	;[537] MUSIC s,s,s
-	SRCFILE "requiem.bas",537
+	;[536] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",536
 	DECLE 16191,63
-	;[538] MUSIC C4,E4,s
-	SRCFILE "requiem.bas",538
-	DECLE 7449,63
+	;[537] MUSIC s,G3,D5
+	SRCFILE "Songs\SHarrierC64.bas",537
+	DECLE 5183,39
+	;[538] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",538
+	DECLE 16136,63
 	;[539] MUSIC s,s,s
-	SRCFILE "requiem.bas",539
+	SRCFILE "Songs\SHarrierC64.bas",539
 	DECLE 16191,63
 	;[540] MUSIC s,s,s
-	SRCFILE "requiem.bas",540
+	SRCFILE "Songs\SHarrierC64.bas",540
 	DECLE 16191,63
-	;[541] MUSIC s,s,s
-	SRCFILE "requiem.bas",541
+	;[541] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",541
+	DECLE 6975,35
+	;[542] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",542
 	DECLE 16191,63
-	;[542] MUSIC G3,C4,C3
-	SRCFILE "requiem.bas",542
-	DECLE 6420,13
 	;[543] MUSIC s,s,s
-	SRCFILE "requiem.bas",543
+	SRCFILE "Songs\SHarrierC64.bas",543
 	DECLE 16191,63
 	;[544] MUSIC s,s,s
-	SRCFILE "requiem.bas",544
+	SRCFILE "Songs\SHarrierC64.bas",544
 	DECLE 16191,63
-	;[545] MUSIC s,s,s
-	SRCFILE "requiem.bas",545
-	DECLE 16191,63
-	;[546] MUSIC C3,C4,s
-	SRCFILE "requiem.bas",546
-	DECLE 6413,63
+	;[545] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",545
+	DECLE 6463,34
+	;[546] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",546
+	DECLE 16148,63
 	;[547] MUSIC s,s,s
-	SRCFILE "requiem.bas",547
+	SRCFILE "Songs\SHarrierC64.bas",547
 	DECLE 16191,63
 	;[548] MUSIC s,s,s
-	SRCFILE "requiem.bas",548
+	SRCFILE "Songs\SHarrierC64.bas",548
 	DECLE 16191,63
-	;[549] MUSIC s,s,s
-	SRCFILE "requiem.bas",549
+	;[549] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",549
+	DECLE 6975,35
+	;[550] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",550
 	DECLE 16191,63
-	;[550] MUSIC C3,E4,A3#
-	SRCFILE "requiem.bas",550
-	DECLE 7437,23
 	;[551] MUSIC s,s,s
-	SRCFILE "requiem.bas",551
+	SRCFILE "Songs\SHarrierC64.bas",551
 	DECLE 16191,63
 	;[552] MUSIC s,s,s
-	SRCFILE "requiem.bas",552
+	SRCFILE "Songs\SHarrierC64.bas",552
 	DECLE 16191,63
-	;[553] MUSIC s,s,s
-	SRCFILE "requiem.bas",553
-	DECLE 16191,63
-	;[554] MUSIC D3,F4,s
-	SRCFILE "requiem.bas",554
-	DECLE 7695,63
+	;[553] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",553
+	DECLE 5951,32
+	;[554] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",554
+	DECLE 16136,63
 	;[555] MUSIC s,s,s
-	SRCFILE "requiem.bas",555
+	SRCFILE "Songs\SHarrierC64.bas",555
 	DECLE 16191,63
-	;[556] MUSIC E3,s,s
-	SRCFILE "requiem.bas",556
-	DECLE 16145,63
-	;[557] MUSIC s,s,s
-	SRCFILE "requiem.bas",557
+	;[556] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",556
 	DECLE 16191,63
-	;[558] MUSIC D3,F4,A3#
-	SRCFILE "requiem.bas",558
-	DECLE 7695,23
+	;[557] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",557
+	DECLE 6975,35
+	;[558] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",558
+	DECLE 16191,63
 	;[559] MUSIC s,s,s
-	SRCFILE "requiem.bas",559
+	SRCFILE "Songs\SHarrierC64.bas",559
 	DECLE 16191,63
-	;[560] MUSIC C3,s,A3
-	SRCFILE "requiem.bas",560
-	DECLE 16141,22
-	;[561] MUSIC s,s,s
-	SRCFILE "requiem.bas",561
+	;[560] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",560
 	DECLE 16191,63
-	;[562] MUSIC D3,A3#,D4
-	SRCFILE "requiem.bas",562
-	DECLE 5903,27
+	;[561] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",561
+	DECLE 6463,34
+	;[562] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",562
+	DECLE 16148,63
 	;[563] MUSIC s,s,s
-	SRCFILE "requiem.bas",563
+	SRCFILE "Songs\SHarrierC64.bas",563
 	DECLE 16191,63
-	;[564] MUSIC E3,C4,s
-	SRCFILE "requiem.bas",564
-	DECLE 6417,63
-	;[565] MUSIC s,s,s
-	SRCFILE "requiem.bas",565
+	;[564] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",564
 	DECLE 16191,63
-	;[566] MUSIC C3,A3,F4
-	SRCFILE "requiem.bas",566
-	DECLE 5645,30
+	;[565] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",565
+	DECLE 6975,35
+	;[566] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",566
+	DECLE 16191,63
 	;[567] MUSIC s,s,s
-	SRCFILE "requiem.bas",567
+	SRCFILE "Songs\SHarrierC64.bas",567
 	DECLE 16191,63
-	;[568] MUSIC D3,A3#,s
-	SRCFILE "requiem.bas",568
-	DECLE 5903,63
-	;[569] MUSIC s,s,s
-	SRCFILE "requiem.bas",569
+	;[568] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",568
 	DECLE 16191,63
-	;[570] MUSIC E3,G3,G4
-	SRCFILE "requiem.bas",570
-	DECLE 5137,32
+	;[569] MUSIC s,G3,D5
+	SRCFILE "Songs\SHarrierC64.bas",569
+	DECLE 5183,39
+	;[570] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",570
+	DECLE 16136,63
 	;[571] MUSIC s,s,s
-	SRCFILE "requiem.bas",571
+	SRCFILE "Songs\SHarrierC64.bas",571
 	DECLE 16191,63
-	;[572] MUSIC F3,s,s
-	SRCFILE "requiem.bas",572
-	DECLE 16146,63
-	;[573] MUSIC s,s,s
-	SRCFILE "requiem.bas",573
+	;[572] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",572
 	DECLE 16191,63
-	;[574] MUSIC E3,A3,G4
-	SRCFILE "requiem.bas",574
-	DECLE 5649,32
+	;[573] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",573
+	DECLE 6975,35
+	;[574] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",574
+	DECLE 16191,63
 	;[575] MUSIC s,s,s
-	SRCFILE "requiem.bas",575
+	SRCFILE "Songs\SHarrierC64.bas",575
 	DECLE 16191,63
-	;[576] MUSIC D3,A3#,s
-	SRCFILE "requiem.bas",576
-	DECLE 5903,63
-	;[577] MUSIC s,s,s
-	SRCFILE "requiem.bas",577
+	;[576] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",576
 	DECLE 16191,63
-	;[578] MUSIC E3,E4,C4
-	SRCFILE "requiem.bas",578
-	DECLE 7441,25
+	;[577] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",577
+	DECLE 6463,34
+	;[578] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",578
+	DECLE 16148,63
 	;[579] MUSIC s,s,s
-	SRCFILE "requiem.bas",579
+	SRCFILE "Songs\SHarrierC64.bas",579
 	DECLE 16191,63
-	;[580] MUSIC F3,s,s
-	SRCFILE "requiem.bas",580
-	DECLE 16146,63
-	;[581] MUSIC s,s,s
-	SRCFILE "requiem.bas",581
+	;[580] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",580
 	DECLE 16191,63
-	;[582] MUSIC D3,F4,C4
-	SRCFILE "requiem.bas",582
-	DECLE 7695,25
+	;[581] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",581
+	DECLE 6975,35
+	;[582] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",582
+	DECLE 16191,63
 	;[583] MUSIC s,s,s
-	SRCFILE "requiem.bas",583
+	SRCFILE "Songs\SHarrierC64.bas",583
 	DECLE 16191,63
-	;[584] MUSIC E3,G4,s
-	SRCFILE "requiem.bas",584
-	DECLE 8209,63
-	;[585] MUSIC s,s,s
-	SRCFILE "requiem.bas",585
+	;[584] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",584
 	DECLE 16191,63
-	;[586] MUSIC A4,F3,s
-	SRCFILE "requiem.bas",586
-	DECLE 4642,63
+	;[585] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",585
+	DECLE 5951,32
+	;[586] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",586
+	DECLE 16136,63
 	;[587] MUSIC s,s,s
-	SRCFILE "requiem.bas",587
+	SRCFILE "Songs\SHarrierC64.bas",587
 	DECLE 16191,63
 	;[588] MUSIC s,s,s
-	SRCFILE "requiem.bas",588
+	SRCFILE "Songs\SHarrierC64.bas",588
 	DECLE 16191,63
-	;[589] MUSIC s,s,s
-	SRCFILE "requiem.bas",589
+	;[589] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",589
+	DECLE 6975,35
+	;[590] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",590
 	DECLE 16191,63
-	;[590] MUSIC G4,E4,G3
-	SRCFILE "requiem.bas",590
-	DECLE 7456,20
 	;[591] MUSIC s,s,s
-	SRCFILE "requiem.bas",591
+	SRCFILE "Songs\SHarrierC64.bas",591
 	DECLE 16191,63
-	;[592] MUSIC A4,F4,F3
-	SRCFILE "requiem.bas",592
-	DECLE 7714,18
-	;[593] MUSIC s,s,s
-	SRCFILE "requiem.bas",593
+	;[592] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",592
 	DECLE 16191,63
-	;[594] MUSIC E3,A4#,G4
-	SRCFILE "requiem.bas",594
-	DECLE 8977,32
+	;[593] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",593
+	DECLE 6463,34
+	;[594] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",594
+	DECLE 16148,63
 	;[595] MUSIC s,s,s
-	SRCFILE "requiem.bas",595
+	SRCFILE "Songs\SHarrierC64.bas",595
 	DECLE 16191,63
-	;[596] MUSIC D3,s,s
-	SRCFILE "requiem.bas",596
-	DECLE 16143,63
-	;[597] MUSIC s,s,s
-	SRCFILE "requiem.bas",597
+	;[596] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",596
 	DECLE 16191,63
-	;[598] MUSIC C3,F4,A4
-	SRCFILE "requiem.bas",598
-	DECLE 7693,34
+	;[597] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",597
+	DECLE 6975,35
+	;[598] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",598
+	DECLE 16191,63
 	;[599] MUSIC s,s,s
-	SRCFILE "requiem.bas",599
+	SRCFILE "Songs\SHarrierC64.bas",599
 	DECLE 16191,63
-	;[600] MUSIC G4,A4#,A2#
-	SRCFILE "requiem.bas",600
-	DECLE 8992,11
-	;[601] MUSIC s,s,s
-	SRCFILE "requiem.bas",601
+	;[600] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",600
 	DECLE 16191,63
-	;[602] MUSIC C5,A4,s
-	SRCFILE "requiem.bas",602
-	DECLE 8741,63
+	;[601] MUSIC s,G3,D5#
+	SRCFILE "Songs\SHarrierC64.bas",601
+	DECLE 5183,40
+	;[602] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",602
+	DECLE 16136,63
 	;[603] MUSIC s,s,s
-	SRCFILE "requiem.bas",603
+	SRCFILE "Songs\SHarrierC64.bas",603
 	DECLE 16191,63
 	;[604] MUSIC s,s,s
-	SRCFILE "requiem.bas",604
+	SRCFILE "Songs\SHarrierC64.bas",604
 	DECLE 16191,63
-	;[605] MUSIC s,s,s
-	SRCFILE "requiem.bas",605
+	;[605] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",605
+	DECLE 7231,37
+	;[606] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",606
 	DECLE 16191,63
-	;[606] MUSIC A4#,E4,C3
-	SRCFILE "requiem.bas",606
-	DECLE 7459,13
 	;[607] MUSIC s,s,s
-	SRCFILE "requiem.bas",607
+	SRCFILE "Songs\SHarrierC64.bas",607
 	DECLE 16191,63
 	;[608] MUSIC s,s,s
-	SRCFILE "requiem.bas",608
+	SRCFILE "Songs\SHarrierC64.bas",608
 	DECLE 16191,63
-	;[609] MUSIC s,s,s
-	SRCFILE "requiem.bas",609
-	DECLE 16191,63
-	;[610] MUSIC A4,F4,F3
-	SRCFILE "requiem.bas",610
-	DECLE 7714,18
+	;[609] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",609
+	DECLE 6975,36
+	;[610] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",610
+	DECLE 16148,63
 	;[611] MUSIC s,s,s
-	SRCFILE "requiem.bas",611
+	SRCFILE "Songs\SHarrierC64.bas",611
 	DECLE 16191,63
 	;[612] MUSIC s,s,s
-	SRCFILE "requiem.bas",612
+	SRCFILE "Songs\SHarrierC64.bas",612
 	DECLE 16191,63
-	;[613] MUSIC s,s,s
-	SRCFILE "requiem.bas",613
+	;[613] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",613
+	DECLE 7231,37
+	;[614] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",614
 	DECLE 16191,63
-	;[614] MUSIC G4,C4#,D3#
-	SRCFILE "requiem.bas",614
-	DECLE 6688,16
 	;[615] MUSIC s,s,s
-	SRCFILE "requiem.bas",615
+	SRCFILE "Songs\SHarrierC64.bas",615
 	DECLE 16191,63
 	;[616] MUSIC s,s,s
-	SRCFILE "requiem.bas",616
+	SRCFILE "Songs\SHarrierC64.bas",616
 	DECLE 16191,63
-	;[617] MUSIC s,s,s
-	SRCFILE "requiem.bas",617
-	DECLE 16191,63
-	;[618] MUSIC D3,F4#,D4
-	SRCFILE "requiem.bas",618
-	DECLE 7951,27
+	;[617] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",617
+	DECLE 6463,32
+	;[618] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",618
+	DECLE 16136,63
 	;[619] MUSIC s,s,s
-	SRCFILE "requiem.bas",619
+	SRCFILE "Songs\SHarrierC64.bas",619
 	DECLE 16191,63
 	;[620] MUSIC s,s,s
-	SRCFILE "requiem.bas",620
+	SRCFILE "Songs\SHarrierC64.bas",620
 	DECLE 16191,63
-	;[621] MUSIC s,s,s
-	SRCFILE "requiem.bas",621
+	;[621] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",621
+	DECLE 7231,37
+	;[622] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",622
 	DECLE 16191,63
-	;[622] MUSIC C4,s,s
-	SRCFILE "requiem.bas",622
-	DECLE 16153,63
 	;[623] MUSIC s,s,s
-	SRCFILE "requiem.bas",623
+	SRCFILE "Songs\SHarrierC64.bas",623
 	DECLE 16191,63
 	;[624] MUSIC s,s,s
-	SRCFILE "requiem.bas",624
+	SRCFILE "Songs\SHarrierC64.bas",624
 	DECLE 16191,63
-	;[625] MUSIC s,s,s
-	SRCFILE "requiem.bas",625
-	DECLE 16191,63
-	;[626] MUSIC s,E4,G4
-	SRCFILE "requiem.bas",626
-	DECLE 7487,32
+	;[625] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",625
+	DECLE 6975,36
+	;[626] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",626
+	DECLE 16148,63
 	;[627] MUSIC s,s,s
-	SRCFILE "requiem.bas",627
+	SRCFILE "Songs\SHarrierC64.bas",627
 	DECLE 16191,63
 	;[628] MUSIC s,s,s
-	SRCFILE "requiem.bas",628
+	SRCFILE "Songs\SHarrierC64.bas",628
 	DECLE 16191,63
-	;[629] MUSIC s,s,s
-	SRCFILE "requiem.bas",629
+	;[629] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",629
+	DECLE 7231,37
+	;[630] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",630
 	DECLE 16191,63
-	;[630] MUSIC A3#,F4,A4
-	SRCFILE "requiem.bas",630
-	DECLE 7703,34
 	;[631] MUSIC s,s,s
-	SRCFILE "requiem.bas",631
+	SRCFILE "Songs\SHarrierC64.bas",631
 	DECLE 16191,63
-	;[632] MUSIC A3,s,s
-	SRCFILE "requiem.bas",632
-	DECLE 16150,63
-	;[633] MUSIC s,s,s
-	SRCFILE "requiem.bas",633
+	;[632] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",632
 	DECLE 16191,63
-	;[634] MUSIC G3,A3#,G4
-	SRCFILE "requiem.bas",634
-	DECLE 5908,32
+	;[633] MUSIC s,G3,D5#
+	SRCFILE "Songs\SHarrierC64.bas",633
+	DECLE 5183,40
+	;[634] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",634
+	DECLE 16136,63
 	;[635] MUSIC s,s,s
-	SRCFILE "requiem.bas",635
+	SRCFILE "Songs\SHarrierC64.bas",635
 	DECLE 16191,63
-	;[636] MUSIC F3,s,s
-	SRCFILE "requiem.bas",636
-	DECLE 16146,63
-	;[637] MUSIC s,s,s
-	SRCFILE "requiem.bas",637
+	;[636] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",636
 	DECLE 16191,63
-	;[638] MUSIC D3#,s,s
-	SRCFILE "requiem.bas",638
-	DECLE 16144,63
+	;[637] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",637
+	DECLE 7231,37
+	;[638] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",638
+	DECLE 16191,63
 	;[639] MUSIC s,s,s
-	SRCFILE "requiem.bas",639
+	SRCFILE "Songs\SHarrierC64.bas",639
 	DECLE 16191,63
-	;[640] MUSIC D3,s,s
-	SRCFILE "requiem.bas",640
-	DECLE 16143,63
-	;[641] MUSIC s,s,s
-	SRCFILE "requiem.bas",641
+	;[640] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",640
 	DECLE 16191,63
-	;[642] MUSIC C3,D4#,s
-	SRCFILE "requiem.bas",642
-	DECLE 7181,63
+	;[641] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",641
+	DECLE 6975,36
+	;[642] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",642
+	DECLE 16148,63
 	;[643] MUSIC s,s,s
-	SRCFILE "requiem.bas",643
+	SRCFILE "Songs\SHarrierC64.bas",643
 	DECLE 16191,63
-	;[644] MUSIC D3,s,s
-	SRCFILE "requiem.bas",644
-	DECLE 16143,63
-	;[645] MUSIC s,s,s
-	SRCFILE "requiem.bas",645
+	;[644] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",644
 	DECLE 16191,63
-	;[646] MUSIC A2#,s,s
-	SRCFILE "requiem.bas",646
-	DECLE 16139,63
+	;[645] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",645
+	DECLE 7231,37
+	;[646] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",646
+	DECLE 16191,63
 	;[647] MUSIC s,s,s
-	SRCFILE "requiem.bas",647
+	SRCFILE "Songs\SHarrierC64.bas",647
 	DECLE 16191,63
-	;[648] MUSIC C3,s,s
-	SRCFILE "requiem.bas",648
-	DECLE 16141,63
-	;[649] MUSIC s,s,s
-	SRCFILE "requiem.bas",649
+	;[648] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",648
 	DECLE 16191,63
-	;[650] MUSIC F3#,D3,s
-	SRCFILE "requiem.bas",650
-	DECLE 3859,63
+	;[649] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",649
+	DECLE 6463,32
+	;[650] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",650
+	DECLE 16136,63
 	;[651] MUSIC s,s,s
-	SRCFILE "requiem.bas",651
+	SRCFILE "Songs\SHarrierC64.bas",651
 	DECLE 16191,63
 	;[652] MUSIC s,s,s
-	SRCFILE "requiem.bas",652
+	SRCFILE "Songs\SHarrierC64.bas",652
 	DECLE 16191,63
-	;[653] MUSIC s,s,s
-	SRCFILE "requiem.bas",653
-	DECLE 16191,63
-	;[654] MUSIC s,D4#,A4
-	SRCFILE "requiem.bas",654
-	DECLE 7231,34
+	;[653] 
+	SRCFILE "Songs\SHarrierC64.bas",653
+	;[654] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",654
+	DECLE 7231,37
 	;[655] MUSIC s,s,s
-	SRCFILE "requiem.bas",655
+	SRCFILE "Songs\SHarrierC64.bas",655
 	DECLE 16191,63
 	;[656] MUSIC s,s,s
-	SRCFILE "requiem.bas",656
+	SRCFILE "Songs\SHarrierC64.bas",656
 	DECLE 16191,63
 	;[657] MUSIC s,s,s
-	SRCFILE "requiem.bas",657
+	SRCFILE "Songs\SHarrierC64.bas",657
 	DECLE 16191,63
-	;[658] MUSIC s,D4,A4
-	SRCFILE "requiem.bas",658
-	DECLE 6975,34
-	;[659] MUSIC s,s,s
-	SRCFILE "requiem.bas",659
-	DECLE 16191,63
+	;[658] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",658
+	DECLE 6975,36
+	;[659] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",659
+	DECLE 16148,63
 	;[660] MUSIC s,s,s
-	SRCFILE "requiem.bas",660
+	SRCFILE "Songs\SHarrierC64.bas",660
 	DECLE 16191,63
 	;[661] MUSIC s,s,s
-	SRCFILE "requiem.bas",661
+	SRCFILE "Songs\SHarrierC64.bas",661
 	DECLE 16191,63
-	;[662] MUSIC A4,C4,F3#
-	SRCFILE "requiem.bas",662
-	DECLE 6434,19
+	;[662] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",662
+	DECLE 7231,37
 	;[663] MUSIC s,s,s
-	SRCFILE "requiem.bas",663
+	SRCFILE "Songs\SHarrierC64.bas",663
 	DECLE 16191,63
 	;[664] MUSIC s,s,s
-	SRCFILE "requiem.bas",664
+	SRCFILE "Songs\SHarrierC64.bas",664
 	DECLE 16191,63
 	;[665] MUSIC s,s,s
-	SRCFILE "requiem.bas",665
+	SRCFILE "Songs\SHarrierC64.bas",665
 	DECLE 16191,63
-	;[666] MUSIC A4#,A3#,G3
-	SRCFILE "requiem.bas",666
-	DECLE 5923,20
-	;[667] MUSIC s,s,s
-	SRCFILE "requiem.bas",667
+	;[666] MUSIC s,F3#,D5
+	SRCFILE "Songs\SHarrierC64.bas",666
+	DECLE 4927,39
+	;[667] MUSIC F2#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",667
+	DECLE 16135,63
+	;[668] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",668
 	DECLE 16191,63
-	;[668] MUSIC C5,s,s
-	SRCFILE "requiem.bas",668
-	DECLE 16165,63
 	;[669] MUSIC s,s,s
-	SRCFILE "requiem.bas",669
+	SRCFILE "Songs\SHarrierC64.bas",669
 	DECLE 16191,63
-	;[670] MUSIC A4#,G3,s
-	SRCFILE "requiem.bas",670
-	DECLE 5155,63
+	;[670] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",670
+	DECLE 6975,34
 	;[671] MUSIC s,s,s
-	SRCFILE "requiem.bas",671
+	SRCFILE "Songs\SHarrierC64.bas",671
 	DECLE 16191,63
-	;[672] MUSIC A4,s,s
-	SRCFILE "requiem.bas",672
-	DECLE 16162,63
+	;[672] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",672
+	DECLE 16191,63
 	;[673] MUSIC s,s,s
-	SRCFILE "requiem.bas",673
+	SRCFILE "Songs\SHarrierC64.bas",673
 	DECLE 16191,63
-	;[674] MUSIC A4#,D4#,s
-	SRCFILE "requiem.bas",674
-	DECLE 7203,63
-	;[675] MUSIC s,s,s
-	SRCFILE "requiem.bas",675
+	;[674] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",674
+	DECLE 6463,32
+	;[675] MUSIC F3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",675
+	DECLE 16147,63
+	;[676] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",676
 	DECLE 16191,63
-	;[676] MUSIC C5,s,s
-	SRCFILE "requiem.bas",676
-	DECLE 16165,63
 	;[677] MUSIC s,s,s
-	SRCFILE "requiem.bas",677
+	SRCFILE "Songs\SHarrierC64.bas",677
 	DECLE 16191,63
-	;[678] MUSIC A4,s,G3
-	SRCFILE "requiem.bas",678
-	DECLE 16162,20
+	;[678] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",678
+	DECLE 6975,34
 	;[679] MUSIC s,s,s
-	SRCFILE "requiem.bas",679
+	SRCFILE "Songs\SHarrierC64.bas",679
 	DECLE 16191,63
-	;[680] MUSIC A4#,s,s
-	SRCFILE "requiem.bas",680
-	DECLE 16163,63
+	;[680] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",680
+	DECLE 16191,63
 	;[681] MUSIC s,s,s
-	SRCFILE "requiem.bas",681
+	SRCFILE "Songs\SHarrierC64.bas",681
 	DECLE 16191,63
-	;[682] MUSIC C5,s,A3
-	SRCFILE "requiem.bas",682
-	DECLE 16165,22
-	;[683] MUSIC s,s,s
-	SRCFILE "requiem.bas",683
+	;[682] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",682
+	DECLE 5695,31
+	;[683] MUSIC F2#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",683
+	DECLE 16135,63
+	;[684] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",684
 	DECLE 16191,63
-	;[684] MUSIC D5,s,s
-	SRCFILE "requiem.bas",684
-	DECLE 16167,63
 	;[685] MUSIC s,s,s
-	SRCFILE "requiem.bas",685
+	SRCFILE "Songs\SHarrierC64.bas",685
 	DECLE 16191,63
-	;[686] MUSIC C5,C4,s
-	SRCFILE "requiem.bas",686
-	DECLE 6437,63
+	;[686] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",686
+	DECLE 6975,34
 	;[687] MUSIC s,s,s
-	SRCFILE "requiem.bas",687
+	SRCFILE "Songs\SHarrierC64.bas",687
 	DECLE 16191,63
-	;[688] MUSIC A4#,s,s
-	SRCFILE "requiem.bas",688
-	DECLE 16163,63
+	;[688] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",688
+	DECLE 16191,63
 	;[689] MUSIC s,s,s
-	SRCFILE "requiem.bas",689
+	SRCFILE "Songs\SHarrierC64.bas",689
 	DECLE 16191,63
-	;[690] MUSIC C5,F4,s
-	SRCFILE "requiem.bas",690
-	DECLE 7717,63
-	;[691] MUSIC s,s,s
-	SRCFILE "requiem.bas",691
+	;[690] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",690
+	DECLE 6463,32
+	;[691] MUSIC F3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",691
+	DECLE 16147,63
+	;[692] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",692
 	DECLE 16191,63
-	;[692] MUSIC D5,s,s
-	SRCFILE "requiem.bas",692
-	DECLE 16167,63
 	;[693] MUSIC s,s,s
-	SRCFILE "requiem.bas",693
+	SRCFILE "Songs\SHarrierC64.bas",693
 	DECLE 16191,63
-	;[694] MUSIC A4#,s,G3
-	SRCFILE "requiem.bas",694
-	DECLE 16163,20
+	;[694] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",694
+	DECLE 6975,34
 	;[695] MUSIC s,s,s
-	SRCFILE "requiem.bas",695
+	SRCFILE "Songs\SHarrierC64.bas",695
 	DECLE 16191,63
-	;[696] MUSIC C5,s,A3
-	SRCFILE "requiem.bas",696
-	DECLE 16165,22
+	;[696] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",696
+	DECLE 16191,63
 	;[697] MUSIC s,s,s
-	SRCFILE "requiem.bas",697
+	SRCFILE "Songs\SHarrierC64.bas",697
 	DECLE 16191,63
-	;[698] MUSIC A3#,s,D5
-	SRCFILE "requiem.bas",698
-	DECLE 16151,39
-	;[699] MUSIC s,s,s
-	SRCFILE "requiem.bas",699
-	DECLE 16191,63
+	;[698] MUSIC s,F3#,D5
+	SRCFILE "Songs\SHarrierC64.bas",698
+	DECLE 4927,39
+	;[699] MUSIC F2#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",699
+	DECLE 16135,63
 	;[700] MUSIC s,s,s
-	SRCFILE "requiem.bas",700
+	SRCFILE "Songs\SHarrierC64.bas",700
 	DECLE 16191,63
 	;[701] MUSIC s,s,s
-	SRCFILE "requiem.bas",701
+	SRCFILE "Songs\SHarrierC64.bas",701
 	DECLE 16191,63
-	;[702] MUSIC A3,s,D5#
-	SRCFILE "requiem.bas",702
-	DECLE 16150,40
+	;[702] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",702
+	DECLE 6975,34
 	;[703] MUSIC s,s,s
-	SRCFILE "requiem.bas",703
+	SRCFILE "Songs\SHarrierC64.bas",703
 	DECLE 16191,63
-	;[704] MUSIC D5,s,A3#
-	SRCFILE "requiem.bas",704
-	DECLE 16167,23
+	;[704] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",704
+	DECLE 16191,63
 	;[705] MUSIC s,s,s
-	SRCFILE "requiem.bas",705
+	SRCFILE "Songs\SHarrierC64.bas",705
 	DECLE 16191,63
-	;[706] MUSIC C5,C4,E4
-	SRCFILE "requiem.bas",706
-	DECLE 6437,29
-	;[707] MUSIC s,s,s
-	SRCFILE "requiem.bas",707
+	;[706] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",706
+	DECLE 6463,32
+	;[707] MUSIC F3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",707
+	DECLE 16147,63
+	;[708] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",708
 	DECLE 16191,63
-	;[708] MUSIC A4#,s,s
-	SRCFILE "requiem.bas",708
-	DECLE 16163,63
 	;[709] MUSIC s,s,s
-	SRCFILE "requiem.bas",709
+	SRCFILE "Songs\SHarrierC64.bas",709
 	DECLE 16191,63
-	;[710] MUSIC A4,A3#,s
-	SRCFILE "requiem.bas",710
-	DECLE 5922,63
+	;[710] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",710
+	DECLE 6975,34
 	;[711] MUSIC s,s,s
-	SRCFILE "requiem.bas",711
+	SRCFILE "Songs\SHarrierC64.bas",711
 	DECLE 16191,63
-	;[712] MUSIC G4,C4,s
-	SRCFILE "requiem.bas",712
-	DECLE 6432,63
+	;[712] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",712
+	DECLE 16191,63
 	;[713] MUSIC s,s,s
-	SRCFILE "requiem.bas",713
+	SRCFILE "Songs\SHarrierC64.bas",713
 	DECLE 16191,63
-	;[714] MUSIC D4,F4#,s
-	SRCFILE "requiem.bas",714
-	DECLE 7963,63
-	;[715] MUSIC s,s,s
-	SRCFILE "requiem.bas",715
-	DECLE 16191,63
+	;[714] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",714
+	DECLE 5695,31
+	;[715] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",715
+	DECLE 16143,63
 	;[716] MUSIC s,s,s
-	SRCFILE "requiem.bas",716
+	SRCFILE "Songs\SHarrierC64.bas",716
 	DECLE 16191,63
 	;[717] MUSIC s,s,s
-	SRCFILE "requiem.bas",717
+	SRCFILE "Songs\SHarrierC64.bas",717
 	DECLE 16191,63
-	;[718] MUSIC A4,C4,F4#
-	SRCFILE "requiem.bas",718
-	DECLE 6434,31
+	;[718] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",718
+	DECLE 6975,34
 	;[719] MUSIC s,s,s
-	SRCFILE "requiem.bas",719
+	SRCFILE "Songs\SHarrierC64.bas",719
 	DECLE 16191,63
 	;[720] MUSIC s,s,s
-	SRCFILE "requiem.bas",720
+	SRCFILE "Songs\SHarrierC64.bas",720
 	DECLE 16191,63
 	;[721] MUSIC s,s,s
-	SRCFILE "requiem.bas",721
+	SRCFILE "Songs\SHarrierC64.bas",721
 	DECLE 16191,63
-	;[722] MUSIC G4,D5,A3#
-	SRCFILE "requiem.bas",722
-	DECLE 10016,23
-	;[723] MUSIC s,s,s
-	SRCFILE "requiem.bas",723
-	DECLE 16191,63
+	;[722] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",722
+	DECLE 6463,32
+	;[723] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",723
+	DECLE 16143,63
 	;[724] MUSIC s,s,s
-	SRCFILE "requiem.bas",724
+	SRCFILE "Songs\SHarrierC64.bas",724
 	DECLE 16191,63
 	;[725] MUSIC s,s,s
-	SRCFILE "requiem.bas",725
+	SRCFILE "Songs\SHarrierC64.bas",725
 	DECLE 16191,63
-	;[726] MUSIC A4,C5,A3
-	SRCFILE "requiem.bas",726
-	DECLE 9506,22
+	;[726] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",726
+	DECLE 6975,34
 	;[727] MUSIC s,s,s
-	SRCFILE "requiem.bas",727
+	SRCFILE "Songs\SHarrierC64.bas",727
 	DECLE 16191,63
 	;[728] MUSIC s,s,s
-	SRCFILE "requiem.bas",728
+	SRCFILE "Songs\SHarrierC64.bas",728
 	DECLE 16191,63
 	;[729] MUSIC s,s,s
-	SRCFILE "requiem.bas",729
+	SRCFILE "Songs\SHarrierC64.bas",729
 	DECLE 16191,63
-	;[730] MUSIC D4,A4#,G3
-	SRCFILE "requiem.bas",730
-	DECLE 8987,20
-	;[731] MUSIC s,s,s
-	SRCFILE "requiem.bas",731
-	DECLE 16191,63
+	;[730] MUSIC s,G3,A4#
+	SRCFILE "Songs\SHarrierC64.bas",730
+	DECLE 5183,35
+	;[731] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",731
+	DECLE 16136,63
 	;[732] MUSIC s,s,s
-	SRCFILE "requiem.bas",732
+	SRCFILE "Songs\SHarrierC64.bas",732
 	DECLE 16191,63
 	;[733] MUSIC s,s,s
-	SRCFILE "requiem.bas",733
+	SRCFILE "Songs\SHarrierC64.bas",733
 	DECLE 16191,63
-	;[734] MUSIC B4,G4#,F4
-	SRCFILE "requiem.bas",734
-	DECLE 8484,30
+	;[734] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",734
+	DECLE 6975,32
 	;[735] MUSIC s,s,s
-	SRCFILE "requiem.bas",735
+	SRCFILE "Songs\SHarrierC64.bas",735
 	DECLE 16191,63
 	;[736] MUSIC s,s,s
-	SRCFILE "requiem.bas",736
+	SRCFILE "Songs\SHarrierC64.bas",736
 	DECLE 16191,63
 	;[737] MUSIC s,s,s
-	SRCFILE "requiem.bas",737
+	SRCFILE "Songs\SHarrierC64.bas",737
 	DECLE 16191,63
-	;[738] MUSIC C5,D4#,G4
-	SRCFILE "requiem.bas",738
-	DECLE 7205,32
-	;[739] MUSIC s,s,s
-	SRCFILE "requiem.bas",739
-	DECLE 16191,63
+	;[738] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",738
+	DECLE 6463,31
+	;[739] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",739
+	DECLE 16148,63
 	;[740] MUSIC s,s,s
-	SRCFILE "requiem.bas",740
+	SRCFILE "Songs\SHarrierC64.bas",740
 	DECLE 16191,63
 	;[741] MUSIC s,s,s
-	SRCFILE "requiem.bas",741
+	SRCFILE "Songs\SHarrierC64.bas",741
 	DECLE 16191,63
-	;[742] MUSIC D5,G3,B3
-	SRCFILE "requiem.bas",742
-	DECLE 5159,24
-	;[743] MUSIC s,s,s
-	SRCFILE "requiem.bas",743
-	DECLE 16191,63
+	;[742] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",742
+	DECLE 16191,32
+	;[743] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",743
+	DECLE 6975,63
 	;[744] MUSIC s,s,s
-	SRCFILE "requiem.bas",744
+	SRCFILE "Songs\SHarrierC64.bas",744
 	DECLE 16191,63
 	;[745] MUSIC s,s,s
-	SRCFILE "requiem.bas",745
+	SRCFILE "Songs\SHarrierC64.bas",745
 	DECLE 16191,63
-	;[746] MUSIC D5#,C4,D3#
-	SRCFILE "requiem.bas",746
-	DECLE 6440,16
-	;[747] MUSIC s,s,s
-	SRCFILE "requiem.bas",747
+	;[746] MUSIC s,A3#,D4
+	SRCFILE "Songs\SHarrierC64.bas",746
+	DECLE 5951,27
+	;[747] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",747
+	DECLE 16136,63
+	;[748] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",748
 	DECLE 16191,63
-	;[748] MUSIC D5,s,s
-	SRCFILE "requiem.bas",748
-	DECLE 16167,63
 	;[749] MUSIC s,s,s
-	SRCFILE "requiem.bas",749
+	SRCFILE "Songs\SHarrierC64.bas",749
 	DECLE 16191,63
-	;[750] MUSIC G4,C5,s
-	SRCFILE "requiem.bas",750
-	DECLE 9504,63
+	;[750] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",750
+	DECLE 6975,32
 	;[751] MUSIC s,s,s
-	SRCFILE "requiem.bas",751
+	SRCFILE "Songs\SHarrierC64.bas",751
 	DECLE 16191,63
 	;[752] MUSIC s,s,s
-	SRCFILE "requiem.bas",752
+	SRCFILE "Songs\SHarrierC64.bas",752
 	DECLE 16191,63
 	;[753] MUSIC s,s,s
-	SRCFILE "requiem.bas",753
+	SRCFILE "Songs\SHarrierC64.bas",753
 	DECLE 16191,63
-	;[754] MUSIC F4,G3#,s
-	SRCFILE "requiem.bas",754
-	DECLE 5406,63
-	;[755] MUSIC s,s,s
-	SRCFILE "requiem.bas",755
-	DECLE 16191,63
-	;[756] MUSIC D4#,s,s
-	SRCFILE "requiem.bas",756
-	DECLE 16156,63
-	;[757] MUSIC s,s,s
-	SRCFILE "requiem.bas",757
-	DECLE 16191,63
-	;[758] MUSIC D4,s,s
-	SRCFILE "requiem.bas",758
-	DECLE 16155,63
-	;[759] MUSIC s,s,s
-	SRCFILE "requiem.bas",759
-	DECLE 16191,63
-	;[760] MUSIC C4,s,s
-	SRCFILE "requiem.bas",760
-	DECLE 16153,63
-	;[761] MUSIC s,s,s
-	SRCFILE "requiem.bas",761
-	DECLE 16191,63
-	;[762] MUSIC D4,B2,s
-	SRCFILE "requiem.bas",762
-	DECLE 3099,63
-	;[763] MUSIC s,s,s
-	SRCFILE "requiem.bas",763
-	DECLE 16191,63
-	;[764] MUSIC C4,s,s
-	SRCFILE "requiem.bas",764
-	DECLE 16153,63
-	;[765] MUSIC s,s,s
-	SRCFILE "requiem.bas",765
-	DECLE 16191,63
-	;[766] MUSIC B3,s,D4
-	SRCFILE "requiem.bas",766
-	DECLE 16152,27
-	;[767] MUSIC s,s,s
-	SRCFILE "requiem.bas",767
-	DECLE 16191,63
-	;[768] MUSIC A3,s,s
-	SRCFILE "requiem.bas",768
-	DECLE 16150,63
-	;[769] MUSIC s,s,s
-	SRCFILE "requiem.bas",769
-	DECLE 16191,63
-	;[770] MUSIC G3,s,D4
-	SRCFILE "requiem.bas",770
-	DECLE 16148,27
-	;[771] MUSIC s,s,s
-	SRCFILE "requiem.bas",771
-	DECLE 16191,63
-	;[772] MUSIC G3#,s,s
-	SRCFILE "requiem.bas",772
-	DECLE 16149,63
-	;[773] MUSIC s,s,s
-	SRCFILE "requiem.bas",773
-	DECLE 16191,63
-	;[774] MUSIC F3,D4,B2
-	SRCFILE "requiem.bas",774
-	DECLE 6930,12
-	;[775] MUSIC s,s,s
-	SRCFILE "requiem.bas",775
-	DECLE 16191,63
-	;[776] MUSIC G3,s,s
-	SRCFILE "requiem.bas",776
+	;[754] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",754
+	DECLE 6463,31
+	;[755] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",755
 	DECLE 16148,63
+	;[756] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",756
+	DECLE 16191,63
+	;[757] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",757
+	DECLE 16191,63
+	;[758] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",758
+	DECLE 6975,32
+	;[759] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",759
+	DECLE 16191,63
+	;[760] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",760
+	DECLE 16191,63
+	;[761] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",761
+	DECLE 16191,63
+	;[762] MUSIC s,G3,A4#
+	SRCFILE "Songs\SHarrierC64.bas",762
+	DECLE 5183,35
+	;[763] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",763
+	DECLE 16136,63
+	;[764] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",764
+	DECLE 16191,63
+	;[765] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",765
+	DECLE 16191,63
+	;[766] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",766
+	DECLE 6975,32
+	;[767] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",767
+	DECLE 16191,63
+	;[768] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",768
+	DECLE 16191,63
+	;[769] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",769
+	DECLE 16191,63
+	;[770] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",770
+	DECLE 6463,31
+	;[771] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",771
+	DECLE 16148,63
+	;[772] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",772
+	DECLE 16191,63
+	;[773] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",773
+	DECLE 16191,63
+	;[774] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",774
+	DECLE 6975,32
+	;[775] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",775
+	DECLE 16191,63
+	;[776] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",776
+	DECLE 16191,63
 	;[777] MUSIC s,s,s
-	SRCFILE "requiem.bas",777
+	SRCFILE "Songs\SHarrierC64.bas",777
 	DECLE 16191,63
-	;[778] MUSIC D4#,D3#,C3
-	SRCFILE "requiem.bas",778
-	DECLE 4124,13
-	;[779] MUSIC s,s,s
-	SRCFILE "requiem.bas",779
+	;[778] MUSIC s,A3#,D4
+	SRCFILE "Songs\SHarrierC64.bas",778
+	DECLE 5951,27
+	;[779] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",779
+	DECLE 16136,63
+	;[780] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",780
 	DECLE 16191,63
-	;[780] MUSIC F4,s,s
-	SRCFILE "requiem.bas",780
-	DECLE 16158,63
 	;[781] MUSIC s,s,s
-	SRCFILE "requiem.bas",781
+	SRCFILE "Songs\SHarrierC64.bas",781
 	DECLE 16191,63
-	;[782] MUSIC D4#,s,C3
-	SRCFILE "requiem.bas",782
-	DECLE 16156,13
-	;[783] MUSIC s,s,s
-	SRCFILE "requiem.bas",783
+	;[782] 
+	SRCFILE "Songs\SHarrierC64.bas",782
+	;[783] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",783
+	DECLE 6975,32
+	;[784] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",784
 	DECLE 16191,63
-	;[784] MUSIC D4,s,s
-	SRCFILE "requiem.bas",784
-	DECLE 16155,63
 	;[785] MUSIC s,s,s
-	SRCFILE "requiem.bas",785
+	SRCFILE "Songs\SHarrierC64.bas",785
 	DECLE 16191,63
-	;[786] MUSIC D4#,G3#,s
-	SRCFILE "requiem.bas",786
-	DECLE 5404,63
-	;[787] MUSIC s,s,s
-	SRCFILE "requiem.bas",787
+	;[786] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",786
 	DECLE 16191,63
-	;[788] MUSIC F4,s,s
-	SRCFILE "requiem.bas",788
-	DECLE 16158,63
+	;[787] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",787
+	DECLE 6463,31
+	;[788] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",788
+	DECLE 16148,63
 	;[789] MUSIC s,s,s
-	SRCFILE "requiem.bas",789
+	SRCFILE "Songs\SHarrierC64.bas",789
 	DECLE 16191,63
-	;[790] MUSIC D4,s,C3
-	SRCFILE "requiem.bas",790
-	DECLE 16155,13
-	;[791] MUSIC s,s,s
-	SRCFILE "requiem.bas",791
+	;[790] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",790
 	DECLE 16191,63
-	;[792] MUSIC D4#,s,s
-	SRCFILE "requiem.bas",792
-	DECLE 16156,63
+	;[791] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",791
+	DECLE 6975,32
+	;[792] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",792
+	DECLE 16191,63
 	;[793] MUSIC s,s,s
-	SRCFILE "requiem.bas",793
+	SRCFILE "Songs\SHarrierC64.bas",793
 	DECLE 16191,63
-	;[794] MUSIC F4,s,D3
-	SRCFILE "requiem.bas",794
-	DECLE 16158,15
-	;[795] MUSIC s,s,s
-	SRCFILE "requiem.bas",795
+	;[794] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",794
 	DECLE 16191,63
-	;[796] MUSIC G4,s,s
-	SRCFILE "requiem.bas",796
-	DECLE 16160,63
+	;[795] MUSIC s,D3#,C5
+	SRCFILE "Songs\SHarrierC64.bas",795
+	DECLE 4159,37
+	;[796] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",796
+	DECLE 16144,63
 	;[797] MUSIC s,s,s
-	SRCFILE "requiem.bas",797
+	SRCFILE "Songs\SHarrierC64.bas",797
 	DECLE 16191,63
-	;[798] MUSIC F4,F3,s
-	SRCFILE "requiem.bas",798
-	DECLE 4638,63
-	;[799] MUSIC s,s,s
-	SRCFILE "requiem.bas",799
+	;[798] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",798
 	DECLE 16191,63
-	;[800] MUSIC D4#,s,s
-	SRCFILE "requiem.bas",800
-	DECLE 16156,63
+	;[799] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",799
+	DECLE 6463,32
+	;[800] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",800
+	DECLE 16191,63
 	;[801] MUSIC s,s,s
-	SRCFILE "requiem.bas",801
+	SRCFILE "Songs\SHarrierC64.bas",801
 	DECLE 16191,63
-	;[802] MUSIC F4,A3#,s
-	SRCFILE "requiem.bas",802
-	DECLE 5918,63
-	;[803] MUSIC s,s,s
-	SRCFILE "requiem.bas",803
+	;[802] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",802
 	DECLE 16191,63
-	;[804] MUSIC G4,s,s
-	SRCFILE "requiem.bas",804
-	DECLE 16160,63
+	;[803] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",803
+	DECLE 5695,31
+	;[804] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",804
+	DECLE 16144,63
 	;[805] MUSIC s,s,s
-	SRCFILE "requiem.bas",805
+	SRCFILE "Songs\SHarrierC64.bas",805
 	DECLE 16191,63
-	;[806] MUSIC D4#,s,C3
-	SRCFILE "requiem.bas",806
-	DECLE 16156,13
-	;[807] MUSIC s,s,s
-	SRCFILE "requiem.bas",807
+	;[806] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",806
 	DECLE 16191,63
-	;[808] MUSIC F4,s,D3
-	SRCFILE "requiem.bas",808
-	DECLE 16158,15
+	;[807] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",807
+	DECLE 6463,32
+	;[808] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",808
+	DECLE 16191,63
 	;[809] MUSIC s,s,s
-	SRCFILE "requiem.bas",809
+	SRCFILE "Songs\SHarrierC64.bas",809
 	DECLE 16191,63
-	;[810] MUSIC G4,s,D3#
-	SRCFILE "requiem.bas",810
-	DECLE 16160,16
-	;[811] MUSIC s,s,s
-	SRCFILE "requiem.bas",811
+	;[810] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",810
 	DECLE 16191,63
-	;[812] MUSIC s,s,s
-	SRCFILE "requiem.bas",812
-	DECLE 16191,63
+	;[811] MUSIC s,G3,D4#
+	SRCFILE "Songs\SHarrierC64.bas",811
+	DECLE 5183,28
+	;[812] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",812
+	DECLE 16144,63
 	;[813] MUSIC s,s,s
-	SRCFILE "requiem.bas",813
+	SRCFILE "Songs\SHarrierC64.bas",813
 	DECLE 16191,63
-	;[814] MUSIC G4#,s,D3
-	SRCFILE "requiem.bas",814
-	DECLE 16161,15
-	;[815] MUSIC s,s,s
-	SRCFILE "requiem.bas",815
+	;[814] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",814
 	DECLE 16191,63
-	;[816] MUSIC G4,s,D3#
-	SRCFILE "requiem.bas",816
-	DECLE 16160,16
+	;[815] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",815
+	DECLE 6463,32
+	;[816] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",816
+	DECLE 16191,63
 	;[817] MUSIC s,s,s
-	SRCFILE "requiem.bas",817
+	SRCFILE "Songs\SHarrierC64.bas",817
 	DECLE 16191,63
-	;[818] MUSIC F4,F3,G3#
-	SRCFILE "requiem.bas",818
-	DECLE 4638,21
-	;[819] MUSIC s,s,s
-	SRCFILE "requiem.bas",819
+	;[818] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",818
 	DECLE 16191,63
-	;[820] MUSIC D4#,s,s
-	SRCFILE "requiem.bas",820
-	DECLE 16156,63
+	;[819] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",819
+	DECLE 5695,31
+	;[820] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",820
+	DECLE 16144,63
 	;[821] MUSIC s,s,s
-	SRCFILE "requiem.bas",821
+	SRCFILE "Songs\SHarrierC64.bas",821
 	DECLE 16191,63
-	;[822] MUSIC D4,D3#,s
-	SRCFILE "requiem.bas",822
-	DECLE 4123,63
-	;[823] MUSIC s,s,s
-	SRCFILE "requiem.bas",823
+	;[822] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",822
 	DECLE 16191,63
-	;[824] MUSIC C4,F3,s
-	SRCFILE "requiem.bas",824
-	DECLE 4633,63
+	;[823] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",823
+	DECLE 6463,32
+	;[824] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",824
+	DECLE 16191,63
 	;[825] MUSIC s,s,s
-	SRCFILE "requiem.bas",825
+	SRCFILE "Songs\SHarrierC64.bas",825
 	DECLE 16191,63
-	;[826] MUSIC B3,G3,s
-	SRCFILE "requiem.bas",826
-	DECLE 5144,63
-	;[827] MUSIC s,s,s
-	SRCFILE "requiem.bas",827
+	;[826] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",826
 	DECLE 16191,63
-	;[828] MUSIC s,s,s
-	SRCFILE "requiem.bas",828
-	DECLE 16191,63
+	;[827] MUSIC s,D3#,C5
+	SRCFILE "Songs\SHarrierC64.bas",827
+	DECLE 4159,37
+	;[828] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",828
+	DECLE 16144,63
 	;[829] MUSIC s,s,s
-	SRCFILE "requiem.bas",829
+	SRCFILE "Songs\SHarrierC64.bas",829
 	DECLE 16191,63
-	;[830] MUSIC A3,D4,F3
-	SRCFILE "requiem.bas",830
-	DECLE 6934,18
-	;[831] MUSIC s,s,s
-	SRCFILE "requiem.bas",831
+	;[830] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",830
 	DECLE 16191,63
-	;[832] MUSIC B3,s,s
-	SRCFILE "requiem.bas",832
-	DECLE 16152,63
+	;[831] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",831
+	DECLE 6463,32
+	;[832] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",832
+	DECLE 16191,63
 	;[833] MUSIC s,s,s
-	SRCFILE "requiem.bas",833
+	SRCFILE "Songs\SHarrierC64.bas",833
 	DECLE 16191,63
-	;[834] MUSIC G4,C4,D3#
-	SRCFILE "requiem.bas",834
-	DECLE 6432,16
-	;[835] MUSIC s,s,s
-	SRCFILE "requiem.bas",835
+	;[834] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",834
 	DECLE 16191,63
-	;[836] MUSIC s,s,s
-	SRCFILE "requiem.bas",836
-	DECLE 16191,63
+	;[835] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",835
+	DECLE 5695,31
+	;[836] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",836
+	DECLE 16144,63
 	;[837] MUSIC s,s,s
-	SRCFILE "requiem.bas",837
+	SRCFILE "Songs\SHarrierC64.bas",837
 	DECLE 16191,63
-	;[838] MUSIC F4,D4,D3
-	SRCFILE "requiem.bas",838
-	DECLE 6942,15
-	;[839] MUSIC s,s,s
-	SRCFILE "requiem.bas",839
+	;[838] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",838
 	DECLE 16191,63
+	;[839] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",839
+	DECLE 6463,32
 	;[840] MUSIC s,s,s
-	SRCFILE "requiem.bas",840
+	SRCFILE "Songs\SHarrierC64.bas",840
 	DECLE 16191,63
 	;[841] MUSIC s,s,s
-	SRCFILE "requiem.bas",841
+	SRCFILE "Songs\SHarrierC64.bas",841
 	DECLE 16191,63
-	;[842] MUSIC D4#,C3,s
-	SRCFILE "requiem.bas",842
-	DECLE 3356,63
-	;[843] MUSIC s,s,s
-	SRCFILE "requiem.bas",843
+	;[842] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",842
 	DECLE 16191,63
-	;[844] MUSIC D4,s,s
-	SRCFILE "requiem.bas",844
-	DECLE 16155,63
+	;[843] MUSIC s,G3,D4#
+	SRCFILE "Songs\SHarrierC64.bas",843
+	DECLE 5183,28
+	;[844] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",844
+	DECLE 16144,63
 	;[845] MUSIC s,s,s
-	SRCFILE "requiem.bas",845
+	SRCFILE "Songs\SHarrierC64.bas",845
 	DECLE 16191,63
-	;[846] MUSIC C4,D3,s
-	SRCFILE "requiem.bas",846
-	DECLE 3865,63
-	;[847] MUSIC s,s,s
-	SRCFILE "requiem.bas",847
+	;[846] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",846
 	DECLE 16191,63
-	;[848] MUSIC D3#,A3#,s
-	SRCFILE "requiem.bas",848
-	DECLE 5904,63
+	;[847] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",847
+	DECLE 6463,32
+	;[848] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",848
+	DECLE 16191,63
 	;[849] MUSIC s,s,s
-	SRCFILE "requiem.bas",849
+	SRCFILE "Songs\SHarrierC64.bas",849
 	DECLE 16191,63
-	;[850] MUSIC A3,F3,s
-	SRCFILE "requiem.bas",850
-	DECLE 4630,63
-	;[851] MUSIC s,s,s
-	SRCFILE "requiem.bas",851
+	;[850] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",850
 	DECLE 16191,63
-	;[852] MUSIC s,s,s
-	SRCFILE "requiem.bas",852
-	DECLE 16191,63
+	;[851] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",851
+	DECLE 5695,31
+	;[852] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",852
+	DECLE 16144,63
 	;[853] MUSIC s,s,s
-	SRCFILE "requiem.bas",853
+	SRCFILE "Songs\SHarrierC64.bas",853
 	DECLE 16191,63
-	;[854] MUSIC D4,s,A3#
-	SRCFILE "requiem.bas",854
-	DECLE 16155,23
-	;[855] MUSIC s,s,s
-	SRCFILE "requiem.bas",855
+	;[854] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",854
 	DECLE 16191,63
+	;[855] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",855
+	DECLE 6463,32
 	;[856] MUSIC s,s,s
-	SRCFILE "requiem.bas",856
+	SRCFILE "Songs\SHarrierC64.bas",856
 	DECLE 16191,63
 	;[857] MUSIC s,s,s
-	SRCFILE "requiem.bas",857
+	SRCFILE "Songs\SHarrierC64.bas",857
 	DECLE 16191,63
-	;[858] MUSIC C4,s,F5
-	SRCFILE "requiem.bas",858
-	DECLE 16153,42
-	;[859] MUSIC s,s,s
-	SRCFILE "requiem.bas",859
+	;[858] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",858
 	DECLE 16191,63
-	;[860] MUSIC s,s,s
-	SRCFILE "requiem.bas",860
-	DECLE 16191,63
+	;[859] MUSIC s,D3,A4#
+	SRCFILE "Songs\SHarrierC64.bas",859
+	DECLE 3903,35
+	;[860] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",860
+	DECLE 16143,63
 	;[861] MUSIC s,s,s
-	SRCFILE "requiem.bas",861
+	SRCFILE "Songs\SHarrierC64.bas",861
 	DECLE 16191,63
-	;[862] MUSIC F4,A3,D3#
-	SRCFILE "requiem.bas",862
-	DECLE 5662,16
-	;[863] MUSIC s,s,s
-	SRCFILE "requiem.bas",863
+	;[862] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",862
 	DECLE 16191,63
+	;[863] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",863
+	DECLE 5951,32
 	;[864] MUSIC s,s,s
-	SRCFILE "requiem.bas",864
+	SRCFILE "Songs\SHarrierC64.bas",864
 	DECLE 16191,63
 	;[865] MUSIC s,s,s
-	SRCFILE "requiem.bas",865
+	SRCFILE "Songs\SHarrierC64.bas",865
 	DECLE 16191,63
-	;[866] MUSIC G4,A3#,D3
-	SRCFILE "requiem.bas",866
-	DECLE 5920,15
-	;[867] MUSIC s,s,s
-	SRCFILE "requiem.bas",867
+	;[866] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",866
 	DECLE 16191,63
-	;[868] MUSIC s,s,s
-	SRCFILE "requiem.bas",868
-	DECLE 16191,63
+	;[867] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",867
+	DECLE 5695,31
+	;[868] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",868
+	DECLE 16143,63
 	;[869] MUSIC s,s,s
-	SRCFILE "requiem.bas",869
+	SRCFILE "Songs\SHarrierC64.bas",869
 	DECLE 16191,63
-	;[870] MUSIC A4,F5,C4
-	SRCFILE "requiem.bas",870
-	DECLE 10786,25
-	;[871] MUSIC s,s,s
-	SRCFILE "requiem.bas",871
+	;[870] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",870
 	DECLE 16191,63
+	;[871] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",871
+	DECLE 5951,32
 	;[872] MUSIC s,s,s
-	SRCFILE "requiem.bas",872
+	SRCFILE "Songs\SHarrierC64.bas",872
 	DECLE 16191,63
 	;[873] MUSIC s,s,s
-	SRCFILE "requiem.bas",873
+	SRCFILE "Songs\SHarrierC64.bas",873
 	DECLE 16191,63
-	;[874] MUSIC A4#,A2#,D4
-	SRCFILE "requiem.bas",874
-	DECLE 2851,27
-	;[875] MUSIC s,s,s
-	SRCFILE "requiem.bas",875
+	;[874] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",874
 	DECLE 16191,63
-	;[876] MUSIC s,s,s
-	SRCFILE "requiem.bas",876
-	DECLE 16191,63
-	;[877] MUSIC s,s,s
-	SRCFILE "requiem.bas",877
-	DECLE 16191,63
-	;[878] MUSIC G3,A3#,s
-	SRCFILE "requiem.bas",878
-	DECLE 5908,63
-	;[879] MUSIC s,s,s
-	SRCFILE "requiem.bas",879
-	DECLE 16191,63
-	;[880] MUSIC F3,s,s
-	SRCFILE "requiem.bas",880
-	DECLE 16146,63
-	;[881] MUSIC s,s,s
-	SRCFILE "requiem.bas",881
-	DECLE 16191,63
-	;[882] MUSIC D3#,D4#,G5
-	SRCFILE "requiem.bas",882
-	DECLE 7184,44
-	;[883] MUSIC s,s,s
-	SRCFILE "requiem.bas",883
-	DECLE 16191,63
-	;[884] MUSIC C3,s,s
-	SRCFILE "requiem.bas",884
-	DECLE 16141,63
-	;[885] MUSIC s,s,s
-	SRCFILE "requiem.bas",885
-	DECLE 16191,63
-	;[886] MUSIC D3,s,s
-	SRCFILE "requiem.bas",886
+	;[875] MUSIC s,G3,D4
+	SRCFILE "Songs\SHarrierC64.bas",875
+	DECLE 5183,27
+	;[876] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",876
 	DECLE 16143,63
-	;[887] MUSIC s,s,s
-	SRCFILE "requiem.bas",887
+	;[877] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",877
 	DECLE 16191,63
-	;[888] MUSIC D3#,D4,s
-	SRCFILE "requiem.bas",888
-	DECLE 6928,63
+	;[878] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",878
+	DECLE 16191,63
+	;[879] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",879
+	DECLE 5951,32
+	;[880] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",880
+	DECLE 16191,63
+	;[881] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",881
+	DECLE 16191,63
+	;[882] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",882
+	DECLE 16191,63
+	;[883] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",883
+	DECLE 5695,31
+	;[884] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",884
+	DECLE 16143,63
+	;[885] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",885
+	DECLE 16191,63
+	;[886] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",886
+	DECLE 16191,63
+	;[887] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",887
+	DECLE 5951,32
+	;[888] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",888
+	DECLE 16191,63
 	;[889] MUSIC s,s,s
-	SRCFILE "requiem.bas",889
+	SRCFILE "Songs\SHarrierC64.bas",889
 	DECLE 16191,63
-	;[890] MUSIC C4,F3,A4
-	SRCFILE "requiem.bas",890
-	DECLE 4633,34
-	;[891] MUSIC s,s,s
-	SRCFILE "requiem.bas",891
+	;[890] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",890
 	DECLE 16191,63
-	;[892] MUSIC s,s,s
-	SRCFILE "requiem.bas",892
-	DECLE 16191,63
+	;[891] MUSIC s,D3,A4#
+	SRCFILE "Songs\SHarrierC64.bas",891
+	DECLE 3903,35
+	;[892] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",892
+	DECLE 16143,63
 	;[893] MUSIC s,s,s
-	SRCFILE "requiem.bas",893
+	SRCFILE "Songs\SHarrierC64.bas",893
 	DECLE 16191,63
-	;[894] MUSIC C4,F3,s
-	SRCFILE "requiem.bas",894
-	DECLE 4633,63
-	;[895] MUSIC s,s,s
-	SRCFILE "requiem.bas",895
+	;[894] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",894
 	DECLE 16191,63
+	;[895] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",895
+	DECLE 5951,32
 	;[896] MUSIC s,s,s
-	SRCFILE "requiem.bas",896
+	SRCFILE "Songs\SHarrierC64.bas",896
 	DECLE 16191,63
 	;[897] MUSIC s,s,s
-	SRCFILE "requiem.bas",897
+	SRCFILE "Songs\SHarrierC64.bas",897
 	DECLE 16191,63
-	;[898] MUSIC F3,F4,s
-	SRCFILE "requiem.bas",898
-	DECLE 7698,63
-	;[899] MUSIC s,s,s
-	SRCFILE "requiem.bas",899
+	;[898] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",898
 	DECLE 16191,63
-	;[900] MUSIC s,s,s
-	SRCFILE "requiem.bas",900
-	DECLE 16191,63
+	;[899] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",899
+	DECLE 5695,31
+	;[900] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",900
+	DECLE 16143,63
 	;[901] MUSIC s,s,s
-	SRCFILE "requiem.bas",901
+	SRCFILE "Songs\SHarrierC64.bas",901
 	DECLE 16191,63
-	;[902] MUSIC F3,s,A4
-	SRCFILE "requiem.bas",902
-	DECLE 16146,34
-	;[903] MUSIC s,s,s
-	SRCFILE "requiem.bas",903
+	;[902] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",902
 	DECLE 16191,63
+	;[903] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",903
+	DECLE 5951,32
 	;[904] MUSIC s,s,s
-	SRCFILE "requiem.bas",904
+	SRCFILE "Songs\SHarrierC64.bas",904
 	DECLE 16191,63
 	;[905] MUSIC s,s,s
-	SRCFILE "requiem.bas",905
+	SRCFILE "Songs\SHarrierC64.bas",905
 	DECLE 16191,63
-	;[906] MUSIC G3,s,A4#
-	SRCFILE "requiem.bas",906
-	DECLE 16148,35
-	;[907] MUSIC s,s,s
-	SRCFILE "requiem.bas",907
+	;[906] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",906
 	DECLE 16191,63
-	;[908] MUSIC A3,s,s
-	SRCFILE "requiem.bas",908
-	DECLE 16150,63
+	;[907] MUSIC s,G3,D4
+	SRCFILE "Songs\SHarrierC64.bas",907
+	DECLE 5183,27
+	;[908] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",908
+	DECLE 16143,63
 	;[909] MUSIC s,s,s
-	SRCFILE "requiem.bas",909
+	SRCFILE "Songs\SHarrierC64.bas",909
 	DECLE 16191,63
-	;[910] MUSIC G3,D4#,s
-	SRCFILE "requiem.bas",910
-	DECLE 7188,63
-	;[911] MUSIC s,s,s
-	SRCFILE "requiem.bas",911
+	;[910] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",910
 	DECLE 16191,63
-	;[912] MUSIC F3,D4,s
-	SRCFILE "requiem.bas",912
-	DECLE 6930,63
+	;[911] 
+	SRCFILE "Songs\SHarrierC64.bas",911
+	;[912] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",912
+	DECLE 5951,32
 	;[913] MUSIC s,s,s
-	SRCFILE "requiem.bas",913
+	SRCFILE "Songs\SHarrierC64.bas",913
 	DECLE 16191,63
-	;[914] MUSIC G3,D4#,s
-	SRCFILE "requiem.bas",914
-	DECLE 7188,63
+	;[914] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",914
+	DECLE 16191,63
 	;[915] MUSIC s,s,s
-	SRCFILE "requiem.bas",915
+	SRCFILE "Songs\SHarrierC64.bas",915
 	DECLE 16191,63
-	;[916] MUSIC A3,F4,s
-	SRCFILE "requiem.bas",916
-	DECLE 7702,63
-	;[917] MUSIC s,s,s
-	SRCFILE "requiem.bas",917
+	;[916] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",916
+	DECLE 5695,31
+	;[917] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",917
+	DECLE 16143,63
+	;[918] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",918
 	DECLE 16191,63
-	;[918] MUSIC F3,D4,A4#
-	SRCFILE "requiem.bas",918
-	DECLE 6930,35
 	;[919] MUSIC s,s,s
-	SRCFILE "requiem.bas",919
+	SRCFILE "Songs\SHarrierC64.bas",919
 	DECLE 16191,63
-	;[920] MUSIC G3,D4#,s
-	SRCFILE "requiem.bas",920
-	DECLE 7188,63
+	;[920] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",920
+	DECLE 5951,32
 	;[921] MUSIC s,s,s
-	SRCFILE "requiem.bas",921
+	SRCFILE "Songs\SHarrierC64.bas",921
 	DECLE 16191,63
-	;[922] MUSIC A3,C4,C5
-	SRCFILE "requiem.bas",922
-	DECLE 6422,37
+	;[922] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",922
+	DECLE 16191,63
 	;[923] MUSIC s,s,s
-	SRCFILE "requiem.bas",923
+	SRCFILE "Songs\SHarrierC64.bas",923
 	DECLE 16191,63
-	;[924] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",924
-	DECLE 16151,63
-	;[925] MUSIC s,s,s
-	SRCFILE "requiem.bas",925
+	;[924] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",924
+	DECLE 16191,34
+	;[925] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",925
+	DECLE 3855,63
+	;[926] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",926
 	DECLE 16191,63
-	;[926] MUSIC A3,D4,s
-	SRCFILE "requiem.bas",926
-	DECLE 6934,63
 	;[927] MUSIC s,s,s
-	SRCFILE "requiem.bas",927
+	SRCFILE "Songs\SHarrierC64.bas",927
 	DECLE 16191,63
-	;[928] MUSIC G3,D4#,s
-	SRCFILE "requiem.bas",928
-	DECLE 7188,63
+	;[928] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",928
+	DECLE 5695,31
 	;[929] MUSIC s,s,s
-	SRCFILE "requiem.bas",929
+	SRCFILE "Songs\SHarrierC64.bas",929
 	DECLE 16191,63
-	;[930] MUSIC A3,F4,s
-	SRCFILE "requiem.bas",930
-	DECLE 7702,63
+	;[930] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",930
+	DECLE 16191,63
 	;[931] MUSIC s,s,s
-	SRCFILE "requiem.bas",931
+	SRCFILE "Songs\SHarrierC64.bas",931
 	DECLE 16191,63
-	;[932] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",932
-	DECLE 16151,63
-	;[933] MUSIC s,s,s
-	SRCFILE "requiem.bas",933
+	;[932] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",932
+	DECLE 5183,29
+	;[933] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",933
+	DECLE 16143,63
+	;[934] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",934
 	DECLE 16191,63
-	;[934] MUSIC G3,F3,A4#
-	SRCFILE "requiem.bas",934
-	DECLE 4628,35
 	;[935] MUSIC s,s,s
-	SRCFILE "requiem.bas",935
+	SRCFILE "Songs\SHarrierC64.bas",935
 	DECLE 16191,63
-	;[936] MUSIC A3,s,C5
-	SRCFILE "requiem.bas",936
-	DECLE 16150,37
+	;[936] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",936
+	DECLE 5695,31
 	;[937] MUSIC s,s,s
-	SRCFILE "requiem.bas",937
+	SRCFILE "Songs\SHarrierC64.bas",937
 	DECLE 16191,63
-	;[938] MUSIC A3#,s,D5
-	SRCFILE "requiem.bas",938
-	DECLE 16151,39
+	;[938] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",938
+	DECLE 16191,63
 	;[939] MUSIC s,s,s
-	SRCFILE "requiem.bas",939
+	SRCFILE "Songs\SHarrierC64.bas",939
 	DECLE 16191,63
-	;[940] MUSIC s,s,s
-	SRCFILE "requiem.bas",940
+	;[940] MUSIC s,F3#,D4
+	SRCFILE "Songs\SHarrierC64.bas",940
+	DECLE 4927,27
+	;[941] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",941
+	DECLE 16143,63
+	;[942] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",942
 	DECLE 16191,63
-	;[941] MUSIC s,s,s
-	SRCFILE "requiem.bas",941
-	DECLE 16191,63
-	;[942] MUSIC C5,A3#,s
-	SRCFILE "requiem.bas",942
-	DECLE 5925,63
 	;[943] MUSIC s,s,s
-	SRCFILE "requiem.bas",943
+	SRCFILE "Songs\SHarrierC64.bas",943
 	DECLE 16191,63
-	;[944] MUSIC D5,s,s
-	SRCFILE "requiem.bas",944
-	DECLE 16167,63
+	;[944] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",944
+	DECLE 5695,31
 	;[945] MUSIC s,s,s
-	SRCFILE "requiem.bas",945
+	SRCFILE "Songs\SHarrierC64.bas",945
 	DECLE 16191,63
-	;[946] MUSIC D5#,s,G3
-	SRCFILE "requiem.bas",946
-	DECLE 16168,20
+	;[946] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",946
+	DECLE 16191,63
 	;[947] MUSIC s,s,s
-	SRCFILE "requiem.bas",947
+	SRCFILE "Songs\SHarrierC64.bas",947
 	DECLE 16191,63
-	;[948] MUSIC s,s,s
-	SRCFILE "requiem.bas",948
+	;[948] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",948
+	DECLE 5183,29
+	;[949] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",949
+	DECLE 16143,63
+	;[950] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",950
 	DECLE 16191,63
-	;[949] MUSIC s,s,s
-	SRCFILE "requiem.bas",949
-	DECLE 16191,63
-	;[950] MUSIC D5,G4,s
-	SRCFILE "requiem.bas",950
-	DECLE 8231,63
 	;[951] MUSIC s,s,s
-	SRCFILE "requiem.bas",951
+	SRCFILE "Songs\SHarrierC64.bas",951
 	DECLE 16191,63
-	;[952] MUSIC D5#,s,s
-	SRCFILE "requiem.bas",952
-	DECLE 16168,63
+	;[952] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",952
+	DECLE 5695,31
 	;[953] MUSIC s,s,s
-	SRCFILE "requiem.bas",953
+	SRCFILE "Songs\SHarrierC64.bas",953
 	DECLE 16191,63
-	;[954] MUSIC F5,F4,s
-	SRCFILE "requiem.bas",954
-	DECLE 7722,63
+	;[954] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",954
+	DECLE 16191,63
 	;[955] MUSIC s,s,s
-	SRCFILE "requiem.bas",955
+	SRCFILE "Songs\SHarrierC64.bas",955
 	DECLE 16191,63
-	;[956] MUSIC s,s,s
-	SRCFILE "requiem.bas",956
+	;[956] MUSIC s,D3,A4
+	SRCFILE "Songs\SHarrierC64.bas",956
+	DECLE 3903,34
+	;[957] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",957
+	DECLE 16143,63
+	;[958] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",958
 	DECLE 16191,63
-	;[957] MUSIC s,s,s
-	SRCFILE "requiem.bas",957
-	DECLE 16191,63
-	;[958] MUSIC C5,s,C4
-	SRCFILE "requiem.bas",958
-	DECLE 16165,25
 	;[959] MUSIC s,s,s
-	SRCFILE "requiem.bas",959
+	SRCFILE "Songs\SHarrierC64.bas",959
 	DECLE 16191,63
-	;[960] MUSIC s,s,s
-	SRCFILE "requiem.bas",960
-	DECLE 16191,63
+	;[960] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",960
+	DECLE 5695,31
 	;[961] MUSIC s,s,s
-	SRCFILE "requiem.bas",961
+	SRCFILE "Songs\SHarrierC64.bas",961
 	DECLE 16191,63
-	;[962] MUSIC F5,C4,s
-	SRCFILE "requiem.bas",962
-	DECLE 6442,63
+	;[962] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",962
+	DECLE 16191,63
 	;[963] MUSIC s,s,s
-	SRCFILE "requiem.bas",963
+	SRCFILE "Songs\SHarrierC64.bas",963
 	DECLE 16191,63
-	;[964] MUSIC s,s,s
-	SRCFILE "requiem.bas",964
+	;[964] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",964
+	DECLE 5183,29
+	;[965] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",965
+	DECLE 16143,63
+	;[966] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",966
 	DECLE 16191,63
-	;[965] MUSIC s,s,s
-	SRCFILE "requiem.bas",965
-	DECLE 16191,63
-	;[966] MUSIC D5#,C4,s
-	SRCFILE "requiem.bas",966
-	DECLE 6440,63
 	;[967] MUSIC s,s,s
-	SRCFILE "requiem.bas",967
+	SRCFILE "Songs\SHarrierC64.bas",967
 	DECLE 16191,63
-	;[968] MUSIC s,s,s
-	SRCFILE "requiem.bas",968
-	DECLE 16191,63
+	;[968] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",968
+	DECLE 5695,31
 	;[969] MUSIC s,s,s
-	SRCFILE "requiem.bas",969
+	SRCFILE "Songs\SHarrierC64.bas",969
 	DECLE 16191,63
-	;[970] MUSIC D4,D5,A2#
-	SRCFILE "requiem.bas",970
-	DECLE 10011,11
+	;[970] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",970
+	DECLE 16191,63
 	;[971] MUSIC s,s,s
-	SRCFILE "requiem.bas",971
+	SRCFILE "Songs\SHarrierC64.bas",971
 	DECLE 16191,63
-	;[972] MUSIC D4#,s,s
-	SRCFILE "requiem.bas",972
-	DECLE 16156,63
-	;[973] MUSIC s,s,s
-	SRCFILE "requiem.bas",973
+	;[972] MUSIC s,F3#,D4
+	SRCFILE "Songs\SHarrierC64.bas",972
+	DECLE 4927,27
+	;[973] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",973
+	DECLE 16143,63
+	;[974] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",974
 	DECLE 16191,63
-	;[974] MUSIC D4,F4,s
-	SRCFILE "requiem.bas",974
-	DECLE 7707,63
 	;[975] MUSIC s,s,s
-	SRCFILE "requiem.bas",975
+	SRCFILE "Songs\SHarrierC64.bas",975
 	DECLE 16191,63
-	;[976] MUSIC C4,s,s
-	SRCFILE "requiem.bas",976
-	DECLE 16153,63
+	;[976] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",976
+	DECLE 5695,31
 	;[977] MUSIC s,s,s
-	SRCFILE "requiem.bas",977
+	SRCFILE "Songs\SHarrierC64.bas",977
 	DECLE 16191,63
-	;[978] MUSIC D4,A4#,s
-	SRCFILE "requiem.bas",978
-	DECLE 8987,63
+	;[978] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",978
+	DECLE 16191,63
 	;[979] MUSIC s,s,s
-	SRCFILE "requiem.bas",979
+	SRCFILE "Songs\SHarrierC64.bas",979
 	DECLE 16191,63
-	;[980] MUSIC D4#,s,s
-	SRCFILE "requiem.bas",980
-	DECLE 16156,63
-	;[981] MUSIC s,s,s
-	SRCFILE "requiem.bas",981
+	;[980] MUSIC s,G3,E4
+	SRCFILE "Songs\SHarrierC64.bas",980
+	DECLE 5183,29
+	;[981] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",981
+	DECLE 16143,63
+	;[982] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",982
 	DECLE 16191,63
-	;[982] MUSIC C4,s,A2#
-	SRCFILE "requiem.bas",982
-	DECLE 16153,11
 	;[983] MUSIC s,s,s
-	SRCFILE "requiem.bas",983
+	SRCFILE "Songs\SHarrierC64.bas",983
 	DECLE 16191,63
-	;[984] MUSIC D4,s,s
-	SRCFILE "requiem.bas",984
-	DECLE 16155,63
+	;[984] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",984
+	DECLE 5695,31
 	;[985] MUSIC s,s,s
-	SRCFILE "requiem.bas",985
+	SRCFILE "Songs\SHarrierC64.bas",985
 	DECLE 16191,63
-	;[986] MUSIC D4#,s,C3
-	SRCFILE "requiem.bas",986
-	DECLE 16156,13
+	;[986] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",986
+	DECLE 16191,63
 	;[987] MUSIC s,s,s
-	SRCFILE "requiem.bas",987
+	SRCFILE "Songs\SHarrierC64.bas",987
 	DECLE 16191,63
-	;[988] MUSIC F4,s,s
-	SRCFILE "requiem.bas",988
-	DECLE 16158,63
+	;[988] MUSIC s,G3,G4
+	SRCFILE "Songs\SHarrierC64.bas",988
+	DECLE 5183,32
 	;[989] MUSIC s,s,s
-	SRCFILE "requiem.bas",989
+	SRCFILE "Songs\SHarrierC64.bas",989
 	DECLE 16191,63
-	;[990] MUSIC D4#,s,s
-	SRCFILE "requiem.bas",990
-	DECLE 16156,63
+	;[990] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",990
+	DECLE 16191,63
 	;[991] MUSIC s,s,s
-	SRCFILE "requiem.bas",991
+	SRCFILE "Songs\SHarrierC64.bas",991
 	DECLE 16191,63
-	;[992] MUSIC D4,s,s
-	SRCFILE "requiem.bas",992
-	DECLE 16155,63
+	;[992] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",992
+	DECLE 6975,63
 	;[993] MUSIC s,s,s
-	SRCFILE "requiem.bas",993
+	SRCFILE "Songs\SHarrierC64.bas",993
 	DECLE 16191,63
-	;[994] MUSIC D4#,A4,s
-	SRCFILE "requiem.bas",994
-	DECLE 8732,63
+	;[994] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",994
+	DECLE 16191,63
 	;[995] MUSIC s,s,s
-	SRCFILE "requiem.bas",995
+	SRCFILE "Songs\SHarrierC64.bas",995
 	DECLE 16191,63
-	;[996] MUSIC F4,s,s
-	SRCFILE "requiem.bas",996
-	DECLE 16158,63
+	;[996] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",996
+	DECLE 6463,63
 	;[997] MUSIC s,s,s
-	SRCFILE "requiem.bas",997
+	SRCFILE "Songs\SHarrierC64.bas",997
 	DECLE 16191,63
-	;[998] MUSIC D4,s,A2#
-	SRCFILE "requiem.bas",998
-	DECLE 16155,11
+	;[998] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",998
+	DECLE 16191,63
 	;[999] MUSIC s,s,s
-	SRCFILE "requiem.bas",999
+	SRCFILE "Songs\SHarrierC64.bas",999
 	DECLE 16191,63
-	;[1000] MUSIC C3,s,D4#
-	SRCFILE "requiem.bas",1000
-	DECLE 16141,28
+	;[1000] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1000
+	DECLE 6975,63
 	;[1001] MUSIC s,s,s
-	SRCFILE "requiem.bas",1001
+	SRCFILE "Songs\SHarrierC64.bas",1001
 	DECLE 16191,63
-	;[1002] MUSIC F4,D3,A4#
-	SRCFILE "requiem.bas",1002
-	DECLE 3870,35
+	;[1002] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1002
+	DECLE 16191,63
 	;[1003] MUSIC s,s,s
-	SRCFILE "requiem.bas",1003
+	SRCFILE "Songs\SHarrierC64.bas",1003
 	DECLE 16191,63
-	;[1004] MUSIC s,s,s
-	SRCFILE "requiem.bas",1004
-	DECLE 16191,63
+	;[1004] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1004
+	DECLE 5951,63
 	;[1005] MUSIC s,s,s
-	SRCFILE "requiem.bas",1005
+	SRCFILE "Songs\SHarrierC64.bas",1005
 	DECLE 16191,63
-	;[1006] MUSIC A3#,D4,s
-	SRCFILE "requiem.bas",1006
-	DECLE 6935,63
+	;[1006] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1006
+	DECLE 16191,63
 	;[1007] MUSIC s,s,s
-	SRCFILE "requiem.bas",1007
+	SRCFILE "Songs\SHarrierC64.bas",1007
 	DECLE 16191,63
-	;[1008] MUSIC A3,s,s
-	SRCFILE "requiem.bas",1008
-	DECLE 16150,63
+	;[1008] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1008
+	DECLE 6975,63
 	;[1009] MUSIC s,s,s
-	SRCFILE "requiem.bas",1009
+	SRCFILE "Songs\SHarrierC64.bas",1009
 	DECLE 16191,63
-	;[1010] MUSIC E4,G3,A4#
-	SRCFILE "requiem.bas",1010
-	DECLE 5149,35
+	;[1010] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1010
+	DECLE 16191,63
 	;[1011] MUSIC s,s,s
-	SRCFILE "requiem.bas",1011
+	SRCFILE "Songs\SHarrierC64.bas",1011
 	DECLE 16191,63
-	;[1012] MUSIC s,s,s
-	SRCFILE "requiem.bas",1012
-	DECLE 16191,63
+	;[1012] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1012
+	DECLE 5695,63
 	;[1013] MUSIC s,s,s
-	SRCFILE "requiem.bas",1013
+	SRCFILE "Songs\SHarrierC64.bas",1013
 	DECLE 16191,63
-	;[1014] MUSIC F4,F3,s
-	SRCFILE "requiem.bas",1014
-	DECLE 4638,63
+	;[1014] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1014
+	DECLE 16191,63
 	;[1015] MUSIC s,s,s
-	SRCFILE "requiem.bas",1015
+	SRCFILE "Songs\SHarrierC64.bas",1015
 	DECLE 16191,63
-	;[1016] MUSIC s,s,s
-	SRCFILE "requiem.bas",1016
-	DECLE 16191,63
+	;[1016] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1016
+	DECLE 6975,63
 	;[1017] MUSIC s,s,s
-	SRCFILE "requiem.bas",1017
+	SRCFILE "Songs\SHarrierC64.bas",1017
 	DECLE 16191,63
-	;[1018] MUSIC E3,G4,C5
-	SRCFILE "requiem.bas",1018
-	DECLE 8209,37
+	;[1018] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1018
+	DECLE 16191,63
 	;[1019] MUSIC s,s,s
-	SRCFILE "requiem.bas",1019
+	SRCFILE "Songs\SHarrierC64.bas",1019
 	DECLE 16191,63
-	;[1020] MUSIC s,s,s
-	SRCFILE "requiem.bas",1020
+	;[1020] MUSIC s,D3,A4
+	SRCFILE "Songs\SHarrierC64.bas",1020
+	DECLE 3903,34
+	;[1021] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1021
+	DECLE 16143,63
+	;[1022] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1022
 	DECLE 16191,63
-	;[1021] MUSIC s,s,s
-	SRCFILE "requiem.bas",1021
-	DECLE 16191,63
-	;[1022] MUSIC G3,s,s
-	SRCFILE "requiem.bas",1022
-	DECLE 16148,63
 	;[1023] MUSIC s,s,s
-	SRCFILE "requiem.bas",1023
+	SRCFILE "Songs\SHarrierC64.bas",1023
 	DECLE 16191,63
-	;[1024] MUSIC s,s,s
-	SRCFILE "requiem.bas",1024
-	DECLE 16191,63
+	;[1024] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1024
+	DECLE 6975,63
 	;[1025] MUSIC s,s,s
-	SRCFILE "requiem.bas",1025
+	SRCFILE "Songs\SHarrierC64.bas",1025
 	DECLE 16191,63
-	;[1026] MUSIC F4,G4#,C3
-	SRCFILE "requiem.bas",1026
-	DECLE 8478,13
+	;[1026] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1026
+	DECLE 16191,63
 	;[1027] MUSIC s,s,s
-	SRCFILE "requiem.bas",1027
+	SRCFILE "Songs\SHarrierC64.bas",1027
 	DECLE 16191,63
-	;[1028] MUSIC s,s,s
-	SRCFILE "requiem.bas",1028
-	DECLE 16191,63
+	;[1028] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1028
+	DECLE 6463,63
 	;[1029] MUSIC s,s,s
-	SRCFILE "requiem.bas",1029
+	SRCFILE "Songs\SHarrierC64.bas",1029
 	DECLE 16191,63
-	;[1030] MUSIC E4,G4,C5
-	SRCFILE "requiem.bas",1030
-	DECLE 8221,37
+	;[1030] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1030
+	DECLE 16191,63
 	;[1031] MUSIC s,s,s
-	SRCFILE "requiem.bas",1031
+	SRCFILE "Songs\SHarrierC64.bas",1031
 	DECLE 16191,63
-	;[1032] MUSIC s,s,s
-	SRCFILE "requiem.bas",1032
-	DECLE 16191,63
+	;[1032] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1032
+	DECLE 6975,63
 	;[1033] MUSIC s,s,s
-	SRCFILE "requiem.bas",1033
+	SRCFILE "Songs\SHarrierC64.bas",1033
 	DECLE 16191,63
-	;[1034] MUSIC F4,G4#,s
-	SRCFILE "requiem.bas",1034
-	DECLE 8478,63
+	;[1034] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1034
+	DECLE 16191,63
 	;[1035] MUSIC s,s,s
-	SRCFILE "requiem.bas",1035
+	SRCFILE "Songs\SHarrierC64.bas",1035
 	DECLE 16191,63
-	;[1036] MUSIC s,s,s
-	SRCFILE "requiem.bas",1036
+	;[1036] MUSIC s,A3,F5#
+	SRCFILE "Songs\SHarrierC64.bas",1036
+	DECLE 5695,43
+	;[1037] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1037
+	DECLE 16143,63
+	;[1038] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1038
 	DECLE 16191,63
-	;[1037] MUSIC s,s,s
-	SRCFILE "requiem.bas",1037
-	DECLE 16191,63
-	;[1038] MUSIC F3,s,s
-	SRCFILE "requiem.bas",1038
-	DECLE 16146,63
 	;[1039] MUSIC s,s,s
-	SRCFILE "requiem.bas",1039
+	SRCFILE "Songs\SHarrierC64.bas",1039
 	DECLE 16191,63
-	;[1040] MUSIC s,s,s
-	SRCFILE "requiem.bas",1040
+	;[1040] 
+	SRCFILE "Songs\SHarrierC64.bas",1040
+	;[1041] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1041
+	DECLE 6975,63
+	;[1042] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1042
 	DECLE 16191,63
-	;[1041] MUSIC s,s,s
-	SRCFILE "requiem.bas",1041
-	DECLE 16191,63
-	;[1042] MUSIC A3#,C5#,s
-	SRCFILE "requiem.bas",1042
-	DECLE 9751,63
 	;[1043] MUSIC s,s,s
-	SRCFILE "requiem.bas",1043
+	SRCFILE "Songs\SHarrierC64.bas",1043
 	DECLE 16191,63
 	;[1044] MUSIC s,s,s
-	SRCFILE "requiem.bas",1044
+	SRCFILE "Songs\SHarrierC64.bas",1044
 	DECLE 16191,63
-	;[1045] MUSIC s,s,s
-	SRCFILE "requiem.bas",1045
+	;[1045] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1045
+	DECLE 6463,63
+	;[1046] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1046
 	DECLE 16191,63
-	;[1046] MUSIC G3,s,s
-	SRCFILE "requiem.bas",1046
-	DECLE 16148,63
 	;[1047] MUSIC s,s,s
-	SRCFILE "requiem.bas",1047
+	SRCFILE "Songs\SHarrierC64.bas",1047
 	DECLE 16191,63
 	;[1048] MUSIC s,s,s
-	SRCFILE "requiem.bas",1048
+	SRCFILE "Songs\SHarrierC64.bas",1048
 	DECLE 16191,63
-	;[1049] MUSIC s,s,s
-	SRCFILE "requiem.bas",1049
+	;[1049] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1049
+	DECLE 6975,63
+	;[1050] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1050
 	DECLE 16191,63
-	;[1050] MUSIC C4,E4,s
-	SRCFILE "requiem.bas",1050
-	DECLE 7449,63
 	;[1051] MUSIC s,s,s
-	SRCFILE "requiem.bas",1051
+	SRCFILE "Songs\SHarrierC64.bas",1051
 	DECLE 16191,63
 	;[1052] MUSIC s,s,s
-	SRCFILE "requiem.bas",1052
+	SRCFILE "Songs\SHarrierC64.bas",1052
 	DECLE 16191,63
-	;[1053] MUSIC s,s,s
-	SRCFILE "requiem.bas",1053
-	DECLE 16191,63
-	;[1054] MUSIC s,s,C3
-	SRCFILE "requiem.bas",1054
-	DECLE 16191,13
+	;[1053] MUSIC s,G3,D5
+	SRCFILE "Songs\SHarrierC64.bas",1053
+	DECLE 5183,39
+	;[1054] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1054
+	DECLE 16136,63
 	;[1055] MUSIC s,s,s
-	SRCFILE "requiem.bas",1055
+	SRCFILE "Songs\SHarrierC64.bas",1055
 	DECLE 16191,63
 	;[1056] MUSIC s,s,s
-	SRCFILE "requiem.bas",1056
+	SRCFILE "Songs\SHarrierC64.bas",1056
 	DECLE 16191,63
-	;[1057] MUSIC s,s,s
-	SRCFILE "requiem.bas",1057
+	;[1057] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1057
+	DECLE 6975,35
+	;[1058] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1058
 	DECLE 16191,63
-	;[1058] MUSIC C3,s,s
-	SRCFILE "requiem.bas",1058
-	DECLE 16141,63
 	;[1059] MUSIC s,s,s
-	SRCFILE "requiem.bas",1059
+	SRCFILE "Songs\SHarrierC64.bas",1059
 	DECLE 16191,63
 	;[1060] MUSIC s,s,s
-	SRCFILE "requiem.bas",1060
+	SRCFILE "Songs\SHarrierC64.bas",1060
 	DECLE 16191,63
-	;[1061] MUSIC s,s,s
-	SRCFILE "requiem.bas",1061
-	DECLE 16191,63
-	;[1062] MUSIC C3,E4,s
-	SRCFILE "requiem.bas",1062
-	DECLE 7437,63
+	;[1061] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1061
+	DECLE 6463,34
+	;[1062] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1062
+	DECLE 16148,63
 	;[1063] MUSIC s,s,s
-	SRCFILE "requiem.bas",1063
+	SRCFILE "Songs\SHarrierC64.bas",1063
 	DECLE 16191,63
 	;[1064] MUSIC s,s,s
-	SRCFILE "requiem.bas",1064
+	SRCFILE "Songs\SHarrierC64.bas",1064
 	DECLE 16191,63
-	;[1065] MUSIC s,s,s
-	SRCFILE "requiem.bas",1065
+	;[1065] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1065
+	DECLE 6975,35
+	;[1066] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1066
 	DECLE 16191,63
-	;[1066] MUSIC C3#,F4,s
-	SRCFILE "requiem.bas",1066
-	DECLE 7694,63
 	;[1067] MUSIC s,s,s
-	SRCFILE "requiem.bas",1067
+	SRCFILE "Songs\SHarrierC64.bas",1067
 	DECLE 16191,63
-	;[1068] MUSIC D3#,s,s
-	SRCFILE "requiem.bas",1068
-	DECLE 16144,63
-	;[1069] MUSIC s,s,s
-	SRCFILE "requiem.bas",1069
+	;[1068] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1068
 	DECLE 16191,63
-	;[1070] MUSIC C3#,F4,s
-	SRCFILE "requiem.bas",1070
-	DECLE 7694,63
+	;[1069] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",1069
+	DECLE 5951,32
+	;[1070] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1070
+	DECLE 16136,63
 	;[1071] MUSIC s,s,s
-	SRCFILE "requiem.bas",1071
+	SRCFILE "Songs\SHarrierC64.bas",1071
 	DECLE 16191,63
-	;[1072] MUSIC C3,s,s
-	SRCFILE "requiem.bas",1072
-	DECLE 16141,63
-	;[1073] MUSIC s,s,s
-	SRCFILE "requiem.bas",1073
+	;[1072] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1072
 	DECLE 16191,63
-	;[1074] MUSIC D3,A4#,s
-	SRCFILE "requiem.bas",1074
-	DECLE 8975,63
+	;[1073] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1073
+	DECLE 6975,35
+	;[1074] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1074
+	DECLE 16191,63
 	;[1075] MUSIC s,s,s
-	SRCFILE "requiem.bas",1075
+	SRCFILE "Songs\SHarrierC64.bas",1075
 	DECLE 16191,63
-	;[1076] MUSIC D3#,s,s
-	SRCFILE "requiem.bas",1076
-	DECLE 16144,63
-	;[1077] MUSIC s,s,s
-	SRCFILE "requiem.bas",1077
+	;[1076] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1076
 	DECLE 16191,63
-	;[1078] MUSIC C3,G4#,s
-	SRCFILE "requiem.bas",1078
-	DECLE 8461,63
+	;[1077] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1077
+	DECLE 6463,34
+	;[1078] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1078
+	DECLE 16148,63
 	;[1079] MUSIC s,s,s
-	SRCFILE "requiem.bas",1079
+	SRCFILE "Songs\SHarrierC64.bas",1079
 	DECLE 16191,63
-	;[1080] MUSIC D3,s,s
-	SRCFILE "requiem.bas",1080
-	DECLE 16143,63
-	;[1081] MUSIC s,s,s
-	SRCFILE "requiem.bas",1081
+	;[1080] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1080
 	DECLE 16191,63
-	;[1082] MUSIC D3#,G4,s
-	SRCFILE "requiem.bas",1082
-	DECLE 8208,63
+	;[1081] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1081
+	DECLE 6975,35
+	;[1082] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1082
+	DECLE 16191,63
 	;[1083] MUSIC s,s,s
-	SRCFILE "requiem.bas",1083
+	SRCFILE "Songs\SHarrierC64.bas",1083
 	DECLE 16191,63
-	;[1084] MUSIC F3,s,s
-	SRCFILE "requiem.bas",1084
-	DECLE 16146,63
-	;[1085] MUSIC s,s,s
-	SRCFILE "requiem.bas",1085
+	;[1084] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1084
 	DECLE 16191,63
-	;[1086] MUSIC D3#,C4,G3
-	SRCFILE "requiem.bas",1086
-	DECLE 6416,20
+	;[1085] MUSIC s,G3,D5
+	SRCFILE "Songs\SHarrierC64.bas",1085
+	DECLE 5183,39
+	;[1086] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1086
+	DECLE 16136,63
 	;[1087] MUSIC s,s,s
-	SRCFILE "requiem.bas",1087
+	SRCFILE "Songs\SHarrierC64.bas",1087
 	DECLE 16191,63
-	;[1088] MUSIC D3,s,s
-	SRCFILE "requiem.bas",1088
-	DECLE 16143,63
-	;[1089] MUSIC s,s,s
-	SRCFILE "requiem.bas",1089
+	;[1088] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1088
 	DECLE 16191,63
-	;[1090] MUSIC E3,C5,G3
-	SRCFILE "requiem.bas",1090
-	DECLE 9489,20
+	;[1089] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1089
+	DECLE 6975,35
+	;[1090] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1090
+	DECLE 16191,63
 	;[1091] MUSIC s,s,s
-	SRCFILE "requiem.bas",1091
+	SRCFILE "Songs\SHarrierC64.bas",1091
 	DECLE 16191,63
-	;[1092] MUSIC F3,s,s
-	SRCFILE "requiem.bas",1092
-	DECLE 16146,63
-	;[1093] MUSIC s,s,s
-	SRCFILE "requiem.bas",1093
+	;[1092] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1092
 	DECLE 16191,63
-	;[1094] MUSIC D3,A4#,G3
-	SRCFILE "requiem.bas",1094
-	DECLE 8975,20
+	;[1093] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1093
+	DECLE 6463,34
+	;[1094] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1094
+	DECLE 16148,63
 	;[1095] MUSIC s,s,s
-	SRCFILE "requiem.bas",1095
+	SRCFILE "Songs\SHarrierC64.bas",1095
 	DECLE 16191,63
-	;[1096] MUSIC E3,s,s
-	SRCFILE "requiem.bas",1096
-	DECLE 16145,63
-	;[1097] MUSIC s,s,s
-	SRCFILE "requiem.bas",1097
+	;[1096] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1096
 	DECLE 16191,63
-	;[1098] MUSIC G3#,F3,G4#
-	SRCFILE "requiem.bas",1098
-	DECLE 4629,33
+	;[1097] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1097
+	DECLE 6975,35
+	;[1098] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1098
+	DECLE 16191,63
 	;[1099] MUSIC s,s,s
-	SRCFILE "requiem.bas",1099
+	SRCFILE "Songs\SHarrierC64.bas",1099
 	DECLE 16191,63
-	;[1100] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",1100
-	DECLE 16151,63
-	;[1101] MUSIC s,s,s
-	SRCFILE "requiem.bas",1101
+	;[1100] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1100
 	DECLE 16191,63
-	;[1102] MUSIC G3#,C3,s
-	SRCFILE "requiem.bas",1102
-	DECLE 3349,63
+	;[1101] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",1101
+	DECLE 5951,32
+	;[1102] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1102
+	DECLE 16136,63
 	;[1103] MUSIC s,s,s
-	SRCFILE "requiem.bas",1103
+	SRCFILE "Songs\SHarrierC64.bas",1103
 	DECLE 16191,63
-	;[1104] MUSIC G3,s,s
-	SRCFILE "requiem.bas",1104
-	DECLE 16148,63
-	;[1105] MUSIC s,s,s
-	SRCFILE "requiem.bas",1105
+	;[1104] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1104
 	DECLE 16191,63
-	;[1106] MUSIC A3,F3,s
-	SRCFILE "requiem.bas",1106
-	DECLE 4630,63
+	;[1105] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1105
+	DECLE 6975,35
+	;[1106] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1106
+	DECLE 16191,63
 	;[1107] MUSIC s,s,s
-	SRCFILE "requiem.bas",1107
+	SRCFILE "Songs\SHarrierC64.bas",1107
 	DECLE 16191,63
-	;[1108] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",1108
-	DECLE 16151,63
-	;[1109] MUSIC s,s,s
-	SRCFILE "requiem.bas",1109
+	;[1108] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1108
 	DECLE 16191,63
-	;[1110] MUSIC G3,D3#,s
-	SRCFILE "requiem.bas",1110
-	DECLE 4116,63
+	;[1109] MUSIC s,C4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1109
+	DECLE 6463,34
+	;[1110] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1110
+	DECLE 16148,63
 	;[1111] MUSIC s,s,s
-	SRCFILE "requiem.bas",1111
+	SRCFILE "Songs\SHarrierC64.bas",1111
 	DECLE 16191,63
-	;[1112] MUSIC A3,s,s
-	SRCFILE "requiem.bas",1112
-	DECLE 16150,63
-	;[1113] MUSIC s,s,s
-	SRCFILE "requiem.bas",1113
+	;[1112] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1112
 	DECLE 16191,63
-	;[1114] MUSIC A3#,D3,s
-	SRCFILE "requiem.bas",1114
-	DECLE 3863,63
+	;[1113] MUSIC s,D4,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1113
+	DECLE 6975,35
+	;[1114] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1114
+	DECLE 16191,63
 	;[1115] MUSIC s,s,s
-	SRCFILE "requiem.bas",1115
+	SRCFILE "Songs\SHarrierC64.bas",1115
 	DECLE 16191,63
-	;[1116] MUSIC C4,s,s
-	SRCFILE "requiem.bas",1116
-	DECLE 16153,63
-	;[1117] MUSIC s,s,s
-	SRCFILE "requiem.bas",1117
+	;[1116] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1116
 	DECLE 16191,63
-	;[1118] MUSIC A3#,D4,s
-	SRCFILE "requiem.bas",1118
-	DECLE 6935,63
+	;[1117] MUSIC s,G3,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1117
+	DECLE 5183,40
+	;[1118] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1118
+	DECLE 16136,63
 	;[1119] MUSIC s,s,s
-	SRCFILE "requiem.bas",1119
+	SRCFILE "Songs\SHarrierC64.bas",1119
 	DECLE 16191,63
-	;[1120] MUSIC A3,s,s
-	SRCFILE "requiem.bas",1120
-	DECLE 16150,63
-	;[1121] MUSIC s,s,s
-	SRCFILE "requiem.bas",1121
+	;[1120] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1120
 	DECLE 16191,63
-	;[1122] MUSIC B3,G3,D4
-	SRCFILE "requiem.bas",1122
-	DECLE 5144,27
+	;[1121] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1121
+	DECLE 7231,37
+	;[1122] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1122
+	DECLE 16191,63
 	;[1123] MUSIC s,s,s
-	SRCFILE "requiem.bas",1123
+	SRCFILE "Songs\SHarrierC64.bas",1123
 	DECLE 16191,63
-	;[1124] MUSIC C4,s,s
-	SRCFILE "requiem.bas",1124
-	DECLE 16153,63
-	;[1125] MUSIC s,s,s
-	SRCFILE "requiem.bas",1125
+	;[1124] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1124
 	DECLE 16191,63
-	;[1126] MUSIC A3,F3,D4
-	SRCFILE "requiem.bas",1126
-	DECLE 4630,27
+	;[1125] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",1125
+	DECLE 6975,36
+	;[1126] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1126
+	DECLE 16148,63
 	;[1127] MUSIC s,s,s
-	SRCFILE "requiem.bas",1127
+	SRCFILE "Songs\SHarrierC64.bas",1127
 	DECLE 16191,63
-	;[1128] MUSIC B3,s,s
-	SRCFILE "requiem.bas",1128
-	DECLE 16152,63
-	;[1129] MUSIC s,s,s
-	SRCFILE "requiem.bas",1129
+	;[1128] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1128
 	DECLE 16191,63
-	;[1130] MUSIC D4#,C4,D3#
-	SRCFILE "requiem.bas",1130
-	DECLE 6428,16
+	;[1129] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1129
+	DECLE 7231,37
+	;[1130] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1130
+	DECLE 16191,63
 	;[1131] MUSIC s,s,s
-	SRCFILE "requiem.bas",1131
+	SRCFILE "Songs\SHarrierC64.bas",1131
 	DECLE 16191,63
-	;[1132] MUSIC F4,s,s
-	SRCFILE "requiem.bas",1132
-	DECLE 16158,63
-	;[1133] MUSIC s,s,s
-	SRCFILE "requiem.bas",1133
+	;[1132] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1132
 	DECLE 16191,63
-	;[1134] MUSIC D4#,G3,s
-	SRCFILE "requiem.bas",1134
-	DECLE 5148,63
+	;[1133] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1133
+	DECLE 6463,32
+	;[1134] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1134
+	DECLE 16136,63
 	;[1135] MUSIC s,s,s
-	SRCFILE "requiem.bas",1135
+	SRCFILE "Songs\SHarrierC64.bas",1135
 	DECLE 16191,63
-	;[1136] MUSIC D4,s,s
-	SRCFILE "requiem.bas",1136
-	DECLE 16155,63
-	;[1137] MUSIC s,s,s
-	SRCFILE "requiem.bas",1137
+	;[1136] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1136
 	DECLE 16191,63
-	;[1138] MUSIC E4,C4,s
-	SRCFILE "requiem.bas",1138
-	DECLE 6429,63
+	;[1137] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1137
+	DECLE 7231,37
+	;[1138] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1138
+	DECLE 16191,63
 	;[1139] MUSIC s,s,s
-	SRCFILE "requiem.bas",1139
+	SRCFILE "Songs\SHarrierC64.bas",1139
 	DECLE 16191,63
-	;[1140] MUSIC F4,s,s
-	SRCFILE "requiem.bas",1140
-	DECLE 16158,63
-	;[1141] MUSIC s,s,s
-	SRCFILE "requiem.bas",1141
+	;[1140] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1140
 	DECLE 16191,63
-	;[1142] MUSIC D4,A3#,s
-	SRCFILE "requiem.bas",1142
-	DECLE 5915,63
+	;[1141] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",1141
+	DECLE 6975,36
+	;[1142] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1142
+	DECLE 16148,63
 	;[1143] MUSIC s,s,s
-	SRCFILE "requiem.bas",1143
+	SRCFILE "Songs\SHarrierC64.bas",1143
 	DECLE 16191,63
-	;[1144] MUSIC E4,s,s
-	SRCFILE "requiem.bas",1144
-	DECLE 16157,63
-	;[1145] MUSIC s,s,s
-	SRCFILE "requiem.bas",1145
+	;[1144] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1144
 	DECLE 16191,63
-	;[1146] MUSIC F4,A3,s
-	SRCFILE "requiem.bas",1146
-	DECLE 5662,63
+	;[1145] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1145
+	DECLE 7231,37
+	;[1146] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1146
+	DECLE 16191,63
 	;[1147] MUSIC s,s,s
-	SRCFILE "requiem.bas",1147
+	SRCFILE "Songs\SHarrierC64.bas",1147
 	DECLE 16191,63
-	;[1148] MUSIC G4,s,s
-	SRCFILE "requiem.bas",1148
-	DECLE 16160,63
-	;[1149] MUSIC s,s,s
-	SRCFILE "requiem.bas",1149
+	;[1148] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1148
 	DECLE 16191,63
-	;[1150] MUSIC F4,D3,A4
-	SRCFILE "requiem.bas",1150
-	DECLE 3870,34
+	;[1149] MUSIC s,G3,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1149
+	DECLE 5183,40
+	;[1150] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1150
+	DECLE 16136,63
 	;[1151] MUSIC s,s,s
-	SRCFILE "requiem.bas",1151
+	SRCFILE "Songs\SHarrierC64.bas",1151
 	DECLE 16191,63
-	;[1152] MUSIC E4,s,s
-	SRCFILE "requiem.bas",1152
-	DECLE 16157,63
-	;[1153] MUSIC s,s,s
-	SRCFILE "requiem.bas",1153
+	;[1152] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1152
 	DECLE 16191,63
-	;[1154] MUSIC F4#,D4,A4
-	SRCFILE "requiem.bas",1154
-	DECLE 6943,34
+	;[1153] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1153
+	DECLE 7231,37
+	;[1154] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1154
+	DECLE 16191,63
 	;[1155] MUSIC s,s,s
-	SRCFILE "requiem.bas",1155
+	SRCFILE "Songs\SHarrierC64.bas",1155
 	DECLE 16191,63
-	;[1156] MUSIC G4,s,s
-	SRCFILE "requiem.bas",1156
-	DECLE 16160,63
-	;[1157] MUSIC s,s,s
-	SRCFILE "requiem.bas",1157
+	;[1156] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1156
 	DECLE 16191,63
-	;[1158] MUSIC E4,C4,A4
-	SRCFILE "requiem.bas",1158
-	DECLE 6429,34
+	;[1157] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",1157
+	DECLE 6975,36
+	;[1158] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1158
+	DECLE 16148,63
 	;[1159] MUSIC s,s,s
-	SRCFILE "requiem.bas",1159
+	SRCFILE "Songs\SHarrierC64.bas",1159
 	DECLE 16191,63
-	;[1160] MUSIC F4#,s,s
-	SRCFILE "requiem.bas",1160
-	DECLE 16159,63
-	;[1161] MUSIC s,s,s
-	SRCFILE "requiem.bas",1161
+	;[1160] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1160
 	DECLE 16191,63
-	;[1162] MUSIC A4#,G4,A3#
-	SRCFILE "requiem.bas",1162
-	DECLE 8227,23
+	;[1161] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1161
+	DECLE 7231,37
+	;[1162] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1162
+	DECLE 16191,63
 	;[1163] MUSIC s,s,s
-	SRCFILE "requiem.bas",1163
+	SRCFILE "Songs\SHarrierC64.bas",1163
 	DECLE 16191,63
-	;[1164] MUSIC C5,s,s
-	SRCFILE "requiem.bas",1164
-	DECLE 16165,63
-	;[1165] MUSIC s,s,s
-	SRCFILE "requiem.bas",1165
+	;[1164] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1164
 	DECLE 16191,63
-	;[1166] MUSIC A4#,D4,s
-	SRCFILE "requiem.bas",1166
-	DECLE 6947,63
+	;[1165] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1165
+	DECLE 6463,32
+	;[1166] MUSIC G2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1166
+	DECLE 16136,63
 	;[1167] MUSIC s,s,s
-	SRCFILE "requiem.bas",1167
+	SRCFILE "Songs\SHarrierC64.bas",1167
 	DECLE 16191,63
-	;[1168] MUSIC A4,s,s
-	SRCFILE "requiem.bas",1168
-	DECLE 16162,63
-	;[1169] MUSIC s,s,s
-	SRCFILE "requiem.bas",1169
+	;[1168] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1168
 	DECLE 16191,63
-	;[1170] MUSIC B4,G4,s
-	SRCFILE "requiem.bas",1170
-	DECLE 8228,63
+	;[1169] 
+	SRCFILE "Songs\SHarrierC64.bas",1169
+	;[1170] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1170
+	DECLE 7231,37
 	;[1171] MUSIC s,s,s
-	SRCFILE "requiem.bas",1171
+	SRCFILE "Songs\SHarrierC64.bas",1171
 	DECLE 16191,63
-	;[1172] MUSIC C5,s,s
-	SRCFILE "requiem.bas",1172
-	DECLE 16165,63
+	;[1172] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1172
+	DECLE 16191,63
 	;[1173] MUSIC s,s,s
-	SRCFILE "requiem.bas",1173
+	SRCFILE "Songs\SHarrierC64.bas",1173
 	DECLE 16191,63
-	;[1174] MUSIC A4,F4,s
-	SRCFILE "requiem.bas",1174
-	DECLE 7714,63
-	;[1175] MUSIC s,s,s
-	SRCFILE "requiem.bas",1175
+	;[1174] MUSIC s,D4,B4
+	SRCFILE "Songs\SHarrierC64.bas",1174
+	DECLE 6975,36
+	;[1175] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1175
+	DECLE 16148,63
+	;[1176] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1176
 	DECLE 16191,63
-	;[1176] MUSIC B4,s,s
-	SRCFILE "requiem.bas",1176
-	DECLE 16164,63
 	;[1177] MUSIC s,s,s
-	SRCFILE "requiem.bas",1177
+	SRCFILE "Songs\SHarrierC64.bas",1177
 	DECLE 16191,63
-	;[1178] MUSIC C5,E4,s
-	SRCFILE "requiem.bas",1178
-	DECLE 7461,63
+	;[1178] MUSIC s,D4#,C5
+	SRCFILE "Songs\SHarrierC64.bas",1178
+	DECLE 7231,37
 	;[1179] MUSIC s,s,s
-	SRCFILE "requiem.bas",1179
+	SRCFILE "Songs\SHarrierC64.bas",1179
 	DECLE 16191,63
-	;[1180] MUSIC D5,s,s
-	SRCFILE "requiem.bas",1180
-	DECLE 16167,63
+	;[1180] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1180
+	DECLE 16191,63
 	;[1181] MUSIC s,s,s
-	SRCFILE "requiem.bas",1181
+	SRCFILE "Songs\SHarrierC64.bas",1181
 	DECLE 16191,63
-	;[1182] MUSIC C5,A3,s
-	SRCFILE "requiem.bas",1182
-	DECLE 5669,63
-	;[1183] MUSIC s,s,s
-	SRCFILE "requiem.bas",1183
+	;[1182] MUSIC s,F3#,D5
+	SRCFILE "Songs\SHarrierC64.bas",1182
+	DECLE 4927,39
+	;[1183] MUSIC F2#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1183
+	DECLE 16135,63
+	;[1184] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1184
 	DECLE 16191,63
-	;[1184] MUSIC B4,G3,E3
-	SRCFILE "requiem.bas",1184
-	DECLE 5156,17
 	;[1185] MUSIC s,s,s
-	SRCFILE "requiem.bas",1185
+	SRCFILE "Songs\SHarrierC64.bas",1185
 	DECLE 16191,63
-	;[1186] MUSIC C5#,A4,s
-	SRCFILE "requiem.bas",1186
-	DECLE 8742,63
+	;[1186] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1186
+	DECLE 6975,34
 	;[1187] MUSIC s,s,s
-	SRCFILE "requiem.bas",1187
+	SRCFILE "Songs\SHarrierC64.bas",1187
 	DECLE 16191,63
-	;[1188] MUSIC D5,G3,E3
-	SRCFILE "requiem.bas",1188
-	DECLE 5159,17
+	;[1188] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1188
+	DECLE 16191,63
 	;[1189] MUSIC s,s,s
-	SRCFILE "requiem.bas",1189
+	SRCFILE "Songs\SHarrierC64.bas",1189
 	DECLE 16191,63
-	;[1190] MUSIC B4,G4,s
-	SRCFILE "requiem.bas",1190
-	DECLE 8228,63
-	;[1191] MUSIC s,s,s
-	SRCFILE "requiem.bas",1191
+	;[1190] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1190
 	DECLE 16191,63
-	;[1192] MUSIC C5#,A3,E3
-	SRCFILE "requiem.bas",1192
-	DECLE 5670,17
+	;[1191] MUSIC F3#,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1191
+	DECLE 6419,32
+	;[1192] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1192
+	DECLE 16191,63
 	;[1193] MUSIC s,s,s
-	SRCFILE "requiem.bas",1193
+	SRCFILE "Songs\SHarrierC64.bas",1193
 	DECLE 16191,63
-	;[1194] MUSIC F3,D5,s
-	SRCFILE "requiem.bas",1194
-	DECLE 10002,63
+	;[1194] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1194
+	DECLE 6975,34
 	;[1195] MUSIC s,s,s
-	SRCFILE "requiem.bas",1195
+	SRCFILE "Songs\SHarrierC64.bas",1195
 	DECLE 16191,63
-	;[1196] MUSIC G3,s,s
-	SRCFILE "requiem.bas",1196
-	DECLE 16148,63
+	;[1196] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1196
+	DECLE 16191,63
 	;[1197] MUSIC s,s,s
-	SRCFILE "requiem.bas",1197
+	SRCFILE "Songs\SHarrierC64.bas",1197
 	DECLE 16191,63
-	;[1198] MUSIC F3,A4,s
-	SRCFILE "requiem.bas",1198
-	DECLE 8722,63
-	;[1199] MUSIC s,s,s
-	SRCFILE "requiem.bas",1199
+	;[1198] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1198
+	DECLE 16191,31
+	;[1199] MUSIC F2#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1199
+	DECLE 5639,63
+	;[1200] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1200
 	DECLE 16191,63
-	;[1200] MUSIC E3,s,s
-	SRCFILE "requiem.bas",1200
-	DECLE 16145,63
 	;[1201] MUSIC s,s,s
-	SRCFILE "requiem.bas",1201
+	SRCFILE "Songs\SHarrierC64.bas",1201
 	DECLE 16191,63
-	;[1202] MUSIC F3#,D5,A4
-	SRCFILE "requiem.bas",1202
-	DECLE 10003,34
-	;[1203] MUSIC s,s,s
-	SRCFILE "requiem.bas",1203
+	;[1202] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1202
+	DECLE 16191,34
+	;[1203] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1203
+	DECLE 6975,63
+	;[1204] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1204
 	DECLE 16191,63
-	;[1204] MUSIC G3,s,s
-	SRCFILE "requiem.bas",1204
-	DECLE 16148,63
 	;[1205] MUSIC s,s,s
-	SRCFILE "requiem.bas",1205
+	SRCFILE "Songs\SHarrierC64.bas",1205
 	DECLE 16191,63
-	;[1206] MUSIC E3,C5,s
-	SRCFILE "requiem.bas",1206
-	DECLE 9489,63
-	;[1207] MUSIC s,s,s
-	SRCFILE "requiem.bas",1207
+	;[1206] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1206
+	DECLE 16191,32
+	;[1207] MUSIC F3#,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1207
+	DECLE 6419,63
+	;[1208] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1208
 	DECLE 16191,63
-	;[1208] MUSIC F3#,s,s
-	SRCFILE "requiem.bas",1208
-	DECLE 16147,63
 	;[1209] MUSIC s,s,s
-	SRCFILE "requiem.bas",1209
+	SRCFILE "Songs\SHarrierC64.bas",1209
 	DECLE 16191,63
-	;[1210] MUSIC G3,B4,D4
-	SRCFILE "requiem.bas",1210
-	DECLE 9236,27
+	;[1210] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1210
+	DECLE 6975,34
 	;[1211] MUSIC s,s,s
-	SRCFILE "requiem.bas",1211
+	SRCFILE "Songs\SHarrierC64.bas",1211
 	DECLE 16191,63
-	;[1212] MUSIC A3,s,s
-	SRCFILE "requiem.bas",1212
-	DECLE 16150,63
+	;[1212] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1212
+	DECLE 16191,63
 	;[1213] MUSIC s,s,s
-	SRCFILE "requiem.bas",1213
+	SRCFILE "Songs\SHarrierC64.bas",1213
 	DECLE 16191,63
-	;[1214] MUSIC G3,E4,B4
-	SRCFILE "requiem.bas",1214
-	DECLE 7444,36
-	;[1215] MUSIC s,s,s
-	SRCFILE "requiem.bas",1215
+	;[1214] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1214
+	DECLE 16191,39
+	;[1215] MUSIC F2#,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1215
+	DECLE 4871,63
+	;[1216] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1216
 	DECLE 16191,63
-	;[1216] MUSIC F3#,s,s
-	SRCFILE "requiem.bas",1216
-	DECLE 16147,63
 	;[1217] MUSIC s,s,s
-	SRCFILE "requiem.bas",1217
+	SRCFILE "Songs\SHarrierC64.bas",1217
 	DECLE 16191,63
-	;[1218] MUSIC G3#,E5,A4#
-	SRCFILE "requiem.bas",1218
-	DECLE 10517,35
+	;[1218] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1218
+	DECLE 6975,34
 	;[1219] MUSIC s,s,s
-	SRCFILE "requiem.bas",1219
+	SRCFILE "Songs\SHarrierC64.bas",1219
 	DECLE 16191,63
-	;[1220] MUSIC A3,s,s
-	SRCFILE "requiem.bas",1220
-	DECLE 16150,63
+	;[1220] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1220
+	DECLE 16191,63
 	;[1221] MUSIC s,s,s
-	SRCFILE "requiem.bas",1221
+	SRCFILE "Songs\SHarrierC64.bas",1221
 	DECLE 16191,63
-	;[1222] MUSIC F3#,D5,s
-	SRCFILE "requiem.bas",1222
-	DECLE 10003,63
-	;[1223] MUSIC s,s,s
-	SRCFILE "requiem.bas",1223
+	;[1222] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1222
+	DECLE 16191,32
+	;[1223] MUSIC F3#,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1223
+	DECLE 6419,63
+	;[1224] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1224
 	DECLE 16191,63
-	;[1224] MUSIC G3#,s,s
-	SRCFILE "requiem.bas",1224
-	DECLE 16149,63
 	;[1225] MUSIC s,s,s
-	SRCFILE "requiem.bas",1225
+	SRCFILE "Songs\SHarrierC64.bas",1225
 	DECLE 16191,63
-	;[1226] MUSIC E4,C5#,A3
-	SRCFILE "requiem.bas",1226
-	DECLE 9757,22
+	;[1226] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1226
+	DECLE 6975,34
 	;[1227] MUSIC s,s,s
-	SRCFILE "requiem.bas",1227
+	SRCFILE "Songs\SHarrierC64.bas",1227
 	DECLE 16191,63
 	;[1228] MUSIC s,s,s
-	SRCFILE "requiem.bas",1228
+	SRCFILE "Songs\SHarrierC64.bas",1228
 	DECLE 16191,63
 	;[1229] MUSIC s,s,s
-	SRCFILE "requiem.bas",1229
+	SRCFILE "Songs\SHarrierC64.bas",1229
 	DECLE 16191,63
-	;[1230] MUSIC C4#,s,A3
-	SRCFILE "requiem.bas",1230
-	DECLE 16154,22
-	;[1231] MUSIC s,s,s
-	SRCFILE "requiem.bas",1231
-	DECLE 16191,63
+	;[1230] MUSIC s,A3,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1230
+	DECLE 5695,31
+	;[1231] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1231
+	DECLE 16143,63
 	;[1232] MUSIC s,s,s
-	SRCFILE "requiem.bas",1232
+	SRCFILE "Songs\SHarrierC64.bas",1232
 	DECLE 16191,63
 	;[1233] MUSIC s,s,s
-	SRCFILE "requiem.bas",1233
+	SRCFILE "Songs\SHarrierC64.bas",1233
 	DECLE 16191,63
-	;[1234] MUSIC D4,B3,s
-	SRCFILE "requiem.bas",1234
-	DECLE 6171,63
+	;[1234] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1234
+	DECLE 6975,34
 	;[1235] MUSIC s,s,s
-	SRCFILE "requiem.bas",1235
+	SRCFILE "Songs\SHarrierC64.bas",1235
 	DECLE 16191,63
 	;[1236] MUSIC s,s,s
-	SRCFILE "requiem.bas",1236
+	SRCFILE "Songs\SHarrierC64.bas",1236
 	DECLE 16191,63
 	;[1237] MUSIC s,s,s
-	SRCFILE "requiem.bas",1237
+	SRCFILE "Songs\SHarrierC64.bas",1237
 	DECLE 16191,63
-	;[1238] MUSIC E4,C4#,A3
-	SRCFILE "requiem.bas",1238
-	DECLE 6685,22
-	;[1239] MUSIC s,s,s
-	SRCFILE "requiem.bas",1239
-	DECLE 16191,63
+	;[1238] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1238
+	DECLE 6463,32
+	;[1239] MUSIC D3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1239
+	DECLE 16143,63
 	;[1240] MUSIC s,s,s
-	SRCFILE "requiem.bas",1240
+	SRCFILE "Songs\SHarrierC64.bas",1240
 	DECLE 16191,63
 	;[1241] MUSIC s,s,s
-	SRCFILE "requiem.bas",1241
+	SRCFILE "Songs\SHarrierC64.bas",1241
 	DECLE 16191,63
-	;[1242] MUSIC F4,D4,s
-	SRCFILE "requiem.bas",1242
-	DECLE 6942,63
+	;[1242] MUSIC s,D4,A4
+	SRCFILE "Songs\SHarrierC64.bas",1242
+	DECLE 6975,34
 	;[1243] MUSIC s,s,s
-	SRCFILE "requiem.bas",1243
+	SRCFILE "Songs\SHarrierC64.bas",1243
 	DECLE 16191,63
 	;[1244] MUSIC s,s,s
-	SRCFILE "requiem.bas",1244
+	SRCFILE "Songs\SHarrierC64.bas",1244
 	DECLE 16191,63
 	;[1245] MUSIC s,s,s
-	SRCFILE "requiem.bas",1245
+	SRCFILE "Songs\SHarrierC64.bas",1245
 	DECLE 16191,63
-	;[1246] MUSIC E4,s,s
-	SRCFILE "requiem.bas",1246
-	DECLE 16157,63
-	;[1247] MUSIC s,s,s
-	SRCFILE "requiem.bas",1247
+	;[1246] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1246
+	DECLE 16191,35
+	;[1247] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1247
+	DECLE 5128,63
+	;[1248] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1248
 	DECLE 16191,63
-	;[1248] MUSIC F4,s,s
-	SRCFILE "requiem.bas",1248
-	DECLE 16158,63
 	;[1249] MUSIC s,s,s
-	SRCFILE "requiem.bas",1249
+	SRCFILE "Songs\SHarrierC64.bas",1249
 	DECLE 16191,63
-	;[1250] MUSIC G4,s,A3#
-	SRCFILE "requiem.bas",1250
-	DECLE 16160,23
+	;[1250] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1250
+	DECLE 6975,32
 	;[1251] MUSIC s,s,s
-	SRCFILE "requiem.bas",1251
+	SRCFILE "Songs\SHarrierC64.bas",1251
 	DECLE 16191,63
 	;[1252] MUSIC s,s,s
-	SRCFILE "requiem.bas",1252
+	SRCFILE "Songs\SHarrierC64.bas",1252
 	DECLE 16191,63
 	;[1253] MUSIC s,s,s
-	SRCFILE "requiem.bas",1253
+	SRCFILE "Songs\SHarrierC64.bas",1253
 	DECLE 16191,63
-	;[1254] MUSIC F4,D4,s
-	SRCFILE "requiem.bas",1254
-	DECLE 6942,63
-	;[1255] MUSIC s,s,s
-	SRCFILE "requiem.bas",1255
+	;[1254] MUSIC s,C4,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1254
+	DECLE 6463,31
+	;[1255] MUSIC G3,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1255
+	DECLE 16148,63
+	;[1256] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1256
 	DECLE 16191,63
-	;[1256] MUSIC G4,s,s
-	SRCFILE "requiem.bas",1256
-	DECLE 16160,63
 	;[1257] MUSIC s,s,s
-	SRCFILE "requiem.bas",1257
+	SRCFILE "Songs\SHarrierC64.bas",1257
 	DECLE 16191,63
-	;[1258] MUSIC A4,E4,C3#
-	SRCFILE "requiem.bas",1258
-	DECLE 7458,14
+	;[1258] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1258
+	DECLE 6975,32
 	;[1259] MUSIC s,s,s
-	SRCFILE "requiem.bas",1259
+	SRCFILE "Songs\SHarrierC64.bas",1259
 	DECLE 16191,63
 	;[1260] MUSIC s,s,s
-	SRCFILE "requiem.bas",1260
+	SRCFILE "Songs\SHarrierC64.bas",1260
 	DECLE 16191,63
 	;[1261] MUSIC s,s,s
-	SRCFILE "requiem.bas",1261
+	SRCFILE "Songs\SHarrierC64.bas",1261
 	DECLE 16191,63
-	;[1262] MUSIC A4#,s,E5
-	SRCFILE "requiem.bas",1262
-	DECLE 16163,41
-	;[1263] MUSIC s,s,s
-	SRCFILE "requiem.bas",1263
-	DECLE 16191,63
+	;[1262] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",1262
+	DECLE 16191,27
+	;[1263] MUSIC G2,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1263
+	DECLE 5896,63
 	;[1264] MUSIC s,s,s
-	SRCFILE "requiem.bas",1264
+	SRCFILE "Songs\SHarrierC64.bas",1264
 	DECLE 16191,63
 	;[1265] MUSIC s,s,s
-	SRCFILE "requiem.bas",1265
+	SRCFILE "Songs\SHarrierC64.bas",1265
 	DECLE 16191,63
-	;[1266] MUSIC A4,E5,A3
-	SRCFILE "requiem.bas",1266
-	DECLE 10530,22
+	;[1266] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1266
+	DECLE 6975,32
 	;[1267] MUSIC s,s,s
-	SRCFILE "requiem.bas",1267
+	SRCFILE "Songs\SHarrierC64.bas",1267
 	DECLE 16191,63
 	;[1268] MUSIC s,s,s
-	SRCFILE "requiem.bas",1268
+	SRCFILE "Songs\SHarrierC64.bas",1268
 	DECLE 16191,63
 	;[1269] MUSIC s,s,s
-	SRCFILE "requiem.bas",1269
+	SRCFILE "Songs\SHarrierC64.bas",1269
 	DECLE 16191,63
-	;[1270] MUSIC G4,E5,C3#
-	SRCFILE "requiem.bas",1270
-	DECLE 10528,14
-	;[1271] MUSIC s,s,s
-	SRCFILE "requiem.bas",1271
-	DECLE 16191,63
+	;[1270] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1270
+	DECLE 16191,31
+	;[1271] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1271
+	DECLE 6420,63
 	;[1272] MUSIC s,s,s
-	SRCFILE "requiem.bas",1272
+	SRCFILE "Songs\SHarrierC64.bas",1272
 	DECLE 16191,63
 	;[1273] MUSIC s,s,s
-	SRCFILE "requiem.bas",1273
+	SRCFILE "Songs\SHarrierC64.bas",1273
 	DECLE 16191,63
-	;[1274] MUSIC F5,F4,D3
-	SRCFILE "requiem.bas",1274
-	DECLE 7722,15
+	;[1274] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1274
+	DECLE 6975,32
 	;[1275] MUSIC s,s,s
-	SRCFILE "requiem.bas",1275
+	SRCFILE "Songs\SHarrierC64.bas",1275
 	DECLE 16191,63
-	;[1276] MUSIC G5,s,s
-	SRCFILE "requiem.bas",1276
-	DECLE 16172,63
+	;[1276] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1276
+	DECLE 16191,63
 	;[1277] MUSIC s,s,s
-	SRCFILE "requiem.bas",1277
+	SRCFILE "Songs\SHarrierC64.bas",1277
 	DECLE 16191,63
-	;[1278] MUSIC F5,A4,F3
-	SRCFILE "requiem.bas",1278
-	DECLE 8746,18
-	;[1279] MUSIC s,s,s
-	SRCFILE "requiem.bas",1279
+	;[1278] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1278
+	DECLE 16191,35
+	;[1279] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1279
+	DECLE 5128,63
+	;[1280] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1280
 	DECLE 16191,63
-	;[1280] MUSIC E5,s,s
-	SRCFILE "requiem.bas",1280
-	DECLE 16169,63
 	;[1281] MUSIC s,s,s
-	SRCFILE "requiem.bas",1281
+	SRCFILE "Songs\SHarrierC64.bas",1281
 	DECLE 16191,63
-	;[1282] MUSIC F5,A3#,D5
-	SRCFILE "requiem.bas",1282
-	DECLE 5930,39
+	;[1282] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1282
+	DECLE 6975,32
 	;[1283] MUSIC s,s,s
-	SRCFILE "requiem.bas",1283
+	SRCFILE "Songs\SHarrierC64.bas",1283
 	DECLE 16191,63
-	;[1284] MUSIC G5,s,s
-	SRCFILE "requiem.bas",1284
-	DECLE 16172,63
+	;[1284] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1284
+	DECLE 16191,63
 	;[1285] MUSIC s,s,s
-	SRCFILE "requiem.bas",1285
+	SRCFILE "Songs\SHarrierC64.bas",1285
 	DECLE 16191,63
-	;[1286] MUSIC E5,s,D3
-	SRCFILE "requiem.bas",1286
-	DECLE 16169,15
-	;[1287] MUSIC s,s,s
-	SRCFILE "requiem.bas",1287
+	;[1286] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1286
+	DECLE 16191,31
+	;[1287] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1287
+	DECLE 6420,63
+	;[1288] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1288
 	DECLE 16191,63
-	;[1288] MUSIC F5,s,s
-	SRCFILE "requiem.bas",1288
-	DECLE 16170,63
 	;[1289] MUSIC s,s,s
-	SRCFILE "requiem.bas",1289
+	SRCFILE "Songs\SHarrierC64.bas",1289
 	DECLE 16191,63
-	;[1290] MUSIC G5,s,s
-	SRCFILE "requiem.bas",1290
-	DECLE 16172,63
+	;[1290] MUSIC s,D4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1290
+	DECLE 6975,32
 	;[1291] MUSIC s,s,s
-	SRCFILE "requiem.bas",1291
+	SRCFILE "Songs\SHarrierC64.bas",1291
 	DECLE 16191,63
-	;[1292] MUSIC A5,s,s
-	SRCFILE "requiem.bas",1292
-	DECLE 16174,63
+	;[1292] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1292
+	DECLE 16191,63
 	;[1293] MUSIC s,s,s
-	SRCFILE "requiem.bas",1293
+	SRCFILE "Songs\SHarrierC64.bas",1293
 	DECLE 16191,63
-	;[1294] MUSIC G5,G3,s
-	SRCFILE "requiem.bas",1294
-	DECLE 5164,63
-	;[1295] MUSIC s,s,s
-	SRCFILE "requiem.bas",1295
+	;[1294] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",1294
+	DECLE 16191,27
+	;[1295] MUSIC G2,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1295
+	DECLE 5896,63
+	;[1296] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1296
 	DECLE 16191,63
-	;[1296] MUSIC F5,s,s
-	SRCFILE "requiem.bas",1296
-	DECLE 16170,63
 	;[1297] MUSIC s,s,s
-	SRCFILE "requiem.bas",1297
+	SRCFILE "Songs\SHarrierC64.bas",1297
 	DECLE 16191,63
-	;[1298] MUSIC G5,C5#,E4
-	SRCFILE "requiem.bas",1298
-	DECLE 9772,29
-	;[1299] MUSIC s,s,s
-	SRCFILE "requiem.bas",1299
-	DECLE 16191,63
-	;[1300] MUSIC A5,s,s
-	SRCFILE "requiem.bas",1300
-	DECLE 16174,63
+	;[1298] 
+	SRCFILE "Songs\SHarrierC64.bas",1298
+	;[1299] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1299
+	DECLE 16191,32
+	;[1300] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1300
+	DECLE 6975,63
 	;[1301] MUSIC s,s,s
-	SRCFILE "requiem.bas",1301
+	SRCFILE "Songs\SHarrierC64.bas",1301
 	DECLE 16191,63
-	;[1302] MUSIC F5,s,D3
-	SRCFILE "requiem.bas",1302
-	DECLE 16170,15
-	;[1303] MUSIC s,s,s
-	SRCFILE "requiem.bas",1303
+	;[1302] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1302
 	DECLE 16191,63
-	;[1304] MUSIC G5,s,E3
-	SRCFILE "requiem.bas",1304
-	DECLE 16172,17
+	;[1303] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1303
+	DECLE 16191,31
+	;[1304] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1304
+	DECLE 6420,63
 	;[1305] MUSIC s,s,s
-	SRCFILE "requiem.bas",1305
+	SRCFILE "Songs\SHarrierC64.bas",1305
 	DECLE 16191,63
-	;[1306] MUSIC A5,F3,D4
-	SRCFILE "requiem.bas",1306
-	DECLE 4654,27
-	;[1307] MUSIC s,s,s
-	SRCFILE "requiem.bas",1307
+	;[1306] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1306
 	DECLE 16191,63
-	;[1308] MUSIC s,s,s
-	SRCFILE "requiem.bas",1308
-	DECLE 16191,63
+	;[1307] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1307
+	DECLE 16191,32
+	;[1308] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1308
+	DECLE 6975,63
 	;[1309] MUSIC s,s,s
-	SRCFILE "requiem.bas",1309
+	SRCFILE "Songs\SHarrierC64.bas",1309
 	DECLE 16191,63
-	;[1310] MUSIC A5#,E3,C4#
-	SRCFILE "requiem.bas",1310
-	DECLE 4399,26
-	;[1311] MUSIC s,s,s
-	SRCFILE "requiem.bas",1311
+	;[1310] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1310
 	DECLE 16191,63
-	;[1312] MUSIC A5,F3,D4
-	SRCFILE "requiem.bas",1312
-	DECLE 4654,27
+	;[1311] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1311
+	DECLE 16191,37
+	;[1312] MUSIC D3#,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1312
+	DECLE 4112,63
 	;[1313] MUSIC s,s,s
-	SRCFILE "requiem.bas",1313
+	SRCFILE "Songs\SHarrierC64.bas",1313
 	DECLE 16191,63
-	;[1314] MUSIC G5,E4,G3
-	SRCFILE "requiem.bas",1314
-	DECLE 7468,20
-	;[1315] MUSIC s,s,s
-	SRCFILE "requiem.bas",1315
+	;[1314] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1314
 	DECLE 16191,63
-	;[1316] MUSIC F5,F4,s
-	SRCFILE "requiem.bas",1316
-	DECLE 7722,63
+	;[1315] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1315
+	DECLE 16191,32
+	;[1316] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1316
+	DECLE 6463,63
 	;[1317] MUSIC s,s,s
-	SRCFILE "requiem.bas",1317
+	SRCFILE "Songs\SHarrierC64.bas",1317
 	DECLE 16191,63
-	;[1318] MUSIC E5,F3,G4
-	SRCFILE "requiem.bas",1318
-	DECLE 4649,32
-	;[1319] MUSIC s,s,s
-	SRCFILE "requiem.bas",1319
+	;[1318] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1318
 	DECLE 16191,63
-	;[1320] MUSIC D5,G3,F4
-	SRCFILE "requiem.bas",1320
-	DECLE 5159,30
+	;[1319] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1319
+	DECLE 16191,31
+	;[1320] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1320
+	DECLE 5648,63
 	;[1321] MUSIC s,s,s
-	SRCFILE "requiem.bas",1321
+	SRCFILE "Songs\SHarrierC64.bas",1321
 	DECLE 16191,63
-	;[1322] MUSIC E4,A3,C5#
-	SRCFILE "requiem.bas",1322
-	DECLE 5661,38
-	;[1323] MUSIC s,s,s
-	SRCFILE "requiem.bas",1323
+	;[1322] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1322
 	DECLE 16191,63
+	;[1323] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1323
+	DECLE 6463,32
 	;[1324] MUSIC s,s,s
-	SRCFILE "requiem.bas",1324
+	SRCFILE "Songs\SHarrierC64.bas",1324
 	DECLE 16191,63
 	;[1325] MUSIC s,s,s
-	SRCFILE "requiem.bas",1325
+	SRCFILE "Songs\SHarrierC64.bas",1325
 	DECLE 16191,63
-	;[1326] MUSIC A3#,D4,D5
-	SRCFILE "requiem.bas",1326
-	DECLE 6935,39
-	;[1327] MUSIC s,s,s
-	SRCFILE "requiem.bas",1327
+	;[1326] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1326
 	DECLE 16191,63
-	;[1328] MUSIC A3,s,s
-	SRCFILE "requiem.bas",1328
-	DECLE 16150,63
+	;[1327] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",1327
+	DECLE 16191,28
+	;[1328] MUSIC D3#,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1328
+	DECLE 5136,63
 	;[1329] MUSIC s,s,s
-	SRCFILE "requiem.bas",1329
+	SRCFILE "Songs\SHarrierC64.bas",1329
 	DECLE 16191,63
-	;[1330] MUSIC G3,C4#,A4#
-	SRCFILE "requiem.bas",1330
-	DECLE 6676,35
-	;[1331] MUSIC s,s,s
-	SRCFILE "requiem.bas",1331
+	;[1330] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1330
 	DECLE 16191,63
-	;[1332] MUSIC F3,s,s
-	SRCFILE "requiem.bas",1332
-	DECLE 16146,63
+	;[1331] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1331
+	DECLE 6463,32
+	;[1332] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1332
+	DECLE 16191,63
 	;[1333] MUSIC s,s,s
-	SRCFILE "requiem.bas",1333
+	SRCFILE "Songs\SHarrierC64.bas",1333
 	DECLE 16191,63
-	;[1334] MUSIC E3,s,s
-	SRCFILE "requiem.bas",1334
-	DECLE 16145,63
-	;[1335] MUSIC s,s,s
-	SRCFILE "requiem.bas",1335
+	;[1334] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1334
 	DECLE 16191,63
-	;[1336] MUSIC D3,D4,s
-	SRCFILE "requiem.bas",1336
-	DECLE 6927,63
+	;[1335] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1335
+	DECLE 16191,31
+	;[1336] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1336
+	DECLE 5648,63
 	;[1337] MUSIC s,s,s
-	SRCFILE "requiem.bas",1337
+	SRCFILE "Songs\SHarrierC64.bas",1337
 	DECLE 16191,63
-	;[1338] MUSIC E4,C3#,s
-	SRCFILE "requiem.bas",1338
-	DECLE 3613,63
-	;[1339] MUSIC s,s,s
-	SRCFILE "requiem.bas",1339
+	;[1338] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1338
 	DECLE 16191,63
+	;[1339] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1339
+	DECLE 6463,32
 	;[1340] MUSIC s,s,s
-	SRCFILE "requiem.bas",1340
+	SRCFILE "Songs\SHarrierC64.bas",1340
 	DECLE 16191,63
 	;[1341] MUSIC s,s,s
-	SRCFILE "requiem.bas",1341
+	SRCFILE "Songs\SHarrierC64.bas",1341
 	DECLE 16191,63
-	;[1342] MUSIC s,G5,A4#
-	SRCFILE "requiem.bas",1342
-	DECLE 11327,35
-	;[1343] MUSIC s,s,s
-	SRCFILE "requiem.bas",1343
+	;[1342] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1342
 	DECLE 16191,63
-	;[1344] MUSIC s,s,s
-	SRCFILE "requiem.bas",1344
-	DECLE 16191,63
+	;[1343] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1343
+	DECLE 16191,37
+	;[1344] MUSIC D3#,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1344
+	DECLE 4112,63
 	;[1345] MUSIC s,s,s
-	SRCFILE "requiem.bas",1345
+	SRCFILE "Songs\SHarrierC64.bas",1345
 	DECLE 16191,63
-	;[1346] MUSIC F5,A4,A3
-	SRCFILE "requiem.bas",1346
-	DECLE 8746,22
-	;[1347] MUSIC s,s,s
-	SRCFILE "requiem.bas",1347
+	;[1346] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1346
 	DECLE 16191,63
+	;[1347] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1347
+	DECLE 6463,32
 	;[1348] MUSIC s,s,s
-	SRCFILE "requiem.bas",1348
+	SRCFILE "Songs\SHarrierC64.bas",1348
 	DECLE 16191,63
 	;[1349] MUSIC s,s,s
-	SRCFILE "requiem.bas",1349
+	SRCFILE "Songs\SHarrierC64.bas",1349
 	DECLE 16191,63
-	;[1350] MUSIC E5,A4,C4#
-	SRCFILE "requiem.bas",1350
-	DECLE 8745,26
-	;[1351] MUSIC s,s,s
-	SRCFILE "requiem.bas",1351
+	;[1350] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1350
 	DECLE 16191,63
-	;[1352] MUSIC s,s,s
-	SRCFILE "requiem.bas",1352
-	DECLE 16191,63
+	;[1351] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1351
+	DECLE 16191,31
+	;[1352] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1352
+	DECLE 5648,63
 	;[1353] MUSIC s,s,s
-	SRCFILE "requiem.bas",1353
+	SRCFILE "Songs\SHarrierC64.bas",1353
 	DECLE 16191,63
-	;[1354] MUSIC D4,A4,D5
-	SRCFILE "requiem.bas",1354
-	DECLE 8731,39
-	;[1355] MUSIC s,s,s
-	SRCFILE "requiem.bas",1355
+	;[1354] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1354
 	DECLE 16191,63
-	;[1356] MUSIC s,s,s
-	SRCFILE "requiem.bas",1356
-	DECLE 16191,63
+	;[1355] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1355
+	DECLE 16191,32
+	;[1356] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1356
+	DECLE 6463,63
 	;[1357] MUSIC s,s,s
-	SRCFILE "requiem.bas",1357
+	SRCFILE "Songs\SHarrierC64.bas",1357
 	DECLE 16191,63
-	;[1358] MUSIC F4,s,s
-	SRCFILE "requiem.bas",1358
-	DECLE 16158,63
-	;[1359] MUSIC s,s,s
-	SRCFILE "requiem.bas",1359
+	;[1358] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1358
 	DECLE 16191,63
-	;[1360] MUSIC s,s,s
-	SRCFILE "requiem.bas",1360
-	DECLE 16191,63
+	;[1359] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",1359
+	DECLE 16191,28
+	;[1360] MUSIC D3#,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1360
+	DECLE 5136,63
 	;[1361] MUSIC s,s,s
-	SRCFILE "requiem.bas",1361
+	SRCFILE "Songs\SHarrierC64.bas",1361
 	DECLE 16191,63
-	;[1362] MUSIC E4,G4#,s
-	SRCFILE "requiem.bas",1362
-	DECLE 8477,63
-	;[1363] MUSIC s,s,s
-	SRCFILE "requiem.bas",1363
+	;[1362] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1362
 	DECLE 16191,63
-	;[1364] MUSIC s,s,s
-	SRCFILE "requiem.bas",1364
-	DECLE 16191,63
+	;[1363] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1363
+	DECLE 16191,32
+	;[1364] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1364
+	DECLE 6463,63
 	;[1365] MUSIC s,s,s
-	SRCFILE "requiem.bas",1365
+	SRCFILE "Songs\SHarrierC64.bas",1365
 	DECLE 16191,63
-	;[1366] MUSIC D4,A3#,D5
-	SRCFILE "requiem.bas",1366
-	DECLE 5915,39
-	;[1367] MUSIC s,s,s
-	SRCFILE "requiem.bas",1367
+	;[1366] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1366
 	DECLE 16191,63
-	;[1368] MUSIC s,s,s
-	SRCFILE "requiem.bas",1368
-	DECLE 16191,63
+	;[1367] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1367
+	DECLE 16191,31
+	;[1368] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1368
+	DECLE 5648,63
 	;[1369] MUSIC s,s,s
-	SRCFILE "requiem.bas",1369
+	SRCFILE "Songs\SHarrierC64.bas",1369
 	DECLE 16191,63
-	;[1370] MUSIC E4,A4,C5#
-	SRCFILE "requiem.bas",1370
-	DECLE 8733,38
-	;[1371] MUSIC s,s,s
-	SRCFILE "requiem.bas",1371
+	;[1370] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1370
 	DECLE 16191,63
+	;[1371] MUSIC s,C4,G4
+	SRCFILE "Songs\SHarrierC64.bas",1371
+	DECLE 6463,32
 	;[1372] MUSIC s,s,s
-	SRCFILE "requiem.bas",1372
+	SRCFILE "Songs\SHarrierC64.bas",1372
 	DECLE 16191,63
 	;[1373] MUSIC s,s,s
-	SRCFILE "requiem.bas",1373
+	SRCFILE "Songs\SHarrierC64.bas",1373
 	DECLE 16191,63
-	;[1374] MUSIC A3,C5#,A4
-	SRCFILE "requiem.bas",1374
-	DECLE 9750,34
-	;[1375] MUSIC s,s,s
-	SRCFILE "requiem.bas",1375
+	;[1374] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1374
 	DECLE 16191,63
-	;[1376] MUSIC s,s,s
-	SRCFILE "requiem.bas",1376
-	DECLE 16191,63
+	;[1375] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1375
+	DECLE 16191,35
+	;[1376] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",1376
+	DECLE 3855,63
 	;[1377] MUSIC s,s,s
-	SRCFILE "requiem.bas",1377
+	SRCFILE "Songs\SHarrierC64.bas",1377
 	DECLE 16191,63
-	;[1378] MUSIC B3,D5,s
-	SRCFILE "requiem.bas",1378
-	DECLE 10008,63
-	;[1379] MUSIC s,s,s
-	SRCFILE "requiem.bas",1379
+	;[1378] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1378
 	DECLE 16191,63
-	;[1380] MUSIC s,s,s
-	SRCFILE "requiem.bas",1380
-	DECLE 16191,63
+	;[1379] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1379
+	DECLE 16191,32
+	;[1380] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1380
+	DECLE 5951,63
 	;[1381] MUSIC s,s,s
-	SRCFILE "requiem.bas",1381
+	SRCFILE "Songs\SHarrierC64.bas",1381
 	DECLE 16191,63
-	;[1382] MUSIC C4#,E5,A4
-	SRCFILE "requiem.bas",1382
-	DECLE 10522,34
-	;[1383] MUSIC s,s,s
-	SRCFILE "requiem.bas",1383
+	;[1382] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1382
 	DECLE 16191,63
-	;[1384] MUSIC s,s,s
-	SRCFILE "requiem.bas",1384
-	DECLE 16191,63
+	;[1383] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1383
+	DECLE 16191,31
+	;[1384] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1384
+	DECLE 5647,63
 	;[1385] MUSIC s,s,s
-	SRCFILE "requiem.bas",1385
+	SRCFILE "Songs\SHarrierC64.bas",1385
 	DECLE 16191,63
-	;[1386] MUSIC D4,F4,A4
-	SRCFILE "requiem.bas",1386
-	DECLE 7707,34
-	;[1387] MUSIC s,s,s
-	SRCFILE "requiem.bas",1387
+	;[1386] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1386
 	DECLE 16191,63
-	;[1388] MUSIC s,s,s
-	SRCFILE "requiem.bas",1388
-	DECLE 16191,63
+	;[1387] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1387
+	DECLE 16191,32
+	;[1388] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1388
+	DECLE 5951,63
 	;[1389] MUSIC s,s,s
-	SRCFILE "requiem.bas",1389
+	SRCFILE "Songs\SHarrierC64.bas",1389
 	DECLE 16191,63
-	;[1390] MUSIC D3,s,s
-	SRCFILE "requiem.bas",1390
-	DECLE 16143,63
-	;[1391] MUSIC s,s,s
-	SRCFILE "requiem.bas",1391
+	;[1390] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1390
 	DECLE 16191,63
-	;[1392] MUSIC s,s,s
-	SRCFILE "requiem.bas",1392
-	DECLE 16191,63
+	;[1391] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",1391
+	DECLE 16191,27
+	;[1392] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1392
+	DECLE 5135,63
 	;[1393] MUSIC s,s,s
-	SRCFILE "requiem.bas",1393
+	SRCFILE "Songs\SHarrierC64.bas",1393
 	DECLE 16191,63
-	;[1394] MUSIC G3,A4#,s
-	SRCFILE "requiem.bas",1394
-	DECLE 8980,63
-	;[1395] MUSIC s,s,s
-	SRCFILE "requiem.bas",1395
+	;[1394] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1394
 	DECLE 16191,63
-	;[1396] MUSIC s,s,s
-	SRCFILE "requiem.bas",1396
-	DECLE 16191,63
+	;[1395] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1395
+	DECLE 16191,32
+	;[1396] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1396
+	DECLE 5951,63
 	;[1397] MUSIC s,s,s
-	SRCFILE "requiem.bas",1397
+	SRCFILE "Songs\SHarrierC64.bas",1397
 	DECLE 16191,63
-	;[1398] MUSIC E3,s,s
-	SRCFILE "requiem.bas",1398
-	DECLE 16145,63
-	;[1399] MUSIC s,s,s
-	SRCFILE "requiem.bas",1399
+	;[1398] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1398
 	DECLE 16191,63
-	;[1400] MUSIC s,s,s
-	SRCFILE "requiem.bas",1400
-	DECLE 16191,63
+	;[1399] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1399
+	DECLE 16191,31
+	;[1400] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1400
+	DECLE 5647,63
 	;[1401] MUSIC s,s,s
-	SRCFILE "requiem.bas",1401
+	SRCFILE "Songs\SHarrierC64.bas",1401
 	DECLE 16191,63
-	;[1402] MUSIC A3,C4#,s
-	SRCFILE "requiem.bas",1402
-	DECLE 6678,63
-	;[1403] MUSIC s,s,s
-	SRCFILE "requiem.bas",1403
+	;[1402] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1402
 	DECLE 16191,63
-	;[1404] MUSIC s,s,s
-	SRCFILE "requiem.bas",1404
-	DECLE 16191,63
+	;[1403] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1403
+	DECLE 16191,32
+	;[1404] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1404
+	DECLE 5951,63
 	;[1405] MUSIC s,s,s
-	SRCFILE "requiem.bas",1405
+	SRCFILE "Songs\SHarrierC64.bas",1405
 	DECLE 16191,63
-	;[1406] MUSIC A3#,s,s
-	SRCFILE "requiem.bas",1406
-	DECLE 16151,63
-	;[1407] MUSIC s,s,s
-	SRCFILE "requiem.bas",1407
+	;[1406] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1406
 	DECLE 16191,63
-	;[1408] MUSIC s,s,s
-	SRCFILE "requiem.bas",1408
-	DECLE 16191,63
+	;[1407] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1407
+	DECLE 16191,35
+	;[1408] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",1408
+	DECLE 3855,63
 	;[1409] MUSIC s,s,s
-	SRCFILE "requiem.bas",1409
+	SRCFILE "Songs\SHarrierC64.bas",1409
 	DECLE 16191,63
-	;[1410] MUSIC A3,s,s
-	SRCFILE "requiem.bas",1410
-	DECLE 16150,63
-	;[1411] MUSIC s,s,s
-	SRCFILE "requiem.bas",1411
+	;[1410] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1410
 	DECLE 16191,63
+	;[1411] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",1411
+	DECLE 5951,32
 	;[1412] MUSIC s,s,s
-	SRCFILE "requiem.bas",1412
+	SRCFILE "Songs\SHarrierC64.bas",1412
 	DECLE 16191,63
 	;[1413] MUSIC s,s,s
-	SRCFILE "requiem.bas",1413
+	SRCFILE "Songs\SHarrierC64.bas",1413
 	DECLE 16191,63
-	;[1414] MUSIC C4#,G3,s
-	SRCFILE "requiem.bas",1414
-	DECLE 5146,63
-	;[1415] MUSIC s,s,s
-	SRCFILE "requiem.bas",1415
+	;[1414] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1414
 	DECLE 16191,63
-	;[1416] MUSIC s,s,s
-	SRCFILE "requiem.bas",1416
-	DECLE 16191,63
+	;[1415] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1415
+	DECLE 16191,31
+	;[1416] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1416
+	DECLE 5647,63
 	;[1417] MUSIC s,s,s
-	SRCFILE "requiem.bas",1417
+	SRCFILE "Songs\SHarrierC64.bas",1417
 	DECLE 16191,63
-	;[1418] MUSIC A2#,F3,D4
-	SRCFILE "requiem.bas",1418
-	DECLE 4619,27
-	;[1419] MUSIC s,s,s
-	SRCFILE "requiem.bas",1419
+	;[1418] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1418
 	DECLE 16191,63
-	;[1420] MUSIC C3,s,s
-	SRCFILE "requiem.bas",1420
-	DECLE 16141,63
+	;[1419] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",1419
+	DECLE 5951,32
+	;[1420] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1420
+	DECLE 16191,63
 	;[1421] MUSIC s,s,s
-	SRCFILE "requiem.bas",1421
+	SRCFILE "Songs\SHarrierC64.bas",1421
 	DECLE 16191,63
-	;[1422] MUSIC A2#,D3,s
-	SRCFILE "requiem.bas",1422
-	DECLE 3851,63
-	;[1423] MUSIC s,s,s
-	SRCFILE "requiem.bas",1423
+	;[1422] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1422
 	DECLE 16191,63
-	;[1424] MUSIC B2,s,G3
-	SRCFILE "requiem.bas",1424
-	DECLE 16140,20
+	;[1423] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",1423
+	DECLE 16191,27
+	;[1424] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1424
+	DECLE 5135,63
 	;[1425] MUSIC s,s,s
-	SRCFILE "requiem.bas",1425
+	SRCFILE "Songs\SHarrierC64.bas",1425
 	DECLE 16191,63
-	;[1426] MUSIC C3,s,s
-	SRCFILE "requiem.bas",1426
-	DECLE 16141,63
-	;[1427] MUSIC s,s,s
-	SRCFILE "requiem.bas",1427
+	;[1426] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1426
 	DECLE 16191,63
-	;[1428] MUSIC F3,D4,s
-	SRCFILE "requiem.bas",1428
-	DECLE 6930,63
+	;[1427] 
+	SRCFILE "Songs\SHarrierC64.bas",1427
+	;[1428] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",1428
+	DECLE 5951,32
 	;[1429] MUSIC s,s,s
-	SRCFILE "requiem.bas",1429
+	SRCFILE "Songs\SHarrierC64.bas",1429
 	DECLE 16191,63
 	;[1430] MUSIC s,s,s
-	SRCFILE "requiem.bas",1430
+	SRCFILE "Songs\SHarrierC64.bas",1430
 	DECLE 16191,63
 	;[1431] MUSIC s,s,s
-	SRCFILE "requiem.bas",1431
+	SRCFILE "Songs\SHarrierC64.bas",1431
 	DECLE 16191,63
-	;[1432] MUSIC B2,s,s
-	SRCFILE "requiem.bas",1432
-	DECLE 16140,63
-	;[1433] MUSIC s,s,s
-	SRCFILE "requiem.bas",1433
+	;[1432] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1432
+	DECLE 16191,31
+	;[1433] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1433
+	DECLE 5647,63
+	;[1434] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1434
 	DECLE 16191,63
-	;[1434] MUSIC C3,E3,E4
-	SRCFILE "requiem.bas",1434
-	DECLE 4365,29
 	;[1435] MUSIC s,s,s
-	SRCFILE "requiem.bas",1435
+	SRCFILE "Songs\SHarrierC64.bas",1435
 	DECLE 16191,63
-	;[1436] MUSIC D3,s,s
-	SRCFILE "requiem.bas",1436
-	DECLE 16143,63
+	;[1436] MUSIC s,A3#,G4
+	SRCFILE "Songs\SHarrierC64.bas",1436
+	DECLE 5951,32
 	;[1437] MUSIC s,s,s
-	SRCFILE "requiem.bas",1437
+	SRCFILE "Songs\SHarrierC64.bas",1437
 	DECLE 16191,63
-	;[1438] MUSIC C3,A4,s
-	SRCFILE "requiem.bas",1438
-	DECLE 8717,63
+	;[1438] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1438
+	DECLE 16191,63
 	;[1439] MUSIC s,s,s
-	SRCFILE "requiem.bas",1439
+	SRCFILE "Songs\SHarrierC64.bas",1439
 	DECLE 16191,63
-	;[1440] MUSIC B2,s,s
-	SRCFILE "requiem.bas",1440
-	DECLE 16140,63
-	;[1441] MUSIC s,s,s
-	SRCFILE "requiem.bas",1441
+	;[1440] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1440
+	DECLE 16191,34
+	;[1441] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",1441
+	DECLE 3855,63
+	;[1442] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1442
 	DECLE 16191,63
-	;[1442] MUSIC C3#,A4,s
-	SRCFILE "requiem.bas",1442
-	DECLE 8718,63
 	;[1443] MUSIC s,s,s
-	SRCFILE "requiem.bas",1443
+	SRCFILE "Songs\SHarrierC64.bas",1443
 	DECLE 16191,63
-	;[1444] MUSIC D3,s,s
-	SRCFILE "requiem.bas",1444
-	DECLE 16143,63
-	;[1445] MUSIC s,s,s
-	SRCFILE "requiem.bas",1445
+	;[1444] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1444
+	DECLE 16191,31
+	;[1445] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1445
+	DECLE 5695,63
+	;[1446] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1446
 	DECLE 16191,63
-	;[1446] MUSIC B2,D4,A4
-	SRCFILE "requiem.bas",1446
-	DECLE 6924,34
 	;[1447] MUSIC s,s,s
-	SRCFILE "requiem.bas",1447
+	SRCFILE "Songs\SHarrierC64.bas",1447
 	DECLE 16191,63
-	;[1448] MUSIC C3#,E4,s
-	SRCFILE "requiem.bas",1448
-	DECLE 7438,63
-	;[1449] MUSIC s,s,s
-	SRCFILE "requiem.bas",1449
+	;[1448] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",1448
+	DECLE 16191,29
+	;[1449] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1449
+	DECLE 5135,63
+	;[1450] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1450
 	DECLE 16191,63
-	;[1450] MUSIC A4#,D3,F4
-	SRCFILE "requiem.bas",1450
-	DECLE 3875,30
 	;[1451] MUSIC s,s,s
-	SRCFILE "requiem.bas",1451
+	SRCFILE "Songs\SHarrierC64.bas",1451
 	DECLE 16191,63
-	;[1452] MUSIC C5,s,s
-	SRCFILE "requiem.bas",1452
-	DECLE 16165,63
-	;[1453] MUSIC s,s,s
-	SRCFILE "requiem.bas",1453
+	;[1452] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1452
+	DECLE 16191,31
+	;[1453] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1453
+	DECLE 5695,63
+	;[1454] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1454
 	DECLE 16191,63
-	;[1454] MUSIC A4#,D3,s
-	SRCFILE "requiem.bas",1454
-	DECLE 3875,63
 	;[1455] MUSIC s,s,s
-	SRCFILE "requiem.bas",1455
+	SRCFILE "Songs\SHarrierC64.bas",1455
 	DECLE 16191,63
-	;[1456] MUSIC A4,s,s
-	SRCFILE "requiem.bas",1456
-	DECLE 16162,63
-	;[1457] MUSIC s,s,s
-	SRCFILE "requiem.bas",1457
+	;[1456] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",1456
+	DECLE 16191,27
+	;[1457] MUSIC D3,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1457
+	DECLE 4879,63
+	;[1458] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1458
 	DECLE 16191,63
-	;[1458] MUSIC B4,G3,D4
-	SRCFILE "requiem.bas",1458
-	DECLE 5156,27
 	;[1459] MUSIC s,s,s
-	SRCFILE "requiem.bas",1459
+	SRCFILE "Songs\SHarrierC64.bas",1459
 	DECLE 16191,63
-	;[1460] MUSIC C5,s,s
-	SRCFILE "requiem.bas",1460
-	DECLE 16165,63
-	;[1461] MUSIC s,s,s
-	SRCFILE "requiem.bas",1461
+	;[1460] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1460
+	DECLE 16191,31
+	;[1461] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1461
+	DECLE 5695,63
+	;[1462] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1462
 	DECLE 16191,63
-	;[1462] MUSIC A4,F3,s
-	SRCFILE "requiem.bas",1462
-	DECLE 4642,63
 	;[1463] MUSIC s,s,s
-	SRCFILE "requiem.bas",1463
+	SRCFILE "Songs\SHarrierC64.bas",1463
 	DECLE 16191,63
-	;[1464] MUSIC B4,s,s
-	SRCFILE "requiem.bas",1464
-	DECLE 16164,63
-	;[1465] MUSIC s,s,s
-	SRCFILE "requiem.bas",1465
+	;[1464] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",1464
+	DECLE 16191,29
+	;[1465] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1465
+	DECLE 5135,63
+	;[1466] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1466
 	DECLE 16191,63
-	;[1466] MUSIC C5,E3,G3
-	SRCFILE "requiem.bas",1466
-	DECLE 4389,20
 	;[1467] MUSIC s,s,s
-	SRCFILE "requiem.bas",1467
+	SRCFILE "Songs\SHarrierC64.bas",1467
 	DECLE 16191,63
-	;[1468] MUSIC D5,s,s
-	SRCFILE "requiem.bas",1468
-	DECLE 16167,63
-	;[1469] MUSIC s,s,s
-	SRCFILE "requiem.bas",1469
+	;[1468] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1468
+	DECLE 16191,31
+	;[1469] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1469
+	DECLE 5695,63
+	;[1470] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1470
 	DECLE 16191,63
-	;[1470] MUSIC C5,E3,E4
-	SRCFILE "requiem.bas",1470
-	DECLE 4389,29
 	;[1471] MUSIC s,s,s
-	SRCFILE "requiem.bas",1471
+	SRCFILE "Songs\SHarrierC64.bas",1471
 	DECLE 16191,63
-	;[1472] MUSIC B4,s,s
-	SRCFILE "requiem.bas",1472
-	DECLE 16164,63
-	;[1473] MUSIC s,s,s
-	SRCFILE "requiem.bas",1473
+	;[1472] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1472
+	DECLE 16191,34
+	;[1473] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",1473
+	DECLE 3855,63
+	;[1474] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1474
 	DECLE 16191,63
-	;[1474] MUSIC C5#,A3,E4
-	SRCFILE "requiem.bas",1474
-	DECLE 5670,29
 	;[1475] MUSIC s,s,s
-	SRCFILE "requiem.bas",1475
+	SRCFILE "Songs\SHarrierC64.bas",1475
 	DECLE 16191,63
-	;[1476] MUSIC D5,s,s
-	SRCFILE "requiem.bas",1476
-	DECLE 16167,63
-	;[1477] MUSIC s,s,s
-	SRCFILE "requiem.bas",1477
+	;[1476] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1476
+	DECLE 16191,31
+	;[1477] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1477
+	DECLE 5695,63
+	;[1478] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1478
 	DECLE 16191,63
-	;[1478] MUSIC B4,G3,E4
-	SRCFILE "requiem.bas",1478
-	DECLE 5156,29
 	;[1479] MUSIC s,s,s
-	SRCFILE "requiem.bas",1479
+	SRCFILE "Songs\SHarrierC64.bas",1479
 	DECLE 16191,63
-	;[1480] MUSIC C5#,s,s
-	SRCFILE "requiem.bas",1480
-	DECLE 16166,63
-	;[1481] MUSIC s,s,s
-	SRCFILE "requiem.bas",1481
+	;[1480] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",1480
+	DECLE 16191,29
+	;[1481] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1481
+	DECLE 5135,63
+	;[1482] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1482
 	DECLE 16191,63
-	;[1482] MUSIC F4,D5,F3
-	SRCFILE "requiem.bas",1482
-	DECLE 10014,18
 	;[1483] MUSIC s,s,s
-	SRCFILE "requiem.bas",1483
+	SRCFILE "Songs\SHarrierC64.bas",1483
 	DECLE 16191,63
-	;[1484] MUSIC G4,s,s
-	SRCFILE "requiem.bas",1484
-	DECLE 16160,63
-	;[1485] MUSIC s,s,s
-	SRCFILE "requiem.bas",1485
+	;[1484] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1484
+	DECLE 16191,31
+	;[1485] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1485
+	DECLE 5695,63
+	;[1486] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1486
 	DECLE 16191,63
-	;[1486] MUSIC F4,s,A3
-	SRCFILE "requiem.bas",1486
-	DECLE 16158,22
 	;[1487] MUSIC s,s,s
-	SRCFILE "requiem.bas",1487
+	SRCFILE "Songs\SHarrierC64.bas",1487
 	DECLE 16191,63
-	;[1488] MUSIC E4,s,s
-	SRCFILE "requiem.bas",1488
-	DECLE 16157,63
-	;[1489] MUSIC s,s,s
-	SRCFILE "requiem.bas",1489
+	;[1488] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",1488
+	DECLE 16191,27
+	;[1489] MUSIC D3,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1489
+	DECLE 4879,63
+	;[1490] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1490
 	DECLE 16191,63
-	;[1490] MUSIC F4#,D4,s
-	SRCFILE "requiem.bas",1490
-	DECLE 6943,63
 	;[1491] MUSIC s,s,s
-	SRCFILE "requiem.bas",1491
+	SRCFILE "Songs\SHarrierC64.bas",1491
 	DECLE 16191,63
-	;[1492] MUSIC G4,s,s
-	SRCFILE "requiem.bas",1492
-	DECLE 16160,63
-	;[1493] MUSIC s,s,s
-	SRCFILE "requiem.bas",1493
+	;[1492] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1492
+	DECLE 16191,31
+	;[1493] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1493
+	DECLE 5695,63
+	;[1494] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1494
 	DECLE 16191,63
-	;[1494] MUSIC E4,C4,s
-	SRCFILE "requiem.bas",1494
-	DECLE 6429,63
 	;[1495] MUSIC s,s,s
-	SRCFILE "requiem.bas",1495
+	SRCFILE "Songs\SHarrierC64.bas",1495
 	DECLE 16191,63
-	;[1496] MUSIC F4#,s,s
-	SRCFILE "requiem.bas",1496
-	DECLE 16159,63
-	;[1497] MUSIC s,s,s
-	SRCFILE "requiem.bas",1497
+	;[1496] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",1496
+	DECLE 16191,29
+	;[1497] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1497
+	DECLE 5135,63
+	;[1498] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1498
 	DECLE 16191,63
-	;[1498] MUSIC G4,B3,s
-	SRCFILE "requiem.bas",1498
-	DECLE 6176,63
 	;[1499] MUSIC s,s,s
-	SRCFILE "requiem.bas",1499
+	SRCFILE "Songs\SHarrierC64.bas",1499
 	DECLE 16191,63
-	;[1500] MUSIC A4,s,s
-	SRCFILE "requiem.bas",1500
-	DECLE 16162,63
-	;[1501] MUSIC s,s,s
-	SRCFILE "requiem.bas",1501
+	;[1500] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1500
+	DECLE 16191,31
+	;[1501] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1501
+	DECLE 5695,63
+	;[1502] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1502
 	DECLE 16191,63
-	;[1502] MUSIC G4,B3,E5
-	SRCFILE "requiem.bas",1502
-	DECLE 6176,41
 	;[1503] MUSIC s,s,s
-	SRCFILE "requiem.bas",1503
+	SRCFILE "Songs\SHarrierC64.bas",1503
 	DECLE 16191,63
-	;[1504] MUSIC F4#,s,s
-	SRCFILE "requiem.bas",1504
-	DECLE 16159,63
-	;[1505] MUSIC s,s,s
-	SRCFILE "requiem.bas",1505
+	;[1504] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1504
+	DECLE 16191,32
+	;[1505] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1505
+	DECLE 5183,63
+	;[1506] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1506
 	DECLE 16191,63
-	;[1506] MUSIC G4#,E4,E5
-	SRCFILE "requiem.bas",1506
-	DECLE 7457,41
 	;[1507] MUSIC s,s,s
-	SRCFILE "requiem.bas",1507
+	SRCFILE "Songs\SHarrierC64.bas",1507
 	DECLE 16191,63
-	;[1508] MUSIC A4,s,s
-	SRCFILE "requiem.bas",1508
-	DECLE 16162,63
+	;[1508] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1508
+	DECLE 6975,63
 	;[1509] MUSIC s,s,s
-	SRCFILE "requiem.bas",1509
+	SRCFILE "Songs\SHarrierC64.bas",1509
 	DECLE 16191,63
-	;[1510] MUSIC F4#,D4,E5
-	SRCFILE "requiem.bas",1510
-	DECLE 6943,41
+	;[1510] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1510
+	DECLE 16191,63
 	;[1511] MUSIC s,s,s
-	SRCFILE "requiem.bas",1511
+	SRCFILE "Songs\SHarrierC64.bas",1511
 	DECLE 16191,63
-	;[1512] MUSIC G4#,s,s
-	SRCFILE "requiem.bas",1512
-	DECLE 16161,63
+	;[1512] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1512
+	DECLE 6463,63
 	;[1513] MUSIC s,s,s
-	SRCFILE "requiem.bas",1513
+	SRCFILE "Songs\SHarrierC64.bas",1513
 	DECLE 16191,63
-	;[1514] MUSIC F5,C4,A4
-	SRCFILE "requiem.bas",1514
-	DECLE 6442,34
+	;[1514] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1514
+	DECLE 16191,63
 	;[1515] MUSIC s,s,s
-	SRCFILE "requiem.bas",1515
+	SRCFILE "Songs\SHarrierC64.bas",1515
 	DECLE 16191,63
-	;[1516] MUSIC G5,s,s
-	SRCFILE "requiem.bas",1516
-	DECLE 16172,63
+	;[1516] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1516
+	DECLE 6975,63
 	;[1517] MUSIC s,s,s
-	SRCFILE "requiem.bas",1517
+	SRCFILE "Songs\SHarrierC64.bas",1517
 	DECLE 16191,63
-	;[1518] MUSIC F5,A3,A2
-	SRCFILE "requiem.bas",1518
-	DECLE 5674,10
+	;[1518] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1518
+	DECLE 16191,63
 	;[1519] MUSIC s,s,s
-	SRCFILE "requiem.bas",1519
+	SRCFILE "Songs\SHarrierC64.bas",1519
 	DECLE 16191,63
-	;[1520] MUSIC E5,s,s
-	SRCFILE "requiem.bas",1520
-	DECLE 16169,63
+	;[1520] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1520
+	DECLE 5951,63
 	;[1521] MUSIC s,s,s
-	SRCFILE "requiem.bas",1521
+	SRCFILE "Songs\SHarrierC64.bas",1521
 	DECLE 16191,63
-	;[1522] MUSIC F5#,D4,A4
-	SRCFILE "requiem.bas",1522
-	DECLE 6955,34
+	;[1522] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1522
+	DECLE 16191,63
 	;[1523] MUSIC s,s,s
-	SRCFILE "requiem.bas",1523
+	SRCFILE "Songs\SHarrierC64.bas",1523
 	DECLE 16191,63
-	;[1524] MUSIC G5,s,s
-	SRCFILE "requiem.bas",1524
-	DECLE 16172,63
+	;[1524] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1524
+	DECLE 6975,63
 	;[1525] MUSIC s,s,s
-	SRCFILE "requiem.bas",1525
+	SRCFILE "Songs\SHarrierC64.bas",1525
 	DECLE 16191,63
-	;[1526] MUSIC E5,C4,C3
-	SRCFILE "requiem.bas",1526
-	DECLE 6441,13
+	;[1526] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1526
+	DECLE 16191,63
 	;[1527] MUSIC s,s,s
-	SRCFILE "requiem.bas",1527
+	SRCFILE "Songs\SHarrierC64.bas",1527
 	DECLE 16191,63
-	;[1528] MUSIC F5#,s,s
-	SRCFILE "requiem.bas",1528
-	DECLE 16171,63
+	;[1528] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1528
+	DECLE 5695,63
 	;[1529] MUSIC s,s,s
-	SRCFILE "requiem.bas",1529
+	SRCFILE "Songs\SHarrierC64.bas",1529
 	DECLE 16191,63
-	;[1530] MUSIC G5,B3,G4
-	SRCFILE "requiem.bas",1530
-	DECLE 6188,32
+	;[1530] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1530
+	DECLE 16191,63
 	;[1531] MUSIC s,s,s
-	SRCFILE "requiem.bas",1531
+	SRCFILE "Songs\SHarrierC64.bas",1531
 	DECLE 16191,63
-	;[1532] MUSIC A5,s,s
-	SRCFILE "requiem.bas",1532
-	DECLE 16174,63
+	;[1532] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1532
+	DECLE 6975,63
 	;[1533] MUSIC s,s,s
-	SRCFILE "requiem.bas",1533
+	SRCFILE "Songs\SHarrierC64.bas",1533
 	DECLE 16191,63
-	;[1534] MUSIC G5,B3,B2
-	SRCFILE "requiem.bas",1534
-	DECLE 6188,12
+	;[1534] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1534
+	DECLE 16191,63
 	;[1535] MUSIC s,s,s
-	SRCFILE "requiem.bas",1535
+	SRCFILE "Songs\SHarrierC64.bas",1535
 	DECLE 16191,63
-	;[1536] MUSIC F5#,s,s
-	SRCFILE "requiem.bas",1536
-	DECLE 16171,63
-	;[1537] MUSIC s,s,s
-	SRCFILE "requiem.bas",1537
+	;[1536] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1536
+	DECLE 16191,34
+	;[1537] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",1537
+	DECLE 3855,63
+	;[1538] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1538
 	DECLE 16191,63
-	;[1538] MUSIC G5#,E4,B4
-	SRCFILE "requiem.bas",1538
-	DECLE 7469,36
 	;[1539] MUSIC s,s,s
-	SRCFILE "requiem.bas",1539
+	SRCFILE "Songs\SHarrierC64.bas",1539
 	DECLE 16191,63
-	;[1540] MUSIC A5,s,s
-	SRCFILE "requiem.bas",1540
-	DECLE 16174,63
+	;[1540] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1540
+	DECLE 6975,63
 	;[1541] MUSIC s,s,s
-	SRCFILE "requiem.bas",1541
+	SRCFILE "Songs\SHarrierC64.bas",1541
 	DECLE 16191,63
-	;[1542] MUSIC F5#,D4,D3
-	SRCFILE "requiem.bas",1542
-	DECLE 6955,15
+	;[1542] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1542
+	DECLE 16191,63
 	;[1543] MUSIC s,s,s
-	SRCFILE "requiem.bas",1543
+	SRCFILE "Songs\SHarrierC64.bas",1543
 	DECLE 16191,63
-	;[1544] MUSIC G5#,s,s
-	SRCFILE "requiem.bas",1544
-	DECLE 16173,63
+	;[1544] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1544
+	DECLE 6463,63
 	;[1545] MUSIC s,s,s
-	SRCFILE "requiem.bas",1545
+	SRCFILE "Songs\SHarrierC64.bas",1545
 	DECLE 16191,63
-	;[1546] MUSIC A5,A4,C4#
-	SRCFILE "requiem.bas",1546
-	DECLE 8750,26
+	;[1546] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1546
+	DECLE 16191,63
 	;[1547] MUSIC s,s,s
-	SRCFILE "requiem.bas",1547
+	SRCFILE "Songs\SHarrierC64.bas",1547
 	DECLE 16191,63
-	;[1548] MUSIC s,s,s
-	SRCFILE "requiem.bas",1548
-	DECLE 16191,63
+	;[1548] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1548
+	DECLE 6975,63
 	;[1549] MUSIC s,s,s
-	SRCFILE "requiem.bas",1549
+	SRCFILE "Songs\SHarrierC64.bas",1549
 	DECLE 16191,63
-	;[1550] MUSIC C5#,E4,A3
-	SRCFILE "requiem.bas",1550
-	DECLE 7462,22
+	;[1550] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1550
+	DECLE 16191,63
 	;[1551] MUSIC s,s,s
-	SRCFILE "requiem.bas",1551
+	SRCFILE "Songs\SHarrierC64.bas",1551
 	DECLE 16191,63
-	;[1552] MUSIC s,s,s
-	SRCFILE "requiem.bas",1552
+	;[1552] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",1552
+	DECLE 16191,43
+	;[1553] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1553
+	DECLE 5647,63
+	;[1554] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1554
 	DECLE 16191,63
-	;[1553] MUSIC s,s,s
-	SRCFILE "requiem.bas",1553
-	DECLE 16191,63
-	;[1554] MUSIC D5,D4,A3#
-	SRCFILE "requiem.bas",1554
-	DECLE 6951,23
 	;[1555] MUSIC s,s,s
-	SRCFILE "requiem.bas",1555
+	SRCFILE "Songs\SHarrierC64.bas",1555
 	DECLE 16191,63
-	;[1556] MUSIC s,s,s
-	SRCFILE "requiem.bas",1556
+	;[1556] 
+	SRCFILE "Songs\SHarrierC64.bas",1556
+	;[1557] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1557
+	DECLE 6975,63
+	;[1558] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1558
 	DECLE 16191,63
-	;[1557] MUSIC s,s,s
-	SRCFILE "requiem.bas",1557
-	DECLE 16191,63
-	;[1558] MUSIC D5,F4,G3
-	SRCFILE "requiem.bas",1558
-	DECLE 7719,20
 	;[1559] MUSIC s,s,s
-	SRCFILE "requiem.bas",1559
+	SRCFILE "Songs\SHarrierC64.bas",1559
 	DECLE 16191,63
 	;[1560] MUSIC s,s,s
-	SRCFILE "requiem.bas",1560
+	SRCFILE "Songs\SHarrierC64.bas",1560
 	DECLE 16191,63
-	;[1561] MUSIC s,s,s
-	SRCFILE "requiem.bas",1561
+	;[1561] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1561
+	DECLE 6463,63
+	;[1562] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1562
 	DECLE 16191,63
-	;[1562] MUSIC D5,A3,E4
-	SRCFILE "requiem.bas",1562
-	DECLE 5671,29
 	;[1563] MUSIC s,s,s
-	SRCFILE "requiem.bas",1563
+	SRCFILE "Songs\SHarrierC64.bas",1563
 	DECLE 16191,63
 	;[1564] MUSIC s,s,s
-	SRCFILE "requiem.bas",1564
+	SRCFILE "Songs\SHarrierC64.bas",1564
 	DECLE 16191,63
-	;[1565] MUSIC s,s,s
-	SRCFILE "requiem.bas",1565
+	;[1565] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1565
+	DECLE 6975,63
+	;[1566] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1566
 	DECLE 16191,63
-	;[1566] MUSIC s,s,A2
-	SRCFILE "requiem.bas",1566
-	DECLE 16191,10
 	;[1567] MUSIC s,s,s
-	SRCFILE "requiem.bas",1567
-	DECLE 16191,63
-	;[1568] MUSIC s,s,A2
-	SRCFILE "requiem.bas",1568
-	DECLE 16191,10
-	;[1569] MUSIC s,s,s
-	SRCFILE "requiem.bas",1569
-	DECLE 16191,63
-	;[1570] MUSIC A2,C5#,s
-	SRCFILE "requiem.bas",1570
-	DECLE 9738,63
-	;[1571] MUSIC s,s,s
-	SRCFILE "requiem.bas",1571
-	DECLE 16191,63
-	;[1572] MUSIC s,s,s
-	SRCFILE "requiem.bas",1572
-	DECLE 16191,63
-	;[1573] MUSIC s,s,s
-	SRCFILE "requiem.bas",1573
-	DECLE 16191,63
-	;[1574] MUSIC A2,E4,A4
-	SRCFILE "requiem.bas",1574
-	DECLE 7434,34
-	;[1575] MUSIC s,s,s
-	SRCFILE "requiem.bas",1575
-	DECLE 16191,63
-	;[1576] MUSIC s,s,s
-	SRCFILE "requiem.bas",1576
-	DECLE 16191,63
-	;[1577] MUSIC s,s,s
-	SRCFILE "requiem.bas",1577
-	DECLE 16191,63
-	;[1578] MUSIC F4,B4,D5
-	SRCFILE "requiem.bas",1578
-	DECLE 9246,39
-	;[1579] MUSIC s,s,s
-	SRCFILE "requiem.bas",1579
-	DECLE 16191,63
-	;[1580] MUSIC s,s,s
-	SRCFILE "requiem.bas",1580
-	DECLE 16191,63
-	;[1581] MUSIC s,s,s
-	SRCFILE "requiem.bas",1581
-	DECLE 16191,63
-	;[1582] MUSIC s,s,s
-	SRCFILE "requiem.bas",1582
-	DECLE 16191,63
-	;[1583] MUSIC s,s,s
-	SRCFILE "requiem.bas",1583
-	DECLE 16191,63
-	;[1584] MUSIC s,s,s
-	SRCFILE "requiem.bas",1584
-	DECLE 16191,63
-	;[1585] MUSIC s,s,s
-	SRCFILE "requiem.bas",1585
-	DECLE 16191,63
-	;[1586] MUSIC s,s,s
-	SRCFILE "requiem.bas",1586
-	DECLE 16191,63
-	;[1587] MUSIC s,s,s
-	SRCFILE "requiem.bas",1587
-	DECLE 16191,63
-	;[1588] MUSIC s,s,s
-	SRCFILE "requiem.bas",1588
-	DECLE 16191,63
-	;[1589] MUSIC s,s,s
-	SRCFILE "requiem.bas",1589
-	DECLE 16191,63
-	;[1590] MUSIC s,s,s
-	SRCFILE "requiem.bas",1590
-	DECLE 16191,63
-	;[1591] MUSIC s,s,s
-	SRCFILE "requiem.bas",1591
-	DECLE 16191,63
-	;[1592] MUSIC s,s,s
-	SRCFILE "requiem.bas",1592
-	DECLE 16191,63
-	;[1593] MUSIC s,s,s
-	SRCFILE "requiem.bas",1593
-	DECLE 16191,63
-	;[1594] MUSIC s,s,s
-	SRCFILE "requiem.bas",1594
-	DECLE 16191,63
-	;[1595] MUSIC s,s,s
-	SRCFILE "requiem.bas",1595
-	DECLE 16191,63
-	;[1596] MUSIC s,s,s
-	SRCFILE "requiem.bas",1596
-	DECLE 16191,63
-	;[1597] MUSIC s,s,s
-	SRCFILE "requiem.bas",1597
-	DECLE 16191,63
-	;[1598] MUSIC s,s,s
-	SRCFILE "requiem.bas",1598
-	DECLE 16191,63
-	;[1599] MUSIC s,s,s
-	SRCFILE "requiem.bas",1599
-	DECLE 16191,63
-	;[1600] MUSIC s,s,s
-	SRCFILE "requiem.bas",1600
-	DECLE 16191,63
-	;[1601] MUSIC s,s,s
-	SRCFILE "requiem.bas",1601
-	DECLE 16191,63
-	;[1602] MUSIC s,s,s
-	SRCFILE "requiem.bas",1602
-	DECLE 16191,63
-	;[1603] MUSIC s,s,s
-	SRCFILE "requiem.bas",1603
-	DECLE 16191,63
-	;[1604] MUSIC s,s,s
-	SRCFILE "requiem.bas",1604
-	DECLE 16191,63
-	;[1605] MUSIC s,s,s
-	SRCFILE "requiem.bas",1605
-	DECLE 16191,63
-	;[1606] MUSIC F4,D5,B4
-	SRCFILE "requiem.bas",1606
-	DECLE 10014,36
-	;[1607] MUSIC s,s,s
-	SRCFILE "requiem.bas",1607
-	DECLE 16191,63
-	;[1608] MUSIC s,s,s
-	SRCFILE "requiem.bas",1608
-	DECLE 16191,63
-	;[1609] MUSIC s,s,s
-	SRCFILE "requiem.bas",1609
-	DECLE 16191,63
-	;[1610] MUSIC s,s,s
-	SRCFILE "requiem.bas",1610
-	DECLE 16191,63
-	;[1611] MUSIC s,s,s
-	SRCFILE "requiem.bas",1611
-	DECLE 16191,63
-	;[1612] MUSIC s,s,s
-	SRCFILE "requiem.bas",1612
-	DECLE 16191,63
-	;[1613] MUSIC s,s,s
-	SRCFILE "requiem.bas",1613
-	DECLE 16191,63
-	;[1614] MUSIC s,s,s
-	SRCFILE "requiem.bas",1614
-	DECLE 16191,63
-	;[1615] MUSIC s,s,s
-	SRCFILE "requiem.bas",1615
-	DECLE 16191,63
-	;[1616] MUSIC s,s,s
-	SRCFILE "requiem.bas",1616
-	DECLE 16191,63
-	;[1617] MUSIC s,s,s
-	SRCFILE "requiem.bas",1617
-	DECLE 16191,63
-	;[1618] MUSIC D5,F4,B4
-	SRCFILE "requiem.bas",1618
-	DECLE 7719,36
-	;[1619] MUSIC s,s,s
-	SRCFILE "requiem.bas",1619
-	DECLE 16191,63
-	;[1620] MUSIC C5#,A4,E4
-	SRCFILE "requiem.bas",1620
-	DECLE 8742,29
-	;[1621] MUSIC s,s,s
-	SRCFILE "requiem.bas",1621
-	DECLE 16191,63
-	;[1622] MUSIC s,s,s
-	SRCFILE "requiem.bas",1622
-	DECLE 16191,63
-	;[1623] MUSIC s,s,s
-	SRCFILE "requiem.bas",1623
-	DECLE 16191,63
-	;[1624] MUSIC s,s,s
-	SRCFILE "requiem.bas",1624
-	DECLE 16191,63
-	;[1625] MUSIC s,s,s
-	SRCFILE "requiem.bas",1625
-	DECLE 16191,63
-	;[1626] MUSIC s,s,s
-	SRCFILE "requiem.bas",1626
-	DECLE 16191,63
-	;[1627] MUSIC s,s,s
-	SRCFILE "requiem.bas",1627
-	DECLE 16191,63
-	;[1628] MUSIC F4,A4,D5
-	SRCFILE "requiem.bas",1628
-	DECLE 8734,39
-	;[1629] MUSIC s,s,s
-	SRCFILE "requiem.bas",1629
-	DECLE 16191,63
-	;[1630] MUSIC s,s,s
-	SRCFILE "requiem.bas",1630
-	DECLE 16191,63
-	;[1631] MUSIC s,s,s
-	SRCFILE "requiem.bas",1631
-	DECLE 16191,63
-	;[1632] MUSIC s,s,s
-	SRCFILE "requiem.bas",1632
-	DECLE 16191,63
-	;[1633] MUSIC s,s,s
-	SRCFILE "requiem.bas",1633
-	DECLE 16191,63
-	;[1634] MUSIC s,s,s
-	SRCFILE "requiem.bas",1634
-	DECLE 16191,63
-	;[1635] MUSIC s,s,s
-	SRCFILE "requiem.bas",1635
-	DECLE 16191,63
-	;[1636] MUSIC s,s,s
-	SRCFILE "requiem.bas",1636
-	DECLE 16191,63
-	;[1637] MUSIC s,s,s
-	SRCFILE "requiem.bas",1637
-	DECLE 16191,63
-	;[1638] MUSIC s,s,s
-	SRCFILE "requiem.bas",1638
-	DECLE 16191,63
-	;[1639] MUSIC s,s,s
-	SRCFILE "requiem.bas",1639
-	DECLE 16191,63
-	;[1640] MUSIC s,s,s
-	SRCFILE "requiem.bas",1640
-	DECLE 16191,63
-	;[1641] MUSIC s,s,s
-	SRCFILE "requiem.bas",1641
-	DECLE 16191,63
-	;[1642] MUSIC s,s,s
-	SRCFILE "requiem.bas",1642
-	DECLE 16191,63
-	;[1643] MUSIC s,s,s
-	SRCFILE "requiem.bas",1643
-	DECLE 16191,63
-	;[1644] MUSIC E4,A4,C5#
-	SRCFILE "requiem.bas",1644
-	DECLE 8733,38
-	;[1645] MUSIC s,s,s
-	SRCFILE "requiem.bas",1645
-	DECLE 16191,63
-	;[1646] MUSIC s,s,s
-	SRCFILE "requiem.bas",1646
-	DECLE 16191,63
-	;[1647] MUSIC s,s,s
-	SRCFILE "requiem.bas",1647
-	DECLE 16191,63
-	;[1648] MUSIC s,s,s
-	SRCFILE "requiem.bas",1648
-	DECLE 16191,63
-	;[1649] MUSIC s,s,s
-	SRCFILE "requiem.bas",1649
-	DECLE 16191,63
-	;[1650] MUSIC s,s,s
-	SRCFILE "requiem.bas",1650
-	DECLE 16191,63
-	;[1651] MUSIC s,s,s
-	SRCFILE "requiem.bas",1651
-	DECLE 16191,63
-	;[1652] MUSIC D4,A4,D5
-	SRCFILE "requiem.bas",1652
-	DECLE 8731,39
-	;[1653] MUSIC s,s,s
-	SRCFILE "requiem.bas",1653
-	DECLE 16191,63
-	;[1654] MUSIC s,s,s
-	SRCFILE "requiem.bas",1654
-	DECLE 16191,63
-	;[1655] MUSIC s,s,s
-	SRCFILE "requiem.bas",1655
-	DECLE 16191,63
-	;[1656] MUSIC s,s,s
-	SRCFILE "requiem.bas",1656
-	DECLE 16191,63
-	;[1657] MUSIC s,s,s
-	SRCFILE "requiem.bas",1657
-	DECLE 16191,63
-	;[1658] MUSIC s,s,s
-	SRCFILE "requiem.bas",1658
-	DECLE 16191,63
-	;[1659] MUSIC s,s,s
-	SRCFILE "requiem.bas",1659
-	DECLE 16191,63
-	;[1660] MUSIC s,s,s
-	SRCFILE "requiem.bas",1660
-	DECLE 16191,63
-	;[1661] MUSIC s,s,s
-	SRCFILE "requiem.bas",1661
-	DECLE 16191,63
-	;[1662] MUSIC s,s,s
-	SRCFILE "requiem.bas",1662
-	DECLE 16191,63
-	;[1663] MUSIC s,s,s
-	SRCFILE "requiem.bas",1663
-	DECLE 16191,63
-	;[1664] MUSIC s,s,s
-	SRCFILE "requiem.bas",1664
-	DECLE 16191,63
-	;[1665] MUSIC s,s,s
-	SRCFILE "requiem.bas",1665
-	DECLE 16191,63
-	;[1666] MUSIC s,s,s
-	SRCFILE "requiem.bas",1666
-	DECLE 16191,63
-	;[1667] MUSIC STOP
-	SRCFILE "requiem.bas",1667
+	SRCFILE "Songs\SHarrierC64.bas",1567
+	DECLE 16191,63
+	;[1568] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1568
+	DECLE 16191,63
+	;[1569] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1569
+	DECLE 16191,40
+	;[1570] MUSIC C3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1570
+	DECLE 6413,63
+	;[1571] MUSIC s,s,D6#
+	SRCFILE "Songs\SHarrierC64.bas",1571
+	DECLE 16191,52
+	;[1572] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1572
+	DECLE 16191,40
+	;[1573] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1573
+	DECLE 16191,37
+	;[1574] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1574
+	DECLE 8255,63
+	;[1575] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1575
+	DECLE 16191,49
+	;[1576] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1576
+	DECLE 16191,37
+	;[1577] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1577
+	DECLE 16191,36
+	;[1578] MUSIC C3,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1578
+	DECLE 7693,63
+	;[1579] MUSIC s,s,B5
+	SRCFILE "Songs\SHarrierC64.bas",1579
+	DECLE 16191,48
+	;[1580] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1580
+	DECLE 16191,36
+	;[1581] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1581
+	DECLE 16191,37
+	;[1582] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1582
+	DECLE 8255,63
+	;[1583] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1583
+	DECLE 16191,49
+	;[1584] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1584
+	DECLE 16191,37
+	;[1585] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1585
+	DECLE 16191,32
+	;[1586] MUSIC C3,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",1586
+	DECLE 7181,63
+	;[1587] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1587
+	DECLE 16191,44
+	;[1588] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1588
+	DECLE 16191,32
+	;[1589] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1589
+	DECLE 16191,37
+	;[1590] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1590
+	DECLE 8255,63
+	;[1591] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1591
+	DECLE 16191,49
+	;[1592] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1592
+	DECLE 16191,37
+	;[1593] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1593
+	DECLE 16191,36
+	;[1594] MUSIC C3,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1594
+	DECLE 7693,63
+	;[1595] MUSIC s,s,B5
+	SRCFILE "Songs\SHarrierC64.bas",1595
+	DECLE 16191,48
+	;[1596] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1596
+	DECLE 16191,36
+	;[1597] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1597
+	DECLE 16191,37
+	;[1598] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1598
+	DECLE 8255,63
+	;[1599] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1599
+	DECLE 16191,49
+	;[1600] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1600
+	DECLE 16191,37
+	;[1601] MUSIC s,F3,s
+	SRCFILE "Songs\SHarrierC64.bas",1601
+	DECLE 4671,63
+	;[1602] MUSIC F2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1602
+	DECLE 16134,63
+	;[1603] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1603
+	DECLE 16191,49
+	;[1604] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1604
+	DECLE 16191,37
+	;[1605] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1605
+	DECLE 16191,34
+	;[1606] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1606
+	DECLE 6463,63
+	;[1607] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1607
+	DECLE 16191,46
+	;[1608] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1608
+	DECLE 16191,34
+	;[1609] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1609
+	DECLE 16191,32
+	;[1610] MUSIC F3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1610
+	DECLE 5906,63
+	;[1611] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1611
+	DECLE 16191,44
+	;[1612] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1612
+	DECLE 16191,32
+	;[1613] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1613
+	DECLE 16191,34
+	;[1614] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1614
+	DECLE 6463,63
+	;[1615] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1615
+	DECLE 16191,46
+	;[1616] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1616
+	DECLE 16191,34
+	;[1617] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1617
+	DECLE 16191,30
+	;[1618] MUSIC F2,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1618
+	DECLE 5638,63
+	;[1619] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1619
+	DECLE 16191,42
+	;[1620] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1620
+	DECLE 16191,30
+	;[1621] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1621
+	DECLE 16191,34
+	;[1622] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1622
+	DECLE 6463,63
+	;[1623] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1623
+	DECLE 16191,46
+	;[1624] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1624
+	DECLE 16191,34
+	;[1625] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1625
+	DECLE 16191,32
+	;[1626] MUSIC F3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1626
+	DECLE 5906,63
+	;[1627] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1627
+	DECLE 16191,44
+	;[1628] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1628
+	DECLE 16191,32
+	;[1629] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1629
+	DECLE 16191,34
+	;[1630] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1630
+	DECLE 6463,63
+	;[1631] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1631
+	DECLE 16191,46
+	;[1632] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1632
+	DECLE 16191,34
+	;[1633] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1633
+	DECLE 16191,39
+	;[1634] MUSIC A2#,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1634
+	DECLE 5899,63
+	;[1635] MUSIC s,s,D6
+	SRCFILE "Songs\SHarrierC64.bas",1635
+	DECLE 16191,51
+	;[1636] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1636
+	DECLE 16191,39
+	;[1637] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1637
+	DECLE 16191,35
+	;[1638] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1638
+	DECLE 7743,63
+	;[1639] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1639
+	DECLE 16191,47
+	;[1640] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1640
+	DECLE 16191,35
+	;[1641] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1641
+	DECLE 16191,34
+	;[1642] MUSIC A3#,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",1642
+	DECLE 7191,63
+	;[1643] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1643
+	DECLE 16191,46
+	;[1644] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1644
+	DECLE 16191,34
+	;[1645] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1645
+	DECLE 16191,35
+	;[1646] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1646
+	DECLE 7743,63
+	;[1647] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1647
+	DECLE 16191,47
+	;[1648] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1648
+	DECLE 16191,35
+	;[1649] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1649
+	DECLE 16191,30
+	;[1650] MUSIC A2#,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1650
+	DECLE 6923,63
+	;[1651] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1651
+	DECLE 16191,42
+	;[1652] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1652
+	DECLE 16191,30
+	;[1653] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1653
+	DECLE 16191,35
+	;[1654] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1654
+	DECLE 7743,63
+	;[1655] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1655
+	DECLE 16191,47
+	;[1656] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1656
+	DECLE 16191,35
+	;[1657] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1657
+	DECLE 16191,34
+	;[1658] MUSIC A3#,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",1658
+	DECLE 7191,63
+	;[1659] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1659
+	DECLE 16191,46
+	;[1660] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1660
+	DECLE 16191,34
+	;[1661] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1661
+	DECLE 16191,35
+	;[1662] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1662
+	DECLE 7743,63
+	;[1663] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1663
+	DECLE 16191,47
+	;[1664] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1664
+	DECLE 16191,35
+	;[1665] MUSIC s,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1665
+	DECLE 4159,63
+	;[1666] MUSIC D3#,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1666
+	DECLE 16144,63
+	;[1667] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1667
+	DECLE 16191,47
+	;[1668] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1668
+	DECLE 16191,35
+	;[1669] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1669
+	DECLE 16191,32
+	;[1670] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1670
+	DECLE 5951,63
+	;[1671] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1671
+	DECLE 16191,44
+	;[1672] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1672
+	DECLE 16191,32
+	;[1673] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1673
+	DECLE 16191,30
+	;[1674] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1674
+	DECLE 5648,63
+	;[1675] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1675
+	DECLE 16191,42
+	;[1676] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1676
+	DECLE 16191,30
+	;[1677] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1677
+	DECLE 16191,32
+	;[1678] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1678
+	DECLE 5951,63
+	;[1679] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1679
+	DECLE 16191,44
+	;[1680] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1680
+	DECLE 16191,32
+	;[1681] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",1681
+	DECLE 16191,28
+	;[1682] MUSIC D3#,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1682
+	DECLE 5136,63
+	;[1683] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1683
+	DECLE 16191,40
+	;[1684] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",1684
+	DECLE 16191,28
+	;[1685] 
+	SRCFILE "Songs\SHarrierC64.bas",1685
+	;[1686] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1686
+	DECLE 16191,32
+	;[1687] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1687
+	DECLE 5951,63
+	;[1688] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1688
+	DECLE 16191,44
+	;[1689] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1689
+	DECLE 16191,32
+	;[1690] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1690
+	DECLE 16191,30
+	;[1691] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1691
+	DECLE 5648,63
+	;[1692] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1692
+	DECLE 16191,42
+	;[1693] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1693
+	DECLE 16191,30
+	;[1694] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1694
+	DECLE 16191,32
+	;[1695] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1695
+	DECLE 5951,63
+	;[1696] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1696
+	DECLE 16191,44
+	;[1697] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1697
+	DECLE 16191,32
+	;[1698] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1698
+	DECLE 16191,37
+	;[1699] MUSIC C3,C3,s
+	SRCFILE "Songs\SHarrierC64.bas",1699
+	DECLE 3341,63
+	;[1700] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1700
+	DECLE 16191,49
+	;[1701] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1701
+	DECLE 16191,37
+	;[1702] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1702
+	DECLE 16191,34
+	;[1703] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1703
+	DECLE 5183,63
+	;[1704] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1704
+	DECLE 16191,46
+	;[1705] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1705
+	DECLE 4927,34
+	;[1706] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1706
+	DECLE 16191,32
+	;[1707] MUSIC C3,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1707
+	DECLE 4109,63
+	;[1708] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1708
+	DECLE 16191,44
+	;[1709] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1709
+	DECLE 16191,32
+	;[1710] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1710
+	DECLE 16191,34
+	;[1711] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1711
+	DECLE 5183,63
+	;[1712] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1712
+	DECLE 16191,46
+	;[1713] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1713
+	DECLE 4927,34
+	;[1714] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1714
+	DECLE 16191,31
+	;[1715] MUSIC C3,C3,s
+	SRCFILE "Songs\SHarrierC64.bas",1715
+	DECLE 3341,63
+	;[1716] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",1716
+	DECLE 16191,43
+	;[1717] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1717
+	DECLE 16191,31
+	;[1718] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1718
+	DECLE 16191,34
+	;[1719] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1719
+	DECLE 5183,63
+	;[1720] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1720
+	DECLE 16191,46
+	;[1721] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1721
+	DECLE 4927,34
+	;[1722] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1722
+	DECLE 16191,32
+	;[1723] MUSIC C3,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1723
+	DECLE 4109,63
+	;[1724] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1724
+	DECLE 16191,44
+	;[1725] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1725
+	DECLE 16191,32
+	;[1726] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1726
+	DECLE 16191,34
+	;[1727] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1727
+	DECLE 5183,63
+	;[1728] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1728
+	DECLE 16191,46
+	;[1729] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1729
+	DECLE 4927,34
+	;[1730] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1730
+	DECLE 16191,37
+	;[1731] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",1731
+	DECLE 3855,63
+	;[1732] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1732
+	DECLE 16191,49
+	;[1733] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1733
+	DECLE 16191,37
+	;[1734] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1734
+	DECLE 16191,34
+	;[1735] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1735
+	DECLE 6463,63
+	;[1736] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1736
+	DECLE 16191,46
+	;[1737] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1737
+	DECLE 16191,34
+	;[1738] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1738
+	DECLE 16191,32
+	;[1739] MUSIC D3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1739
+	DECLE 5903,63
+	;[1740] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1740
+	DECLE 16191,44
+	;[1741] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1741
+	DECLE 16191,32
+	;[1742] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1742
+	DECLE 16191,34
+	;[1743] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1743
+	DECLE 6463,63
+	;[1744] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1744
+	DECLE 16191,46
+	;[1745] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1745
+	DECLE 16191,34
+	;[1746] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1746
+	DECLE 16191,31
+	;[1747] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1747
+	DECLE 5647,63
+	;[1748] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",1748
+	DECLE 16191,43
+	;[1749] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1749
+	DECLE 16191,31
+	;[1750] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1750
+	DECLE 16191,34
+	;[1751] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1751
+	DECLE 6463,63
+	;[1752] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1752
+	DECLE 16191,46
+	;[1753] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1753
+	DECLE 16191,34
+	;[1754] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1754
+	DECLE 16191,32
+	;[1755] MUSIC D3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1755
+	DECLE 5903,63
+	;[1756] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1756
+	DECLE 16191,44
+	;[1757] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1757
+	DECLE 16191,32
+	;[1758] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1758
+	DECLE 16191,34
+	;[1759] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1759
+	DECLE 6463,63
+	;[1760] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1760
+	DECLE 16191,46
+	;[1761] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1761
+	DECLE 16191,34
+	;[1762] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1762
+	DECLE 16191,35
+	;[1763] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1763
+	DECLE 5128,63
+	;[1764] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1764
+	DECLE 16191,47
+	;[1765] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1765
+	DECLE 16191,35
+	;[1766] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1766
+	DECLE 16191,47
+	;[1767] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1767
+	DECLE 6975,63
+	;[1768] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1768
+	DECLE 16191,35
+	;[1769] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1769
+	DECLE 16191,47
+	;[1770] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1770
+	DECLE 16191,35
+	;[1771] MUSIC G3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1771
+	DECLE 5908,63
+	;[1772] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1772
+	DECLE 16191,47
+	;[1773] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1773
+	DECLE 16191,35
+	;[1774] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1774
+	DECLE 16191,47
+	;[1775] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1775
+	DECLE 6975,63
+	;[1776] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1776
+	DECLE 16191,35
+	;[1777] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1777
+	DECLE 16191,47
+	;[1778] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1778
+	DECLE 16191,35
+	;[1779] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1779
+	DECLE 5128,63
+	;[1780] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1780
+	DECLE 16191,47
+	;[1781] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1781
+	DECLE 16191,35
+	;[1782] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1782
+	DECLE 16191,47
+	;[1783] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1783
+	DECLE 6975,63
+	;[1784] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1784
+	DECLE 16191,35
+	;[1785] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1785
+	DECLE 16191,47
+	;[1786] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1786
+	DECLE 16191,35
+	;[1787] MUSIC G3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1787
+	DECLE 5908,63
+	;[1788] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1788
+	DECLE 16191,47
+	;[1789] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1789
+	DECLE 16191,35
+	;[1790] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1790
+	DECLE 16191,47
+	;[1791] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1791
+	DECLE 6975,63
+	;[1792] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1792
+	DECLE 16191,35
+	;[1793] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1793
+	DECLE 16191,47
+	;[1794] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1794
+	DECLE 16191,35
+	;[1795] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1795
+	DECLE 5183,63
+	;[1796] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1796
+	DECLE 16191,47
+	;[1797] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1797
+	DECLE 16191,35
+	;[1798] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1798
+	DECLE 16191,47
+	;[1799] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1799
+	DECLE 6975,63
+	;[1800] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1800
+	DECLE 16191,35
+	;[1801] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1801
+	DECLE 16191,47
+	;[1802] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1802
+	DECLE 16191,37
+	;[1803] MUSIC A3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1803
+	DECLE 5654,63
+	;[1804] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1804
+	DECLE 16191,49
+	;[1805] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1805
+	DECLE 16191,37
+	;[1806] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1806
+	DECLE 16191,49
+	;[1807] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1807
+	DECLE 6975,63
+	;[1808] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1808
+	DECLE 16191,37
+	;[1809] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1809
+	DECLE 16191,49
+	;[1810] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1810
+	DECLE 16191,39
+	;[1811] MUSIC A3#,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1811
+	DECLE 5911,63
+	;[1812] MUSIC s,s,D6
+	SRCFILE "Songs\SHarrierC64.bas",1812
+	DECLE 16191,51
+	;[1813] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1813
+	DECLE 16191,39
+	;[1814] 
+	SRCFILE "Songs\SHarrierC64.bas",1814
+	;[1815] MUSIC s,s,D6
+	SRCFILE "Songs\SHarrierC64.bas",1815
+	DECLE 16191,51
+	;[1816] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1816
+	DECLE 6975,63
+	;[1817] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1817
+	DECLE 16191,39
+	;[1818] MUSIC s,s,D6
+	SRCFILE "Songs\SHarrierC64.bas",1818
+	DECLE 16191,51
+	;[1819] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1819
+	DECLE 16191,35
+	;[1820] MUSIC G3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1820
+	DECLE 5140,63
+	;[1821] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1821
+	DECLE 16191,47
+	;[1822] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1822
+	DECLE 16191,35
+	;[1823] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1823
+	DECLE 16191,47
+	;[1824] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1824
+	DECLE 6975,63
+	;[1825] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1825
+	DECLE 16191,35
+	;[1826] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1826
+	DECLE 16191,47
+	;[1827] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1827
+	DECLE 16191,40
+	;[1828] MUSIC C3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1828
+	DECLE 6413,63
+	;[1829] MUSIC s,s,D6#
+	SRCFILE "Songs\SHarrierC64.bas",1829
+	DECLE 16191,52
+	;[1830] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1830
+	DECLE 16191,40
+	;[1831] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1831
+	DECLE 16191,37
+	;[1832] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1832
+	DECLE 8255,63
+	;[1833] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1833
+	DECLE 16191,49
+	;[1834] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1834
+	DECLE 16191,37
+	;[1835] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1835
+	DECLE 16191,36
+	;[1836] MUSIC C3,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1836
+	DECLE 7693,63
+	;[1837] MUSIC s,s,B5
+	SRCFILE "Songs\SHarrierC64.bas",1837
+	DECLE 16191,48
+	;[1838] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1838
+	DECLE 16191,36
+	;[1839] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1839
+	DECLE 16191,37
+	;[1840] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1840
+	DECLE 8255,63
+	;[1841] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1841
+	DECLE 16191,49
+	;[1842] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1842
+	DECLE 16191,37
+	;[1843] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1843
+	DECLE 16191,32
+	;[1844] MUSIC C3,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",1844
+	DECLE 7181,63
+	;[1845] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1845
+	DECLE 16191,44
+	;[1846] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1846
+	DECLE 16191,32
+	;[1847] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1847
+	DECLE 16191,37
+	;[1848] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1848
+	DECLE 8255,63
+	;[1849] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1849
+	DECLE 16191,49
+	;[1850] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1850
+	DECLE 16191,37
+	;[1851] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1851
+	DECLE 16191,36
+	;[1852] MUSIC C3,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1852
+	DECLE 7693,63
+	;[1853] MUSIC s,s,B5
+	SRCFILE "Songs\SHarrierC64.bas",1853
+	DECLE 16191,48
+	;[1854] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",1854
+	DECLE 16191,36
+	;[1855] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1855
+	DECLE 16191,37
+	;[1856] MUSIC s,G4,s
+	SRCFILE "Songs\SHarrierC64.bas",1856
+	DECLE 8255,63
+	;[1857] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1857
+	DECLE 16191,49
+	;[1858] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1858
+	DECLE 16191,37
+	;[1859] MUSIC s,F3,s
+	SRCFILE "Songs\SHarrierC64.bas",1859
+	DECLE 4671,63
+	;[1860] MUSIC F2,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1860
+	DECLE 16134,63
+	;[1861] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1861
+	DECLE 16191,49
+	;[1862] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1862
+	DECLE 16191,37
+	;[1863] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1863
+	DECLE 16191,34
+	;[1864] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1864
+	DECLE 6463,63
+	;[1865] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1865
+	DECLE 16191,46
+	;[1866] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1866
+	DECLE 16191,34
+	;[1867] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1867
+	DECLE 16191,32
+	;[1868] MUSIC F3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1868
+	DECLE 5906,63
+	;[1869] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1869
+	DECLE 16191,44
+	;[1870] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1870
+	DECLE 16191,32
+	;[1871] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1871
+	DECLE 16191,34
+	;[1872] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1872
+	DECLE 6463,63
+	;[1873] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1873
+	DECLE 16191,46
+	;[1874] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1874
+	DECLE 16191,34
+	;[1875] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1875
+	DECLE 16191,30
+	;[1876] MUSIC F2,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1876
+	DECLE 5638,63
+	;[1877] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1877
+	DECLE 16191,42
+	;[1878] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1878
+	DECLE 16191,30
+	;[1879] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1879
+	DECLE 16191,34
+	;[1880] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1880
+	DECLE 6463,63
+	;[1881] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1881
+	DECLE 16191,46
+	;[1882] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1882
+	DECLE 16191,34
+	;[1883] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1883
+	DECLE 16191,32
+	;[1884] MUSIC F3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1884
+	DECLE 5906,63
+	;[1885] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1885
+	DECLE 16191,44
+	;[1886] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1886
+	DECLE 16191,32
+	;[1887] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1887
+	DECLE 16191,34
+	;[1888] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1888
+	DECLE 6463,63
+	;[1889] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1889
+	DECLE 16191,46
+	;[1890] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1890
+	DECLE 16191,34
+	;[1891] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1891
+	DECLE 16191,39
+	;[1892] MUSIC A2#,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1892
+	DECLE 5899,63
+	;[1893] MUSIC s,s,D6
+	SRCFILE "Songs\SHarrierC64.bas",1893
+	DECLE 16191,51
+	;[1894] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",1894
+	DECLE 16191,39
+	;[1895] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1895
+	DECLE 16191,35
+	;[1896] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1896
+	DECLE 7743,63
+	;[1897] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1897
+	DECLE 16191,47
+	;[1898] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1898
+	DECLE 16191,35
+	;[1899] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1899
+	DECLE 16191,34
+	;[1900] MUSIC A3#,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",1900
+	DECLE 7191,63
+	;[1901] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1901
+	DECLE 16191,46
+	;[1902] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1902
+	DECLE 16191,34
+	;[1903] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1903
+	DECLE 16191,35
+	;[1904] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1904
+	DECLE 7743,63
+	;[1905] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1905
+	DECLE 16191,47
+	;[1906] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1906
+	DECLE 16191,35
+	;[1907] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1907
+	DECLE 16191,30
+	;[1908] MUSIC A2#,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",1908
+	DECLE 6923,63
+	;[1909] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1909
+	DECLE 16191,42
+	;[1910] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1910
+	DECLE 16191,30
+	;[1911] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1911
+	DECLE 16191,35
+	;[1912] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1912
+	DECLE 7743,63
+	;[1913] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1913
+	DECLE 16191,47
+	;[1914] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1914
+	DECLE 16191,35
+	;[1915] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1915
+	DECLE 16191,34
+	;[1916] MUSIC A3#,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",1916
+	DECLE 7191,63
+	;[1917] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1917
+	DECLE 16191,46
+	;[1918] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1918
+	DECLE 16191,34
+	;[1919] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1919
+	DECLE 16191,35
+	;[1920] MUSIC s,F4,s
+	SRCFILE "Songs\SHarrierC64.bas",1920
+	DECLE 7743,63
+	;[1921] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1921
+	DECLE 16191,47
+	;[1922] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1922
+	DECLE 16191,35
+	;[1923] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",1923
+	DECLE 16191,63
+	;[1924] MUSIC D3#,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1924
+	DECLE 4112,63
+	;[1925] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",1925
+	DECLE 16191,47
+	;[1926] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",1926
+	DECLE 16191,35
+	;[1927] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1927
+	DECLE 16191,32
+	;[1928] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1928
+	DECLE 5951,63
+	;[1929] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1929
+	DECLE 16191,44
+	;[1930] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1930
+	DECLE 16191,32
+	;[1931] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1931
+	DECLE 16191,30
+	;[1932] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1932
+	DECLE 5648,63
+	;[1933] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1933
+	DECLE 16191,42
+	;[1934] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1934
+	DECLE 16191,30
+	;[1935] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1935
+	DECLE 16191,32
+	;[1936] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1936
+	DECLE 5951,63
+	;[1937] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1937
+	DECLE 16191,44
+	;[1938] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1938
+	DECLE 16191,32
+	;[1939] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",1939
+	DECLE 16191,28
+	;[1940] MUSIC D3#,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1940
+	DECLE 5136,63
+	;[1941] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",1941
+	DECLE 16191,40
+	;[1942] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",1942
+	DECLE 16191,28
+	;[1943] 
+	SRCFILE "Songs\SHarrierC64.bas",1943
+	;[1944] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1944
+	DECLE 16191,32
+	;[1945] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1945
+	DECLE 5951,63
+	;[1946] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1946
+	DECLE 16191,44
+	;[1947] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1947
+	DECLE 16191,32
+	;[1948] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1948
+	DECLE 16191,30
+	;[1949] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",1949
+	DECLE 5648,63
+	;[1950] MUSIC s,s,F5
+	SRCFILE "Songs\SHarrierC64.bas",1950
+	DECLE 16191,42
+	;[1951] MUSIC s,s,F4
+	SRCFILE "Songs\SHarrierC64.bas",1951
+	DECLE 16191,30
+	;[1952] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1952
+	DECLE 16191,32
+	;[1953] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1953
+	DECLE 5951,63
+	;[1954] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1954
+	DECLE 16191,44
+	;[1955] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1955
+	DECLE 16191,32
+	;[1956] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1956
+	DECLE 16191,37
+	;[1957] MUSIC C3,C3,s
+	SRCFILE "Songs\SHarrierC64.bas",1957
+	DECLE 3341,63
+	;[1958] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1958
+	DECLE 16191,49
+	;[1959] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1959
+	DECLE 16191,37
+	;[1960] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1960
+	DECLE 16191,34
+	;[1961] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1961
+	DECLE 5183,63
+	;[1962] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1962
+	DECLE 16191,46
+	;[1963] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1963
+	DECLE 4927,34
+	;[1964] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1964
+	DECLE 16191,32
+	;[1965] MUSIC C3,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1965
+	DECLE 4109,63
+	;[1966] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1966
+	DECLE 16191,44
+	;[1967] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1967
+	DECLE 16191,32
+	;[1968] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1968
+	DECLE 16191,34
+	;[1969] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1969
+	DECLE 5183,63
+	;[1970] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1970
+	DECLE 16191,46
+	;[1971] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1971
+	DECLE 4927,34
+	;[1972] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1972
+	DECLE 16191,31
+	;[1973] MUSIC C3,C3,s
+	SRCFILE "Songs\SHarrierC64.bas",1973
+	DECLE 3341,63
+	;[1974] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",1974
+	DECLE 16191,43
+	;[1975] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",1975
+	DECLE 16191,31
+	;[1976] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1976
+	DECLE 16191,34
+	;[1977] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1977
+	DECLE 5183,63
+	;[1978] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1978
+	DECLE 16191,46
+	;[1979] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1979
+	DECLE 4927,34
+	;[1980] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1980
+	DECLE 16191,32
+	;[1981] MUSIC C3,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1981
+	DECLE 4109,63
+	;[1982] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1982
+	DECLE 16191,44
+	;[1983] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1983
+	DECLE 16191,32
+	;[1984] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1984
+	DECLE 16191,34
+	;[1985] MUSIC s,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",1985
+	DECLE 5183,63
+	;[1986] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1986
+	DECLE 16191,46
+	;[1987] MUSIC s,F3#,A4
+	SRCFILE "Songs\SHarrierC64.bas",1987
+	DECLE 4927,34
+	;[1988] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1988
+	DECLE 16191,37
+	;[1989] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",1989
+	DECLE 3855,63
+	;[1990] MUSIC s,s,C6
+	SRCFILE "Songs\SHarrierC64.bas",1990
+	DECLE 16191,49
+	;[1991] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",1991
+	DECLE 16191,37
+	;[1992] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1992
+	DECLE 16191,34
+	;[1993] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",1993
+	DECLE 6463,63
+	;[1994] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",1994
+	DECLE 16191,46
+	;[1995] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",1995
+	DECLE 16191,34
+	;[1996] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1996
+	DECLE 16191,32
+	;[1997] MUSIC D3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",1997
+	DECLE 5903,63
+	;[1998] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",1998
+	DECLE 16191,44
+	;[1999] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",1999
+	DECLE 16191,32
+	;[2000] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2000
+	DECLE 16191,34
+	;[2001] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2001
+	DECLE 6463,63
+	;[2002] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",2002
+	DECLE 16191,46
+	;[2003] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2003
+	DECLE 16191,34
+	;[2004] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2004
+	DECLE 16191,31
+	;[2005] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2005
+	DECLE 5647,63
+	;[2006] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",2006
+	DECLE 16191,43
+	;[2007] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2007
+	DECLE 16191,31
+	;[2008] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2008
+	DECLE 16191,34
+	;[2009] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2009
+	DECLE 6463,63
+	;[2010] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",2010
+	DECLE 16191,46
+	;[2011] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2011
+	DECLE 16191,34
+	;[2012] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2012
+	DECLE 16191,32
+	;[2013] MUSIC D3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2013
+	DECLE 5903,63
+	;[2014] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2014
+	DECLE 16191,44
+	;[2015] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2015
+	DECLE 16191,32
+	;[2016] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2016
+	DECLE 16191,34
+	;[2017] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2017
+	DECLE 6463,63
+	;[2018] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",2018
+	DECLE 16191,46
+	;[2019] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2019
+	DECLE 16191,34
+	;[2020] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2020
+	DECLE 16191,35
+	;[2021] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",2021
+	DECLE 3855,63
+	;[2022] MUSIC s,s,A5#
+	SRCFILE "Songs\SHarrierC64.bas",2022
+	DECLE 16191,47
+	;[2023] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2023
+	DECLE 16191,35
+	;[2024] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2024
+	DECLE 16191,32
+	;[2025] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2025
+	DECLE 5951,63
+	;[2026] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2026
+	DECLE 16191,44
+	;[2027] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2027
+	DECLE 16191,32
+	;[2028] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2028
+	DECLE 16191,31
+	;[2029] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2029
+	DECLE 5647,63
+	;[2030] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",2030
+	DECLE 16191,43
+	;[2031] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2031
+	DECLE 16191,31
+	;[2032] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2032
+	DECLE 16191,32
+	;[2033] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2033
+	DECLE 5951,63
+	;[2034] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2034
+	DECLE 16191,44
+	;[2035] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2035
+	DECLE 16191,32
+	;[2036] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2036
+	DECLE 16191,27
+	;[2037] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2037
+	DECLE 5135,63
+	;[2038] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",2038
+	DECLE 16191,39
+	;[2039] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2039
+	DECLE 16191,27
+	;[2040] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2040
+	DECLE 16191,32
+	;[2041] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2041
+	DECLE 5951,63
+	;[2042] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2042
+	DECLE 16191,44
+	;[2043] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2043
+	DECLE 16191,32
+	;[2044] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2044
+	DECLE 16191,31
+	;[2045] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2045
+	DECLE 5647,63
+	;[2046] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",2046
+	DECLE 16191,43
+	;[2047] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2047
+	DECLE 16191,31
+	;[2048] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2048
+	DECLE 16191,32
+	;[2049] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2049
+	DECLE 5951,63
+	;[2050] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2050
+	DECLE 16191,44
+	;[2051] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2051
+	DECLE 16191,32
+	;[2052] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2052
+	DECLE 16191,34
+	;[2053] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",2053
+	DECLE 3855,63
+	;[2054] MUSIC s,s,A5
+	SRCFILE "Songs\SHarrierC64.bas",2054
+	DECLE 16191,46
+	;[2055] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2055
+	DECLE 16191,34
+	;[2056] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2056
+	DECLE 16191,31
+	;[2057] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2057
+	DECLE 5695,63
+	;[2058] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",2058
+	DECLE 16191,43
+	;[2059] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2059
+	DECLE 16191,31
+	;[2060] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2060
+	DECLE 16191,29
+	;[2061] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2061
+	DECLE 5135,63
+	;[2062] MUSIC s,s,E5
+	SRCFILE "Songs\SHarrierC64.bas",2062
+	DECLE 16191,41
+	;[2063] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2063
+	DECLE 16191,29
+	;[2064] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2064
+	DECLE 16191,31
+	;[2065] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2065
+	DECLE 5695,63
+	;[2066] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",2066
+	DECLE 16191,43
+	;[2067] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2067
+	DECLE 16191,31
+	;[2068] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2068
+	DECLE 16191,27
+	;[2069] MUSIC D3,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2069
+	DECLE 4879,63
+	;[2070] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",2070
+	DECLE 16191,39
+	;[2071] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2071
+	DECLE 16191,27
+	;[2072] 
+	SRCFILE "Songs\SHarrierC64.bas",2072
+	;[2073] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2073
+	DECLE 16191,31
+	;[2074] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2074
+	DECLE 5695,63
+	;[2075] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",2075
+	DECLE 16191,43
+	;[2076] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2076
+	DECLE 16191,31
+	;[2077] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2077
+	DECLE 16191,29
+	;[2078] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2078
+	DECLE 5135,63
+	;[2079] MUSIC s,s,E5
+	SRCFILE "Songs\SHarrierC64.bas",2079
+	DECLE 16191,41
+	;[2080] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2080
+	DECLE 16191,29
+	;[2081] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2081
+	DECLE 16191,31
+	;[2082] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2082
+	DECLE 5695,63
+	;[2083] MUSIC s,s,F5#
+	SRCFILE "Songs\SHarrierC64.bas",2083
+	DECLE 16191,43
+	;[2084] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2084
+	DECLE 16191,31
+	;[2085] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2085
+	DECLE 16191,32
+	;[2086] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2086
+	DECLE 5128,63
+	;[2087] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2087
+	DECLE 16191,44
+	;[2088] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2088
+	DECLE 16191,32
+	;[2089] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2089
+	DECLE 16191,44
+	;[2090] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2090
+	DECLE 6975,63
+	;[2091] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2091
+	DECLE 16191,32
+	;[2092] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2092
+	DECLE 16191,44
+	;[2093] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2093
+	DECLE 16191,32
+	;[2094] MUSIC G3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2094
+	DECLE 5908,63
+	;[2095] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2095
+	DECLE 16191,44
+	;[2096] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2096
+	DECLE 16191,32
+	;[2097] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2097
+	DECLE 16191,44
+	;[2098] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2098
+	DECLE 6975,63
+	;[2099] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2099
+	DECLE 16191,32
+	;[2100] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2100
+	DECLE 16191,44
+	;[2101] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2101
+	DECLE 16191,32
+	;[2102] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2102
+	DECLE 5128,63
+	;[2103] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2103
+	DECLE 16191,44
+	;[2104] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2104
+	DECLE 16191,32
+	;[2105] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2105
+	DECLE 16191,44
+	;[2106] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2106
+	DECLE 6975,63
+	;[2107] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2107
+	DECLE 16191,32
+	;[2108] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2108
+	DECLE 16191,44
+	;[2109] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2109
+	DECLE 16191,32
+	;[2110] MUSIC G3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2110
+	DECLE 5908,63
+	;[2111] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2111
+	DECLE 16191,44
+	;[2112] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2112
+	DECLE 16191,32
+	;[2113] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2113
+	DECLE 16191,44
+	;[2114] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2114
+	DECLE 6975,63
+	;[2115] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2115
+	DECLE 16191,32
+	;[2116] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2116
+	DECLE 16191,44
+	;[2117] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2117
+	DECLE 16191,32
+	;[2118] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2118
+	DECLE 5128,63
+	;[2119] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2119
+	DECLE 16191,44
+	;[2120] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2120
+	DECLE 16191,32
+	;[2121] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2121
+	DECLE 16191,44
+	;[2122] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2122
+	DECLE 6975,63
+	;[2123] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2123
+	DECLE 16191,32
+	;[2124] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2124
+	DECLE 16191,44
+	;[2125] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2125
+	DECLE 16191,32
+	;[2126] MUSIC G3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2126
+	DECLE 5908,63
+	;[2127] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2127
+	DECLE 16191,44
+	;[2128] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2128
+	DECLE 16191,32
+	;[2129] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2129
+	DECLE 16191,44
+	;[2130] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2130
+	DECLE 6975,63
+	;[2131] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2131
+	DECLE 16191,32
+	;[2132] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2132
+	DECLE 16191,44
+	;[2133] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2133
+	DECLE 16191,32
+	;[2134] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2134
+	DECLE 5128,63
+	;[2135] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2135
+	DECLE 16191,44
+	;[2136] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2136
+	DECLE 16191,32
+	;[2137] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2137
+	DECLE 16191,44
+	;[2138] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2138
+	DECLE 6975,63
+	;[2139] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2139
+	DECLE 16191,32
+	;[2140] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2140
+	DECLE 16191,44
+	;[2141] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2141
+	DECLE 16191,32
+	;[2142] MUSIC G3,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2142
+	DECLE 5908,63
+	;[2143] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2143
+	DECLE 16191,44
+	;[2144] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2144
+	DECLE 16191,32
+	;[2145] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2145
+	DECLE 16191,44
+	;[2146] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2146
+	DECLE 6975,63
+	;[2147] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2147
+	DECLE 16191,32
+	;[2148] MUSIC s,s,G5
+	SRCFILE "Songs\SHarrierC64.bas",2148
+	DECLE 16191,44
+	;[2149] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2149
+	DECLE 16191,63
+	;[2150] MUSIC G2,G3,D5
+	SRCFILE "Songs\SHarrierC64.bas",2150
+	DECLE 5128,39
+	;[2151] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2151
+	DECLE 16191,63
+	;[2152] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2152
+	DECLE 16191,63
+	;[2153] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2153
+	DECLE 16191,35
+	;[2154] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2154
+	DECLE 6975,63
+	;[2155] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2155
+	DECLE 16191,63
+	;[2156] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2156
+	DECLE 16191,63
+	;[2157] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2157
+	DECLE 16191,34
+	;[2158] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2158
+	DECLE 6420,63
+	;[2159] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2159
+	DECLE 16191,63
+	;[2160] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2160
+	DECLE 16191,63
+	;[2161] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2161
+	DECLE 16191,35
+	;[2162] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2162
+	DECLE 6975,63
+	;[2163] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2163
+	DECLE 16191,63
+	;[2164] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2164
+	DECLE 16191,63
+	;[2165] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2165
+	DECLE 16191,32
+	;[2166] MUSIC G2,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2166
+	DECLE 5896,63
+	;[2167] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2167
+	DECLE 16191,63
+	;[2168] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2168
+	DECLE 16191,63
+	;[2169] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2169
+	DECLE 16191,35
+	;[2170] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2170
+	DECLE 6975,63
+	;[2171] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2171
+	DECLE 16191,63
+	;[2172] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2172
+	DECLE 16191,63
+	;[2173] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2173
+	DECLE 16191,34
+	;[2174] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2174
+	DECLE 6420,63
+	;[2175] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2175
+	DECLE 16191,63
+	;[2176] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2176
+	DECLE 16191,63
+	;[2177] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2177
+	DECLE 16191,35
+	;[2178] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2178
+	DECLE 6975,63
+	;[2179] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2179
+	DECLE 16191,63
+	;[2180] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2180
+	DECLE 16191,63
+	;[2181] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",2181
+	DECLE 16191,39
+	;[2182] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2182
+	DECLE 5128,63
+	;[2183] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2183
+	DECLE 16191,63
+	;[2184] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2184
+	DECLE 16191,63
+	;[2185] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2185
+	DECLE 16191,35
+	;[2186] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2186
+	DECLE 6975,63
+	;[2187] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2187
+	DECLE 16191,63
+	;[2188] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2188
+	DECLE 16191,63
+	;[2189] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2189
+	DECLE 16191,34
+	;[2190] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2190
+	DECLE 6420,63
+	;[2191] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2191
+	DECLE 16191,63
+	;[2192] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2192
+	DECLE 16191,63
+	;[2193] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2193
+	DECLE 16191,35
+	;[2194] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2194
+	DECLE 6975,63
+	;[2195] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2195
+	DECLE 16191,63
+	;[2196] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2196
+	DECLE 16191,63
+	;[2197] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2197
+	DECLE 16191,32
+	;[2198] MUSIC G2,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2198
+	DECLE 5896,63
+	;[2199] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2199
+	DECLE 16191,63
+	;[2200] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2200
+	DECLE 16191,63
+	;[2201] 
+	SRCFILE "Songs\SHarrierC64.bas",2201
+	;[2202] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2202
+	DECLE 16191,35
+	;[2203] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2203
+	DECLE 6975,63
+	;[2204] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2204
+	DECLE 16191,63
+	;[2205] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2205
+	DECLE 16191,63
+	;[2206] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2206
+	DECLE 16191,34
+	;[2207] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2207
+	DECLE 6420,63
+	;[2208] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2208
+	DECLE 16191,63
+	;[2209] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2209
+	DECLE 16191,63
+	;[2210] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2210
+	DECLE 16191,35
+	;[2211] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2211
+	DECLE 6975,63
+	;[2212] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2212
+	DECLE 16191,63
+	;[2213] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2213
+	DECLE 16191,63
+	;[2214] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",2214
+	DECLE 16191,40
+	;[2215] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2215
+	DECLE 5128,63
+	;[2216] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2216
+	DECLE 16191,63
+	;[2217] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2217
+	DECLE 16191,63
+	;[2218] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2218
+	DECLE 16191,37
+	;[2219] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2219
+	DECLE 7231,63
+	;[2220] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2220
+	DECLE 16191,63
+	;[2221] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2221
+	DECLE 16191,63
+	;[2222] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",2222
+	DECLE 16191,36
+	;[2223] MUSIC G3,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2223
+	DECLE 6932,63
+	;[2224] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2224
+	DECLE 16191,63
+	;[2225] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2225
+	DECLE 16191,63
+	;[2226] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2226
+	DECLE 16191,37
+	;[2227] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2227
+	DECLE 7231,63
+	;[2228] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2228
+	DECLE 16191,63
+	;[2229] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2229
+	DECLE 16191,63
+	;[2230] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2230
+	DECLE 16191,32
+	;[2231] MUSIC G2,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2231
+	DECLE 6408,63
+	;[2232] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2232
+	DECLE 16191,63
+	;[2233] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2233
+	DECLE 16191,63
+	;[2234] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2234
+	DECLE 16191,37
+	;[2235] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2235
+	DECLE 7231,63
+	;[2236] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2236
+	DECLE 16191,63
+	;[2237] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2237
+	DECLE 16191,63
+	;[2238] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",2238
+	DECLE 16191,36
+	;[2239] MUSIC G3,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2239
+	DECLE 6932,63
+	;[2240] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2240
+	DECLE 16191,63
+	;[2241] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2241
+	DECLE 16191,63
+	;[2242] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2242
+	DECLE 16191,37
+	;[2243] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2243
+	DECLE 7231,63
+	;[2244] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2244
+	DECLE 16191,63
+	;[2245] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2245
+	DECLE 16191,63
+	;[2246] MUSIC s,s,D5#
+	SRCFILE "Songs\SHarrierC64.bas",2246
+	DECLE 16191,40
+	;[2247] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2247
+	DECLE 5128,63
+	;[2248] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2248
+	DECLE 16191,63
+	;[2249] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2249
+	DECLE 16191,63
+	;[2250] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2250
+	DECLE 16191,37
+	;[2251] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2251
+	DECLE 7231,63
+	;[2252] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2252
+	DECLE 16191,63
+	;[2253] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2253
+	DECLE 16191,63
+	;[2254] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",2254
+	DECLE 16191,36
+	;[2255] MUSIC G3,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2255
+	DECLE 6932,63
+	;[2256] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2256
+	DECLE 16191,63
+	;[2257] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2257
+	DECLE 16191,63
+	;[2258] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2258
+	DECLE 16191,37
+	;[2259] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2259
+	DECLE 7231,63
+	;[2260] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2260
+	DECLE 16191,63
+	;[2261] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2261
+	DECLE 16191,63
+	;[2262] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2262
+	DECLE 16191,32
+	;[2263] MUSIC G2,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2263
+	DECLE 6408,63
+	;[2264] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2264
+	DECLE 16191,63
+	;[2265] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2265
+	DECLE 16191,63
+	;[2266] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2266
+	DECLE 16191,37
+	;[2267] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2267
+	DECLE 7231,63
+	;[2268] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2268
+	DECLE 16191,63
+	;[2269] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2269
+	DECLE 16191,63
+	;[2270] MUSIC s,s,B4
+	SRCFILE "Songs\SHarrierC64.bas",2270
+	DECLE 16191,36
+	;[2271] MUSIC G3,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2271
+	DECLE 6932,63
+	;[2272] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2272
+	DECLE 16191,63
+	;[2273] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2273
+	DECLE 16191,63
+	;[2274] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2274
+	DECLE 16191,37
+	;[2275] MUSIC s,D4#,s
+	SRCFILE "Songs\SHarrierC64.bas",2275
+	DECLE 7231,63
+	;[2276] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2276
+	DECLE 16191,63
+	;[2277] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2277
+	DECLE 16191,63
+	;[2278] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",2278
+	DECLE 16191,39
+	;[2279] MUSIC F2#,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2279
+	DECLE 4871,63
+	;[2280] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2280
+	DECLE 16191,63
+	;[2281] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2281
+	DECLE 16191,63
+	;[2282] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2282
+	DECLE 16191,34
+	;[2283] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2283
+	DECLE 6975,63
+	;[2284] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2284
+	DECLE 16191,63
+	;[2285] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2285
+	DECLE 16191,63
+	;[2286] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2286
+	DECLE 16191,32
+	;[2287] MUSIC F3#,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2287
+	DECLE 6419,63
+	;[2288] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2288
+	DECLE 16191,63
+	;[2289] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2289
+	DECLE 16191,63
+	;[2290] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2290
+	DECLE 16191,34
+	;[2291] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2291
+	DECLE 6975,63
+	;[2292] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2292
+	DECLE 16191,63
+	;[2293] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2293
+	DECLE 16191,63
+	;[2294] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2294
+	DECLE 16191,31
+	;[2295] MUSIC F2#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2295
+	DECLE 5639,63
+	;[2296] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2296
+	DECLE 16191,63
+	;[2297] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2297
+	DECLE 16191,63
+	;[2298] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2298
+	DECLE 16191,34
+	;[2299] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2299
+	DECLE 6975,63
+	;[2300] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2300
+	DECLE 16191,63
+	;[2301] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2301
+	DECLE 16191,63
+	;[2302] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2302
+	DECLE 16191,32
+	;[2303] MUSIC F3#,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2303
+	DECLE 6419,63
+	;[2304] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2304
+	DECLE 16191,63
+	;[2305] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2305
+	DECLE 16191,63
+	;[2306] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2306
+	DECLE 16191,34
+	;[2307] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2307
+	DECLE 6975,63
+	;[2308] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2308
+	DECLE 16191,63
+	;[2309] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2309
+	DECLE 16191,63
+	;[2310] MUSIC s,s,D5
+	SRCFILE "Songs\SHarrierC64.bas",2310
+	DECLE 16191,39
+	;[2311] MUSIC F2#,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2311
+	DECLE 4871,63
+	;[2312] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2312
+	DECLE 16191,63
+	;[2313] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2313
+	DECLE 16191,63
+	;[2314] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2314
+	DECLE 16191,34
+	;[2315] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2315
+	DECLE 6975,63
+	;[2316] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2316
+	DECLE 16191,63
+	;[2317] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2317
+	DECLE 16191,63
+	;[2318] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2318
+	DECLE 16191,32
+	;[2319] MUSIC F3#,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2319
+	DECLE 6419,63
+	;[2320] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2320
+	DECLE 16191,63
+	;[2321] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2321
+	DECLE 16191,63
+	;[2322] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2322
+	DECLE 16191,34
+	;[2323] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2323
+	DECLE 6975,63
+	;[2324] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2324
+	DECLE 16191,63
+	;[2325] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2325
+	DECLE 16191,63
+	;[2326] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2326
+	DECLE 16191,31
+	;[2327] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2327
+	DECLE 5647,63
+	;[2328] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2328
+	DECLE 16191,63
+	;[2329] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2329
+	DECLE 16191,63
+	;[2330] 
+	SRCFILE "Songs\SHarrierC64.bas",2330
+	;[2331] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2331
+	DECLE 16191,34
+	;[2332] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2332
+	DECLE 6975,63
+	;[2333] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2333
+	DECLE 16191,63
+	;[2334] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2334
+	DECLE 16191,63
+	;[2335] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2335
+	DECLE 16191,32
+	;[2336] MUSIC D3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2336
+	DECLE 6415,63
+	;[2337] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2337
+	DECLE 16191,63
+	;[2338] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2338
+	DECLE 16191,63
+	;[2339] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2339
+	DECLE 16191,34
+	;[2340] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2340
+	DECLE 6975,63
+	;[2341] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2341
+	DECLE 16191,63
+	;[2342] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2342
+	DECLE 16191,63
+	;[2343] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2343
+	DECLE 16191,35
+	;[2344] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2344
+	DECLE 5128,63
+	;[2345] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2345
+	DECLE 16191,63
+	;[2346] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2346
+	DECLE 16191,63
+	;[2347] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2347
+	DECLE 16191,32
+	;[2348] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2348
+	DECLE 6975,63
+	;[2349] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2349
+	DECLE 16191,63
+	;[2350] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2350
+	DECLE 16191,63
+	;[2351] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2351
+	DECLE 16191,31
+	;[2352] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2352
+	DECLE 6420,63
+	;[2353] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2353
+	DECLE 16191,63
+	;[2354] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2354
+	DECLE 16191,63
+	;[2355] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2355
+	DECLE 16191,32
+	;[2356] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2356
+	DECLE 6975,63
+	;[2357] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2357
+	DECLE 16191,63
+	;[2358] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2358
+	DECLE 16191,63
+	;[2359] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2359
+	DECLE 16191,27
+	;[2360] MUSIC G2,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2360
+	DECLE 5896,63
+	;[2361] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2361
+	DECLE 16191,63
+	;[2362] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2362
+	DECLE 16191,63
+	;[2363] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2363
+	DECLE 16191,32
+	;[2364] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2364
+	DECLE 6975,63
+	;[2365] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2365
+	DECLE 16191,63
+	;[2366] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2366
+	DECLE 16191,63
+	;[2367] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2367
+	DECLE 16191,31
+	;[2368] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2368
+	DECLE 6420,63
+	;[2369] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2369
+	DECLE 16191,63
+	;[2370] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2370
+	DECLE 16191,63
+	;[2371] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2371
+	DECLE 16191,32
+	;[2372] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2372
+	DECLE 6975,63
+	;[2373] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2373
+	DECLE 16191,63
+	;[2374] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2374
+	DECLE 16191,63
+	;[2375] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2375
+	DECLE 16191,35
+	;[2376] MUSIC G2,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2376
+	DECLE 5128,63
+	;[2377] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2377
+	DECLE 16191,63
+	;[2378] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2378
+	DECLE 16191,63
+	;[2379] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2379
+	DECLE 16191,32
+	;[2380] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2380
+	DECLE 6975,63
+	;[2381] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2381
+	DECLE 16191,63
+	;[2382] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2382
+	DECLE 16191,63
+	;[2383] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2383
+	DECLE 16191,31
+	;[2384] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2384
+	DECLE 6420,63
+	;[2385] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2385
+	DECLE 16191,63
+	;[2386] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2386
+	DECLE 16191,63
+	;[2387] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2387
+	DECLE 16191,32
+	;[2388] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2388
+	DECLE 6975,63
+	;[2389] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2389
+	DECLE 16191,63
+	;[2390] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2390
+	DECLE 16191,63
+	;[2391] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2391
+	DECLE 16191,27
+	;[2392] MUSIC G2,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2392
+	DECLE 5896,63
+	;[2393] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2393
+	DECLE 16191,63
+	;[2394] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2394
+	DECLE 16191,63
+	;[2395] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2395
+	DECLE 16191,32
+	;[2396] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2396
+	DECLE 6975,63
+	;[2397] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2397
+	DECLE 16191,63
+	;[2398] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2398
+	DECLE 16191,63
+	;[2399] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2399
+	DECLE 16191,31
+	;[2400] MUSIC G3,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2400
+	DECLE 6420,63
+	;[2401] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2401
+	DECLE 16191,63
+	;[2402] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2402
+	DECLE 16191,63
+	;[2403] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2403
+	DECLE 16191,32
+	;[2404] MUSIC s,D4,s
+	SRCFILE "Songs\SHarrierC64.bas",2404
+	DECLE 6975,63
+	;[2405] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2405
+	DECLE 16191,63
+	;[2406] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2406
+	DECLE 16191,63
+	;[2407] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2407
+	DECLE 16191,37
+	;[2408] MUSIC D3#,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2408
+	DECLE 4112,63
+	;[2409] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2409
+	DECLE 16191,63
+	;[2410] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2410
+	DECLE 16191,63
+	;[2411] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2411
+	DECLE 16191,32
+	;[2412] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2412
+	DECLE 6463,63
+	;[2413] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2413
+	DECLE 16191,63
+	;[2414] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2414
+	DECLE 16191,63
+	;[2415] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2415
+	DECLE 16191,31
+	;[2416] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2416
+	DECLE 5648,63
+	;[2417] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2417
+	DECLE 16191,63
+	;[2418] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2418
+	DECLE 16191,63
+	;[2419] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2419
+	DECLE 16191,32
+	;[2420] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2420
+	DECLE 6463,63
+	;[2421] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2421
+	DECLE 16191,63
+	;[2422] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2422
+	DECLE 16191,63
+	;[2423] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",2423
+	DECLE 16191,28
+	;[2424] MUSIC D3#,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2424
+	DECLE 5136,63
+	;[2425] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2425
+	DECLE 16191,63
+	;[2426] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2426
+	DECLE 16191,63
+	;[2427] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2427
+	DECLE 16191,32
+	;[2428] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2428
+	DECLE 6463,63
+	;[2429] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2429
+	DECLE 16191,63
+	;[2430] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2430
+	DECLE 16191,63
+	;[2431] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2431
+	DECLE 16191,31
+	;[2432] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2432
+	DECLE 5648,63
+	;[2433] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2433
+	DECLE 16191,63
+	;[2434] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2434
+	DECLE 16191,63
+	;[2435] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2435
+	DECLE 16191,32
+	;[2436] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2436
+	DECLE 6463,63
+	;[2437] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2437
+	DECLE 16191,63
+	;[2438] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2438
+	DECLE 16191,63
+	;[2439] MUSIC s,s,C5
+	SRCFILE "Songs\SHarrierC64.bas",2439
+	DECLE 16191,37
+	;[2440] MUSIC D3#,D3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2440
+	DECLE 4112,63
+	;[2441] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2441
+	DECLE 16191,63
+	;[2442] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2442
+	DECLE 16191,63
+	;[2443] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2443
+	DECLE 16191,32
+	;[2444] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2444
+	DECLE 6463,63
+	;[2445] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2445
+	DECLE 16191,63
+	;[2446] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2446
+	DECLE 16191,63
+	;[2447] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2447
+	DECLE 16191,31
+	;[2448] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2448
+	DECLE 5648,63
+	;[2449] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2449
+	DECLE 16191,63
+	;[2450] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2450
+	DECLE 16191,63
+	;[2451] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2451
+	DECLE 16191,32
+	;[2452] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2452
+	DECLE 6463,63
+	;[2453] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2453
+	DECLE 16191,63
+	;[2454] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2454
+	DECLE 16191,63
+	;[2455] MUSIC s,s,D4#
+	SRCFILE "Songs\SHarrierC64.bas",2455
+	DECLE 16191,28
+	;[2456] MUSIC D3#,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2456
+	DECLE 5136,63
+	;[2457] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2457
+	DECLE 16191,63
+	;[2458] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2458
+	DECLE 16191,63
+	;[2459] 
+	SRCFILE "Songs\SHarrierC64.bas",2459
+	;[2460] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2460
+	DECLE 16191,32
+	;[2461] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2461
+	DECLE 6463,63
+	;[2462] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2462
+	DECLE 16191,63
+	;[2463] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2463
+	DECLE 16191,63
+	;[2464] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2464
+	DECLE 16191,31
+	;[2465] MUSIC D3#,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2465
+	DECLE 5648,63
+	;[2466] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2466
+	DECLE 16191,63
+	;[2467] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2467
+	DECLE 16191,63
+	;[2468] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2468
+	DECLE 16191,32
+	;[2469] MUSIC s,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2469
+	DECLE 6463,63
+	;[2470] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2470
+	DECLE 16191,63
+	;[2471] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2471
+	DECLE 16191,63
+	;[2472] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2472
+	DECLE 16191,35
+	;[2473] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",2473
+	DECLE 3855,63
+	;[2474] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2474
+	DECLE 16191,63
+	;[2475] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2475
+	DECLE 16191,63
+	;[2476] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2476
+	DECLE 16191,32
+	;[2477] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2477
+	DECLE 5951,63
+	;[2478] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2478
+	DECLE 16191,63
+	;[2479] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2479
+	DECLE 16191,63
+	;[2480] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2480
+	DECLE 16191,31
+	;[2481] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2481
+	DECLE 5647,63
+	;[2482] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2482
+	DECLE 16191,63
+	;[2483] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2483
+	DECLE 16191,63
+	;[2484] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2484
+	DECLE 16191,32
+	;[2485] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2485
+	DECLE 5951,63
+	;[2486] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2486
+	DECLE 16191,63
+	;[2487] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2487
+	DECLE 16191,63
+	;[2488] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2488
+	DECLE 16191,27
+	;[2489] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2489
+	DECLE 5135,63
+	;[2490] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2490
+	DECLE 16191,63
+	;[2491] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2491
+	DECLE 16191,63
+	;[2492] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2492
+	DECLE 16191,32
+	;[2493] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2493
+	DECLE 5951,63
+	;[2494] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2494
+	DECLE 16191,63
+	;[2495] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2495
+	DECLE 16191,63
+	;[2496] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2496
+	DECLE 16191,31
+	;[2497] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2497
+	DECLE 5647,63
+	;[2498] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2498
+	DECLE 16191,63
+	;[2499] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2499
+	DECLE 16191,63
+	;[2500] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2500
+	DECLE 16191,32
+	;[2501] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2501
+	DECLE 5951,63
+	;[2502] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2502
+	DECLE 16191,63
+	;[2503] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2503
+	DECLE 16191,63
+	;[2504] MUSIC s,s,A4#
+	SRCFILE "Songs\SHarrierC64.bas",2504
+	DECLE 16191,35
+	;[2505] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",2505
+	DECLE 3855,63
+	;[2506] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2506
+	DECLE 16191,63
+	;[2507] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2507
+	DECLE 16191,63
+	;[2508] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2508
+	DECLE 16191,32
+	;[2509] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2509
+	DECLE 5951,63
+	;[2510] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2510
+	DECLE 16191,63
+	;[2511] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2511
+	DECLE 16191,63
+	;[2512] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2512
+	DECLE 16191,31
+	;[2513] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2513
+	DECLE 5647,63
+	;[2514] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2514
+	DECLE 16191,63
+	;[2515] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2515
+	DECLE 16191,63
+	;[2516] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2516
+	DECLE 16191,32
+	;[2517] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2517
+	DECLE 5951,63
+	;[2518] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2518
+	DECLE 16191,63
+	;[2519] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2519
+	DECLE 16191,63
+	;[2520] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2520
+	DECLE 16191,27
+	;[2521] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2521
+	DECLE 5135,63
+	;[2522] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2522
+	DECLE 16191,63
+	;[2523] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2523
+	DECLE 16191,63
+	;[2524] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2524
+	DECLE 16191,32
+	;[2525] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2525
+	DECLE 5951,63
+	;[2526] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2526
+	DECLE 16191,63
+	;[2527] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2527
+	DECLE 16191,63
+	;[2528] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2528
+	DECLE 16191,31
+	;[2529] MUSIC D3,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2529
+	DECLE 5647,63
+	;[2530] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2530
+	DECLE 16191,63
+	;[2531] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2531
+	DECLE 16191,63
+	;[2532] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2532
+	DECLE 16191,32
+	;[2533] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2533
+	DECLE 5951,63
+	;[2534] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2534
+	DECLE 16191,63
+	;[2535] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2535
+	DECLE 16191,63
+	;[2536] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2536
+	DECLE 16191,34
+	;[2537] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",2537
+	DECLE 3855,63
+	;[2538] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2538
+	DECLE 16191,63
+	;[2539] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2539
+	DECLE 16191,63
+	;[2540] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2540
+	DECLE 16191,31
+	;[2541] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2541
+	DECLE 5695,63
+	;[2542] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2542
+	DECLE 16191,63
+	;[2543] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2543
+	DECLE 16191,63
+	;[2544] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2544
+	DECLE 16191,29
+	;[2545] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2545
+	DECLE 5135,63
+	;[2546] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2546
+	DECLE 16191,63
+	;[2547] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2547
+	DECLE 16191,63
+	;[2548] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2548
+	DECLE 16191,31
+	;[2549] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2549
+	DECLE 5695,63
+	;[2550] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2550
+	DECLE 16191,63
+	;[2551] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2551
+	DECLE 16191,63
+	;[2552] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2552
+	DECLE 16191,27
+	;[2553] MUSIC D3,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2553
+	DECLE 4879,63
+	;[2554] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2554
+	DECLE 16191,63
+	;[2555] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2555
+	DECLE 16191,63
+	;[2556] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2556
+	DECLE 16191,31
+	;[2557] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2557
+	DECLE 5695,63
+	;[2558] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2558
+	DECLE 16191,63
+	;[2559] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2559
+	DECLE 16191,63
+	;[2560] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2560
+	DECLE 16191,29
+	;[2561] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2561
+	DECLE 5135,63
+	;[2562] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2562
+	DECLE 16191,63
+	;[2563] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2563
+	DECLE 16191,63
+	;[2564] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2564
+	DECLE 16191,31
+	;[2565] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2565
+	DECLE 5695,63
+	;[2566] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2566
+	DECLE 16191,63
+	;[2567] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2567
+	DECLE 16191,63
+	;[2568] MUSIC s,s,A4
+	SRCFILE "Songs\SHarrierC64.bas",2568
+	DECLE 16191,34
+	;[2569] MUSIC D3,D3,s
+	SRCFILE "Songs\SHarrierC64.bas",2569
+	DECLE 3855,63
+	;[2570] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2570
+	DECLE 16191,63
+	;[2571] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2571
+	DECLE 16191,63
+	;[2572] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2572
+	DECLE 16191,31
+	;[2573] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2573
+	DECLE 5695,63
+	;[2574] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2574
+	DECLE 16191,63
+	;[2575] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2575
+	DECLE 16191,63
+	;[2576] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2576
+	DECLE 16191,29
+	;[2577] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2577
+	DECLE 5135,63
+	;[2578] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2578
+	DECLE 16191,63
+	;[2579] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2579
+	DECLE 16191,63
+	;[2580] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2580
+	DECLE 16191,31
+	;[2581] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2581
+	DECLE 5695,63
+	;[2582] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2582
+	DECLE 16191,63
+	;[2583] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2583
+	DECLE 16191,63
+	;[2584] MUSIC s,s,D4
+	SRCFILE "Songs\SHarrierC64.bas",2584
+	DECLE 16191,27
+	;[2585] MUSIC D3,F3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2585
+	DECLE 4879,63
+	;[2586] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2586
+	DECLE 16191,63
+	;[2587] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2587
+	DECLE 16191,63
+	;[2588] 
+	SRCFILE "Songs\SHarrierC64.bas",2588
+	;[2589] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2589
+	DECLE 16191,31
+	;[2590] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2590
+	DECLE 5695,63
+	;[2591] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2591
+	DECLE 16191,63
+	;[2592] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2592
+	DECLE 16191,63
+	;[2593] MUSIC s,s,E4
+	SRCFILE "Songs\SHarrierC64.bas",2593
+	DECLE 16191,29
+	;[2594] MUSIC D3,G3,s
+	SRCFILE "Songs\SHarrierC64.bas",2594
+	DECLE 5135,63
+	;[2595] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2595
+	DECLE 16191,63
+	;[2596] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2596
+	DECLE 16191,63
+	;[2597] MUSIC s,s,F4#
+	SRCFILE "Songs\SHarrierC64.bas",2597
+	DECLE 16191,31
+	;[2598] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2598
+	DECLE 5695,63
+	;[2599] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2599
+	DECLE 16191,63
+	;[2600] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2600
+	DECLE 16191,63
+	;[2601] MUSIC s,s,G4
+	SRCFILE "Songs\SHarrierC64.bas",2601
+	DECLE 16191,32
+	;[2602] MUSIC G2,C4,s
+	SRCFILE "Songs\SHarrierC64.bas",2602
+	DECLE 6408,63
+	;[2603] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2603
+	DECLE 16191,63
+	;[2604] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2604
+	DECLE 16191,63
+	;[2605] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2605
+	DECLE 16191,63
+	;[2606] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2606
+	DECLE 16191,63
+	;[2607] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2607
+	DECLE 16191,63
+	;[2608] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2608
+	DECLE 16191,63
+	;[2609] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2609
+	DECLE 16191,63
+	;[2610] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2610
+	DECLE 16191,63
+	;[2611] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2611
+	DECLE 16191,63
+	;[2612] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2612
+	DECLE 16191,63
+	;[2613] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2613
+	DECLE 16191,63
+	;[2614] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2614
+	DECLE 16191,63
+	;[2615] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2615
+	DECLE 16191,63
+	;[2616] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2616
+	DECLE 16191,63
+	;[2617] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2617
+	DECLE 16191,63
+	;[2618] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2618
+	DECLE 5951,63
+	;[2619] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2619
+	DECLE 16191,63
+	;[2620] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2620
+	DECLE 16191,63
+	;[2621] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2621
+	DECLE 16191,63
+	;[2622] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2622
+	DECLE 16191,63
+	;[2623] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2623
+	DECLE 16191,63
+	;[2624] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2624
+	DECLE 16191,63
+	;[2625] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2625
+	DECLE 16191,63
+	;[2626] MUSIC s,A3,s
+	SRCFILE "Songs\SHarrierC64.bas",2626
+	DECLE 5695,63
+	;[2627] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2627
+	DECLE 16191,63
+	;[2628] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2628
+	DECLE 16191,63
+	;[2629] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2629
+	DECLE 16191,63
+	;[2630] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2630
+	DECLE 16191,63
+	;[2631] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2631
+	DECLE 16191,63
+	;[2632] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2632
+	DECLE 16191,63
+	;[2633] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2633
+	DECLE 16191,63
+	;[2634] MUSIC s,A3#,s
+	SRCFILE "Songs\SHarrierC64.bas",2634
+	DECLE 5951,63
+	;[2635] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2635
+	DECLE 16191,63
+	;[2636] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2636
+	DECLE 16191,63
+	;[2637] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2637
+	DECLE 16191,63
+	;[2638] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2638
+	DECLE 16191,63
+	;[2639] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2639
+	DECLE 16191,63
+	;[2640] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2640
+	DECLE 16191,63
+	;[2641] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2641
+	DECLE 16191,63
+	;[2642] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2642
+	DECLE 16191,63
+	;[2643] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2643
+	DECLE 16191,63
+	;[2644] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2644
+	DECLE 16191,63
+	;[2645] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2645
+	DECLE 16191,63
+	;[2646] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2646
+	DECLE 16191,63
+	;[2647] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2647
+	DECLE 16191,63
+	;[2648] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2648
+	DECLE 16191,63
+	;[2649] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2649
+	DECLE 16191,63
+	;[2650] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2650
+	DECLE 16191,63
+	;[2651] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2651
+	DECLE 16191,63
+	;[2652] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2652
+	DECLE 16191,63
+	;[2653] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2653
+	DECLE 16191,63
+	;[2654] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2654
+	DECLE 16191,63
+	;[2655] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2655
+	DECLE 16191,63
+	;[2656] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2656
+	DECLE 16191,63
+	;[2657] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2657
+	DECLE 16191,63
+	;[2658] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2658
+	DECLE 16191,63
+	;[2659] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2659
+	DECLE 16191,63
+	;[2660] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2660
+	DECLE 16191,63
+	;[2661] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2661
+	DECLE 16191,63
+	;[2662] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2662
+	DECLE 16191,63
+	;[2663] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2663
+	DECLE 16191,63
+	;[2664] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2664
+	DECLE 16191,63
+	;[2665] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2665
+	DECLE 16191,63
+	;[2666] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2666
+	DECLE 16191,63
+	;[2667] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2667
+	DECLE 16191,63
+	;[2668] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2668
+	DECLE 16191,63
+	;[2669] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2669
+	DECLE 16191,63
+	;[2670] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2670
+	DECLE 16191,63
+	;[2671] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2671
+	DECLE 16191,63
+	;[2672] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2672
+	DECLE 16191,63
+	;[2673] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2673
+	DECLE 16191,63
+	;[2674] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2674
+	DECLE 16191,63
+	;[2675] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2675
+	DECLE 16191,63
+	;[2676] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2676
+	DECLE 16191,63
+	;[2677] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2677
+	DECLE 16191,63
+	;[2678] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2678
+	DECLE 16191,63
+	;[2679] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2679
+	DECLE 16191,63
+	;[2680] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2680
+	DECLE 16191,63
+	;[2681] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2681
+	DECLE 16191,63
+	;[2682] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2682
+	DECLE 16191,63
+	;[2683] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2683
+	DECLE 16191,63
+	;[2684] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2684
+	DECLE 16191,63
+	;[2685] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2685
+	DECLE 16191,63
+	;[2686] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2686
+	DECLE 16191,63
+	;[2687] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2687
+	DECLE 16191,63
+	;[2688] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2688
+	DECLE 16191,63
+	;[2689] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2689
+	DECLE 16191,63
+	;[2690] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2690
+	DECLE 16191,63
+	;[2691] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2691
+	DECLE 16191,63
+	;[2692] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2692
+	DECLE 16191,63
+	;[2693] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2693
+	DECLE 16191,63
+	;[2694] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2694
+	DECLE 16191,63
+	;[2695] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2695
+	DECLE 16191,63
+	;[2696] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2696
+	DECLE 16191,63
+	;[2697] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2697
+	DECLE 16191,63
+	;[2698] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2698
+	DECLE 16191,63
+	;[2699] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2699
+	DECLE 16191,63
+	;[2700] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2700
+	DECLE 16191,63
+	;[2701] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2701
+	DECLE 16191,63
+	;[2702] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2702
+	DECLE 16191,63
+	;[2703] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2703
+	DECLE 16191,63
+	;[2704] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2704
+	DECLE 16191,63
+	;[2705] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2705
+	DECLE 16191,63
+	;[2706] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2706
+	DECLE 16191,63
+	;[2707] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2707
+	DECLE 16191,63
+	;[2708] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2708
+	DECLE 16191,63
+	;[2709] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2709
+	DECLE 16191,63
+	;[2710] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2710
+	DECLE 16191,63
+	;[2711] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2711
+	DECLE 16191,63
+	;[2712] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2712
+	DECLE 16191,63
+	;[2713] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2713
+	DECLE 16191,63
+	;[2714] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2714
+	DECLE 16191,63
+	;[2715] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2715
+	DECLE 16191,63
+	;[2716] MUSIC s,s,s
+	SRCFILE "Songs\SHarrierC64.bas",2716
+	DECLE 16191,63
+	;[2717] 
+	SRCFILE "Songs\SHarrierC64.bas",2717
+	;[2718] 
+	SRCFILE "Songs\SHarrierC64.bas",2718
+	;[2719] MUSIC -,-,-
+	SRCFILE "Songs\SHarrierC64.bas",2719
+	DECLE 0,0
+	;[2720] MUSIC -,-,-
+	SRCFILE "Songs\SHarrierC64.bas",2720
+	DECLE 0,0
+	;[2721] MUSIC -,-,-
+	SRCFILE "Songs\SHarrierC64.bas",2721
+	DECLE 0,0
+	;[2722] MUSIC STOP
+	SRCFILE "Songs\SHarrierC64.bas",2722
 	DECLE 254,0
 	;ENDFILE
 	;FILE IntyMusic.bas
+	;[59] 
+	SRCFILE "IntyMusic.bas",59
+	;[60] '--- song name ------ Must be 12 characters or less! -----
+	SRCFILE "IntyMusic.bas",60
+	;[61] MyMusicName:
+	SRCFILE "IntyMusic.bas",61
+	; MYMUSICNAME
+Q29:	;[62] DATA "SHarrier C64"
+	SRCFILE "IntyMusic.bas",62
+	DECLE 51
+	DECLE 40
+	DECLE 65
+	DECLE 82
+	DECLE 82
+	DECLE 73
+	DECLE 69
+	DECLE 82
+	DECLE 0
+	DECLE 35
+	DECLE 22
+	DECLE 20
+	;[63] REM "123456789012"
+	SRCFILE "IntyMusic.bas",63
+	;[64] 
+	SRCFILE "IntyMusic.bas",64
+	;[65] '----dont remove----
+	SRCFILE "IntyMusic.bas",65
+	;[66] DATA 0,0,0,0,0,0,0,0,0,0,0,0
+	SRCFILE "IntyMusic.bas",66
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
+	DECLE 0
 	;ENDFILE
 	SRCFILE "",0
 intybasic_scroll:	equ 1	; Forces to include scroll library
@@ -13599,26 +17115,30 @@ IV.FLEN:   RMB 1    ; IV_xxx        8-bit           Length of FIFO data
     ENDI
 
 
-V9:	RMB 1	; IMUSICINST
+V10:	RMB 1	; IMUSICINST
 V1:	RMB 1	; IMUSICSCROLL
-V7:	RMB 1	; IMUSICVOLCHECK
-V8:	RMB 1	; IMUSICVOLLAST
-V5:	RMB 1	; IMUSICX
-V6:	RMB 1	; INTYNOTE
+V8:	RMB 1	; IMUSICVOLCHECK
+V9:	RMB 1	; IMUSICVOLLAST
+V6:	RMB 1	; IMUSICX
+V7:	RMB 1	; INTYNOTE
 V4:	RMB 1	; KEYCLEAR
 V3:	RMB 1	; TOGGLE
-Q12:	RMB 3	; IMUSICDRAWNOTE
-Q9:	RMB 3	; IMUSICNOTELAST
-Q10:	RMB 3	; IMUSICVOLUMELAST
+Q15:	RMB 3	; IMUSICDRAWNOTE
+Q3:	RMB 3	; IMUSICNOTECOLOR
+Q12:	RMB 3	; IMUSICNOTELAST
+Q13:	RMB 3	; IMUSICVOLUMELAST
 _SCRATCH:	EQU $
 
 SYSTEM:	ORG $2F0, $2F0, "-RWBN"
 STACK:	RMB 24
+V5:	RMB 1	; #INTYMUSICBLINK
 V2:	RMB 1	; #X
-Q7:	RMB 3	; #IMUSICINST
-Q5:	RMB 3	; #IMUSICNOTE
-Q8:	RMB 2	; #IMUSICTIME
-Q6:	RMB 3	; #IMUSICVOL
+Q10:	RMB 3	; #IMUSICINST
+Q8:	RMB 3	; #IMUSICNOTE
+Q4:	RMB 3	; #IMUSICPIANOCOLORA
+Q5:	RMB 3	; #IMUSICPIANOCOLORB
+Q11:	RMB 2	; #IMUSICTIME
+Q9:	RMB 3	; #IMUSICVOL
 _SYSTEM:	EQU $
-F17:	EQU IMUSICGETINFO
-F16:	EQU IMUSICKILL
+F20:	EQU IMUSICGETINFO
+F19:	EQU IMUSICKILL

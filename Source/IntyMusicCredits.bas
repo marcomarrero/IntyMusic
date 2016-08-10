@@ -10,16 +10,7 @@ IntyMusicInit: PROCEDURE
 		#BACKTAB(#x)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
 		iMusicX=iMusicX+1:IF iMusicX>19 THEN iMusicX=0
 	NEXT #x
-	
-	'---Alternate colors
-	IF INTYMUSIC_FANFOLD THEN
-		iMusicX=0
-		FOR #x=1 TO 11
-			#BACKTAB(iMusicX)=CS_ADVANCE			
-			iMusicX=iMusicX+20
-		NEXT #x
-	END IF
-	
+
 	'Draw &
 	PRINT AT 9 COLOR 0,"\277\269\272\261"
 	PRINT AT 29,"\278\270\273\262"
@@ -28,18 +19,32 @@ IntyMusicInit: PROCEDURE
 	PRINT AT 5,"\271\263"
 	PRINT AT 25,"\273\262"
 	PRINT AT 46,"\279"
+		
+	'- Draw piano---
+	FOR iMusicX=0 TO 19
+		#BACKTAB(200+iMusicX)= IntyPiano(iMusicX)
+	NEXT iMusicX	
+	PRINT AT 220, CS_ADVANCE
 	
+	'---me---
 	PRINT AT 60 COLOR CS_BLUE,"\285"
 	PRINT COLOR CS_BLACK," IntyMusic Player "
 	PRINT COLOR CS_BLUE,"\285"
 	PRINT COLOR CS_BLACK,"by Marco A. Marrero "
 
-	'---------------- ADD YOUR INFORMATION HERE -------------------------
-	PRINT AT 120,""
-	'-----------------------------------------------------------------
-	
+	GOSUB IntyMusicInit_Credits
 	
 	PRINT AT 220,"Press button to play"		
+	
+	'---Alternate colors
+	IF INTYMUSIC_FANFOLD THEN
+		iMusicX=0
+		FOR #x=1 TO 12
+			#BACKTAB(iMusicX)=#BACKTAB(iMusicX) OR CS_ADVANCE			
+			iMusicX=iMusicX+20
+		NEXT #x
+	END IF
+	
 	GOSUB WaitForKeyDownThenUp	
 RETURN
 END

@@ -2,7 +2,7 @@
 'IntyMusic_Player.bas | Main code.
 'Public domain, feel free to use/modify. Feel free to contact me in the Intellivision Programming forum @ AtariAge.com
 
-MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
+'MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
 WAIT
 
 BORDER BORDER_WHITE,0
@@ -30,6 +30,7 @@ DIM iMusicDrawNote(3)		'Draw new note?
 #x=0
 Toggle=1
 KeyClear=0
+#IntyMusicBlink=0: IF INTYMUSIC_FANFOLD THEN #IntyMusicBlink=CS_ADVANCE
 
 '----initialize---
 WAIT
@@ -38,8 +39,6 @@ GOSUB IntyMusicInit
 '---- main loop -----
 PLAY MyMusic
 PlayLoop:
-	Toggle=Toggle XOR 1
-	
 	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
 	FOR iMusicX=0 to 2
 		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
@@ -62,12 +61,12 @@ PlayLoop:
 	END IF	
 	'-------------------
 	
-	'--Get values from IntyBasic_epilogue
-	WAIT
+	'--Get values from IntyBasic_epilogue	
 	Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
 	
 	'Use IntyBasic music counter (_music_tc), if its 1 I can check if new notes are playing	
-	IF #iMusicTime(1)=#iMusicTime(0) THEN	
+	IF #iMusicTime(1)=#iMusicTime(0) THEN	 'IF Song Speed is 1, player will freeze.. use this code instead: 'IF #iMusicTime(1)=1 THEN	
+	
 		iMusicScroll=0		
 		FOR iMusicX=0 to 2	
 			IntyNote=0
@@ -91,52 +90,71 @@ PlayLoop:
 			iMusicScroll=iMusicScroll+IntyNote
 			
 		NEXT iMusicX
-		'----------------
 		
+		'---------------- SCROLL, DRAW MUSIC ----------------------------		
+		'--- Theres very little time after VBLANK, I had to rearrange things here to draw bottom display first
 		IF (INTYMUSIC_AUTO_SCROLL OR iMusicScroll) THEN 			
-			SCROLL 0,0,3	'Scroll upwards (move things down)
-				
-			'----Clear top line, from pre-stored data---
-			'- also draw piano----
-			WAIT	
-			FOR iMusicX=0 TO 19
-				#BACKTAB(iMusicX)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR				
-				#BACKTAB(200+iMusicX)= IntyPiano(iMusicX) 'GRAM + (Sprite24 * 8)
+			Toggle=Toggle XOR 1	'Toggle piano key color
+			
+			SCROLL 0,0,3			'Scroll upwards (move things down), just about...
+			WAIT					'....NOW!
+			
+			'- Draw piano---
+			FOR iMusicX=0 TO 18
+				#BACKTAB(200+iMusicX)= IntyPiano(iMusicX)
 			NEXT iMusicX	
 			
-			'---Alternate colors,
-			IF INTYMUSIC_FANFOLD THEN
-				#BACKTAB(0)=CS_ADVANCE
-				#BACKTAB(20)=CS_ADVANCE
-			END IF			
-			
-			'--pick piano hilite color, idea was see if same key struck again, but I got instead cool flashy keys
-			IF Toggle THEN #x=INTYMUSIC_PIANO_HILITE1 ELSE #x=INTYMUSIC_PIANO_HILITE2
-			
-			'---Draw each note, also draw on lower bottom note data-----	
-			PRINT AT 220 COLOR CS_WHITE: PRINT COLOR CS_ADVANCE," ":PRINT COLOR CS_BLUE		
+			'---Alternate colors---
+			'IF INTYMUSIC_FANFOLD THEN	#BACKTAB(0)=CS_ADVANCE			
+			#BACKTAB(0)=#IntyMusicBlink			
+			PRINT AT 220, CS_ADVANCE
+			'---Draw lower bottom note data-----	
 			FOR iMusicX=0 TO 2
 				IntyNote=#iMusicNote(iMusicX)	'Get note value to use in look-up tables 
-
-				IF iMusicDrawNote(iMusicX) THEN 
-					#BACKTAB(IntyNoteOnscreen(IntyNote))=IntyNoteGRAM(IntyNote)
-					PRINT " \285" 
-				ELSE 
-					PRINT ". " 									'note on/off (below)
-				END IF
+				#x=iMusicNoteColor(iMusicX)	'Get note color
 				
-				PRINT IntyNoteLetter(IntyNote),IntyNoteOctave(IntyNote),IntyNoteSharp(IntyNote)	'Note text,ex. C5#
-
-				'---Use sprites to "hilite" piano key -----			
+				PRINT COLOR #x,2280 + iMusicDrawNote(iMusicX)
+				PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x		'Note text,ex. C5#
+			NEXT iMusicX
+						
+			'--Print song name 
+			#x=19
+			FOR iMusicX=0 TO 11
+				#BACKTAB(#x)=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
+				#x=#x+20
+			NEXT iMusicX
+			
+			'---Draw bottom left piano, lefmost key... to avoid erasing other keys that scrolled down. 
+			PRINT 2272 'PRINT "\284"
+			'----Clear top line, draw staff---
+			FOR iMusicX=1 TO 18
+				#BACKTAB(iMusicX)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
+			NEXT iMusicX
+			
+			'---Use sprites to "hilite" piano keys and draw notes-----
+			FOR iMusicX=0 TO 2
+				IntyNote=#iMusicNote(iMusicX)	'--Get note 
+				
+				'Draw Note
+				IF iMusicDrawNote(iMusicX) THEN #BACKTAB(IntyNoteOnscreen(IntyNote))=IntyNoteGRAM(IntyNote) + iMusicNoteColor(iMusicX)				
+				
+				'Overlay sprites on piano keys. Flash colors 
+				IF Toggle THEN #x=#iMusicPianoColorA(iMusicX) ELSE #x=#iMusicPianoColorB(iMusicX)
 				SPRITE iMusicX,16 + VISIBLE + IntyPianoSpriteOffset(IntyNote),88 + ZOOMY2, IntyPianoSprite(IntyNote) + #x
-			NEXT iMusicX	
-					
-		END IF 'Scrolll
-	PRINT "    " 'last 3 chars, otherwise Ill see part of piano that has scrolled
-	END IF '#iMusicTime()
+			NEXT iMusicX		
+		END IF '<----- Scroll			
+	ELSE	
+		WAIT
+	END IF '<-----#iMusicTime()
 GOTO PlayLoop
 
-
+'--Prints song name, after last PRINT position
+Print_Song_Name: PROCEDURE
+	FOR iMusicX=0 TO 11
+		#BACKTAB(iMusicX+POS(0))=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
+	NEXT iMusicX
+RETURN
+END
 '    _______________
 '___/ IMUSICGETINFO \________________________________________________________________
 'Get IntyBasic_epilogue data onto IntyBasic. Ill copy note and volume
