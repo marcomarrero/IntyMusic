@@ -1614,7 +1614,7 @@ ENDM
 ;; ======================================================================== ;;
 
 	;FILE IntyMusic.bas
-	;[1] 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/9/2016
+	;[1] 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/10/2016
 	SRCFILE "IntyMusic.bas",1
 	;[2] 
 	SRCFILE "IntyMusic.bas",2
@@ -2769,86 +2769,92 @@ ENDM
 	SRCFILE "IntyMusic.bas",8
 	;[9] 
 	SRCFILE "IntyMusic.bas",9
-	;[10] '========================== Options you can modify =============================================
+	;[10] '========================== Options #1 - customization ========================================
 	SRCFILE "IntyMusic.bas",10
-	;[11] CONST INTYMUSIC_STAFF_COLOR = FG_BLUE		'FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
+	;[11] 
 	SRCFILE "IntyMusic.bas",11
-	;[12] CONST INTYMUSIC_AUTO_SCROLL = 1			'0 to pause at notes, 1 to always scroll
+	;[12] CONST INTYMUSIC_STAFF_COLOR = FG_BLACK		'FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
 	SRCFILE "IntyMusic.bas",12
-	;[13] CONST INTYMUSIC_FANFOLD = 1				'1 to alternate colors, like classic dot-matrix paper
+	;[13] CONST INTYMUSIC_AUTO_SCROLL = 1			'0 to pause at notes, 1 to always scroll
 	SRCFILE "IntyMusic.bas",13
-	;[14] CONST INTYMUSIC_TITLE_COLOR=FG_BLUE			'---Song title Color ---- FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
+	;[14] CONST INTYMUSIC_FANFOLD = 1				'1 to alternate colors, like classic dot-matrix paper
 	SRCFILE "IntyMusic.bas",14
-	;[15] 
+	;[15] CONST INTYMUSIC_TITLE_COLOR=FG_BLUE			'---Song title Color ---- FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
 	SRCFILE "IntyMusic.bas",15
-	;[16] '--- Note color, by voice channel ---- FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
+	;[16] 
 	SRCFILE "IntyMusic.bas",16
-	;[17] iMusicNoteColor(0)=FG_BLACK
+	;[17] '--- Note color, by voice channel ---- FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
 	SRCFILE "IntyMusic.bas",17
-	CLRR R0
-	MVO R0,Q3
-	;[18] iMusicNoteColor(1)=FG_RED
+	;[18] iMusicNoteColor(0)=FG_BLUE
 	SRCFILE "IntyMusic.bas",18
+	MVII #1,R0
+	MVO R0,Q3
+	;[19] iMusicNoteColor(1)=FG_RED
+	SRCFILE "IntyMusic.bas",19
 	MVII #2,R0
 	MVO R0,Q3+1
-	;[19] iMusicNoteColor(2)=SPR_DARKGREEN
-	SRCFILE "IntyMusic.bas",19
+	;[20] iMusicNoteColor(2)=SPR_DARKGREEN
+	SRCFILE "IntyMusic.bas",20
 	MVII #4,R0
 	MVO R0,Q3+2
-	;[20] 
-	SRCFILE "IntyMusic.bas",20
-	;[21] '--- Piano key color, by voice channel ---- 2nd set for flash effect. Use same colors on 2nd set to disable blink
+	;[21] 
 	SRCFILE "IntyMusic.bas",21
-	;[22] ' SPR_BLACK,SPR_BLUE,SPR_RED,SPR_TAN,SPR_DARKGREEN,SPR_GREEN,SPR_YELLOW,SPR_WHITE,SPR_GREY,SPR_CYAN,SPR_ORANGE,SPR_BROWN,SPR_PINK,SPR_LIGHTBLUE,SPR_YELLOWGREEN,SPR_PURPLE			7
+	;[22] '--- Piano key color, by voice channel ---- 2nd set for flash effect. Use same colors on 2nd set to disable blink
 	SRCFILE "IntyMusic.bas",22
-	;[23] #iMusicPianoColorA(0)=SPR_BLACK
+	;[23] ' SPR_BLACK,SPR_BLUE,SPR_RED,SPR_TAN,SPR_DARKGREEN,SPR_GREEN,SPR_YELLOW,SPR_WHITE,SPR_GREY,SPR_CYAN,SPR_ORANGE,SPR_BROWN,SPR_PINK,SPR_LIGHTBLUE,SPR_YELLOWGREEN,SPR_PURPLE			7
 	SRCFILE "IntyMusic.bas",23
-	CLRR R0
-	MVO R0,Q4
-	;[24] #iMusicPianoColorA(1)=SPR_RED
+	;[24] '--1st set---
 	SRCFILE "IntyMusic.bas",24
+	;[25] #iMusicPianoColorA(0)=SPR_BLUE
+	SRCFILE "IntyMusic.bas",25
+	MVII #1,R0
+	MVO R0,Q4
+	;[26] #iMusicPianoColorA(1)=SPR_RED
+	SRCFILE "IntyMusic.bas",26
 	MVII #2,R0
 	MVO R0,Q4+1
-	;[25] #iMusicPianoColorA(2)=SPR_DARKGREEN
-	SRCFILE "IntyMusic.bas",25
+	;[27] #iMusicPianoColorA(2)=SPR_DARKGREEN
+	SRCFILE "IntyMusic.bas",27
 	MVII #4,R0
 	MVO R0,Q4+2
-	;[26] 
-	SRCFILE "IntyMusic.bas",26
-	;[27] #iMusicPianoColorB(0)=SPR_GREY
-	SRCFILE "IntyMusic.bas",27
-	MVII #4096,R0
-	MVO R0,Q5
-	;[28] #iMusicPianoColorB(1)=SPR_ORANGE
+	;[28] '--2nd set, flash---
 	SRCFILE "IntyMusic.bas",28
+	;[29] #iMusicPianoColorB(0)=SPR_LIGHTBLUE
+	SRCFILE "IntyMusic.bas",29
+	MVII #4101,R0
+	MVO R0,Q5
+	;[30] #iMusicPianoColorB(1)=SPR_ORANGE
+	SRCFILE "IntyMusic.bas",30
 	MVII #4098,R0
 	MVO R0,Q5+1
-	;[29] #iMusicPianoColorB(2)=SPR_GREEN
-	SRCFILE "IntyMusic.bas",29
+	;[31] #iMusicPianoColorB(2)=SPR_GREEN
+	SRCFILE "IntyMusic.bas",31
 	MOVR R3,R0
 	MVO R0,Q5+2
-	;[30] 
-	SRCFILE "IntyMusic.bas",30
-	;[31] 'Alternating colors: STACK_BLACK,STACK_BLUE,STACK_RED,STACK_TAN,STACK_DARKGREEN,STACK_GREEN,STACK_YELLOW,STACK_WHITE,STACK_GREY,STACK_CYAN,STACK_ORANGE,STACK_BROWN,STACK_PINK,STACK_LIGHTBLUE,STACK_YELLOWGREEN,STACK_PURPLE
-	SRCFILE "IntyMusic.bas",31
-	;[32] MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
+	;[32] 
 	SRCFILE "IntyMusic.bas",32
+	;[33] '----Color stack----
+	SRCFILE "IntyMusic.bas",33
+	;[34] 'STACK_BLACK,STACK_BLUE,STACK_RED,STACK_TAN,STACK_DARKGREEN,STACK_GREEN,STACK_YELLOW,STACK_WHITE,STACK_GREY,STACK_CYAN,STACK_ORANGE,STACK_BROWN,STACK_PINK,STACK_LIGHTBLUE,STACK_YELLOWGREEN,STACK_PURPLE
+	SRCFILE "IntyMusic.bas",34
+	;[35] MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
+	SRCFILE "IntyMusic.bas",35
 	MVII #29495,R0
 	MVO R0,_color
 	MVII #1,R0
 	MVO R0,_mode_select
-	;[33] 'MODE 0,STACK_GREY,STACK_LIGHTBLUE,STACK_WHITE,STACK_CYAN
-	SRCFILE "IntyMusic.bas",33
-	;[34] 
-	SRCFILE "IntyMusic.bas",34
-	;[35] '========================== Options End =============================================
-	SRCFILE "IntyMusic.bas",35
-	;[36] 
+	;[36] 'MODE 0,STACK_GREY,STACK_LIGHTBLUE,STACK_WHITE,STACK_CYAN
 	SRCFILE "IntyMusic.bas",36
-	;[37] '-----Required------ 
+	;[37] 
 	SRCFILE "IntyMusic.bas",37
-	;[38] INCLUDE "IntyMusicPlayer.bas"
+	;[38] '========================== Options #1 End =============================================
 	SRCFILE "IntyMusic.bas",38
+	;[39] 
+	SRCFILE "IntyMusic.bas",39
+	;[40] '-----Required------ 
+	SRCFILE "IntyMusic.bas",40
+	;[41] INCLUDE "IntyMusicPlayer.bas"
+	SRCFILE "IntyMusic.bas",41
 	;FILE IntyMusicPlayer.bas
 	;[1] 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/3/2016
 	SRCFILE "IntyMusicPlayer.bas",1
@@ -2967,94 +2973,59 @@ Q14:	;[23] CLS
 T1:
 	;[34] 
 	SRCFILE "IntyMusicPlayer.bas",34
-	;[35] '----initialize---
+	;[35] '----initialize, show title screen and credits---
 	SRCFILE "IntyMusicPlayer.bas",35
-	;[36] WAIT
+	;[36] GOSUB IntyMusicInit
 	SRCFILE "IntyMusicPlayer.bas",36
-	CALL _wait
-	;[37] GOSUB IntyMusicInit
-	SRCFILE "IntyMusicPlayer.bas",37
 	CALL Q16
-	;[38] 
+	;[37] 
+	SRCFILE "IntyMusicPlayer.bas",37
+	;[38] '---- main loop -----
 	SRCFILE "IntyMusicPlayer.bas",38
-	;[39] '---- main loop -----
+	;[39] PLAY MyMusic
 	SRCFILE "IntyMusicPlayer.bas",39
-	;[40] PLAY MyMusic
-	SRCFILE "IntyMusicPlayer.bas",40
 	MVII #Q17,R0
 	CALL _play_music
-	;[41] PlayLoop:
-	SRCFILE "IntyMusicPlayer.bas",41
+	;[40] PlayLoop:
+	SRCFILE "IntyMusicPlayer.bas",40
 	; PLAYLOOP
-Q18:	;[42] 	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
+Q18:	;[41] 	'---- user reset? ----
+	SRCFILE "IntyMusicPlayer.bas",41
+	;[42] 	IF Cont.KEY=12 THEN 
 	SRCFILE "IntyMusicPlayer.bas",42
-	;[43] 	FOR iMusicX=0 to 2
-	SRCFILE "IntyMusicPlayer.bas",43
-	CLRR R0
-	MVO R0,V6
-T2:
-	;[44] 		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
-	SRCFILE "IntyMusicPlayer.bas",44
-	MVII #Q8,R3
-	ADD V6,R3
-	MVI@ R3,R0
-	MVII #Q12,R3
-	ADD V6,R3
-	MVO@ R0,R3
-	;[45] 		iMusicVolumeLast(iMusicX)=#iMusicVol(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",45
-	MVII #Q9,R3
-	ADD V6,R3
-	MVI@ R3,R0
-	MVII #Q13,R3
-	ADD V6,R3
-	MVO@ R0,R3
-	;[46] 	NEXT iMusicX	
-	SRCFILE "IntyMusicPlayer.bas",46
-	MVI V6,R0
-	INCR R0
-	MVO R0,V6
-	CMPI #2,R0
-	BLE T2
-	;[47] 	
-	SRCFILE "IntyMusicPlayer.bas",47
-	;[48] 	'---- reset? ----
-	SRCFILE "IntyMusicPlayer.bas",48
-	;[49] 	IF Cont.KEY=12 THEN 
-	SRCFILE "IntyMusicPlayer.bas",49
 	MVI _cnt1_key,R0
 	CMPI #12,R0
 	BNE $+4
 	MVI _cnt2_key,R0
 	CMPI #12,R0
-	BNE T3
-	;[50] 		KeyClear=1
-	SRCFILE "IntyMusicPlayer.bas",50
+	BNE T2
+	;[43] 		KeyClear=1
+	SRCFILE "IntyMusicPlayer.bas",43
 	MVII #1,R0
 	MVO R0,V4
-	;[51] 	ELSE
-	SRCFILE "IntyMusicPlayer.bas",51
-	B T4
-T3:
-	;[52] 		IF KeyClear THEN 
-	SRCFILE "IntyMusicPlayer.bas",52
+	;[44] 	ELSE
+	SRCFILE "IntyMusicPlayer.bas",44
+	B T3
+T2:
+	;[45] 		IF KeyClear THEN 
+	SRCFILE "IntyMusicPlayer.bas",45
 	MVI V4,R0
 	TSTR R0
-	BEQ T5
-	;[53] 			IF Cont.KEY=10 THEN 
-	SRCFILE "IntyMusicPlayer.bas",53
+	BEQ T4
+	;[46] 			IF Cont.KEY=10 THEN 
+	SRCFILE "IntyMusicPlayer.bas",46
 	MVI _cnt1_key,R0
 	CMPI #12,R0
 	BNE $+4
 	MVI _cnt2_key,R0
 	CMPI #10,R0
-	BNE T6
-	;[54] 				PLAY OFF						
-	SRCFILE "IntyMusicPlayer.bas",54
+	BNE T5
+	;[47] 				PLAY OFF						
+	SRCFILE "IntyMusicPlayer.bas",47
 	CLRR R0
 	CALL _play_music
-	;[55] 				SOUND 0,1,0:	SOUND 1,1,0:	SOUND 2,1,0:SOUND 4,1,$38
-	SRCFILE "IntyMusicPlayer.bas",55
+	;[48] 				SOUND 0,1,0:	SOUND 1,1,0:	SOUND 2,1,0:SOUND 4,1,$38
+	SRCFILE "IntyMusicPlayer.bas",48
 	MVII #1,R0
 	MVO R0,496
 	SWAP R0
@@ -3077,30 +3048,64 @@ T3:
 	MVO R0,505
 	MVII #56,R0
 	MVO R0,504
-	;[56] 				CALL IMUSICKILL	'works too well...
-	SRCFILE "IntyMusicPlayer.bas",56
+	;[49] 				CALL IMUSICKILL	'works too well...
+	SRCFILE "IntyMusicPlayer.bas",49
 	CALL F19
-	;[57] 				GOTO IntyMusicReset
-	SRCFILE "IntyMusicPlayer.bas",57
+	;[50] 				GOTO IntyMusicReset
+	SRCFILE "IntyMusicPlayer.bas",50
 	B Q14
-	;[58] 			END IF
-	SRCFILE "IntyMusicPlayer.bas",58
-T6:
-	;[59] 		END IF
-	SRCFILE "IntyMusicPlayer.bas",59
+	;[51] 			END IF
+	SRCFILE "IntyMusicPlayer.bas",51
 T5:
-	;[60] 		KeyClear=0
-	SRCFILE "IntyMusicPlayer.bas",60
+	;[52] 		END IF
+	SRCFILE "IntyMusicPlayer.bas",52
+T4:
+	;[53] 		KeyClear=0
+	SRCFILE "IntyMusicPlayer.bas",53
 	CLRR R0
 	MVO R0,V4
-	;[61] 	END IF	
+	;[54] 	END IF	
+	SRCFILE "IntyMusicPlayer.bas",54
+T3:
+	;[55] 	'-------------------
+	SRCFILE "IntyMusicPlayer.bas",55
+	;[56] 
+	SRCFILE "IntyMusicPlayer.bas",56
+	;[57] 	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
+	SRCFILE "IntyMusicPlayer.bas",57
+	;[58] 	'---it seems it does not work most times...
+	SRCFILE "IntyMusicPlayer.bas",58
+	;[59] 	FOR iMusicX=0 to 2
+	SRCFILE "IntyMusicPlayer.bas",59
+	CLRR R0
+	MVO R0,V6
+T6:
+	;[60] 		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
+	SRCFILE "IntyMusicPlayer.bas",60
+	MVII #Q8,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVII #Q12,R3
+	ADD V6,R3
+	MVO@ R0,R3
+	;[61] 		iMusicVolumeLast(iMusicX)=#iMusicVol(iMusicX)
 	SRCFILE "IntyMusicPlayer.bas",61
-T4:
-	;[62] 	'-------------------
+	MVII #Q9,R3
+	ADD V6,R3
+	MVI@ R3,R0
+	MVII #Q13,R3
+	ADD V6,R3
+	MVO@ R0,R3
+	;[62] 	NEXT iMusicX	
 	SRCFILE "IntyMusicPlayer.bas",62
-	;[63] 	
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #2,R0
+	BLE T6
+	;[63] 		
 	SRCFILE "IntyMusicPlayer.bas",63
-	;[64] 	'--Get values from IntyBasic_epilogue	
+	;[64] 	'--Get values from IntyBasic_epilogue ASM
 	SRCFILE "IntyMusicPlayer.bas",64
 	;[65] 	Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
 	SRCFILE "IntyMusicPlayer.bas",65
@@ -3121,20 +3126,22 @@ T4:
 	BNE T7
 	;[69] 	
 	SRCFILE "IntyMusicPlayer.bas",69
-	;[70] 		iMusicScroll=0		
+	;[70] 		'--- check if note changed, or, if same note plays again by checking instrument volume 
 	SRCFILE "IntyMusicPlayer.bas",70
+	;[71] 		iMusicScroll=0		
+	SRCFILE "IntyMusicPlayer.bas",71
 	CLRR R0
 	MVO R0,V1
-	;[71] 		FOR iMusicX=0 to 2	
-	SRCFILE "IntyMusicPlayer.bas",71
+	;[72] 		FOR iMusicX=0 to 2	
+	SRCFILE "IntyMusicPlayer.bas",72
 	MVO R0,V6
 T8:
-	;[72] 			IntyNote=0
-	SRCFILE "IntyMusicPlayer.bas",72
+	;[73] 			IntyNote=0
+	SRCFILE "IntyMusicPlayer.bas",73
 	CLRR R0
 	MVO R0,V7
-	;[73] 			IF iMusicNoteLast(iMusicX)<>#iMusicNote(iMusicX) THEN GOTO GotIntyNote	'note changed
-	SRCFILE "IntyMusicPlayer.bas",73
+	;[74] 			IF iMusicNoteLast(iMusicX)<>#iMusicNote(iMusicX) THEN GOTO GotIntyNote	'note changed
+	SRCFILE "IntyMusicPlayer.bas",74
 	MVII #Q12,R3
 	ADD V6,R3
 	MVI@ R3,R0
@@ -3142,30 +3149,30 @@ T8:
 	ADD V6,R3
 	CMP@ R3,R0
 	BNE Q21
-	;[74] 			
-	SRCFILE "IntyMusicPlayer.bas",74
-	;[75] 			'Same note? check last volume. piano: 14,13 clarinet: 13,14 bass: 12,13 flute:10,12
+	;[75] 			
 	SRCFILE "IntyMusicPlayer.bas",75
-	;[76] 			iMusicVolCheck=#iMusicVol(iMusicX)
+	;[76] 			'Same note? check last volume. piano: 14,13 clarinet: 13,14 bass: 12,13 flute:10,12
 	SRCFILE "IntyMusicPlayer.bas",76
+	;[77] 			iMusicVolCheck=#iMusicVol(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",77
 	MVII #Q9,R3
 	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V8
-	;[77] 			iMusicVolLast=iMusicVolumeLast(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",77
+	;[78] 			iMusicVolLast=iMusicVolumeLast(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",78
 	MVII #Q13,R3
 	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V9
-	;[78] 			iMusicInst=#iMusicInst(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",78
+	;[79] 			iMusicInst=#iMusicInst(iMusicX)
+	SRCFILE "IntyMusicPlayer.bas",79
 	MVII #Q10,R3
 	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V10
-	;[79] 			IF iMusicInst=0 THEN IF iMusicVolLast=14 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'piano
-	SRCFILE "IntyMusicPlayer.bas",79
+	;[80] 			IF iMusicInst=0 THEN IF iMusicVolLast=14 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'piano
+	SRCFILE "IntyMusicPlayer.bas",80
 	MVI V10,R0
 	TSTR R0
 	BNE T10
@@ -3182,8 +3189,8 @@ T8:
 	ANDR R1,R0
 	BNE Q21
 T10:
-	;[80] 			IF iMusicInst=64 THEN IF iMusicVolLast=13 AND iMusicVolCheck=14 THEN GOTO GotIntyNote	'clarinet
-	SRCFILE "IntyMusicPlayer.bas",80
+	;[81] 			IF iMusicInst=64 THEN IF iMusicVolLast=13 AND iMusicVolCheck=14 THEN GOTO GotIntyNote	'clarinet
+	SRCFILE "IntyMusicPlayer.bas",81
 	MVI V10,R0
 	CMPI #64,R0
 	BNE T12
@@ -3200,8 +3207,8 @@ T10:
 	ANDR R1,R0
 	BNE Q21
 T12:
-	;[81] 			IF iMusicInst=128 THEN IF iMusicVolLast=10 AND iMusicVolCheck=12 THEN GOTO GotIntyNote	'flute 
-	SRCFILE "IntyMusicPlayer.bas",81
+	;[82] 			IF iMusicInst=128 THEN IF iMusicVolLast=10 AND iMusicVolCheck=12 THEN GOTO GotIntyNote	'flute 
+	SRCFILE "IntyMusicPlayer.bas",82
 	MVI V10,R0
 	CMPI #128,R0
 	BNE T14
@@ -3218,8 +3225,8 @@ T12:
 	ANDR R1,R0
 	BNE Q21
 T14:
-	;[82] 			IF iMusicInst=192 THEN IF iMusicVolLast=12 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'bass
-	SRCFILE "IntyMusicPlayer.bas",82
+	;[83] 			IF iMusicInst=192 THEN IF iMusicVolLast=12 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'bass
+	SRCFILE "IntyMusicPlayer.bas",83
 	MVI V10,R0
 	CMPI #192,R0
 	BNE T16
@@ -3236,36 +3243,34 @@ T14:
 	ANDR R1,R0
 	BNE Q21
 T16:
-	;[83] 			GOTO GotIntyNoteFail
-	SRCFILE "IntyMusicPlayer.bas",83
-	B Q22
-	;[84] 
+	;[84] 			GOTO GotIntyNoteFail
 	SRCFILE "IntyMusicPlayer.bas",84
-	;[85] 		GotIntyNote:			
+	B Q22
+	;[85] 
 	SRCFILE "IntyMusicPlayer.bas",85
-	; GOTINTYNOTE
-Q21:	;[86] 			IntyNote=1
+	;[86] 		GotIntyNote:			
 	SRCFILE "IntyMusicPlayer.bas",86
+	; GOTINTYNOTE
+Q21:	;[87] 			IntyNote=1
+	SRCFILE "IntyMusicPlayer.bas",87
 	MVII #1,R0
 	MVO R0,V7
-	;[87] 			
-	SRCFILE "IntyMusicPlayer.bas",87
-	;[88] 		GotIntyNoteFail:
+	;[88] 			
 	SRCFILE "IntyMusicPlayer.bas",88
-	; GOTINTYNOTEFAIL
-Q22:	;[89] 			iMusicDrawNote(iMusicX)=IntyNote
+	;[89] 		GotIntyNoteFail:
 	SRCFILE "IntyMusicPlayer.bas",89
+	; GOTINTYNOTEFAIL
+Q22:	;[90] 			iMusicDrawNote(iMusicX)=IntyNote
+	SRCFILE "IntyMusicPlayer.bas",90
 	MVI V7,R0
 	MVII #Q15,R3
 	ADD V6,R3
 	MVO@ R0,R3
-	;[90] 			iMusicScroll=iMusicScroll+IntyNote
-	SRCFILE "IntyMusicPlayer.bas",90
+	;[91] 			iMusicScroll=iMusicScroll+IntyNote			
+	SRCFILE "IntyMusicPlayer.bas",91
 	MVI V1,R0
 	ADD V7,R0
 	MVO R0,V1
-	;[91] 			
-	SRCFILE "IntyMusicPlayer.bas",91
 	;[92] 		NEXT iMusicX
 	SRCFILE "IntyMusicPlayer.bas",92
 	MVI V6,R0
@@ -3308,13 +3313,11 @@ Q22:	;[89] 			iMusicDrawNote(iMusicX)=IntyNote
 	SRCFILE "IntyMusicPlayer.bas",101
 	;[102] 			'- Draw piano---
 	SRCFILE "IntyMusicPlayer.bas",102
-	;[103] 			FOR iMusicX=0 TO 18
+	;[103] 			FOR iMusicX=0 TO 18:#BACKTAB(200+iMusicX)= IntyPiano(iMusicX):NEXT iMusicX	
 	SRCFILE "IntyMusicPlayer.bas",103
 	CLRR R0
 	MVO R0,V6
 T19:
-	;[104] 				#BACKTAB(200+iMusicX)= IntyPiano(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",104
 	MVII #Q2,R0
 	MVII #200,R1
 	ADD V6,R1
@@ -3324,54 +3327,52 @@ T19:
 	MVI@ R3,R1
 	MOVR R0,R4
 	MVO@ R1,R4
-	;[105] 			NEXT iMusicX	
-	SRCFILE "IntyMusicPlayer.bas",105
 	MVI V6,R0
 	INCR R0
 	MVO R0,V6
 	CMPI #18,R0
 	BLE T19
-	;[106] 			
+	;[104] 			
+	SRCFILE "IntyMusicPlayer.bas",104
+	;[105] 			'---Alternate colors---
+	SRCFILE "IntyMusicPlayer.bas",105
+	;[106] 			#BACKTAB(0)=#IntyMusicBlink			
 	SRCFILE "IntyMusicPlayer.bas",106
-	;[107] 			'---Alternate colors---
-	SRCFILE "IntyMusicPlayer.bas",107
-	;[108] 			'IF INTYMUSIC_FANFOLD THEN	#BACKTAB(0)=CS_ADVANCE			
-	SRCFILE "IntyMusicPlayer.bas",108
-	;[109] 			#BACKTAB(0)=#IntyMusicBlink			
-	SRCFILE "IntyMusicPlayer.bas",109
 	MVI V5,R0
 	MVO R0,Q2
-	;[110] 			PRINT AT 220, CS_ADVANCE
-	SRCFILE "IntyMusicPlayer.bas",110
+	;[107] 			PRINT AT 220, CS_ADVANCE
+	SRCFILE "IntyMusicPlayer.bas",107
 	MVII #732,R0
 	MVO R0,_screen
 	MVII #8192,R0
 	MVI _screen,R4
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[111] 			'---Draw lower bottom note data-----	
-	SRCFILE "IntyMusicPlayer.bas",111
-	;[112] 			FOR iMusicX=0 TO 2
-	SRCFILE "IntyMusicPlayer.bas",112
+	;[108] 			
+	SRCFILE "IntyMusicPlayer.bas",108
+	;[109] 			'---Draw lower bottom note data,ex. C3# A4 B5-----	
+	SRCFILE "IntyMusicPlayer.bas",109
+	;[110] 			FOR iMusicX=0 TO 2
+	SRCFILE "IntyMusicPlayer.bas",110
 	CLRR R0
 	MVO R0,V6
 T20:
-	;[113] 				IntyNote=#iMusicNote(iMusicX)	'Get note value to use in look-up tables 
-	SRCFILE "IntyMusicPlayer.bas",113
+	;[111] 				IntyNote=#iMusicNote(iMusicX)	'Get note value to use in look-up tables 
+	SRCFILE "IntyMusicPlayer.bas",111
 	MVII #Q8,R3
 	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V7
-	;[114] 				#x=iMusicNoteColor(iMusicX)	'Get note color
-	SRCFILE "IntyMusicPlayer.bas",114
+	;[112] 				#x=iMusicNoteColor(iMusicX)	'Get note color
+	SRCFILE "IntyMusicPlayer.bas",112
 	MVII #Q3,R3
 	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V2
-	;[115] 				
-	SRCFILE "IntyMusicPlayer.bas",115
-	;[116] 				PRINT COLOR #x,2280 + iMusicDrawNote(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",116
+	;[113] 				
+	SRCFILE "IntyMusicPlayer.bas",113
+	;[114] 				PRINT COLOR #x,2280 + iMusicDrawNote(iMusicX)	'Note + blink
+	SRCFILE "IntyMusicPlayer.bas",114
 	MVO R0,_color
 	MVII #Q15,R3
 	ADD V6,R3
@@ -3380,8 +3381,8 @@ T20:
 	MVI _screen,R4
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[117] 				PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x		'Note text,ex. C5#
-	SRCFILE "IntyMusicPlayer.bas",117
+	;[115] 				PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x		'Note text,ex. C5#
+	SRCFILE "IntyMusicPlayer.bas",115
 	MVII #Q26,R3
 	ADD V7,R3
 	MVI@ R3,R0
@@ -3403,28 +3404,28 @@ T20:
 	MVI _screen,R4
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[118] 			NEXT iMusicX
-	SRCFILE "IntyMusicPlayer.bas",118
+	;[116] 			NEXT iMusicX
+	SRCFILE "IntyMusicPlayer.bas",116
 	MVI V6,R0
 	INCR R0
 	MVO R0,V6
 	CMPI #2,R0
 	BLE T20
-	;[119] 						
+	;[117] 						
+	SRCFILE "IntyMusicPlayer.bas",117
+	;[118] 			'--Print song name --
+	SRCFILE "IntyMusicPlayer.bas",118
+	;[119] 			#x=19
 	SRCFILE "IntyMusicPlayer.bas",119
-	;[120] 			'--Print song name 
-	SRCFILE "IntyMusicPlayer.bas",120
-	;[121] 			#x=19
-	SRCFILE "IntyMusicPlayer.bas",121
 	MVII #19,R0
 	MVO R0,V2
-	;[122] 			FOR iMusicX=0 TO 11
-	SRCFILE "IntyMusicPlayer.bas",122
+	;[120] 			FOR iMusicX=0 TO 11
+	SRCFILE "IntyMusicPlayer.bas",120
 	CLRR R0
 	MVO R0,V6
 T21:
-	;[123] 				#BACKTAB(#x)=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
-	SRCFILE "IntyMusicPlayer.bas",123
+	;[121] 				#BACKTAB(#x)=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
+	SRCFILE "IntyMusicPlayer.bas",121
 	MVII #Q29,R3
 	ADD V6,R3
 	MVI@ R3,R0
@@ -3434,72 +3435,73 @@ T21:
 	MVII #Q2,R3
 	ADD V2,R3
 	MVO@ R0,R3
-	;[124] 				#x=#x+20
-	SRCFILE "IntyMusicPlayer.bas",124
+	;[122] 				#x=#x+20
+	SRCFILE "IntyMusicPlayer.bas",122
 	MVI V2,R0
 	ADDI #20,R0
 	MVO R0,V2
-	;[125] 			NEXT iMusicX
-	SRCFILE "IntyMusicPlayer.bas",125
+	;[123] 			NEXT iMusicX
+	SRCFILE "IntyMusicPlayer.bas",123
 	MVI V6,R0
 	INCR R0
 	MVO R0,V6
 	CMPI #11,R0
 	BLE T21
-	;[126] 			
+	;[124] 			
+	SRCFILE "IntyMusicPlayer.bas",124
+	;[125] 			'---Draw bottom left piano, lefmost key... I cannot waste time erasing other piano keys that scrolled down
+	SRCFILE "IntyMusicPlayer.bas",125
+	;[126] 			PRINT 2272 'PRINT "\284"			
 	SRCFILE "IntyMusicPlayer.bas",126
-	;[127] 			'---Draw bottom left piano, lefmost key... to avoid erasing other keys that scrolled down. 
-	SRCFILE "IntyMusicPlayer.bas",127
-	;[128] 			PRINT 2272 'PRINT "\284"
-	SRCFILE "IntyMusicPlayer.bas",128
 	MVII #2272,R0
 	MVI _screen,R4
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[129] 			'----Clear top line, draw staff---
+	;[127] 			
+	SRCFILE "IntyMusicPlayer.bas",127
+	;[128] 			'----Done updating lower screen. Clear top line, draw staff---
+	SRCFILE "IntyMusicPlayer.bas",128
+	;[129] 			FOR iMusicX=1 TO 18
 	SRCFILE "IntyMusicPlayer.bas",129
-	;[130] 			FOR iMusicX=1 TO 18
-	SRCFILE "IntyMusicPlayer.bas",130
 	MVII #1,R0
 	MVO R0,V6
 T22:
-	;[131] 				#BACKTAB(iMusicX)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
-	SRCFILE "IntyMusicPlayer.bas",131
+	;[130] 				#BACKTAB(iMusicX)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
+	SRCFILE "IntyMusicPlayer.bas",130
 	MVII #Q30,R3
 	ADD V6,R3
 	MVI@ R3,R0
-	INCR R0
 	MVII #Q2,R3
 	ADD V6,R3
 	MVO@ R0,R3
-	;[132] 			NEXT iMusicX
-	SRCFILE "IntyMusicPlayer.bas",132
+	;[131] 			NEXT iMusicX
+	SRCFILE "IntyMusicPlayer.bas",131
 	MVI V6,R0
 	INCR R0
 	MVO R0,V6
 	CMPI #18,R0
 	BLE T22
-	;[133] 			
+	;[132] 			
+	SRCFILE "IntyMusicPlayer.bas",132
+	;[133] 			'---Use sprites to "hilite" piano keys and draw notes-----
 	SRCFILE "IntyMusicPlayer.bas",133
-	;[134] 			'---Use sprites to "hilite" piano keys and draw notes-----
+	;[134] 			FOR iMusicX=0 TO 2
 	SRCFILE "IntyMusicPlayer.bas",134
-	;[135] 			FOR iMusicX=0 TO 2
-	SRCFILE "IntyMusicPlayer.bas",135
 	CLRR R0
 	MVO R0,V6
 T23:
-	;[136] 				IntyNote=#iMusicNote(iMusicX)	'--Get note 
-	SRCFILE "IntyMusicPlayer.bas",136
+	;[135] 				IntyNote=#iMusicNote(iMusicX)	'--Get note 
+	SRCFILE "IntyMusicPlayer.bas",135
 	MVII #Q8,R3
 	ADD V6,R3
 	MVI@ R3,R0
 	MVO R0,V7
-	;[137] 				
+	;[136] 				
+	SRCFILE "IntyMusicPlayer.bas",136
+	;[137] 				'---Draw Note. Up to 2 notes per card. I used a spreadsheet to create lookup data, card, position, etc.--
 	SRCFILE "IntyMusicPlayer.bas",137
-	;[138] 				'Draw Note
+	;[138] 				IF iMusicDrawNote(iMusicX) THEN #BACKTAB(IntyNoteOnscreen(IntyNote))=IntyNoteGRAM(IntyNote) + iMusicNoteColor(iMusicX)				
 	SRCFILE "IntyMusicPlayer.bas",138
-	;[139] 				IF iMusicDrawNote(iMusicX) THEN #BACKTAB(IntyNoteOnscreen(IntyNote))=IntyNoteGRAM(IntyNote) + iMusicNoteColor(iMusicX)				
-	SRCFILE "IntyMusicPlayer.bas",139
 	MVII #Q15,R3
 	ADD V6,R3
 	MVI@ R3,R0
@@ -3517,12 +3519,12 @@ T23:
 	ADD@ R3,R1
 	MVO@ R0,R1
 T24:
-	;[140] 				
+	;[139] 				
+	SRCFILE "IntyMusicPlayer.bas",139
+	;[140] 				'---Overlay sprites on piano keys. Flash colors---
 	SRCFILE "IntyMusicPlayer.bas",140
-	;[141] 				'Overlay sprites on piano keys. Flash colors 
+	;[141] 				IF Toggle THEN #x=#iMusicPianoColorA(iMusicX) ELSE #x=#iMusicPianoColorB(iMusicX)
 	SRCFILE "IntyMusicPlayer.bas",141
-	;[142] 				IF Toggle THEN #x=#iMusicPianoColorA(iMusicX) ELSE #x=#iMusicPianoColorB(iMusicX)
-	SRCFILE "IntyMusicPlayer.bas",142
 	MVI V3,R0
 	TSTR R0
 	BEQ T25
@@ -3537,8 +3539,8 @@ T25:
 	MVI@ R3,R0
 	MVO R0,V2
 T26:
-	;[143] 				SPRITE iMusicX,16 + VISIBLE + IntyPianoSpriteOffset(IntyNote),88 + ZOOMY2, IntyPianoSprite(IntyNote) + #x
-	SRCFILE "IntyMusicPlayer.bas",143
+	;[142] 				SPRITE iMusicX,16 + VISIBLE + IntyPianoSpriteOffset(IntyNote),88 + ZOOMY2, IntyPianoSprite(IntyNote) + #x
+	SRCFILE "IntyMusicPlayer.bas",142
 	MVII #Q1,R0
 	ADD V6,R0
 	MOVR R0,R4
@@ -3556,348 +3558,282 @@ T26:
 	ADD V2,R0
 	ADDI #7,R4
 	MVO@ R0,R4
-	;[144] 			NEXT iMusicX		
-	SRCFILE "IntyMusicPlayer.bas",144
+	;[143] 			NEXT iMusicX		
+	SRCFILE "IntyMusicPlayer.bas",143
 	MVI V6,R0
 	INCR R0
 	MVO R0,V6
 	CMPI #2,R0
 	BLE T23
-	;[145] 		END IF '<----- Scroll			
-	SRCFILE "IntyMusicPlayer.bas",145
+	;[144] 		END IF '<----- Scroll			
+	SRCFILE "IntyMusicPlayer.bas",144
 T18:
-	;[146] 	ELSE	
-	SRCFILE "IntyMusicPlayer.bas",146
+	;[145] 	ELSE	
+	SRCFILE "IntyMusicPlayer.bas",145
 	B T27
 T7:
-	;[147] 		WAIT
-	SRCFILE "IntyMusicPlayer.bas",147
+	;[146] 		WAIT
+	SRCFILE "IntyMusicPlayer.bas",146
 	CALL _wait
-	;[148] 	END IF '<-----#iMusicTime()
-	SRCFILE "IntyMusicPlayer.bas",148
+	;[147] 	END IF '<-----#iMusicTime()
+	SRCFILE "IntyMusicPlayer.bas",147
 T27:
+	;[148] 	
+	SRCFILE "IntyMusicPlayer.bas",148
 	;[149] GOTO PlayLoop
 	SRCFILE "IntyMusicPlayer.bas",149
 	B Q18
 	;[150] 
 	SRCFILE "IntyMusicPlayer.bas",150
-	;[151] '--Prints song name, after last PRINT position
+	;[151] '    _______________
 	SRCFILE "IntyMusicPlayer.bas",151
-	;[152] Print_Song_Name: PROCEDURE
+	;[152] '___/ IMUSICGETINFO \________________________________________________________________
 	SRCFILE "IntyMusicPlayer.bas",152
-	; PRINT_SONG_NAME
-Q35:	PROC
-	BEGIN
-	;[153] 	FOR iMusicX=0 TO 11
+	;[153] 'Get IntyBasic_epilogue data onto IntyBasic. Ill copy note and volume
 	SRCFILE "IntyMusicPlayer.bas",153
-	CLRR R0
-	MVO R0,V6
-T28:
-	;[154] 		#BACKTAB(iMusicX+POS(0))=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
+	;[154] 'Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
 	SRCFILE "IntyMusicPlayer.bas",154
-	MVI _screen,R0
-	SUBI #512,R0
-	ADD V6,R0
-	MVII #Q2,R1
-	ADDR R1,R0
-	MVII #Q29,R3
-	ADD V6,R3
-	MVI@ R3,R1
-	SLL R1,2
-	ADDR R1,R1
-	INCR R1
-	MOVR R0,R4
-	MVO@ R1,R4
-	;[155] 	NEXT iMusicX
+	;[155] ASM IMUSICGETINFO: PROC	
 	SRCFILE "IntyMusicPlayer.bas",155
-	MVI V6,R0
-	INCR R0
-	MVO R0,V6
-	CMPI #11,R0
-	BLE T28
-	;[156] RETURN
-	SRCFILE "IntyMusicPlayer.bas",156
-	RETURN
-	;[157] END
-	SRCFILE "IntyMusicPlayer.bas",157
-	ENDP
-	;[158] '    _______________
-	SRCFILE "IntyMusicPlayer.bas",158
-	;[159] '___/ IMUSICGETINFO \________________________________________________________________
-	SRCFILE "IntyMusicPlayer.bas",159
-	;[160] 'Get IntyBasic_epilogue data onto IntyBasic. Ill copy note and volume
-	SRCFILE "IntyMusicPlayer.bas",160
-	;[161] 'Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
-	SRCFILE "IntyMusicPlayer.bas",161
-	;[162] ASM IMUSICGETINFO: PROC	
-	SRCFILE "IntyMusicPlayer.bas",162
 IMUSICGETINFO: PROC	
-	;[163] 'r0 = 1st parameter, VARPTR #iMusicVol(0)
+	;[156] 'r0 = 1st parameter, VARPTR #iMusicVol(0)
+	SRCFILE "IntyMusicPlayer.bas",156
+	;[157] 'r1 = 2nd parameter, VARPTR #iMusicNote(0)
+	SRCFILE "IntyMusicPlayer.bas",157
+	;[158] 'r2 = 3rd parameter, VARPTR #iMusicTime(0)
+	SRCFILE "IntyMusicPlayer.bas",158
+	;[159] 'r3 = 4rd parameter, VARPTR #iInstrument(0)
+	SRCFILE "IntyMusicPlayer.bas",159
+	;[160] 'asm pshr r5				;push return
+	SRCFILE "IntyMusicPlayer.bas",160
+	;[161] 		
+	SRCFILE "IntyMusicPlayer.bas",161
+	;[162] '--- Get iIntruments ---------
+	SRCFILE "IntyMusicPlayer.bas",162
+	;[163] 	asm movr	r3,r4				; r3 --> r4 		
 	SRCFILE "IntyMusicPlayer.bas",163
-	;[164] 'r1 = 2nd parameter, VARPTR #iMusicNote(0)
-	SRCFILE "IntyMusicPlayer.bas",164
-	;[165] 'r2 = 3rd parameter, VARPTR #iMusicTime(0)
-	SRCFILE "IntyMusicPlayer.bas",165
-	;[166] 'r3 = 4rd parameter, VARPTR #iInstrument(0)
-	SRCFILE "IntyMusicPlayer.bas",166
-	;[167] 'asm pshr r5				;push return
-	SRCFILE "IntyMusicPlayer.bas",167
-	;[168] 		
-	SRCFILE "IntyMusicPlayer.bas",168
-	;[169] '--- Get iIntruments ---------
-	SRCFILE "IntyMusicPlayer.bas",169
-	;[170] 	asm movr	r3,r4				; r3 --> r4 		
-	SRCFILE "IntyMusicPlayer.bas",170
  movr	r3,r4				; r3 --> r4 		
-	;[171] 	asm mvi _music_i1,r3
-	SRCFILE "IntyMusicPlayer.bas",171
+	;[164] 	asm mvi _music_i1,r3
+	SRCFILE "IntyMusicPlayer.bas",164
  mvi _music_i1,r3
-	;[172] 	asm mvo@ r3,r4				; r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",172
+	;[165] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",165
  mvo@ r3,r4				; r3 --> [r4++]
-	;[173] 	asm mvi _music_i2,r3
-	SRCFILE "IntyMusicPlayer.bas",173
+	;[166] 	asm mvi _music_i2,r3
+	SRCFILE "IntyMusicPlayer.bas",166
  mvi _music_i2,r3
-	;[174] 	asm mvo@ r3,r4				; r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",174
+	;[167] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",167
  mvo@ r3,r4				; r3 --> [r4++]
-	;[175] 	asm mvi _music_i3,r3
-	SRCFILE "IntyMusicPlayer.bas",175
+	;[168] 	asm mvi _music_i3,r3
+	SRCFILE "IntyMusicPlayer.bas",168
  mvi _music_i3,r3
-	;[176] 	asm mvo@ r3,r4				; r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",176
+	;[169] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",169
  mvo@ r3,r4				; r3 --> [r4++]
-	;[177] 
-	SRCFILE "IntyMusicPlayer.bas",177
-	;[178] '---- get volume, to know when same note played again ---
-	SRCFILE "IntyMusicPlayer.bas",178
-	;[179] 	asm movr	r0,r4			;r0 --> r4 (r4=r0=&#iMusicVol(0))
-	SRCFILE "IntyMusicPlayer.bas",179
+	;[170] 
+	SRCFILE "IntyMusicPlayer.bas",170
+	;[171] '---- get volume, to know when same note played again ---
+	SRCFILE "IntyMusicPlayer.bas",171
+	;[172] 	asm movr	r0,r4			;r0 --> r4 (r4=r0=&#iMusicVol(0))
+	SRCFILE "IntyMusicPlayer.bas",172
  movr	r0,r4			;r0 --> r4 (r4=r0=&#iMusicVol(0))
-	;[180] 	
-	SRCFILE "IntyMusicPlayer.bas",180
-	;[181] 	asm mvi	_music_vol1,r3	;  --> r3	
-	SRCFILE "IntyMusicPlayer.bas",181
+	;[173] 	
+	SRCFILE "IntyMusicPlayer.bas",173
+	;[174] 	asm mvi	_music_vol1,r3	;  --> r3	
+	SRCFILE "IntyMusicPlayer.bas",174
  mvi	_music_vol1,r3	;  --> r3	
-	;[182] 	asm mvo@ r3,r4			;r2 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",182
+	;[175] 	asm mvo@ r3,r4			;r2 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",175
  mvo@ r3,r4			;r2 --> [r4++]
-	;[183] 	asm mvi	_music_vol2,r3	; --> r3
-	SRCFILE "IntyMusicPlayer.bas",183
+	;[176] 	asm mvi	_music_vol2,r3	; --> r3
+	SRCFILE "IntyMusicPlayer.bas",176
  mvi	_music_vol2,r3	; --> r3
+	;[177] 	asm mvo@ r3,r4			;r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",177
+ mvo@ r3,r4			;r3 --> [r4++]
+	;[178] 	asm mvi	_music_vol3,r3	; --> r3
+	SRCFILE "IntyMusicPlayer.bas",178
+ mvi	_music_vol3,r3	; --> r3
+	;[179] 	asm mvo@ r3,r4			;r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",179
+ mvo@ r3,r4			;r3 --> [r4++]
+	;[180] 		
+	SRCFILE "IntyMusicPlayer.bas",180
+	;[181] '--- get notes ---
+	SRCFILE "IntyMusicPlayer.bas",181
+	;[182] 	asm movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
+	SRCFILE "IntyMusicPlayer.bas",182
+ movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
+	;[183] 	asm mvi	_music_n1,r3		;_music_n1 --> r3
+	SRCFILE "IntyMusicPlayer.bas",183
+ mvi	_music_n1,r3		;_music_n1 --> r3
 	;[184] 	asm mvo@ r3,r4			;r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",184
  mvo@ r3,r4			;r3 --> [r4++]
-	;[185] 	asm mvi	_music_vol3,r3	; --> r3
+	;[185] 	asm mvi	_music_n2,r3 	;_music_n2 --> r3
 	SRCFILE "IntyMusicPlayer.bas",185
- mvi	_music_vol3,r3	; --> r3
+ mvi	_music_n2,r3 	;_music_n2 --> r3
 	;[186] 	asm mvo@ r3,r4			;r3 --> [r4++]
 	SRCFILE "IntyMusicPlayer.bas",186
  mvo@ r3,r4			;r3 --> [r4++]
-	;[187] 		
+	;[187] 	asm mvi	_music_n3,r3		;_music_n3 --> r3
 	SRCFILE "IntyMusicPlayer.bas",187
-	;[188] '--- get notes ---
-	SRCFILE "IntyMusicPlayer.bas",188
-	;[189] 	asm movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
-	SRCFILE "IntyMusicPlayer.bas",189
- movr	r1,r4			;r1 --> r4. (r4=&#iMusicNote(0))
-	;[190] 	asm mvi	_music_n1,r3		;_music_n1 --> r3
-	SRCFILE "IntyMusicPlayer.bas",190
- mvi	_music_n1,r3		;_music_n1 --> r3
-	;[191] 	asm mvo@ r3,r4			;r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",191
- mvo@ r3,r4			;r3 --> [r4++]
-	;[192] 	asm mvi	_music_n2,r3 	;_music_n2 --> r3
-	SRCFILE "IntyMusicPlayer.bas",192
- mvi	_music_n2,r3 	;_music_n2 --> r3
-	;[193] 	asm mvo@ r3,r4			;r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",193
- mvo@ r3,r4			;r3 --> [r4++]
-	;[194] 	asm mvi	_music_n3,r3		;_music_n3 --> r3
-	SRCFILE "IntyMusicPlayer.bas",194
  mvi	_music_n3,r3		;_music_n3 --> r3
-	;[195] 	asm mvo@ r3,r4			;r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",195
+	;[188] 	asm mvo@ r3,r4			;r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",188
  mvo@ r3,r4			;r3 --> [r4++]
-	;[196] 	
-	SRCFILE "IntyMusicPlayer.bas",196
-	;[197] '--- get time counter and time base --------
-	SRCFILE "IntyMusicPlayer.bas",197
-	;[198] 	asm movr r2,r4				;r2 --> r4  (r4= &#iMusicTime(0))
-	SRCFILE "IntyMusicPlayer.bas",198
+	;[189] 	
+	SRCFILE "IntyMusicPlayer.bas",189
+	;[190] '--- get time counter and time base --------
+	SRCFILE "IntyMusicPlayer.bas",190
+	;[191] 	asm movr r2,r4				;r2 --> r4  (r4= &#iMusicTime(0))
+	SRCFILE "IntyMusicPlayer.bas",191
  movr r2,r4				;r2 --> r4  (r4= &#iMusicTime(0))
-	;[199] 	asm mvi _music_t,r3			; _music_t --> r3 (time base)
-	SRCFILE "IntyMusicPlayer.bas",199
+	;[192] 	asm mvi _music_t,r3			; _music_t --> r3 (time base)
+	SRCFILE "IntyMusicPlayer.bas",192
  mvi _music_t,r3			; _music_t --> r3 (time base)
-	;[200] 	asm decr r3 					; r3--
-	SRCFILE "IntyMusicPlayer.bas",200
+	;[193] 	asm decr r3 					; r3--
+	SRCFILE "IntyMusicPlayer.bas",193
  decr r3 					; r3--
-	;[201] 	asm mvo@ r3,r4				; r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",201
+	;[194] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",194
  mvo@ r3,r4				; r3 --> [r4++]
-	;[202] 	asm mvi	_music_tc,r3			; _music_t --> r3 (time)	
-	SRCFILE "IntyMusicPlayer.bas",202
+	;[195] 	asm mvi	_music_tc,r3			; _music_t --> r3 (time)	
+	SRCFILE "IntyMusicPlayer.bas",195
  mvi	_music_tc,r3			; _music_t --> r3 (time)	
-	;[203] 	asm mvo@ r3,r4				; r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",203
+	;[196] 	asm mvo@ r3,r4				; r3 --> [r4++]
+	SRCFILE "IntyMusicPlayer.bas",196
  mvo@ r3,r4				; r3 --> [r4++]
-	;[204] 
+	;[197] 
+	SRCFILE "IntyMusicPlayer.bas",197
+	;[198] '-------------------------------------------------------------	
+	SRCFILE "IntyMusicPlayer.bas",198
+	;[199] 	asm jr	r5				;return 
+	SRCFILE "IntyMusicPlayer.bas",199
+ jr	r5				;return 
+	;[200] 	
+	SRCFILE "IntyMusicPlayer.bas",200
+	;[201] 	'asm	pulr pc				;return 
+	SRCFILE "IntyMusicPlayer.bas",201
+	;[202] 	'asm mvi@ r3,r3				; Get pointer, r3=[r3] 
+	SRCFILE "IntyMusicPlayer.bas",202
+	;[203] 	'asm xorr	r3,r3 			; r3=0
+	SRCFILE "IntyMusicPlayer.bas",203
+	;[204] asm ENDP
 	SRCFILE "IntyMusicPlayer.bas",204
-	;[205] '-------------------------------------------------------------	
+ ENDP
+	;[205] 
 	SRCFILE "IntyMusicPlayer.bas",205
-	;[206] 	asm jr	r5				;return 
+	;[206] '    ____________
 	SRCFILE "IntyMusicPlayer.bas",206
- jr	r5				;return 
-	;[207] 	
+	;[207] '___/ IMUSICKILL \________________________________________________________________
 	SRCFILE "IntyMusicPlayer.bas",207
-	;[208] 	'asm	pulr pc				;return 
+	;[208] 'PLAY NONE seems not to work.... This works too well, music does not play anymore
 	SRCFILE "IntyMusicPlayer.bas",208
-	;[209] 	'asm mvi@ r3,r3				; Get pointer, r3=[r3] 
+	;[209] ASM IMUSICKILL: PROC	
 	SRCFILE "IntyMusicPlayer.bas",209
-	;[210] 	'asm xorr	r3,r3 			; r3=0
-	SRCFILE "IntyMusicPlayer.bas",210
-	;[211] asm ENDP
-	SRCFILE "IntyMusicPlayer.bas",211
- ENDP
-	;[212] 
-	SRCFILE "IntyMusicPlayer.bas",212
-	;[213] '    ____________
-	SRCFILE "IntyMusicPlayer.bas",213
-	;[214] '___/ IMUSICKILL \________________________________________________________________
-	SRCFILE "IntyMusicPlayer.bas",214
-	;[215] 'PLAY NONE seems not to work....
-	SRCFILE "IntyMusicPlayer.bas",215
-	;[216] ASM IMUSICKILL: PROC	
-	SRCFILE "IntyMusicPlayer.bas",216
 IMUSICKILL: PROC	
-	;[217] 		
-	SRCFILE "IntyMusicPlayer.bas",217
-	;[218] '--- kill notes ---
-	SRCFILE "IntyMusicPlayer.bas",218
-	;[219] 	asm xorr r0,r0			;clear r0
-	SRCFILE "IntyMusicPlayer.bas",219
+	;[210] 		
+	SRCFILE "IntyMusicPlayer.bas",210
+	;[211] '--- kill notes ---
+	SRCFILE "IntyMusicPlayer.bas",211
+	;[212] 	asm xorr r0,r0			;clear r0
+	SRCFILE "IntyMusicPlayer.bas",212
  xorr r0,r0			;clear r0
-	;[220] 	asm mvo	r0,_music_n1
-	SRCFILE "IntyMusicPlayer.bas",220
+	;[213] 	asm mvo	r0,_music_n1
+	SRCFILE "IntyMusicPlayer.bas",213
  mvo	r0,_music_n1
-	;[221] 	asm mvo	r0,_music_n2
-	SRCFILE "IntyMusicPlayer.bas",221
+	;[214] 	asm mvo	r0,_music_n2
+	SRCFILE "IntyMusicPlayer.bas",214
  mvo	r0,_music_n2
-	;[222] 	asm mvo 	r0,_music_n3
-	SRCFILE "IntyMusicPlayer.bas",222
+	;[215] 	asm mvo 	r0,_music_n3
+	SRCFILE "IntyMusicPlayer.bas",215
  mvo 	r0,_music_n3
-	;[223] 	asm jr	r5				;return 
-	SRCFILE "IntyMusicPlayer.bas",223
+	;[216] 	asm jr	r5				;return 
+	SRCFILE "IntyMusicPlayer.bas",216
  jr	r5				;return 
-	;[224] asm ENDP
-	SRCFILE "IntyMusicPlayer.bas",224
+	;[217] asm ENDP
+	SRCFILE "IntyMusicPlayer.bas",217
  ENDP
-	;[225] 
+	;[218] 
+	SRCFILE "IntyMusicPlayer.bas",218
+	;[219] 
+	SRCFILE "IntyMusicPlayer.bas",219
+	;[220] '============================================================================================================
+	SRCFILE "IntyMusicPlayer.bas",220
+	;[221] 'From IntyBasic_epilogue.asm
+	SRCFILE "IntyMusicPlayer.bas",221
+	;[222] '_music_table:	RMB 1	; Note table
+	SRCFILE "IntyMusicPlayer.bas",222
+	;[223] '_music_start:	RMB 1	; Start of music
+	SRCFILE "IntyMusicPlayer.bas",223
+	;[224] '_music_p:	RMB 1	; Pointer to music
+	SRCFILE "IntyMusicPlayer.bas",224
+	;[225] '- - - - - - -
 	SRCFILE "IntyMusicPlayer.bas",225
-	;[226] 
+	;[226] '_music_mode: RMB 1      ; Music mode (0= Not using PSG, 2= Simple, 4= Full, add 1 if using noise channel for drums)
 	SRCFILE "IntyMusicPlayer.bas",226
-	;[227] '============================================================================================================
+	;[227] '_music_frame: RMB 1     ; Music frame (for 50 hz fixed)
 	SRCFILE "IntyMusicPlayer.bas",227
-	;[228] 'From IntyBasic_epilogue.asm
+	;[228] '_music_tc:  RMB 1       ; Time counter
 	SRCFILE "IntyMusicPlayer.bas",228
-	;[229] '_music_table:	RMB 1	; Note table
+	;[229] '_music_t:   RMB 1       ; Time base
 	SRCFILE "IntyMusicPlayer.bas",229
-	;[230] '_music_start:	RMB 1	; Start of music
+	;[230] '_music_i1:  RMB 1       ; Instrument 1 
 	SRCFILE "IntyMusicPlayer.bas",230
-	;[231] '_music_p:	RMB 1	; Pointer to music
+	;[231] '_music_s1:  RMB 1       ; Sample pointer 1
 	SRCFILE "IntyMusicPlayer.bas",231
-	;[232] '- - - - - - -
+	;[232] '_music_n1:  RMB 1       ; Note 1
 	SRCFILE "IntyMusicPlayer.bas",232
-	;[233] '_music_mode: RMB 1      ; Music mode (0= Not using PSG, 2= Simple, 4= Full, add 1 if using noise channel for drums)
+	;[233] '_music_i2:  RMB 1       ; Instrument 2
 	SRCFILE "IntyMusicPlayer.bas",233
-	;[234] '_music_frame: RMB 1     ; Music frame (for 50 hz fixed)
+	;[234] '_music_s2:  RMB 1       ; Sample pointer 2
 	SRCFILE "IntyMusicPlayer.bas",234
-	;[235] '_music_tc:  RMB 1       ; Time counter
+	;[235] '_music_n2:  RMB 1       ; Note 2
 	SRCFILE "IntyMusicPlayer.bas",235
-	;[236] '_music_t:   RMB 1       ; Time base
+	;[236] '_music_i3:  RMB 1       ; Instrument 3
 	SRCFILE "IntyMusicPlayer.bas",236
-	;[237] '_music_i1:  RMB 1       ; Instrument 1 
+	;[237] '_music_s3:  RMB 1       ; Sample pointer 3
 	SRCFILE "IntyMusicPlayer.bas",237
-	;[238] '_music_s1:  RMB 1       ; Sample pointer 1
+	;[238] '_music_n3:  RMB 1       ; Note 3
 	SRCFILE "IntyMusicPlayer.bas",238
-	;[239] '_music_n1:  RMB 1       ; Note 1
+	;[239] '_music_s4:  RMB 1       ; Sample pointer 4
 	SRCFILE "IntyMusicPlayer.bas",239
-	;[240] '_music_i2:  RMB 1       ; Instrument 2
+	;[240] '_music_n4:  RMB 1       ; Note 4 (really it's drum)
 	SRCFILE "IntyMusicPlayer.bas",240
-	;[241] '_music_s2:  RMB 1       ; Sample pointer 2
+	;[241] '-----
 	SRCFILE "IntyMusicPlayer.bas",241
-	;[242] '_music_n2:  RMB 1       ; Note 2
+	;[242] '_music_freq10:	RMB 1   ; Low byte frequency A
 	SRCFILE "IntyMusicPlayer.bas",242
-	;[243] '_music_i3:  RMB 1       ; Instrument 3
+	;[243] '_music_freq20:	RMB 1   ; Low byte frequency B
 	SRCFILE "IntyMusicPlayer.bas",243
-	;[244] '_music_s3:  RMB 1       ; Sample pointer 3
+	;[244] '_music_freq30:	RMB 1   ; Low byte frequency C
 	SRCFILE "IntyMusicPlayer.bas",244
-	;[245] '_music_n3:  RMB 1       ; Note 3
+	;[245] '_music_freq11:	RMB 1   ; High byte frequency A
 	SRCFILE "IntyMusicPlayer.bas",245
-	;[246] '_music_s4:  RMB 1       ; Sample pointer 4
+	;[246] '_music_freq21:	RMB 1   ; High byte frequency B
 	SRCFILE "IntyMusicPlayer.bas",246
-	;[247] '_music_n4:  RMB 1       ; Note 4 (really it's drum)
+	;[247] '_music_freq31:	RMB 1   ; High byte frequency C
 	SRCFILE "IntyMusicPlayer.bas",247
-	;[248] '-----
+	;[248] '_music_mix:	RMB 1   ; Mixer
 	SRCFILE "IntyMusicPlayer.bas",248
-	;[249] '_music_freq10:	RMB 1   ; Low byte frequency A
+	;[249] '_music_noise:	RMB 1   ; Noise
 	SRCFILE "IntyMusicPlayer.bas",249
-	;[250] '_music_freq20:	RMB 1   ; Low byte frequency B
+	;[250] '_music_vol1:	RMB 1   ; Volume A
 	SRCFILE "IntyMusicPlayer.bas",250
-	;[251] '_music_freq30:	RMB 1   ; Low byte frequency C
+	;[251] '_music_vol2:	RMB 1   ; Volume B
 	SRCFILE "IntyMusicPlayer.bas",251
-	;[252] '_music_freq11:	RMB 1   ; High byte frequency A
+	;[252] '_music_vol3:	RMB 1   ; Volume C
 	SRCFILE "IntyMusicPlayer.bas",252
-	;[253] '_music_freq21:	RMB 1   ; High byte frequency B
+	;[253] '_music_vol:	RMB 1	; Global music volume
 	SRCFILE "IntyMusicPlayer.bas",253
-	;[254] '_music_freq31:	RMB 1   ; High byte frequency C
+	;[254] 
 	SRCFILE "IntyMusicPlayer.bas",254
-	;[255] '_music_mix:	RMB 1   ; Mixer
-	SRCFILE "IntyMusicPlayer.bas",255
-	;[256] '_music_noise:	RMB 1   ; Noise
-	SRCFILE "IntyMusicPlayer.bas",256
-	;[257] '_music_vol1:	RMB 1   ; Volume A
-	SRCFILE "IntyMusicPlayer.bas",257
-	;[258] '_music_vol2:	RMB 1   ; Volume B
-	SRCFILE "IntyMusicPlayer.bas",258
-	;[259] '_music_vol3:	RMB 1   ; Volume C
-	SRCFILE "IntyMusicPlayer.bas",259
-	;[260] '_music_vol:	RMB 1	; Global music volume
-	SRCFILE "IntyMusicPlayer.bas",260
-	;[261] 
-	SRCFILE "IntyMusicPlayer.bas",261
-	;[262] 
-	SRCFILE "IntyMusicPlayer.bas",262
-	;[263] '--- get volume, to know if note just started to play ---
-	SRCFILE "IntyMusicPlayer.bas",263
-	;[264] '	asm movr	r0,r4			;r0 --> r4 (r4=r0=#iMusicVol)
-	SRCFILE "IntyMusicPlayer.bas",264
-	;[265] '	asm mvi	_music_vol1,r3	;_music_vol1 --> r3
-	SRCFILE "IntyMusicPlayer.bas",265
-	;[266] '	'asm mvi	_music_s1,r3		; --> r3
-	SRCFILE "IntyMusicPlayer.bas",266
-	;[267] '	asm mvo@ r3,r4			;r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",267
-	;[268] '	
-	SRCFILE "IntyMusicPlayer.bas",268
-	;[269] '	asm mvi	_music_vol2,r3	;_music_vol2 --> r3
-	SRCFILE "IntyMusicPlayer.bas",269
-	;[270] '	'asm mvi	_music_s2,r3		; --> r3
-	SRCFILE "IntyMusicPlayer.bas",270
-	;[271] '	asm mvo@ r3,r4			;r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",271
-	;[272] '
-	SRCFILE "IntyMusicPlayer.bas",272
-	;[273] '	asm mvi	_music_vol3,r3	;_music_vol3 --> r3
-	SRCFILE "IntyMusicPlayer.bas",273
-	;[274] '	'asm mvi	_music_s3,r3		; --> r3
-	SRCFILE "IntyMusicPlayer.bas",274
-	;[275] '	asm mvo@ r3,r4			;r3 --> [r4++]
-	SRCFILE "IntyMusicPlayer.bas",275
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[39] INCLUDE "IntyMusicCredits.bas"		
-	SRCFILE "IntyMusic.bas",39
+	;[42] INCLUDE "IntyMusicCredits.bas"		
+	SRCFILE "IntyMusic.bas",42
 	;FILE IntyMusicCredits.bas
 	;[1] 
 	SRCFILE "IntyMusicCredits.bas",1
@@ -3925,13 +3861,12 @@ Q16:	PROC
 	SRCFILE "IntyMusicCredits.bas",9
 	CLRR R0
 	MVO R0,V2
-T29:
+T28:
 	;[10] 		#BACKTAB(#x)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
 	SRCFILE "IntyMusicCredits.bas",10
 	MVII #Q30,R3
 	ADD V6,R3
 	MVI@ R3,R0
-	INCR R0
 	MVII #Q2,R3
 	ADD V2,R3
 	MVO@ R0,R3
@@ -3942,17 +3877,17 @@ T29:
 	MVO R0,V6
 	MVI V6,R0
 	CMPI #19,R0
-	BLE T30
+	BLE T29
 	CLRR R0
 	MVO R0,V6
-T30:
+T29:
 	;[12] 	NEXT #x
 	SRCFILE "IntyMusicCredits.bas",12
 	MVI V2,R0
 	INCR R0
 	MVO R0,V2
 	CMPI #60,R0
-	BLE T29
+	BLE T28
 	;[13] 
 	SRCFILE "IntyMusicCredits.bas",13
 	;[14] 	'Draw &
@@ -4032,7 +3967,7 @@ T30:
 	SRCFILE "IntyMusicCredits.bas",24
 	CLRR R0
 	MVO R0,V6
-T31:
+T30:
 	;[25] 		#BACKTAB(200+iMusicX)= IntyPiano(iMusicX)
 	SRCFILE "IntyMusicCredits.bas",25
 	MVII #Q2,R0
@@ -4050,7 +3985,7 @@ T31:
 	INCR R0
 	MVO R0,V6
 	CMPI #19,R0
-	BLE T31
+	BLE T30
 	;[27] 	PRINT AT 220, CS_ADVANCE
 	SRCFILE "IntyMusicCredits.bas",27
 	MVII #732,R0
@@ -4174,7 +4109,7 @@ T31:
 	SRCFILE "IntyMusicCredits.bas",34
 	;[35] 	GOSUB IntyMusicInit_Credits
 	SRCFILE "IntyMusicCredits.bas",35
-	CALL Q37
+	CALL Q36
 	;[36] 	
 	SRCFILE "IntyMusicCredits.bas",36
 	;[37] 	PRINT AT 220,"Press button to play"		
@@ -4230,7 +4165,7 @@ T31:
 	SRCFILE "IntyMusicCredits.bas",40
 	MVII #1,R0
 	TSTR R0
-	BEQ T32
+	BEQ T31
 	;[41] 		iMusicX=0
 	SRCFILE "IntyMusicCredits.bas",41
 	CLRR R0
@@ -4239,7 +4174,7 @@ T31:
 	SRCFILE "IntyMusicCredits.bas",42
 	MVII #1,R0
 	MVO R0,V2
-T33:
+T32:
 	;[43] 			#BACKTAB(iMusicX)=#BACKTAB(iMusicX) OR CS_ADVANCE			
 	SRCFILE "IntyMusicCredits.bas",43
 	MVII #Q2,R3
@@ -4259,15 +4194,15 @@ T33:
 	INCR R0
 	MVO R0,V2
 	CMPI #12,R0
-	BLE T33
+	BLE T32
 	;[46] 	END IF
 	SRCFILE "IntyMusicCredits.bas",46
-T32:
+T31:
 	;[47] 	
 	SRCFILE "IntyMusicCredits.bas",47
 	;[48] 	GOSUB WaitForKeyDownThenUp	
 	SRCFILE "IntyMusicCredits.bas",48
-	CALL Q38
+	CALL Q37
 	;[49] RETURN
 	SRCFILE "IntyMusicCredits.bas",49
 	RETURN
@@ -4279,46 +4214,88 @@ T32:
 	;[52] WaitForKeyDownThenUp: procedure
 	SRCFILE "IntyMusicCredits.bas",52
 	; WAITFORKEYDOWNTHENUP
-Q38:	PROC
+Q37:	PROC
 	BEGIN
 	;[53] 	' Wait for a key to be pressed.
 	SRCFILE "IntyMusicCredits.bas",53
 	;[54] 	do while cont=0
 	SRCFILE "IntyMusicCredits.bas",54
-T34:
+T33:
 	MVI 510,R0
 	XOR 511,R0
-	BNE T35
+	BNE T34
 	;[55] 		wait
 	SRCFILE "IntyMusicCredits.bas",55
 	CALL _wait
 	;[56] 	loop	
 	SRCFILE "IntyMusicCredits.bas",56
-	B T34
-T35:
+	B T33
+T34:
 	;[57] 	' Wait for a key to be released.
 	SRCFILE "IntyMusicCredits.bas",57
 	;[58] 	do while cont<>0
 	SRCFILE "IntyMusicCredits.bas",58
-T36:
+T35:
 	MVI 510,R0
 	XOR 511,R0
-	BEQ T37
+	BEQ T36
 	;[59] 		wait
 	SRCFILE "IntyMusicCredits.bas",59
 	CALL _wait
 	;[60] 	loop	
 	SRCFILE "IntyMusicCredits.bas",60
-	B T36
-T37:
+	B T35
+T36:
 	;[61] end
 	SRCFILE "IntyMusicCredits.bas",61
 	RETURN
 	ENDP
+	;[62] 
+	SRCFILE "IntyMusicCredits.bas",62
+	;[63] '--Prints song name, after last PRINT position
+	SRCFILE "IntyMusicCredits.bas",63
+	;[64] Print_Song_Name: PROCEDURE
+	SRCFILE "IntyMusicCredits.bas",64
+	; PRINT_SONG_NAME
+Q39:	PROC
+	BEGIN
+	;[65] 	FOR iMusicX=0 TO 11
+	SRCFILE "IntyMusicCredits.bas",65
+	CLRR R0
+	MVO R0,V6
+T37:
+	;[66] 		#BACKTAB(iMusicX+POS(0))=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
+	SRCFILE "IntyMusicCredits.bas",66
+	MVI _screen,R0
+	SUBI #512,R0
+	ADD V6,R0
+	MVII #Q2,R1
+	ADDR R1,R0
+	MVII #Q29,R3
+	ADD V6,R3
+	MVI@ R3,R1
+	SLL R1,2
+	ADDR R1,R1
+	INCR R1
+	MOVR R0,R4
+	MVO@ R1,R4
+	;[67] 	NEXT iMusicX
+	SRCFILE "IntyMusicCredits.bas",67
+	MVI V6,R0
+	INCR R0
+	MVO R0,V6
+	CMPI #11,R0
+	BLE T37
+	;[68] RETURN
+	SRCFILE "IntyMusicCredits.bas",68
+	RETURN
+	;[69] END
+	SRCFILE "IntyMusicCredits.bas",69
+	ENDP
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[40] INCLUDE "IntyMusicGraphics.bas"
-	SRCFILE "IntyMusic.bas",40
+	;[43] INCLUDE "IntyMusicGraphics.bas"
+	SRCFILE "IntyMusic.bas",43
 	;FILE IntyMusicGraphics.bas
 	;[1] '---- Source: C:\Users\mmarr\GD\Intellivision\IntyMusic5.png
 	SRCFILE "IntyMusicGraphics.bas",1
@@ -5168,8 +5145,8 @@ Q7:	;[183] 	BITMAP "........"	'$00
 	SRCFILE "IntyMusicGraphics.bas",358
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[41] INCLUDE "IntyMusicData.bas"
-	SRCFILE "IntyMusic.bas",41
+	;[44] INCLUDE "IntyMusicData.bas"
+	SRCFILE "IntyMusic.bas",44
 	;FILE IntyMusicData.bas
 	;[1] 'IntyMusic by Marco A. Marrero.  Started on 7/30/2016
 	SRCFILE "IntyMusicData.bas",1
@@ -5772,19 +5749,25 @@ Q33:	;[48] DATA 4,0,2,4,6,8,12,14,16,18,20,22,24,28,30,32,34,36,40,42,44,46,48,5
 	SRCFILE "IntyMusicData.bas",52
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[42] 
-	SRCFILE "IntyMusic.bas",42
-	;[43] '========== More Options =======================
-	SRCFILE "IntyMusic.bas",43
-	;[44] IntyMusicInit_Credits: PROCEDURE
-	SRCFILE "IntyMusic.bas",44
-	; INTYMUSICINIT_CREDITS
-Q37:	PROC
-	BEGIN
-	;[45] 	'---------------- ADD INFORMATION BELOW -------------------------
+	;[45] 
 	SRCFILE "IntyMusic.bas",45
-	;[46] 	PRINT AT 120,"Song:Space Harrier"   	'<
+	;[46] 
 	SRCFILE "IntyMusic.bas",46
+	;[47] '========================== Options #2 - More customization ========================================
+	SRCFILE "IntyMusic.bas",47
+	;[48] 
+	SRCFILE "IntyMusic.bas",48
+	;[49] IntyMusicInit_Credits: PROCEDURE
+	SRCFILE "IntyMusic.bas",49
+	; INTYMUSICINIT_CREDITS
+Q36:	PROC
+	BEGIN
+	;[50] 	'---------------- ADD INFORMATION BELOW -------------------------
+	SRCFILE "IntyMusic.bas",50
+	;[51] 	'20 char max 12345678901234567890
+	SRCFILE "IntyMusic.bas",51
+	;[52] 	PRINT AT 120,"Song:Super Mario 2"
+	SRCFILE "IntyMusic.bas",52
 	MVII #632,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -5801,36 +5784,37 @@ Q37:	PROC
 	MVO@ R0,R4
 	XORI #328,R0
 	MVO@ R0,R4
-	XORI #792,R0
+	XORI #816,R0
 	MVO@ R0,R4
-	XORI #136,R0
+	XORI #40,R0
 	MVO@ R0,R4
-	XORI #16,R0
-	MVO@ R0,R4
-	XORI #48,R0
-	MVO@ R0,R4
-	XORI #552,R0
-	MVO@ R0,R4
-	XORI #320,R0
-	MVO@ R0,R4
-	XORI #840,R0
-	MVO@ R0,R4
-	XORI #152,R0
-	MVO@ R0,R4
-	MVO@ R0,R4
-	XORI #216,R0
-	MVO@ R0,R4
-	XORI #96,R0
+	XORI #168,R0
 	MVO@ R0,R4
 	XORI #184,R0
 	MVO@ R0,R4
+	XORI #656,R0
+	MVO@ R0,R4
+	XORI #360,R0
+	MVO@ R0,R4
+	XORI #864,R0
+	MVO@ R0,R4
+	XORI #152,R0
+	MVO@ R0,R4
+	XORI #216,R0
+	MVO@ R0,R4
+	XORI #48,R0
+	MVO@ R0,R4
+	XORI #632,R0
+	MVO@ R0,R4
+	XORI #144,R0
+	MVO@ R0,R4
 	MVO R4,_screen
-	;[47] 	'GOSUB Print_Song_Name					'<-- use the same text from vertical print
-	SRCFILE "IntyMusic.bas",47
-	;[48] 	
-	SRCFILE "IntyMusic.bas",48
-	;[49] 	PRINT AT 140,"From:C64 Hi-Score"
-	SRCFILE "IntyMusic.bas",49
+	;[53] 	'GOSUB Print_Song_Name					'<-- uncomment to use the same text from vertical print
+	SRCFILE "IntyMusic.bas",53
+	;[54] 	
+	SRCFILE "IntyMusic.bas",54
+	;[55] 	PRINT AT 140,"From:FamiTracker>Mid"
+	SRCFILE "IntyMusic.bas",55
 	MVII #652,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -5845,33 +5829,39 @@ Q37:	PROC
 	MVO@ R0,R4
 	XORI #696,R0
 	MVO@ R0,R4
-	XORI #456,R0
+	XORI #480,R0
 	MVO@ R0,R4
-	XORI #424,R0
-	MVO@ R0,R4
-	XORI #16,R0
-	MVO@ R0,R4
-	XORI #160,R0
-	MVO@ R0,R4
-	XORI #320,R0
-	MVO@ R0,R4
-	XORI #776,R0
-	MVO@ R0,R4
-	XORI #544,R0
-	MVO@ R0,R4
-	XORI #496,R0
-	MVO@ R0,R4
-	XORI #896,R0
+	XORI #824,R0
 	MVO@ R0,R4
 	XORI #96,R0
 	MVO@ R0,R4
-	XORI #232,R0
+	XORI #32,R0
+	MVO@ R0,R4
+	XORI #1000,R0
+	MVO@ R0,R4
+	XORI #816,R0
+	MVO@ R0,R4
+	XORI #152,R0
+	MVO@ R0,R4
+	XORI #16,R0
+	MVO@ R0,R4
+	XORI #64,R0
+	MVO@ R0,R4
+	XORI #112,R0
 	MVO@ R0,R4
 	XORI #184,R0
 	MVO@ R0,R4
+	XORI #608,R0
+	MVO@ R0,R4
+	XORI #408,R0
+	MVO@ R0,R4
+	XORI #800,R0
+	MVO@ R0,R4
+	XORI #104,R0
+	MVO@ R0,R4
 	MVO R4,_screen
-	;[50] 	PRINT AT 160,"  By:Mark Cooksey"
-	SRCFILE "IntyMusic.bas",50
+	;[56] 	PRINT AT 160,"  By:Koji Kondo"
+	SRCFILE "IntyMusic.bas",56
 	MVII #672,R0
 	MVO R0,_screen
 	MOVR R0,R4
@@ -5884,8219 +5874,2801 @@ Q37:	PROC
 	MVO@ R0,R4
 	XORI #536,R0
 	MVO@ R0,R4
-	XORI #440,R0
+	XORI #392,R0
 	MVO@ R0,R4
-	XORI #864,R0
+	XORI #800,R0
 	MVO@ R0,R4
-	XORI #152,R0
+	XORI #40,R0
 	MVO@ R0,R4
-	XORI #200,R0
+	XORI #24,R0
 	MVO@ R0,R4
-	XORI #600,R0
+	XORI #584,R0
 	MVO@ R0,R4
-	XORI #280,R0
+	XORI #344,R0
 	MVO@ R0,R4
-	XORI #864,R0
+	XORI #800,R0
 	MVO@ R0,R4
+	XORI #8,R0
 	MVO@ R0,R4
-	XORI #32,R0
+	XORI #80,R0
 	MVO@ R0,R4
-	XORI #192,R0
-	MVO@ R0,R4
-	XORI #176,R0
-	MVO@ R0,R4
-	XORI #224,R0
+	XORI #88,R0
 	MVO@ R0,R4
 	MVO R4,_screen
-	;[51] 	'-----------------------------------------------------------------
-	SRCFILE "IntyMusic.bas",51
-	;[52] RETURN
-	SRCFILE "IntyMusic.bas",52
-	RETURN
-	;[53] END	
-	SRCFILE "IntyMusic.bas",53
-	ENDP
-	;[54] 
-	SRCFILE "IntyMusic.bas",54
-	;[55] '-----Music to use------
-	SRCFILE "IntyMusic.bas",55
-	;[56] 'MyMusic:
-	SRCFILE "IntyMusic.bas",56
-	;[57] asm org $A000
+	;[57] 	'PRINT AT 180," "
 	SRCFILE "IntyMusic.bas",57
- org $A000
-	;[58] INCLUDE "Songs\SHarrierC64.bas"		 '<---- Music data. Data label *must* be named "MyMusic"
+	;[58] 	'-----------------------------------------------------------------
 	SRCFILE "IntyMusic.bas",58
-	;FILE Songs\SHarrierC64.bas
-	;[1] 'Space Harrier C64 hi-score, from MIDI source file.
-	SRCFILE "Songs\SHarrierC64.bas",1
-	;[2] '
-	SRCFILE "Songs\SHarrierC64.bas",2
-	;[3] 
-	SRCFILE "Songs\SHarrierC64.bas",3
-	;[4] MyMusic:
-	SRCFILE "Songs\SHarrierC64.bas",4
+	;[59] RETURN
+	SRCFILE "IntyMusic.bas",59
+	RETURN
+	;[60] END	
+	SRCFILE "IntyMusic.bas",60
+	ENDP
+	;[61] 
+	SRCFILE "IntyMusic.bas",61
+	;[62] '-----Music to use------
+	SRCFILE "IntyMusic.bas",62
+	;[63] 'MyMusic:
+	SRCFILE "IntyMusic.bas",63
+	;[64] asm org $A000
+	SRCFILE "IntyMusic.bas",64
+ org $A000
+	;[65] INCLUDE "Songs\SMario2.bas"		 '<---- Music data. Data label *must* be named "MyMusic"
+	SRCFILE "IntyMusic.bas",65
+	;FILE Songs\SMario2.bas
+	;[1] 'Mario2
+	SRCFILE "Songs\SMario2.bas",1
+	;[2] 
+	SRCFILE "Songs\SMario2.bas",2
+	;[3] MyMusic:
+	SRCFILE "Songs\SMario2.bas",3
 	; MYMUSIC
-Q17:	;[5] 
-	SRCFILE "Songs\SHarrierC64.bas",5
-	;[6] DATA 2
-	SRCFILE "Songs\SHarrierC64.bas",6
-	DECLE 2
-	;[7] 
-	SRCFILE "Songs\SHarrierC64.bas",7
-	;[8] 
-	SRCFILE "Songs\SHarrierC64.bas",8
-	;[9] MUSIC E3,G4,B4
-	SRCFILE "Songs\SHarrierC64.bas",9
-	DECLE 8209,36
+Q17:	;[4] 
+	SRCFILE "Songs\SMario2.bas",4
+	;[5] DATA 3
+	SRCFILE "Songs\SMario2.bas",5
+	DECLE 3
+	;[6] 
+	SRCFILE "Songs\SMario2.bas",6
+	;[7] MUSIC B4,G5,D4
+	SRCFILE "Songs\SMario2.bas",7
+	DECLE 11300,27
+	;[8] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",8
+	DECLE 16191,63
+	;[9] MUSIC A4#,F5#,C4#
+	SRCFILE "Songs\SMario2.bas",9
+	DECLE 11043,26
 	;[10] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",10
+	SRCFILE "Songs\SMario2.bas",10
 	DECLE 16191,63
 	;[11] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",11
+	SRCFILE "Songs\SMario2.bas",11
 	DECLE 16191,63
 	;[12] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",12
+	SRCFILE "Songs\SMario2.bas",12
 	DECLE 16191,63
-	;[13] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",13
-	DECLE 16191,63
+	;[13] MUSIC A4,F5,C4
+	SRCFILE "Songs\SMario2.bas",13
+	DECLE 10786,25
 	;[14] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",14
+	SRCFILE "Songs\SMario2.bas",14
 	DECLE 16191,63
-	;[15] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",15
-	DECLE 16191,63
+	;[15] MUSIC F4,D5,B3
+	SRCFILE "Songs\SMario2.bas",15
+	DECLE 10014,24
 	;[16] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",16
+	SRCFILE "Songs\SMario2.bas",16
 	DECLE 16191,63
 	;[17] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",17
+	SRCFILE "Songs\SMario2.bas",17
 	DECLE 16191,63
 	;[18] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",18
+	SRCFILE "Songs\SMario2.bas",18
 	DECLE 16191,63
-	;[19] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",19
-	DECLE 16191,63
+	;[19] MUSIC D4,B4,G3
+	SRCFILE "Songs\SMario2.bas",19
+	DECLE 9243,20
 	;[20] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",20
+	SRCFILE "Songs\SMario2.bas",20
 	DECLE 16191,63
-	;[21] MUSIC G3,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",21
-	DECLE 16148,39
+	;[21] MUSIC C4,A4,F3
+	SRCFILE "Songs\SMario2.bas",21
+	DECLE 8729,18
 	;[22] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",22
+	SRCFILE "Songs\SMario2.bas",22
 	DECLE 16191,63
 	;[23] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",23
+	SRCFILE "Songs\SMario2.bas",23
 	DECLE 16191,63
 	;[24] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",24
+	SRCFILE "Songs\SMario2.bas",24
 	DECLE 16191,63
-	;[25] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",25
-	DECLE 6975,35
+	;[25] MUSIC B3,G4#,E3
+	SRCFILE "Songs\SMario2.bas",25
+	DECLE 8472,17
 	;[26] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",26
+	SRCFILE "Songs\SMario2.bas",26
 	DECLE 16191,63
-	;[27] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",27
-	DECLE 16191,63
+	;[27] MUSIC s,G4,D3
+	SRCFILE "Songs\SMario2.bas",27
+	DECLE 8255,15
 	;[28] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",28
+	SRCFILE "Songs\SMario2.bas",28
 	DECLE 16191,63
-	;[29] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",29
-	DECLE 6463,34
+	;[29] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",29
+	DECLE 16191,63
 	;[30] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",30
+	SRCFILE "Songs\SMario2.bas",30
 	DECLE 16191,63
 	;[31] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",31
+	SRCFILE "Songs\SMario2.bas",31
 	DECLE 16191,63
 	;[32] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",32
+	SRCFILE "Songs\SMario2.bas",32
 	DECLE 16191,63
-	;[33] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",33
-	DECLE 6975,35
+	;[33] MUSIC B4,G5,D4
+	SRCFILE "Songs\SMario2.bas",33
+	DECLE 11300,27
 	;[34] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",34
+	SRCFILE "Songs\SMario2.bas",34
 	DECLE 16191,63
 	;[35] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",35
+	SRCFILE "Songs\SMario2.bas",35
 	DECLE 16191,63
 	;[36] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",36
+	SRCFILE "Songs\SMario2.bas",36
 	DECLE 16191,63
-	;[37] MUSIC A3#,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",37
-	DECLE 16151,32
+	;[37] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",37
+	DECLE 16191,63
 	;[38] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",38
+	SRCFILE "Songs\SMario2.bas",38
 	DECLE 16191,63
-	;[39] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",39
-	DECLE 16191,63
+	;[39] MUSIC F4,G4,D3
+	SRCFILE "Songs\SMario2.bas",39
+	DECLE 8222,15
 	;[40] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",40
+	SRCFILE "Songs\SMario2.bas",40
 	DECLE 16191,63
-	;[41] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",41
-	DECLE 6975,35
+	;[41] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",41
+	DECLE 16191,63
 	;[42] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",42
+	SRCFILE "Songs\SMario2.bas",42
 	DECLE 16191,63
 	;[43] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",43
+	SRCFILE "Songs\SMario2.bas",43
 	DECLE 16191,63
 	;[44] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",44
+	SRCFILE "Songs\SMario2.bas",44
 	DECLE 16191,63
-	;[45] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",45
-	DECLE 6463,34
+	;[45] MUSIC s,s,G3
+	SRCFILE "Songs\SMario2.bas",45
+	DECLE 16191,20
 	;[46] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",46
+	SRCFILE "Songs\SMario2.bas",46
 	DECLE 16191,63
 	;[47] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",47
+	SRCFILE "Songs\SMario2.bas",47
 	DECLE 16191,63
 	;[48] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",48
+	SRCFILE "Songs\SMario2.bas",48
 	DECLE 16191,63
-	;[49] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",49
-	DECLE 6975,35
+	;[49] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",49
+	DECLE 16191,63
 	;[50] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",50
+	SRCFILE "Songs\SMario2.bas",50
 	DECLE 16191,63
-	;[51] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",51
-	DECLE 16191,63
+	;[51] MUSIC C5,G5,C3
+	SRCFILE "Songs\SMario2.bas",51
+	DECLE 11301,13
 	;[52] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",52
+	SRCFILE "Songs\SMario2.bas",52
 	DECLE 16191,63
-	;[53] MUSIC G3,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",53
-	DECLE 16148,39
+	;[53] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",53
+	DECLE 16191,63
 	;[54] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",54
+	SRCFILE "Songs\SMario2.bas",54
 	DECLE 16191,63
-	;[55] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",55
-	DECLE 16191,63
+	;[55] MUSIC E4,C5,s
+	SRCFILE "Songs\SMario2.bas",55
+	DECLE 9501,63
 	;[56] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",56
+	SRCFILE "Songs\SMario2.bas",56
 	DECLE 16191,63
-	;[57] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",57
-	DECLE 6975,35
+	;[57] MUSIC G4,E5,G3
+	SRCFILE "Songs\SMario2.bas",57
+	DECLE 10528,20
 	;[58] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",58
+	SRCFILE "Songs\SMario2.bas",58
 	DECLE 16191,63
 	;[59] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",59
+	SRCFILE "Songs\SMario2.bas",59
 	DECLE 16191,63
 	;[60] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",60
+	SRCFILE "Songs\SMario2.bas",60
 	DECLE 16191,63
-	;[61] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",61
-	DECLE 6463,34
+	;[61] MUSIC C5,G5,s
+	SRCFILE "Songs\SMario2.bas",61
+	DECLE 11301,63
 	;[62] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",62
+	SRCFILE "Songs\SMario2.bas",62
 	DECLE 16191,63
-	;[63] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",63
-	DECLE 16191,63
+	;[63] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",63
+	DECLE 16191,13
 	;[64] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",64
+	SRCFILE "Songs\SMario2.bas",64
 	DECLE 16191,63
-	;[65] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",65
-	DECLE 6975,35
+	;[65] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",65
+	DECLE 16191,63
 	;[66] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",66
+	SRCFILE "Songs\SMario2.bas",66
 	DECLE 16191,63
-	;[67] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",67
-	DECLE 16191,63
+	;[67] MUSIC E4,C5,s
+	SRCFILE "Songs\SMario2.bas",67
+	DECLE 9501,63
 	;[68] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",68
+	SRCFILE "Songs\SMario2.bas",68
 	DECLE 16191,63
-	;[69] MUSIC A3#,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",69
-	DECLE 16151,32
+	;[69] MUSIC G4,E5,G3
+	SRCFILE "Songs\SMario2.bas",69
+	DECLE 10528,20
 	;[70] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",70
+	SRCFILE "Songs\SMario2.bas",70
 	DECLE 16191,63
 	;[71] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",71
+	SRCFILE "Songs\SMario2.bas",71
 	DECLE 16191,63
 	;[72] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",72
+	SRCFILE "Songs\SMario2.bas",72
 	DECLE 16191,63
-	;[73] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",73
-	DECLE 6975,35
+	;[73] MUSIC C5,G5,s
+	SRCFILE "Songs\SMario2.bas",73
+	DECLE 11301,63
 	;[74] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",74
+	SRCFILE "Songs\SMario2.bas",74
 	DECLE 16191,63
-	;[75] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",75
-	DECLE 16191,63
+	;[75] MUSIC D4#,B4,B2
+	SRCFILE "Songs\SMario2.bas",75
+	DECLE 9244,12
 	;[76] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",76
+	SRCFILE "Songs\SMario2.bas",76
 	DECLE 16191,63
-	;[77] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",77
-	DECLE 6463,34
+	;[77] MUSIC G4,D5#,s
+	SRCFILE "Songs\SMario2.bas",77
+	DECLE 10272,63
 	;[78] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",78
+	SRCFILE "Songs\SMario2.bas",78
 	DECLE 16191,63
-	;[79] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",79
-	DECLE 16191,63
+	;[79] MUSIC B4,G5,s
+	SRCFILE "Songs\SMario2.bas",79
+	DECLE 11300,63
 	;[80] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",80
+	SRCFILE "Songs\SMario2.bas",80
 	DECLE 16191,63
-	;[81] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",81
-	DECLE 6975,35
+	;[81] MUSIC D5#,B5,G3
+	SRCFILE "Songs\SMario2.bas",81
+	DECLE 12328,20
 	;[82] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",82
+	SRCFILE "Songs\SMario2.bas",82
 	DECLE 16191,63
 	;[83] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",83
+	SRCFILE "Songs\SMario2.bas",83
 	DECLE 16191,63
 	;[84] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",84
+	SRCFILE "Songs\SMario2.bas",84
 	DECLE 16191,63
-	;[85] MUSIC G3,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",85
-	DECLE 16148,40
+	;[85] MUSIC B4,A5,s
+	SRCFILE "Songs\SMario2.bas",85
+	DECLE 11812,63
 	;[86] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",86
+	SRCFILE "Songs\SMario2.bas",86
 	DECLE 16191,63
-	;[87] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",87
-	DECLE 16191,63
+	;[87] MUSIC s,s,B2
+	SRCFILE "Songs\SMario2.bas",87
+	DECLE 16191,12
 	;[88] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",88
+	SRCFILE "Songs\SMario2.bas",88
 	DECLE 16191,63
-	;[89] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",89
-	DECLE 7231,37
+	;[89] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",89
+	DECLE 16191,63
 	;[90] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",90
+	SRCFILE "Songs\SMario2.bas",90
 	DECLE 16191,63
 	;[91] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",91
+	SRCFILE "Songs\SMario2.bas",91
 	DECLE 16191,63
 	;[92] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",92
+	SRCFILE "Songs\SMario2.bas",92
 	DECLE 16191,63
-	;[93] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",93
-	DECLE 6975,36
+	;[93] MUSIC s,s,G3
+	SRCFILE "Songs\SMario2.bas",93
+	DECLE 16191,20
 	;[94] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",94
+	SRCFILE "Songs\SMario2.bas",94
 	DECLE 16191,63
 	;[95] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",95
+	SRCFILE "Songs\SMario2.bas",95
 	DECLE 16191,63
 	;[96] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",96
+	SRCFILE "Songs\SMario2.bas",96
 	DECLE 16191,63
-	;[97] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",97
-	DECLE 7231,37
+	;[97] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",97
+	DECLE 16191,63
 	;[98] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",98
+	SRCFILE "Songs\SMario2.bas",98
 	DECLE 16191,63
-	;[99] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",99
-	DECLE 16191,63
+	;[99] MUSIC A4#,G5,A2#
+	SRCFILE "Songs\SMario2.bas",99
+	DECLE 11299,11
 	;[100] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",100
+	SRCFILE "Songs\SMario2.bas",100
 	DECLE 16191,63
-	;[101] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",101
-	DECLE 6463,32
+	;[101] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",101
+	DECLE 16191,63
 	;[102] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",102
+	SRCFILE "Songs\SMario2.bas",102
 	DECLE 16191,63
-	;[103] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",103
-	DECLE 16191,63
+	;[103] MUSIC D4,A4#,s
+	SRCFILE "Songs\SMario2.bas",103
+	DECLE 8987,63
 	;[104] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",104
+	SRCFILE "Songs\SMario2.bas",104
 	DECLE 16191,63
-	;[105] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",105
-	DECLE 7231,37
+	;[105] MUSIC G4,D5,G3
+	SRCFILE "Songs\SMario2.bas",105
+	DECLE 10016,20
 	;[106] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",106
+	SRCFILE "Songs\SMario2.bas",106
 	DECLE 16191,63
 	;[107] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",107
+	SRCFILE "Songs\SMario2.bas",107
 	DECLE 16191,63
 	;[108] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",108
+	SRCFILE "Songs\SMario2.bas",108
 	DECLE 16191,63
-	;[109] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",109
-	DECLE 6975,36
+	;[109] MUSIC A4#,G5,s
+	SRCFILE "Songs\SMario2.bas",109
+	DECLE 11299,63
 	;[110] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",110
+	SRCFILE "Songs\SMario2.bas",110
 	DECLE 16191,63
-	;[111] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",111
-	DECLE 16191,63
+	;[111] MUSIC s,s,A2#
+	SRCFILE "Songs\SMario2.bas",111
+	DECLE 16191,11
 	;[112] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",112
+	SRCFILE "Songs\SMario2.bas",112
 	DECLE 16191,63
-	;[113] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",113
-	DECLE 7231,37
+	;[113] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",113
+	DECLE 16191,63
 	;[114] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",114
+	SRCFILE "Songs\SMario2.bas",114
 	DECLE 16191,63
-	;[115] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",115
-	DECLE 16191,63
+	;[115] MUSIC D4,A4#,s
+	SRCFILE "Songs\SMario2.bas",115
+	DECLE 8987,63
 	;[116] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",116
+	SRCFILE "Songs\SMario2.bas",116
 	DECLE 16191,63
-	;[117] MUSIC G3,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",117
-	DECLE 16148,40
+	;[117] MUSIC G4,D5,G3
+	SRCFILE "Songs\SMario2.bas",117
+	DECLE 10016,20
 	;[118] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",118
+	SRCFILE "Songs\SMario2.bas",118
 	DECLE 16191,63
 	;[119] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",119
+	SRCFILE "Songs\SMario2.bas",119
 	DECLE 16191,63
 	;[120] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",120
+	SRCFILE "Songs\SMario2.bas",120
 	DECLE 16191,63
-	;[121] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",121
-	DECLE 7231,37
+	;[121] MUSIC A4#,G5,s
+	SRCFILE "Songs\SMario2.bas",121
+	DECLE 11299,63
 	;[122] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",122
+	SRCFILE "Songs\SMario2.bas",122
 	DECLE 16191,63
-	;[123] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",123
-	DECLE 16191,63
+	;[123] MUSIC E4,C5#,A2
+	SRCFILE "Songs\SMario2.bas",123
+	DECLE 9757,10
 	;[124] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",124
+	SRCFILE "Songs\SMario2.bas",124
 	DECLE 16191,63
-	;[125] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",125
-	DECLE 6975,36
+	;[125] MUSIC A4,E5,s
+	SRCFILE "Songs\SMario2.bas",125
+	DECLE 10530,63
 	;[126] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",126
+	SRCFILE "Songs\SMario2.bas",126
 	DECLE 16191,63
-	;[127] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",127
-	DECLE 16191,63
+	;[127] MUSIC C5#,G5,s
+	SRCFILE "Songs\SMario2.bas",127
+	DECLE 11302,63
 	;[128] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",128
+	SRCFILE "Songs\SMario2.bas",128
 	DECLE 16191,63
-	;[129] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",129
-	DECLE 7231,37
+	;[129] MUSIC E5,B5,G3
+	SRCFILE "Songs\SMario2.bas",129
+	DECLE 12329,20
 	;[130] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",130
+	SRCFILE "Songs\SMario2.bas",130
 	DECLE 16191,63
 	;[131] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",131
+	SRCFILE "Songs\SMario2.bas",131
 	DECLE 16191,63
 	;[132] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",132
+	SRCFILE "Songs\SMario2.bas",132
 	DECLE 16191,63
-	;[133] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",133
-	DECLE 6463,32
+	;[133] MUSIC C5#,A5,s
+	SRCFILE "Songs\SMario2.bas",133
+	DECLE 11814,63
 	;[134] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",134
+	SRCFILE "Songs\SMario2.bas",134
 	DECLE 16191,63
-	;[135] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",135
+	;[135] 
+	SRCFILE "Songs\SMario2.bas",135
+	;[136] MyLoop:
+	SRCFILE "Songs\SMario2.bas",136
+	; MYLOOP
+Q53:	;[137] MUSIC s,s,A2
+	SRCFILE "Songs\SMario2.bas",137
+	DECLE 16191,10
+	;[138] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",138
 	DECLE 16191,63
-	;[136] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",136
-	DECLE 16191,63
-	;[137] 
-	SRCFILE "Songs\SHarrierC64.bas",137
-	;[138] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",138
-	DECLE 7231,37
 	;[139] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",139
+	SRCFILE "Songs\SMario2.bas",139
 	DECLE 16191,63
 	;[140] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",140
+	SRCFILE "Songs\SMario2.bas",140
 	DECLE 16191,63
 	;[141] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",141
+	SRCFILE "Songs\SMario2.bas",141
 	DECLE 16191,63
-	;[142] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",142
-	DECLE 6975,36
-	;[143] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",143
+	;[142] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",142
 	DECLE 16191,63
+	;[143] MUSIC s,s,G3
+	SRCFILE "Songs\SMario2.bas",143
+	DECLE 16191,20
 	;[144] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",144
+	SRCFILE "Songs\SMario2.bas",144
 	DECLE 16191,63
 	;[145] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",145
+	SRCFILE "Songs\SMario2.bas",145
 	DECLE 16191,63
-	;[146] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",146
-	DECLE 7231,37
-	;[147] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",147
+	;[146] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",146
 	DECLE 16191,63
+	;[147] MUSIC E5,B5,s
+	SRCFILE "Songs\SMario2.bas",147
+	DECLE 12329,63
 	;[148] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",148
+	SRCFILE "Songs\SMario2.bas",148
 	DECLE 16191,63
-	;[149] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",149
+	;[149] MUSIC A5,C6,F2
+	SRCFILE "Songs\SMario2.bas",149
+	DECLE 12590,6
+	;[150] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",150
 	DECLE 16191,63
-	;[150] MUSIC F3#,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",150
-	DECLE 16147,39
 	;[151] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",151
+	SRCFILE "Songs\SMario2.bas",151
 	DECLE 16191,63
 	;[152] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",152
+	SRCFILE "Songs\SMario2.bas",152
 	DECLE 16191,63
-	;[153] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",153
+	;[153] MUSIC G5,B5,s
+	SRCFILE "Songs\SMario2.bas",153
+	DECLE 12332,63
+	;[154] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",154
 	DECLE 16191,63
-	;[154] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",154
-	DECLE 6975,34
-	;[155] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",155
-	DECLE 16191,63
+	;[155] MUSIC A5,C6,F3
+	SRCFILE "Songs\SMario2.bas",155
+	DECLE 12590,18
 	;[156] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",156
+	SRCFILE "Songs\SMario2.bas",156
 	DECLE 16191,63
 	;[157] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",157
+	SRCFILE "Songs\SMario2.bas",157
 	DECLE 16191,63
-	;[158] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",158
-	DECLE 6463,32
-	;[159] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",159
+	;[158] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",158
 	DECLE 16191,63
+	;[159] MUSIC F5,A5,s
+	SRCFILE "Songs\SMario2.bas",159
+	DECLE 11818,63
 	;[160] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",160
+	SRCFILE "Songs\SMario2.bas",160
 	DECLE 16191,63
-	;[161] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",161
+	;[161] MUSIC s,s,F2#
+	SRCFILE "Songs\SMario2.bas",161
+	DECLE 16191,7
+	;[162] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",162
 	DECLE 16191,63
-	;[162] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",162
-	DECLE 6975,34
 	;[163] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",163
+	SRCFILE "Songs\SMario2.bas",163
 	DECLE 16191,63
 	;[164] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",164
+	SRCFILE "Songs\SMario2.bas",164
 	DECLE 16191,63
-	;[165] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",165
+	;[165] MUSIC A5,C6,s
+	SRCFILE "Songs\SMario2.bas",165
+	DECLE 12590,63
+	;[166] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",166
 	DECLE 16191,63
-	;[166] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",166
-	DECLE 16150,31
-	;[167] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",167
-	DECLE 16191,63
+	;[167] MUSIC G5,B5,F3#
+	SRCFILE "Songs\SMario2.bas",167
+	DECLE 12332,19
 	;[168] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",168
+	SRCFILE "Songs\SMario2.bas",168
 	DECLE 16191,63
 	;[169] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",169
+	SRCFILE "Songs\SMario2.bas",169
 	DECLE 16191,63
-	;[170] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",170
-	DECLE 6975,34
-	;[171] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",171
+	;[170] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",170
 	DECLE 16191,63
+	;[171] MUSIC F5#,A5,s
+	SRCFILE "Songs\SMario2.bas",171
+	DECLE 11819,63
 	;[172] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",172
+	SRCFILE "Songs\SMario2.bas",172
 	DECLE 16191,63
-	;[173] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",173
+	;[173] MUSIC E5,G5,G2
+	SRCFILE "Songs\SMario2.bas",173
+	DECLE 11305,8
+	;[174] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",174
 	DECLE 16191,63
-	;[174] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",174
-	DECLE 6463,32
 	;[175] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",175
+	SRCFILE "Songs\SMario2.bas",175
 	DECLE 16191,63
 	;[176] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",176
+	SRCFILE "Songs\SMario2.bas",176
 	DECLE 16191,63
-	;[177] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",177
+	;[177] MUSIC D5#,F5#,s
+	SRCFILE "Songs\SMario2.bas",177
+	DECLE 11048,63
+	;[178] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",178
 	DECLE 16191,63
-	;[178] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",178
-	DECLE 6975,34
-	;[179] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",179
-	DECLE 16191,63
+	;[179] MUSIC E5,G5,G3
+	SRCFILE "Songs\SMario2.bas",179
+	DECLE 11305,20
 	;[180] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",180
+	SRCFILE "Songs\SMario2.bas",180
 	DECLE 16191,63
 	;[181] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",181
+	SRCFILE "Songs\SMario2.bas",181
 	DECLE 16191,63
-	;[182] MUSIC F3#,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",182
-	DECLE 16147,39
-	;[183] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",183
+	;[182] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",182
 	DECLE 16191,63
+	;[183] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",183
+	DECLE 10533,63
 	;[184] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",184
+	SRCFILE "Songs\SMario2.bas",184
 	DECLE 16191,63
-	;[185] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",185
+	;[185] MUSIC s,s,A2
+	SRCFILE "Songs\SMario2.bas",185
+	DECLE 16191,10
+	;[186] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",186
 	DECLE 16191,63
-	;[186] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",186
-	DECLE 6975,34
 	;[187] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",187
+	SRCFILE "Songs\SMario2.bas",187
 	DECLE 16191,63
 	;[188] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",188
+	SRCFILE "Songs\SMario2.bas",188
 	DECLE 16191,63
-	;[189] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",189
+	;[189] MUSIC A4,C5#,s
+	SRCFILE "Songs\SMario2.bas",189
+	DECLE 9762,63
+	;[190] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",190
 	DECLE 16191,63
-	;[190] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",190
-	DECLE 6463,32
-	;[191] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",191
-	DECLE 16191,63
+	;[191] MUSIC B4,D5,A3
+	SRCFILE "Songs\SMario2.bas",191
+	DECLE 10020,22
 	;[192] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",192
+	SRCFILE "Songs\SMario2.bas",192
 	DECLE 16191,63
 	;[193] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",193
+	SRCFILE "Songs\SMario2.bas",193
 	DECLE 16191,63
-	;[194] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",194
-	DECLE 6975,34
-	;[195] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",195
+	;[194] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",194
 	DECLE 16191,63
+	;[195] MUSIC C5#,E5,s
+	SRCFILE "Songs\SMario2.bas",195
+	DECLE 10534,63
 	;[196] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",196
+	SRCFILE "Songs\SMario2.bas",196
 	DECLE 16191,63
-	;[197] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",197
+	;[197] MUSIC D5,F5,D3
+	SRCFILE "Songs\SMario2.bas",197
+	DECLE 10791,15
+	;[198] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",198
 	DECLE 16191,63
-	;[198] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",198
-	DECLE 16150,31
 	;[199] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",199
+	SRCFILE "Songs\SMario2.bas",199
 	DECLE 16191,63
 	;[200] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",200
+	SRCFILE "Songs\SMario2.bas",200
 	DECLE 16191,63
-	;[201] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",201
+	;[201] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",201
+	DECLE 10533,63
+	;[202] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",202
 	DECLE 16191,63
-	;[202] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",202
-	DECLE 6975,34
-	;[203] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",203
-	DECLE 16191,63
+	;[203] MUSIC D5,F5,F3
+	SRCFILE "Songs\SMario2.bas",203
+	DECLE 10791,18
 	;[204] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",204
+	SRCFILE "Songs\SMario2.bas",204
 	DECLE 16191,63
 	;[205] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",205
+	SRCFILE "Songs\SMario2.bas",205
 	DECLE 16191,63
-	;[206] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",206
-	DECLE 6463,32
-	;[207] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",207
+	;[206] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",206
 	DECLE 16191,63
+	;[207] MUSIC G4,B4,s
+	SRCFILE "Songs\SMario2.bas",207
+	DECLE 9248,63
 	;[208] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",208
+	SRCFILE "Songs\SMario2.bas",208
 	DECLE 16191,63
-	;[209] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",209
+	;[209] MUSIC s,s,G2
+	SRCFILE "Songs\SMario2.bas",209
+	DECLE 16191,8
+	;[210] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",210
 	DECLE 16191,63
-	;[210] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",210
-	DECLE 6975,34
 	;[211] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",211
+	SRCFILE "Songs\SMario2.bas",211
 	DECLE 16191,63
 	;[212] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",212
+	SRCFILE "Songs\SMario2.bas",212
 	DECLE 16191,63
-	;[213] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",213
+	;[213] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",213
+	DECLE 10533,63
+	;[214] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",214
 	DECLE 16191,63
-	;[214] MUSIC G3,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",214
-	DECLE 16148,35
-	;[215] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",215
-	DECLE 16191,63
+	;[215] MUSIC B4,D5,D3
+	SRCFILE "Songs\SMario2.bas",215
+	DECLE 10020,15
 	;[216] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",216
+	SRCFILE "Songs\SMario2.bas",216
 	DECLE 16191,63
 	;[217] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",217
+	SRCFILE "Songs\SMario2.bas",217
 	DECLE 16191,63
-	;[218] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",218
-	DECLE 6975,32
-	;[219] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",219
+	;[218] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",218
 	DECLE 16191,63
+	;[219] MUSIC G4,C5,s
+	SRCFILE "Songs\SMario2.bas",219
+	DECLE 9504,63
 	;[220] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",220
+	SRCFILE "Songs\SMario2.bas",220
 	DECLE 16191,63
-	;[221] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",221
+	;[221] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",221
+	DECLE 16191,13
+	;[222] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",222
 	DECLE 16191,63
-	;[222] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",222
-	DECLE 6463,31
 	;[223] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",223
+	SRCFILE "Songs\SMario2.bas",223
 	DECLE 16191,63
 	;[224] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",224
+	SRCFILE "Songs\SMario2.bas",224
 	DECLE 16191,63
 	;[225] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",225
+	SRCFILE "Songs\SMario2.bas",225
 	DECLE 16191,63
-	;[226] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",226
-	DECLE 6975,32
-	;[227] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",227
+	;[226] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",226
 	DECLE 16191,63
+	;[227] MUSIC s,s,G2
+	SRCFILE "Songs\SMario2.bas",227
+	DECLE 16191,8
 	;[228] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",228
+	SRCFILE "Songs\SMario2.bas",228
 	DECLE 16191,63
 	;[229] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",229
+	SRCFILE "Songs\SMario2.bas",229
 	DECLE 16191,63
-	;[230] MUSIC A3#,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",230
-	DECLE 16151,27
+	;[230] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",230
+	DECLE 16191,63
 	;[231] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",231
+	SRCFILE "Songs\SMario2.bas",231
 	DECLE 16191,63
 	;[232] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",232
+	SRCFILE "Songs\SMario2.bas",232
 	DECLE 16191,63
-	;[233] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",233
+	;[233] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",233
+	DECLE 16191,13
+	;[234] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",234
 	DECLE 16191,63
-	;[234] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",234
-	DECLE 6975,32
 	;[235] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",235
+	SRCFILE "Songs\SMario2.bas",235
 	DECLE 16191,63
 	;[236] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",236
+	SRCFILE "Songs\SMario2.bas",236
 	DECLE 16191,63
 	;[237] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",237
+	SRCFILE "Songs\SMario2.bas",237
 	DECLE 16191,63
-	;[238] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",238
-	DECLE 6463,31
+	;[238] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",238
+	DECLE 16191,63
 	;[239] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",239
+	SRCFILE "Songs\SMario2.bas",239
 	DECLE 16191,63
 	;[240] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",240
+	SRCFILE "Songs\SMario2.bas",240
 	DECLE 16191,63
 	;[241] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",241
+	SRCFILE "Songs\SMario2.bas",241
 	DECLE 16191,63
-	;[242] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",242
-	DECLE 6975,32
+	;[242] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",242
+	DECLE 16191,63
 	;[243] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",243
+	SRCFILE "Songs\SMario2.bas",243
 	DECLE 16191,63
 	;[244] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",244
+	SRCFILE "Songs\SMario2.bas",244
 	DECLE 16191,63
-	;[245] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",245
+	;[245] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",245
+	DECLE 16191,13
+	;[246] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",246
 	DECLE 16191,63
-	;[246] MUSIC G3,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",246
-	DECLE 16148,35
 	;[247] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",247
+	SRCFILE "Songs\SMario2.bas",247
 	DECLE 16191,63
 	;[248] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",248
+	SRCFILE "Songs\SMario2.bas",248
 	DECLE 16191,63
-	;[249] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",249
+	;[249] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",249
+	DECLE 10528,63
+	;[250] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",250
 	DECLE 16191,63
-	;[250] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",250
-	DECLE 6975,32
-	;[251] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",251
-	DECLE 16191,63
+	;[251] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",251
+	DECLE 16191,15
 	;[252] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",252
+	SRCFILE "Songs\SMario2.bas",252
 	DECLE 16191,63
 	;[253] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",253
+	SRCFILE "Songs\SMario2.bas",253
 	DECLE 16191,63
-	;[254] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",254
-	DECLE 6463,31
+	;[254] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",254
+	DECLE 16191,63
 	;[255] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",255
+	SRCFILE "Songs\SMario2.bas",255
 	DECLE 16191,63
 	;[256] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",256
+	SRCFILE "Songs\SMario2.bas",256
 	DECLE 16191,63
-	;[257] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",257
+	;[257] MUSIC C5,G5,E3
+	SRCFILE "Songs\SMario2.bas",257
+	DECLE 11301,17
+	;[258] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",258
 	DECLE 16191,63
-	;[258] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",258
-	DECLE 6975,32
 	;[259] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",259
+	SRCFILE "Songs\SMario2.bas",259
 	DECLE 16191,63
 	;[260] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",260
+	SRCFILE "Songs\SMario2.bas",260
 	DECLE 16191,63
 	;[261] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",261
+	SRCFILE "Songs\SMario2.bas",261
 	DECLE 16191,63
-	;[262] MUSIC A3#,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",262
-	DECLE 16151,27
-	;[263] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",263
+	;[262] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",262
 	DECLE 16191,63
+	;[263] MUSIC E5,A5,G3
+	SRCFILE "Songs\SMario2.bas",263
+	DECLE 11817,20
 	;[264] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",264
+	SRCFILE "Songs\SMario2.bas",264
 	DECLE 16191,63
-	;[265] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",265
+	;[265] 
+	SRCFILE "Songs\SMario2.bas",265
+	;[266] MUSIC s,s,G3
+	SRCFILE "Songs\SMario2.bas",266
+	DECLE 16191,20
+	;[267] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",267
 	DECLE 16191,63
-	;[266] 
-	SRCFILE "Songs\SHarrierC64.bas",266
-	;[267] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",267
-	DECLE 6975,32
-	;[268] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",268
-	DECLE 16191,63
+	;[268] MUSIC G5,C6,s
+	SRCFILE "Songs\SMario2.bas",268
+	DECLE 12588,63
 	;[269] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",269
+	SRCFILE "Songs\SMario2.bas",269
 	DECLE 16191,63
-	;[270] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",270
+	;[270] MUSIC s,s,A3
+	SRCFILE "Songs\SMario2.bas",270
+	DECLE 16191,22
+	;[271] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",271
 	DECLE 16191,63
-	;[271] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",271
-	DECLE 6463,31
 	;[272] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",272
+	SRCFILE "Songs\SMario2.bas",272
 	DECLE 16191,63
 	;[273] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",273
+	SRCFILE "Songs\SMario2.bas",273
 	DECLE 16191,63
 	;[274] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",274
+	SRCFILE "Songs\SMario2.bas",274
 	DECLE 16191,63
-	;[275] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",275
-	DECLE 6975,32
-	;[276] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",276
+	;[275] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",275
 	DECLE 16191,63
+	;[276] MUSIC s,s,G3
+	SRCFILE "Songs\SMario2.bas",276
+	DECLE 16191,20
 	;[277] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",277
+	SRCFILE "Songs\SMario2.bas",277
 	DECLE 16191,63
 	;[278] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",278
+	SRCFILE "Songs\SMario2.bas",278
 	DECLE 16191,63
-	;[279] MUSIC D3#,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",279
-	DECLE 16144,37
+	;[279] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",279
+	DECLE 16191,63
 	;[280] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",280
+	SRCFILE "Songs\SMario2.bas",280
 	DECLE 16191,63
 	;[281] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",281
+	SRCFILE "Songs\SMario2.bas",281
 	DECLE 16191,63
-	;[282] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",282
+	;[282] MUSIC E5,A5,E3
+	SRCFILE "Songs\SMario2.bas",282
+	DECLE 11817,17
+	;[283] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",283
 	DECLE 16191,63
-	;[283] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",283
-	DECLE 6463,32
 	;[284] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",284
+	SRCFILE "Songs\SMario2.bas",284
 	DECLE 16191,63
 	;[285] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",285
+	SRCFILE "Songs\SMario2.bas",285
 	DECLE 16191,63
-	;[286] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",286
+	;[286] MUSIC C5,G5,s
+	SRCFILE "Songs\SMario2.bas",286
+	DECLE 11301,63
+	;[287] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",287
 	DECLE 16191,63
-	;[287] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",287
-	DECLE 16150,31
-	;[288] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",288
-	DECLE 16191,63
+	;[288] MUSIC A4,E5,C3
+	SRCFILE "Songs\SMario2.bas",288
+	DECLE 10530,13
 	;[289] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",289
+	SRCFILE "Songs\SMario2.bas",289
 	DECLE 16191,63
 	;[290] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",290
+	SRCFILE "Songs\SMario2.bas",290
 	DECLE 16191,63
-	;[291] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",291
-	DECLE 6463,32
-	;[292] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",292
+	;[291] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",291
 	DECLE 16191,63
+	;[292] MUSIC G4,C5,s
+	SRCFILE "Songs\SMario2.bas",292
+	DECLE 9504,63
 	;[293] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",293
+	SRCFILE "Songs\SMario2.bas",293
 	DECLE 16191,63
-	;[294] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",294
+	;[294] MUSIC F4#,D5,D3
+	SRCFILE "Songs\SMario2.bas",294
+	DECLE 10015,15
+	;[295] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",295
 	DECLE 16191,63
-	;[295] MUSIC s,G3,D4#
-	SRCFILE "Songs\SHarrierC64.bas",295
-	DECLE 5183,28
 	;[296] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",296
+	SRCFILE "Songs\SMario2.bas",296
 	DECLE 16191,63
 	;[297] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",297
+	SRCFILE "Songs\SMario2.bas",297
 	DECLE 16191,63
-	;[298] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",298
+	;[298] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",298
+	DECLE 10528,63
+	;[299] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",299
 	DECLE 16191,63
-	;[299] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",299
-	DECLE 6463,32
-	;[300] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",300
-	DECLE 16191,63
+	;[300] MUSIC F4#,D5,E3
+	SRCFILE "Songs\SMario2.bas",300
+	DECLE 10015,17
 	;[301] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",301
+	SRCFILE "Songs\SMario2.bas",301
 	DECLE 16191,63
 	;[302] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",302
+	SRCFILE "Songs\SMario2.bas",302
 	DECLE 16191,63
-	;[303] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",303
-	DECLE 16150,31
-	;[304] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",304
+	;[303] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",303
 	DECLE 16191,63
+	;[304] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",304
+	DECLE 10528,63
 	;[305] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",305
+	SRCFILE "Songs\SMario2.bas",305
 	DECLE 16191,63
-	;[306] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",306
+	;[306] MUSIC F4#,D5,F3#
+	SRCFILE "Songs\SMario2.bas",306
+	DECLE 10015,19
+	;[307] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",307
 	DECLE 16191,63
-	;[307] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",307
-	DECLE 6463,32
 	;[308] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",308
+	SRCFILE "Songs\SMario2.bas",308
 	DECLE 16191,63
 	;[309] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",309
+	SRCFILE "Songs\SMario2.bas",309
 	DECLE 16191,63
-	;[310] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",310
+	;[310] MUSIC D4,A4,s
+	SRCFILE "Songs\SMario2.bas",310
+	DECLE 8731,63
+	;[311] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",311
 	DECLE 16191,63
-	;[311] MUSIC D3#,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",311
-	DECLE 16144,37
-	;[312] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",312
-	DECLE 16191,63
+	;[312] MUSIC s,s,A2
+	SRCFILE "Songs\SMario2.bas",312
+	DECLE 16191,10
 	;[313] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",313
+	SRCFILE "Songs\SMario2.bas",313
 	DECLE 16191,63
 	;[314] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",314
+	SRCFILE "Songs\SMario2.bas",314
 	DECLE 16191,63
-	;[315] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",315
-	DECLE 6463,32
-	;[316] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",316
+	;[315] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",315
 	DECLE 16191,63
+	;[316] MUSIC F4#,D5,s
+	SRCFILE "Songs\SMario2.bas",316
+	DECLE 10015,63
 	;[317] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",317
+	SRCFILE "Songs\SMario2.bas",317
 	DECLE 16191,63
-	;[318] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",318
+	;[318] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",318
+	DECLE 16191,15
+	;[319] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",319
 	DECLE 16191,63
-	;[319] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",319
-	DECLE 16150,31
 	;[320] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",320
+	SRCFILE "Songs\SMario2.bas",320
 	DECLE 16191,63
 	;[321] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",321
+	SRCFILE "Songs\SMario2.bas",321
 	DECLE 16191,63
-	;[322] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",322
-	DECLE 16191,63
-	;[323] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",323
-	DECLE 6463,32
-	;[324] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",324
-	DECLE 16191,63
+	;[322] MUSIC D4,A4,E3
+	SRCFILE "Songs\SMario2.bas",322
+	DECLE 8731,17
+	;[323] MUSIC F4#,D5,s
+	SRCFILE "Songs\SMario2.bas",323
+	DECLE 10015,63
+	;[324] MUSIC D4,A4,C3
+	SRCFILE "Songs\SMario2.bas",324
+	DECLE 8731,13
 	;[325] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",325
+	SRCFILE "Songs\SMario2.bas",325
 	DECLE 16191,63
-	;[326] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",326
-	DECLE 16191,63
-	;[327] MUSIC G3,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",327
-	DECLE 16148,28
-	;[328] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",328
-	DECLE 16191,63
+	;[326] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",326
+	DECLE 10011,63
+	;[327] MUSIC F4#,A4,s
+	SRCFILE "Songs\SMario2.bas",327
+	DECLE 8735,63
+	;[328] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",328
+	DECLE 10011,63
 	;[329] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",329
+	SRCFILE "Songs\SMario2.bas",329
 	DECLE 16191,63
-	;[330] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",330
-	DECLE 16191,63
-	;[331] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",331
-	DECLE 6463,32
-	;[332] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",332
-	DECLE 16191,63
+	;[330] MUSIC F4#,A4,B2
+	SRCFILE "Songs\SMario2.bas",330
+	DECLE 8735,12
+	;[331] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",331
+	DECLE 10011,63
+	;[332] MUSIC F4#,A4,s
+	SRCFILE "Songs\SMario2.bas",332
+	DECLE 8735,63
 	;[333] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",333
+	SRCFILE "Songs\SMario2.bas",333
 	DECLE 16191,63
-	;[334] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",334
-	DECLE 16191,63
-	;[335] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",335
-	DECLE 16150,31
-	;[336] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",336
-	DECLE 16191,63
+	;[334] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",334
+	DECLE 10011,63
+	;[335] MUSIC F4#,A4,s
+	SRCFILE "Songs\SMario2.bas",335
+	DECLE 8735,63
+	;[336] MUSIC D4,D5,A2
+	SRCFILE "Songs\SMario2.bas",336
+	DECLE 10011,10
 	;[337] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",337
+	SRCFILE "Songs\SMario2.bas",337
 	DECLE 16191,63
 	;[338] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",338
+	SRCFILE "Songs\SMario2.bas",338
 	DECLE 16191,63
-	;[339] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",339
-	DECLE 6463,32
-	;[340] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",340
+	;[339] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",339
 	DECLE 16191,63
+	;[340] MUSIC F4,D5,s
+	SRCFILE "Songs\SMario2.bas",340
+	DECLE 10014,63
 	;[341] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",341
+	SRCFILE "Songs\SMario2.bas",341
 	DECLE 16191,63
-	;[342] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",342
+	;[342] MUSIC s,s,G2
+	SRCFILE "Songs\SMario2.bas",342
+	DECLE 16191,8
+	;[343] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",343
 	DECLE 16191,63
-	;[343] MUSIC D3,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",343
-	DECLE 16143,35
 	;[344] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",344
+	SRCFILE "Songs\SMario2.bas",344
 	DECLE 16191,63
 	;[345] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",345
+	SRCFILE "Songs\SMario2.bas",345
 	DECLE 16191,63
-	;[346] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",346
+	;[346] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",346
+	DECLE 10528,63
+	;[347] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",347
 	DECLE 16191,63
-	;[347] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",347
-	DECLE 5951,32
-	;[348] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",348
-	DECLE 16191,63
+	;[348] MUSIC F4,D5,G3
+	SRCFILE "Songs\SMario2.bas",348
+	DECLE 10014,20
 	;[349] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",349
+	SRCFILE "Songs\SMario2.bas",349
 	DECLE 16191,63
 	;[350] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",350
+	SRCFILE "Songs\SMario2.bas",350
 	DECLE 16191,63
-	;[351] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",351
-	DECLE 16150,31
-	;[352] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",352
+	;[351] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",351
 	DECLE 16191,63
+	;[352] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",352
+	DECLE 10528,63
 	;[353] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",353
+	SRCFILE "Songs\SMario2.bas",353
 	DECLE 16191,63
-	;[354] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",354
+	;[354] MUSIC F4,D5,F3
+	SRCFILE "Songs\SMario2.bas",354
+	DECLE 10014,18
+	;[355] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",355
 	DECLE 16191,63
-	;[355] MUSIC A3#,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",355
-	DECLE 8215,63
 	;[356] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",356
+	SRCFILE "Songs\SMario2.bas",356
 	DECLE 16191,63
 	;[357] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",357
+	SRCFILE "Songs\SMario2.bas",357
 	DECLE 16191,63
-	;[358] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",358
+	;[358] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",358
+	DECLE 10528,63
+	;[359] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",359
 	DECLE 16191,63
-	;[359] MUSIC s,G3,D4
-	SRCFILE "Songs\SHarrierC64.bas",359
-	DECLE 5183,27
-	;[360] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",360
-	DECLE 16191,63
+	;[360] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",360
+	DECLE 16191,15
 	;[361] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",361
+	SRCFILE "Songs\SMario2.bas",361
 	DECLE 16191,63
 	;[362] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",362
+	SRCFILE "Songs\SMario2.bas",362
 	DECLE 16191,63
-	;[363] MUSIC A3#,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",363
-	DECLE 8215,63
-	;[364] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",364
+	;[363] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",363
 	DECLE 16191,63
+	;[364] MUSIC C5,A5,s
+	SRCFILE "Songs\SMario2.bas",364
+	DECLE 11813,63
 	;[365] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",365
+	SRCFILE "Songs\SMario2.bas",365
 	DECLE 16191,63
-	;[366] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",366
+	;[366] MUSIC s,s,B2
+	SRCFILE "Songs\SMario2.bas",366
+	DECLE 16191,12
+	;[367] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",367
 	DECLE 16191,63
-	;[367] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",367
-	DECLE 5695,31
 	;[368] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",368
+	SRCFILE "Songs\SMario2.bas",368
 	DECLE 16191,63
 	;[369] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",369
+	SRCFILE "Songs\SMario2.bas",369
 	DECLE 16191,63
-	;[370] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",370
+	;[370] MUSIC B4,G5,s
+	SRCFILE "Songs\SMario2.bas",370
+	DECLE 11300,63
+	;[371] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",371
 	DECLE 16191,63
-	;[371] MUSIC G4,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",371
-	DECLE 5920,63
-	;[372] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",372
-	DECLE 16191,63
+	;[372] MUSIC C5,A5,G2
+	SRCFILE "Songs\SMario2.bas",372
+	DECLE 11813,8
 	;[373] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",373
+	SRCFILE "Songs\SMario2.bas",373
 	DECLE 16191,63
 	;[374] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",374
+	SRCFILE "Songs\SMario2.bas",374
 	DECLE 16191,63
-	;[375] MUSIC s,D3,A4#
-	SRCFILE "Songs\SHarrierC64.bas",375
-	DECLE 3903,35
-	;[376] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",376
+	;[375] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",375
 	DECLE 16191,63
+	;[376] MUSIC B4,G5,s
+	SRCFILE "Songs\SMario2.bas",376
+	DECLE 11300,63
 	;[377] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",377
+	SRCFILE "Songs\SMario2.bas",377
 	DECLE 16191,63
-	;[378] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",378
+	;[378] MUSIC G4,E5,A2
+	SRCFILE "Songs\SMario2.bas",378
+	DECLE 10528,10
+	;[379] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",379
 	DECLE 16191,63
-	;[379] MUSIC A3#,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",379
-	DECLE 16151,32
 	;[380] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",380
+	SRCFILE "Songs\SMario2.bas",380
 	DECLE 16191,63
 	;[381] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",381
+	SRCFILE "Songs\SMario2.bas",381
 	DECLE 16191,63
-	;[382] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",382
+	;[382] MUSIC F4,D5,s
+	SRCFILE "Songs\SMario2.bas",382
+	DECLE 10014,63
+	;[383] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",383
 	DECLE 16191,63
-	;[383] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",383
-	DECLE 5695,31
-	;[384] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",384
-	DECLE 16191,63
+	;[384] MUSIC E4,C5,B2
+	SRCFILE "Songs\SMario2.bas",384
+	DECLE 9501,12
 	;[385] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",385
+	SRCFILE "Songs\SMario2.bas",385
 	DECLE 16191,63
 	;[386] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",386
+	SRCFILE "Songs\SMario2.bas",386
 	DECLE 16191,63
-	;[387] MUSIC G4,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",387
-	DECLE 5920,63
-	;[388] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",388
+	;[387] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",387
 	DECLE 16191,63
+	;[388] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",388
+	DECLE 10533,63
 	;[389] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",389
+	SRCFILE "Songs\SMario2.bas",389
 	DECLE 16191,63
-	;[390] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",390
+	;[390] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",390
+	DECLE 16191,13
+	;[391] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",391
 	DECLE 16191,63
-	;[391] MUSIC s,G3,D4
-	SRCFILE "Songs\SHarrierC64.bas",391
-	DECLE 5183,27
 	;[392] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",392
+	SRCFILE "Songs\SMario2.bas",392
 	DECLE 16191,63
 	;[393] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",393
+	SRCFILE "Songs\SMario2.bas",393
 	DECLE 16191,63
-	;[394] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",394
-	DECLE 16191,63
-	;[395] 
-	SRCFILE "Songs\SHarrierC64.bas",395
-	;[396] MUSIC A3#,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",396
-	DECLE 16151,32
-	;[397] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",397
-	DECLE 16191,63
+	;[394] 
+	SRCFILE "Songs\SMario2.bas",394
+	;[395] MUSIC E4,G4,s
+	SRCFILE "Songs\SMario2.bas",395
+	DECLE 8221,63
+	;[396] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",396
+	DECLE 10533,63
+	;[397] MUSIC E4,G4,C3#
+	SRCFILE "Songs\SMario2.bas",397
+	DECLE 8221,14
 	;[398] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",398
+	SRCFILE "Songs\SMario2.bas",398
 	DECLE 16191,63
-	;[399] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",399
-	DECLE 16191,63
-	;[400] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",400
-	DECLE 5695,31
-	;[401] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",401
-	DECLE 16191,63
+	;[399] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",399
+	DECLE 10533,63
+	;[400] MUSIC E4,G4,s
+	SRCFILE "Songs\SMario2.bas",400
+	DECLE 8221,63
+	;[401] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",401
+	DECLE 10533,63
 	;[402] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",402
+	SRCFILE "Songs\SMario2.bas",402
 	DECLE 16191,63
-	;[403] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",403
-	DECLE 16191,63
-	;[404] MUSIC G4,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",404
-	DECLE 5920,63
-	;[405] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",405
-	DECLE 16191,63
+	;[403] MUSIC E4,G4,D3
+	SRCFILE "Songs\SMario2.bas",403
+	DECLE 8221,15
+	;[404] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",404
+	DECLE 10533,63
+	;[405] MUSIC E4,G4,s
+	SRCFILE "Songs\SMario2.bas",405
+	DECLE 8221,63
 	;[406] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",406
+	SRCFILE "Songs\SMario2.bas",406
 	DECLE 16191,63
-	;[407] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",407
-	DECLE 16191,63
-	;[408] MUSIC s,D3,A4
-	SRCFILE "Songs\SHarrierC64.bas",408
-	DECLE 3903,34
-	;[409] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",409
-	DECLE 16191,63
+	;[407] MUSIC C5,E5,s
+	SRCFILE "Songs\SMario2.bas",407
+	DECLE 10533,63
+	;[408] MUSIC E4,G4,s
+	SRCFILE "Songs\SMario2.bas",408
+	DECLE 8221,63
+	;[409] MUSIC C5,E5,D3#
+	SRCFILE "Songs\SMario2.bas",409
+	DECLE 10533,16
 	;[410] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",410
+	SRCFILE "Songs\SMario2.bas",410
 	DECLE 16191,63
 	;[411] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",411
+	SRCFILE "Songs\SMario2.bas",411
 	DECLE 16191,63
-	;[412] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",412
-	DECLE 16150,31
+	;[412] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",412
+	DECLE 16191,63
 	;[413] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",413
+	SRCFILE "Songs\SMario2.bas",413
 	DECLE 16191,63
 	;[414] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",414
+	SRCFILE "Songs\SMario2.bas",414
 	DECLE 16191,63
-	;[415] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",415
+	;[415] MUSIC s,s,E3
+	SRCFILE "Songs\SMario2.bas",415
+	DECLE 16191,17
+	;[416] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",416
 	DECLE 16191,63
-	;[416] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",416
-	DECLE 5183,29
 	;[417] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",417
+	SRCFILE "Songs\SMario2.bas",417
 	DECLE 16191,63
 	;[418] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",418
+	SRCFILE "Songs\SMario2.bas",418
 	DECLE 16191,63
-	;[419] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",419
+	;[419] MUSIC B4,G5,B2
+	SRCFILE "Songs\SMario2.bas",419
+	DECLE 11300,12
+	;[420] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",420
 	DECLE 16191,63
-	;[420] MUSIC F4#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",420
-	DECLE 5663,63
-	;[421] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",421
-	DECLE 16191,63
+	;[421] MUSIC s,s,A2
+	SRCFILE "Songs\SMario2.bas",421
+	DECLE 16191,10
 	;[422] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",422
+	SRCFILE "Songs\SMario2.bas",422
 	DECLE 16191,63
-	;[423] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",423
+	;[423] MUSIC A4,D5#,s
+	SRCFILE "Songs\SMario2.bas",423
+	DECLE 10274,63
+	;[424] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",424
 	DECLE 16191,63
-	;[424] MUSIC s,F3#,D4
-	SRCFILE "Songs\SHarrierC64.bas",424
-	DECLE 4927,27
 	;[425] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",425
+	SRCFILE "Songs\SMario2.bas",425
 	DECLE 16191,63
 	;[426] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",426
+	SRCFILE "Songs\SMario2.bas",426
 	DECLE 16191,63
-	;[427] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",427
+	;[427] MUSIC G4,B4,G2
+	SRCFILE "Songs\SMario2.bas",427
+	DECLE 9248,8
+	;[428] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",428
 	DECLE 16191,63
-	;[428] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",428
-	DECLE 16150,31
 	;[429] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",429
+	SRCFILE "Songs\SMario2.bas",429
 	DECLE 16191,63
 	;[430] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",430
+	SRCFILE "Songs\SMario2.bas",430
 	DECLE 16191,63
-	;[431] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",431
+	;[431] MUSIC F4,A4,s
+	SRCFILE "Songs\SMario2.bas",431
+	DECLE 8734,63
+	;[432] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",432
 	DECLE 16191,63
-	;[432] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",432
-	DECLE 5183,29
-	;[433] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",433
-	DECLE 16191,63
+	;[433] MUSIC s,s,B2
+	SRCFILE "Songs\SMario2.bas",433
+	DECLE 16191,12
 	;[434] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",434
+	SRCFILE "Songs\SMario2.bas",434
 	DECLE 16191,63
-	;[435] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",435
+	;[435] MUSIC D4#,G4,s
+	SRCFILE "Songs\SMario2.bas",435
+	DECLE 8220,63
+	;[436] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",436
 	DECLE 16191,63
-	;[436] MUSIC F4#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",436
-	DECLE 5663,63
 	;[437] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",437
+	SRCFILE "Songs\SMario2.bas",437
 	DECLE 16191,63
 	;[438] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",438
+	SRCFILE "Songs\SMario2.bas",438
 	DECLE 16191,63
-	;[439] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",439
+	;[439] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",439
+	DECLE 16191,13
+	;[440] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",440
 	DECLE 16191,63
-	;[440] MUSIC s,D3,A4
-	SRCFILE "Songs\SHarrierC64.bas",440
-	DECLE 3903,34
 	;[441] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",441
+	SRCFILE "Songs\SMario2.bas",441
 	DECLE 16191,63
 	;[442] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",442
+	SRCFILE "Songs\SMario2.bas",442
 	DECLE 16191,63
-	;[443] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",443
+	;[443] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",443
+	DECLE 10528,63
+	;[444] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",444
 	DECLE 16191,63
-	;[444] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",444
-	DECLE 16150,31
-	;[445] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",445
-	DECLE 16191,63
+	;[445] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",445
+	DECLE 16191,15
 	;[446] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",446
+	SRCFILE "Songs\SMario2.bas",446
 	DECLE 16191,63
 	;[447] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",447
+	SRCFILE "Songs\SMario2.bas",447
 	DECLE 16191,63
-	;[448] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",448
-	DECLE 5183,29
+	;[448] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",448
+	DECLE 16191,63
 	;[449] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",449
+	SRCFILE "Songs\SMario2.bas",449
 	DECLE 16191,63
 	;[450] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",450
+	SRCFILE "Songs\SMario2.bas",450
 	DECLE 16191,63
-	;[451] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",451
+	;[451] MUSIC C5,G5,E3
+	SRCFILE "Songs\SMario2.bas",451
+	DECLE 11301,17
+	;[452] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",452
 	DECLE 16191,63
-	;[452] MUSIC F4#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",452
-	DECLE 5663,63
 	;[453] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",453
+	SRCFILE "Songs\SMario2.bas",453
 	DECLE 16191,63
 	;[454] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",454
+	SRCFILE "Songs\SMario2.bas",454
 	DECLE 16191,63
 	;[455] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",455
+	SRCFILE "Songs\SMario2.bas",455
 	DECLE 16191,63
-	;[456] MUSIC s,F3#,D4
-	SRCFILE "Songs\SHarrierC64.bas",456
-	DECLE 4927,27
-	;[457] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",457
+	;[456] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",456
 	DECLE 16191,63
+	;[457] MUSIC E5,A5,G3
+	SRCFILE "Songs\SMario2.bas",457
+	DECLE 11817,20
 	;[458] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",458
+	SRCFILE "Songs\SMario2.bas",458
 	DECLE 16191,63
 	;[459] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",459
+	SRCFILE "Songs\SMario2.bas",459
 	DECLE 16191,63
-	;[460] MUSIC A3,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",460
-	DECLE 16150,31
-	;[461] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",461
+	;[460] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",460
 	DECLE 16191,63
+	;[461] MUSIC G5,C6,s
+	SRCFILE "Songs\SMario2.bas",461
+	DECLE 12588,63
 	;[462] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",462
+	SRCFILE "Songs\SMario2.bas",462
 	DECLE 16191,63
-	;[463] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",463
+	;[463] MUSIC s,s,A3
+	SRCFILE "Songs\SMario2.bas",463
+	DECLE 16191,22
+	;[464] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",464
 	DECLE 16191,63
-	;[464] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",464
-	DECLE 5183,29
 	;[465] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",465
+	SRCFILE "Songs\SMario2.bas",465
 	DECLE 16191,63
 	;[466] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",466
+	SRCFILE "Songs\SMario2.bas",466
 	DECLE 16191,63
 	;[467] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",467
+	SRCFILE "Songs\SMario2.bas",467
 	DECLE 16191,63
-	;[468] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",468
-	DECLE 5695,31
-	;[469] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",469
+	;[468] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",468
 	DECLE 16191,63
+	;[469] MUSIC s,s,G3
+	SRCFILE "Songs\SMario2.bas",469
+	DECLE 16191,20
 	;[470] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",470
+	SRCFILE "Songs\SMario2.bas",470
 	DECLE 16191,63
 	;[471] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",471
+	SRCFILE "Songs\SMario2.bas",471
 	DECLE 16191,63
-	;[472] MUSIC G3,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",472
-	DECLE 16148,32
+	;[472] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",472
+	DECLE 16191,63
 	;[473] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",473
+	SRCFILE "Songs\SMario2.bas",473
 	DECLE 16191,63
 	;[474] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",474
+	SRCFILE "Songs\SMario2.bas",474
 	DECLE 16191,63
-	;[475] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",475
+	;[475] MUSIC E5,A5,E3
+	SRCFILE "Songs\SMario2.bas",475
+	DECLE 11817,17
+	;[476] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",476
 	DECLE 16191,63
-	;[476] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",476
-	DECLE 6975,63
 	;[477] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",477
+	SRCFILE "Songs\SMario2.bas",477
 	DECLE 16191,63
 	;[478] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",478
+	SRCFILE "Songs\SMario2.bas",478
 	DECLE 16191,63
-	;[479] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",479
+	;[479] MUSIC C5,G5,s
+	SRCFILE "Songs\SMario2.bas",479
+	DECLE 11301,63
+	;[480] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",480
 	DECLE 16191,63
-	;[480] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",480
-	DECLE 6463,63
-	;[481] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",481
-	DECLE 16191,63
+	;[481] MUSIC A4,E5,C3
+	SRCFILE "Songs\SMario2.bas",481
+	DECLE 10530,13
 	;[482] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",482
+	SRCFILE "Songs\SMario2.bas",482
 	DECLE 16191,63
 	;[483] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",483
+	SRCFILE "Songs\SMario2.bas",483
 	DECLE 16191,63
-	;[484] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",484
-	DECLE 6975,63
-	;[485] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",485
+	;[484] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",484
 	DECLE 16191,63
+	;[485] MUSIC G4,C5,s
+	SRCFILE "Songs\SMario2.bas",485
+	DECLE 9504,63
 	;[486] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",486
+	SRCFILE "Songs\SMario2.bas",486
 	DECLE 16191,63
-	;[487] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",487
+	;[487] MUSIC F4#,D5,D3
+	SRCFILE "Songs\SMario2.bas",487
+	DECLE 10015,15
+	;[488] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",488
 	DECLE 16191,63
-	;[488] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",488
-	DECLE 5951,63
 	;[489] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",489
+	SRCFILE "Songs\SMario2.bas",489
 	DECLE 16191,63
 	;[490] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",490
+	SRCFILE "Songs\SMario2.bas",490
 	DECLE 16191,63
-	;[491] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",491
+	;[491] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",491
+	DECLE 10528,63
+	;[492] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",492
 	DECLE 16191,63
-	;[492] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",492
-	DECLE 6975,63
-	;[493] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",493
-	DECLE 16191,63
+	;[493] MUSIC F4#,D5,E3
+	SRCFILE "Songs\SMario2.bas",493
+	DECLE 10015,17
 	;[494] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",494
+	SRCFILE "Songs\SMario2.bas",494
 	DECLE 16191,63
 	;[495] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",495
+	SRCFILE "Songs\SMario2.bas",495
 	DECLE 16191,63
-	;[496] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",496
-	DECLE 5695,63
-	;[497] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",497
+	;[496] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",496
 	DECLE 16191,63
+	;[497] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",497
+	DECLE 10528,63
 	;[498] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",498
+	SRCFILE "Songs\SMario2.bas",498
 	DECLE 16191,63
-	;[499] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",499
+	;[499] MUSIC F4#,D5,F3#
+	SRCFILE "Songs\SMario2.bas",499
+	DECLE 10015,19
+	;[500] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",500
 	DECLE 16191,63
-	;[500] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",500
-	DECLE 6975,63
 	;[501] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",501
+	SRCFILE "Songs\SMario2.bas",501
 	DECLE 16191,63
 	;[502] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",502
+	SRCFILE "Songs\SMario2.bas",502
 	DECLE 16191,63
-	;[503] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",503
+	;[503] MUSIC D4,A4,s
+	SRCFILE "Songs\SMario2.bas",503
+	DECLE 8731,63
+	;[504] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",504
 	DECLE 16191,63
-	;[504] MUSIC s,D3,A4
-	SRCFILE "Songs\SHarrierC64.bas",504
-	DECLE 3903,34
-	;[505] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",505
-	DECLE 16143,63
+	;[505] MUSIC s,s,A2
+	SRCFILE "Songs\SMario2.bas",505
+	DECLE 16191,10
 	;[506] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",506
+	SRCFILE "Songs\SMario2.bas",506
 	DECLE 16191,63
 	;[507] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",507
+	SRCFILE "Songs\SMario2.bas",507
 	DECLE 16191,63
-	;[508] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",508
-	DECLE 6975,63
-	;[509] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",509
+	;[508] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",508
 	DECLE 16191,63
+	;[509] MUSIC F4#,D5,s
+	SRCFILE "Songs\SMario2.bas",509
+	DECLE 10015,63
 	;[510] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",510
+	SRCFILE "Songs\SMario2.bas",510
 	DECLE 16191,63
-	;[511] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",511
+	;[511] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",511
+	DECLE 16191,15
+	;[512] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",512
 	DECLE 16191,63
-	;[512] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",512
-	DECLE 6463,63
 	;[513] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",513
+	SRCFILE "Songs\SMario2.bas",513
 	DECLE 16191,63
 	;[514] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",514
+	SRCFILE "Songs\SMario2.bas",514
 	DECLE 16191,63
-	;[515] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",515
-	DECLE 16191,63
-	;[516] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",516
-	DECLE 6975,63
-	;[517] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",517
-	DECLE 16191,63
+	;[515] MUSIC D4,A4,E3
+	SRCFILE "Songs\SMario2.bas",515
+	DECLE 8731,17
+	;[516] MUSIC F4#,D5,s
+	SRCFILE "Songs\SMario2.bas",516
+	DECLE 10015,63
+	;[517] MUSIC D4,A4,C3
+	SRCFILE "Songs\SMario2.bas",517
+	DECLE 8731,13
 	;[518] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",518
+	SRCFILE "Songs\SMario2.bas",518
 	DECLE 16191,63
-	;[519] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",519
-	DECLE 16191,63
-	;[520] MUSIC s,A3,F5#
-	SRCFILE "Songs\SHarrierC64.bas",520
-	DECLE 5695,43
-	;[521] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",521
-	DECLE 16143,63
+	;[519] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",519
+	DECLE 10011,63
+	;[520] MUSIC F4#,A4,s
+	SRCFILE "Songs\SMario2.bas",520
+	DECLE 8735,63
+	;[521] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",521
+	DECLE 10011,63
 	;[522] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",522
+	SRCFILE "Songs\SMario2.bas",522
 	DECLE 16191,63
-	;[523] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",523
-	DECLE 16191,63
-	;[524] 
-	SRCFILE "Songs\SHarrierC64.bas",524
-	;[525] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",525
-	DECLE 6975,63
-	;[526] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",526
-	DECLE 16191,63
+	;[523] 
+	SRCFILE "Songs\SMario2.bas",523
+	;[524] MUSIC F4#,A4,B2
+	SRCFILE "Songs\SMario2.bas",524
+	DECLE 8735,12
+	;[525] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",525
+	DECLE 10011,63
+	;[526] MUSIC F4#,A4,s
+	SRCFILE "Songs\SMario2.bas",526
+	DECLE 8735,63
 	;[527] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",527
+	SRCFILE "Songs\SMario2.bas",527
 	DECLE 16191,63
-	;[528] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",528
-	DECLE 16191,63
-	;[529] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",529
-	DECLE 6463,63
-	;[530] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",530
-	DECLE 16191,63
+	;[528] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",528
+	DECLE 10011,63
+	;[529] MUSIC F4#,A4,s
+	SRCFILE "Songs\SMario2.bas",529
+	DECLE 8735,63
+	;[530] MUSIC D4,D5,A2
+	SRCFILE "Songs\SMario2.bas",530
+	DECLE 10011,10
 	;[531] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",531
+	SRCFILE "Songs\SMario2.bas",531
 	DECLE 16191,63
 	;[532] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",532
+	SRCFILE "Songs\SMario2.bas",532
 	DECLE 16191,63
-	;[533] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",533
-	DECLE 6975,63
-	;[534] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",534
+	;[533] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",533
 	DECLE 16191,63
+	;[534] MUSIC F4,D5,s
+	SRCFILE "Songs\SMario2.bas",534
+	DECLE 10014,63
 	;[535] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",535
+	SRCFILE "Songs\SMario2.bas",535
 	DECLE 16191,63
-	;[536] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",536
+	;[536] MUSIC s,s,G2
+	SRCFILE "Songs\SMario2.bas",536
+	DECLE 16191,8
+	;[537] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",537
 	DECLE 16191,63
-	;[537] MUSIC s,G3,D5
-	SRCFILE "Songs\SHarrierC64.bas",537
-	DECLE 5183,39
-	;[538] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",538
-	DECLE 16136,63
+	;[538] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",538
+	DECLE 16191,63
 	;[539] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",539
+	SRCFILE "Songs\SMario2.bas",539
 	DECLE 16191,63
-	;[540] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",540
+	;[540] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",540
+	DECLE 10528,63
+	;[541] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",541
 	DECLE 16191,63
-	;[541] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",541
-	DECLE 6975,35
-	;[542] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",542
-	DECLE 16191,63
+	;[542] MUSIC F4,D5,G3
+	SRCFILE "Songs\SMario2.bas",542
+	DECLE 10014,20
 	;[543] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",543
+	SRCFILE "Songs\SMario2.bas",543
 	DECLE 16191,63
 	;[544] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",544
+	SRCFILE "Songs\SMario2.bas",544
 	DECLE 16191,63
-	;[545] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",545
-	DECLE 6463,34
-	;[546] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",546
-	DECLE 16148,63
+	;[545] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",545
+	DECLE 16191,63
+	;[546] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",546
+	DECLE 10528,63
 	;[547] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",547
+	SRCFILE "Songs\SMario2.bas",547
 	DECLE 16191,63
-	;[548] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",548
+	;[548] MUSIC F4,D5,F3
+	SRCFILE "Songs\SMario2.bas",548
+	DECLE 10014,18
+	;[549] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",549
 	DECLE 16191,63
-	;[549] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",549
-	DECLE 6975,35
 	;[550] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",550
+	SRCFILE "Songs\SMario2.bas",550
 	DECLE 16191,63
 	;[551] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",551
+	SRCFILE "Songs\SMario2.bas",551
 	DECLE 16191,63
-	;[552] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",552
+	;[552] MUSIC G4,E5,s
+	SRCFILE "Songs\SMario2.bas",552
+	DECLE 10528,63
+	;[553] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",553
 	DECLE 16191,63
-	;[553] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",553
-	DECLE 5951,32
-	;[554] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",554
-	DECLE 16136,63
+	;[554] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",554
+	DECLE 16191,15
 	;[555] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",555
+	SRCFILE "Songs\SMario2.bas",555
 	DECLE 16191,63
 	;[556] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",556
+	SRCFILE "Songs\SMario2.bas",556
 	DECLE 16191,63
-	;[557] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",557
-	DECLE 6975,35
-	;[558] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",558
+	;[557] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",557
 	DECLE 16191,63
+	;[558] MUSIC C5,A5,s
+	SRCFILE "Songs\SMario2.bas",558
+	DECLE 11813,63
 	;[559] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",559
+	SRCFILE "Songs\SMario2.bas",559
 	DECLE 16191,63
-	;[560] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",560
+	;[560] MUSIC s,s,B2
+	SRCFILE "Songs\SMario2.bas",560
+	DECLE 16191,12
+	;[561] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",561
 	DECLE 16191,63
-	;[561] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",561
-	DECLE 6463,34
-	;[562] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",562
-	DECLE 16148,63
+	;[562] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",562
+	DECLE 16191,63
 	;[563] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",563
+	SRCFILE "Songs\SMario2.bas",563
 	DECLE 16191,63
-	;[564] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",564
+	;[564] MUSIC B4,G5,s
+	SRCFILE "Songs\SMario2.bas",564
+	DECLE 11300,63
+	;[565] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",565
 	DECLE 16191,63
-	;[565] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",565
-	DECLE 6975,35
-	;[566] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",566
-	DECLE 16191,63
+	;[566] MUSIC C5,A5,G2
+	SRCFILE "Songs\SMario2.bas",566
+	DECLE 11813,8
 	;[567] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",567
+	SRCFILE "Songs\SMario2.bas",567
 	DECLE 16191,63
 	;[568] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",568
+	SRCFILE "Songs\SMario2.bas",568
 	DECLE 16191,63
-	;[569] MUSIC s,G3,D5
-	SRCFILE "Songs\SHarrierC64.bas",569
-	DECLE 5183,39
-	;[570] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",570
-	DECLE 16136,63
+	;[569] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",569
+	DECLE 16191,63
+	;[570] MUSIC B4,G5,s
+	SRCFILE "Songs\SMario2.bas",570
+	DECLE 11300,63
 	;[571] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",571
+	SRCFILE "Songs\SMario2.bas",571
 	DECLE 16191,63
-	;[572] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",572
+	;[572] MUSIC C5,A5,A2
+	SRCFILE "Songs\SMario2.bas",572
+	DECLE 11813,10
+	;[573] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",573
 	DECLE 16191,63
-	;[573] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",573
-	DECLE 6975,35
 	;[574] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",574
+	SRCFILE "Songs\SMario2.bas",574
 	DECLE 16191,63
 	;[575] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",575
+	SRCFILE "Songs\SMario2.bas",575
 	DECLE 16191,63
-	;[576] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",576
+	;[576] MUSIC B4,G5,s
+	SRCFILE "Songs\SMario2.bas",576
+	DECLE 11300,63
+	;[577] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",577
 	DECLE 16191,63
-	;[577] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",577
-	DECLE 6463,34
-	;[578] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",578
-	DECLE 16148,63
+	;[578] MUSIC G4,E5,B2
+	SRCFILE "Songs\SMario2.bas",578
+	DECLE 10528,12
 	;[579] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",579
+	SRCFILE "Songs\SMario2.bas",579
 	DECLE 16191,63
 	;[580] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",580
+	SRCFILE "Songs\SMario2.bas",580
 	DECLE 16191,63
-	;[581] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",581
-	DECLE 6975,35
-	;[582] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",582
+	;[581] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",581
 	DECLE 16191,63
+	;[582] MUSIC E4,C5,s
+	SRCFILE "Songs\SMario2.bas",582
+	DECLE 9501,63
 	;[583] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",583
+	SRCFILE "Songs\SMario2.bas",583
 	DECLE 16191,63
-	;[584] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",584
+	;[584] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",584
+	DECLE 16191,13
+	;[585] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",585
 	DECLE 16191,63
-	;[585] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",585
-	DECLE 5951,32
-	;[586] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",586
-	DECLE 16136,63
+	;[586] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",586
+	DECLE 16191,63
 	;[587] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",587
+	SRCFILE "Songs\SMario2.bas",587
 	DECLE 16191,63
 	;[588] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",588
+	SRCFILE "Songs\SMario2.bas",588
 	DECLE 16191,63
-	;[589] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",589
-	DECLE 6975,35
-	;[590] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",590
+	;[589] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",589
 	DECLE 16191,63
+	;[590] MUSIC s,s,G2
+	SRCFILE "Songs\SMario2.bas",590
+	DECLE 16191,8
 	;[591] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",591
+	SRCFILE "Songs\SMario2.bas",591
 	DECLE 16191,63
 	;[592] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",592
+	SRCFILE "Songs\SMario2.bas",592
 	DECLE 16191,63
-	;[593] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",593
-	DECLE 6463,34
-	;[594] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",594
-	DECLE 16148,63
+	;[593] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",593
+	DECLE 16191,63
+	;[594] MUSIC s,F4#,s
+	SRCFILE "Songs\SMario2.bas",594
+	DECLE 7999,63
 	;[595] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",595
+	SRCFILE "Songs\SMario2.bas",595
 	DECLE 16191,63
-	;[596] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",596
+	;[596] MUSIC s,G4,A2
+	SRCFILE "Songs\SMario2.bas",596
+	DECLE 8255,10
+	;[597] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",597
 	DECLE 16191,63
-	;[597] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",597
-	DECLE 6975,35
 	;[598] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",598
+	SRCFILE "Songs\SMario2.bas",598
 	DECLE 16191,63
 	;[599] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",599
+	SRCFILE "Songs\SMario2.bas",599
 	DECLE 16191,63
-	;[600] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",600
+	;[600] MUSIC s,G4#,s
+	SRCFILE "Songs\SMario2.bas",600
+	DECLE 8511,63
+	;[601] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",601
 	DECLE 16191,63
-	;[601] MUSIC s,G3,D5#
-	SRCFILE "Songs\SHarrierC64.bas",601
-	DECLE 5183,40
-	;[602] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",602
-	DECLE 16136,63
+	;[602] MUSIC F4,A4,B2
+	SRCFILE "Songs\SMario2.bas",602
+	DECLE 8734,12
 	;[603] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",603
+	SRCFILE "Songs\SMario2.bas",603
 	DECLE 16191,63
 	;[604] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",604
+	SRCFILE "Songs\SMario2.bas",604
 	DECLE 16191,63
-	;[605] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",605
-	DECLE 7231,37
-	;[606] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",606
+	;[605] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",605
 	DECLE 16191,63
+	;[606] MUSIC E4,C5,s
+	SRCFILE "Songs\SMario2.bas",606
+	DECLE 9501,63
 	;[607] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",607
+	SRCFILE "Songs\SMario2.bas",607
 	DECLE 16191,63
-	;[608] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",608
+	;[608] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",608
+	DECLE 16191,13
+	;[609] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",609
 	DECLE 16191,63
-	;[609] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",609
-	DECLE 6975,36
-	;[610] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",610
-	DECLE 16148,63
+	;[610] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",610
+	DECLE 16191,63
 	;[611] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",611
+	SRCFILE "Songs\SMario2.bas",611
 	DECLE 16191,63
 	;[612] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",612
+	SRCFILE "Songs\SMario2.bas",612
 	DECLE 16191,63
-	;[613] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",613
-	DECLE 7231,37
+	;[613] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",613
+	DECLE 16191,63
 	;[614] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",614
+	SRCFILE "Songs\SMario2.bas",614
 	DECLE 16191,63
 	;[615] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",615
+	SRCFILE "Songs\SMario2.bas",615
 	DECLE 16191,63
 	;[616] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",616
+	SRCFILE "Songs\SMario2.bas",616
 	DECLE 16191,63
-	;[617] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",617
-	DECLE 6463,32
-	;[618] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",618
-	DECLE 16136,63
+	;[617] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",617
+	DECLE 16191,63
+	;[618] MUSIC E4,C5,C3
+	SRCFILE "Songs\SMario2.bas",618
+	DECLE 9501,13
 	;[619] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",619
+	SRCFILE "Songs\SMario2.bas",619
 	DECLE 16191,63
 	;[620] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",620
+	SRCFILE "Songs\SMario2.bas",620
 	DECLE 16191,63
-	;[621] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",621
-	DECLE 7231,37
+	;[621] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",621
+	DECLE 16191,63
 	;[622] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",622
+	SRCFILE "Songs\SMario2.bas",622
 	DECLE 16191,63
 	;[623] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",623
+	SRCFILE "Songs\SMario2.bas",623
 	DECLE 16191,63
 	;[624] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",624
+	SRCFILE "Songs\SMario2.bas",624
 	DECLE 16191,63
-	;[625] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",625
-	DECLE 6975,36
-	;[626] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",626
-	DECLE 16148,63
+	;[625] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",625
+	DECLE 16191,63
+	;[626] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",626
+	DECLE 16191,63
 	;[627] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",627
+	SRCFILE "Songs\SMario2.bas",627
 	DECLE 16191,63
 	;[628] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",628
+	SRCFILE "Songs\SMario2.bas",628
 	DECLE 16191,63
-	;[629] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",629
-	DECLE 7231,37
-	;[630] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",630
+	;[629] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",629
 	DECLE 16191,63
+	;[630] MUSIC E4,E5,s
+	SRCFILE "Songs\SMario2.bas",630
+	DECLE 10525,63
 	;[631] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",631
+	SRCFILE "Songs\SMario2.bas",631
 	DECLE 16191,63
-	;[632] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",632
+	;[632] MUSIC s,s,E3
+	SRCFILE "Songs\SMario2.bas",632
+	DECLE 16191,17
+	;[633] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",633
 	DECLE 16191,63
-	;[633] MUSIC s,G3,D5#
-	SRCFILE "Songs\SHarrierC64.bas",633
-	DECLE 5183,40
-	;[634] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",634
-	DECLE 16136,63
+	;[634] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",634
+	DECLE 16191,63
 	;[635] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",635
+	SRCFILE "Songs\SMario2.bas",635
 	DECLE 16191,63
-	;[636] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",636
+	;[636] MUSIC F4,F5,s
+	SRCFILE "Songs\SMario2.bas",636
+	DECLE 10782,63
+	;[637] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",637
 	DECLE 16191,63
-	;[637] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",637
-	DECLE 7231,37
-	;[638] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",638
-	DECLE 16191,63
+	;[638] MUSIC D4#,D5#,B3
+	SRCFILE "Songs\SMario2.bas",638
+	DECLE 10268,24
 	;[639] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",639
+	SRCFILE "Songs\SMario2.bas",639
 	DECLE 16191,63
 	;[640] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",640
+	SRCFILE "Songs\SMario2.bas",640
 	DECLE 16191,63
-	;[641] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",641
-	DECLE 6975,36
-	;[642] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",642
-	DECLE 16148,63
+	;[641] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",641
+	DECLE 16191,63
+	;[642] MUSIC E4,E5,s
+	SRCFILE "Songs\SMario2.bas",642
+	DECLE 10525,63
 	;[643] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",643
+	SRCFILE "Songs\SMario2.bas",643
 	DECLE 16191,63
-	;[644] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",644
+	;[644] MUSIC F4,F5,G3#
+	SRCFILE "Songs\SMario2.bas",644
+	DECLE 10782,21
+	;[645] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",645
 	DECLE 16191,63
-	;[645] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",645
-	DECLE 7231,37
 	;[646] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",646
+	SRCFILE "Songs\SMario2.bas",646
 	DECLE 16191,63
 	;[647] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",647
+	SRCFILE "Songs\SMario2.bas",647
 	DECLE 16191,63
-	;[648] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",648
+	;[648] MUSIC D4#,D5#,s
+	SRCFILE "Songs\SMario2.bas",648
+	DECLE 10268,63
+	;[649] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",649
 	DECLE 16191,63
-	;[649] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",649
-	DECLE 6463,32
-	;[650] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",650
-	DECLE 16136,63
+	;[650] MUSIC E4,E5,F3
+	SRCFILE "Songs\SMario2.bas",650
+	DECLE 10525,18
 	;[651] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",651
+	SRCFILE "Songs\SMario2.bas",651
 	DECLE 16191,63
-	;[652] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",652
+	;[652] 
+	SRCFILE "Songs\SMario2.bas",652
+	;[653] MUSIC s,s,F3
+	SRCFILE "Songs\SMario2.bas",653
+	DECLE 16191,18
+	;[654] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",654
 	DECLE 16191,63
-	;[653] 
-	SRCFILE "Songs\SHarrierC64.bas",653
-	;[654] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",654
-	DECLE 7231,37
-	;[655] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",655
-	DECLE 16191,63
+	;[655] MUSIC B4,B5,s
+	SRCFILE "Songs\SMario2.bas",655
+	DECLE 12324,63
 	;[656] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",656
+	SRCFILE "Songs\SMario2.bas",656
 	DECLE 16191,63
-	;[657] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",657
+	;[657] MUSIC s,s,E3
+	SRCFILE "Songs\SMario2.bas",657
+	DECLE 16191,17
+	;[658] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",658
 	DECLE 16191,63
-	;[658] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",658
-	DECLE 6975,36
-	;[659] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",659
-	DECLE 16148,63
+	;[659] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",659
+	DECLE 16191,63
 	;[660] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",660
+	SRCFILE "Songs\SMario2.bas",660
 	DECLE 16191,63
 	;[661] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",661
+	SRCFILE "Songs\SMario2.bas",661
 	DECLE 16191,63
-	;[662] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",662
-	DECLE 7231,37
-	;[663] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",663
+	;[662] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",662
 	DECLE 16191,63
+	;[663] MUSIC G4#,G5#,D3
+	SRCFILE "Songs\SMario2.bas",663
+	DECLE 11553,15
 	;[664] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",664
+	SRCFILE "Songs\SMario2.bas",664
 	DECLE 16191,63
 	;[665] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",665
+	SRCFILE "Songs\SMario2.bas",665
 	DECLE 16191,63
-	;[666] MUSIC s,F3#,D5
-	SRCFILE "Songs\SHarrierC64.bas",666
-	DECLE 4927,39
-	;[667] MUSIC F2#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",667
-	DECLE 16135,63
+	;[666] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",666
+	DECLE 16191,63
+	;[667] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",667
+	DECLE 16191,63
 	;[668] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",668
+	SRCFILE "Songs\SMario2.bas",668
 	DECLE 16191,63
-	;[669] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",669
+	;[669] MUSIC F4,F5,B2
+	SRCFILE "Songs\SMario2.bas",669
+	DECLE 10782,12
+	;[670] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",670
 	DECLE 16191,63
-	;[670] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",670
-	DECLE 6975,34
 	;[671] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",671
+	SRCFILE "Songs\SMario2.bas",671
 	DECLE 16191,63
 	;[672] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",672
+	SRCFILE "Songs\SMario2.bas",672
 	DECLE 16191,63
 	;[673] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",673
+	SRCFILE "Songs\SMario2.bas",673
 	DECLE 16191,63
-	;[674] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",674
-	DECLE 6463,32
-	;[675] MUSIC F3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",675
-	DECLE 16147,63
+	;[674] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",674
+	DECLE 16191,63
+	;[675] MUSIC E4,E5,G2#
+	SRCFILE "Songs\SMario2.bas",675
+	DECLE 10525,9
 	;[676] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",676
+	SRCFILE "Songs\SMario2.bas",676
 	DECLE 16191,63
 	;[677] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",677
+	SRCFILE "Songs\SMario2.bas",677
 	DECLE 16191,63
-	;[678] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",678
-	DECLE 6975,34
+	;[678] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",678
+	DECLE 16191,63
 	;[679] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",679
+	SRCFILE "Songs\SMario2.bas",679
 	DECLE 16191,63
 	;[680] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",680
+	SRCFILE "Songs\SMario2.bas",680
 	DECLE 16191,63
-	;[681] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",681
+	;[681] MUSIC D4,D5,A2
+	SRCFILE "Songs\SMario2.bas",681
+	DECLE 10011,10
+	;[682] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",682
 	DECLE 16191,63
-	;[682] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",682
-	DECLE 5695,31
-	;[683] MUSIC F2#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",683
-	DECLE 16135,63
-	;[684] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",684
+	;[683] MUSIC E4,E5,s
+	SRCFILE "Songs\SMario2.bas",683
+	DECLE 10525,63
+	;[684] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",684
+	DECLE 10011,63
+	;[685] MUSIC C4,C5,s
+	SRCFILE "Songs\SMario2.bas",685
+	DECLE 9497,63
+	;[686] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",686
 	DECLE 16191,63
-	;[685] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",685
-	DECLE 16191,63
-	;[686] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",686
-	DECLE 6975,34
-	;[687] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",687
-	DECLE 16191,63
+	;[687] MUSIC B3,B4,B2
+	SRCFILE "Songs\SMario2.bas",687
+	DECLE 9240,12
 	;[688] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",688
+	SRCFILE "Songs\SMario2.bas",688
 	DECLE 16191,63
 	;[689] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",689
+	SRCFILE "Songs\SMario2.bas",689
 	DECLE 16191,63
-	;[690] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",690
-	DECLE 6463,32
-	;[691] MUSIC F3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",691
-	DECLE 16147,63
+	;[690] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",690
+	DECLE 16191,63
+	;[691] MUSIC C4,C5,s
+	SRCFILE "Songs\SMario2.bas",691
+	DECLE 9497,63
 	;[692] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",692
+	SRCFILE "Songs\SMario2.bas",692
 	DECLE 16191,63
-	;[693] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",693
+	;[693] MUSIC D4,D5,C3
+	SRCFILE "Songs\SMario2.bas",693
+	DECLE 10011,13
+	;[694] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",694
 	DECLE 16191,63
-	;[694] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",694
-	DECLE 6975,34
 	;[695] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",695
+	SRCFILE "Songs\SMario2.bas",695
 	DECLE 16191,63
 	;[696] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",696
+	SRCFILE "Songs\SMario2.bas",696
 	DECLE 16191,63
-	;[697] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",697
+	;[697] MUSIC C4,C5,s
+	SRCFILE "Songs\SMario2.bas",697
+	DECLE 9497,63
+	;[698] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",698
 	DECLE 16191,63
-	;[698] MUSIC s,F3#,D5
-	SRCFILE "Songs\SHarrierC64.bas",698
-	DECLE 4927,39
-	;[699] MUSIC F2#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",699
-	DECLE 16135,63
+	;[699] MUSIC B3,B4,D3
+	SRCFILE "Songs\SMario2.bas",699
+	DECLE 9240,15
 	;[700] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",700
+	SRCFILE "Songs\SMario2.bas",700
 	DECLE 16191,63
 	;[701] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",701
+	SRCFILE "Songs\SMario2.bas",701
 	DECLE 16191,63
-	;[702] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",702
-	DECLE 6975,34
-	;[703] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",703
+	;[702] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",702
 	DECLE 16191,63
+	;[703] MUSIC C4,C5,s
+	SRCFILE "Songs\SMario2.bas",703
+	DECLE 9497,63
 	;[704] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",704
+	SRCFILE "Songs\SMario2.bas",704
 	DECLE 16191,63
-	;[705] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",705
+	;[705] MUSIC s,s,E3
+	SRCFILE "Songs\SMario2.bas",705
+	DECLE 16191,17
+	;[706] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",706
 	DECLE 16191,63
-	;[706] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",706
-	DECLE 6463,32
-	;[707] MUSIC F3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",707
-	DECLE 16147,63
+	;[707] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",707
+	DECLE 16191,63
 	;[708] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",708
+	SRCFILE "Songs\SMario2.bas",708
 	DECLE 16191,63
 	;[709] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",709
+	SRCFILE "Songs\SMario2.bas",709
 	DECLE 16191,63
-	;[710] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",710
-	DECLE 6975,34
-	;[711] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",711
+	;[710] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",710
 	DECLE 16191,63
+	;[711] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",711
+	DECLE 16191,13
 	;[712] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",712
+	SRCFILE "Songs\SMario2.bas",712
 	DECLE 16191,63
 	;[713] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",713
+	SRCFILE "Songs\SMario2.bas",713
 	DECLE 16191,63
-	;[714] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",714
-	DECLE 5695,31
-	;[715] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",715
-	DECLE 16143,63
+	;[714] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",714
+	DECLE 16191,63
+	;[715] MUSIC C4,C5,s
+	SRCFILE "Songs\SMario2.bas",715
+	DECLE 9497,63
 	;[716] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",716
+	SRCFILE "Songs\SMario2.bas",716
 	DECLE 16191,63
-	;[717] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",717
+	;[717] MUSIC B3,B4,B2
+	SRCFILE "Songs\SMario2.bas",717
+	DECLE 9240,12
+	;[718] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",718
 	DECLE 16191,63
-	;[718] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",718
-	DECLE 6975,34
 	;[719] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",719
+	SRCFILE "Songs\SMario2.bas",719
 	DECLE 16191,63
 	;[720] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",720
+	SRCFILE "Songs\SMario2.bas",720
 	DECLE 16191,63
 	;[721] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",721
+	SRCFILE "Songs\SMario2.bas",721
 	DECLE 16191,63
-	;[722] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",722
-	DECLE 6463,32
-	;[723] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",723
-	DECLE 16143,63
+	;[722] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",722
+	DECLE 16191,63
+	;[723] MUSIC C4,C5,A2
+	SRCFILE "Songs\SMario2.bas",723
+	DECLE 9497,10
 	;[724] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",724
+	SRCFILE "Songs\SMario2.bas",724
 	DECLE 16191,63
 	;[725] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",725
+	SRCFILE "Songs\SMario2.bas",725
 	DECLE 16191,63
-	;[726] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",726
-	DECLE 6975,34
+	;[726] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",726
+	DECLE 16191,63
 	;[727] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",727
+	SRCFILE "Songs\SMario2.bas",727
 	DECLE 16191,63
 	;[728] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",728
+	SRCFILE "Songs\SMario2.bas",728
 	DECLE 16191,63
-	;[729] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",729
+	;[729] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",729
+	DECLE 16191,15
+	;[730] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",730
 	DECLE 16191,63
-	;[730] MUSIC s,G3,A4#
-	SRCFILE "Songs\SHarrierC64.bas",730
-	DECLE 5183,35
-	;[731] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",731
-	DECLE 16136,63
+	;[731] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",731
+	DECLE 16191,63
 	;[732] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",732
+	SRCFILE "Songs\SMario2.bas",732
 	DECLE 16191,63
-	;[733] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",733
+	;[733] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",733
+	DECLE 10011,63
+	;[734] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",734
 	DECLE 16191,63
-	;[734] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",734
-	DECLE 6975,32
-	;[735] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",735
-	DECLE 16191,63
+	;[735] MUSIC s,s,E3
+	SRCFILE "Songs\SMario2.bas",735
+	DECLE 16191,17
 	;[736] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",736
+	SRCFILE "Songs\SMario2.bas",736
 	DECLE 16191,63
 	;[737] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",737
+	SRCFILE "Songs\SMario2.bas",737
 	DECLE 16191,63
-	;[738] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",738
-	DECLE 6463,31
-	;[739] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",739
-	DECLE 16148,63
+	;[738] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",738
+	DECLE 16191,63
+	;[739] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",739
+	DECLE 16191,63
 	;[740] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",740
+	SRCFILE "Songs\SMario2.bas",740
 	DECLE 16191,63
-	;[741] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",741
+	;[741] MUSIC C4#,C5#,F3#
+	SRCFILE "Songs\SMario2.bas",741
+	DECLE 9754,19
+	;[742] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",742
 	DECLE 16191,63
-	;[742] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",742
-	DECLE 16191,32
-	;[743] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",743
-	DECLE 6975,63
+	;[743] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",743
+	DECLE 16191,63
 	;[744] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",744
+	SRCFILE "Songs\SMario2.bas",744
 	DECLE 16191,63
 	;[745] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",745
+	SRCFILE "Songs\SMario2.bas",745
 	DECLE 16191,63
-	;[746] MUSIC s,A3#,D4
-	SRCFILE "Songs\SHarrierC64.bas",746
-	DECLE 5951,27
-	;[747] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",747
-	DECLE 16136,63
+	;[746] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",746
+	DECLE 16191,63
+	;[747] MUSIC D4,D5,A3
+	SRCFILE "Songs\SMario2.bas",747
+	DECLE 10011,22
 	;[748] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",748
+	SRCFILE "Songs\SMario2.bas",748
 	DECLE 16191,63
 	;[749] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",749
+	SRCFILE "Songs\SMario2.bas",749
 	DECLE 16191,63
-	;[750] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",750
-	DECLE 6975,32
-	;[751] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",751
+	;[750] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",750
 	DECLE 16191,63
+	;[751] MUSIC A4,A5,s
+	SRCFILE "Songs\SMario2.bas",751
+	DECLE 11810,63
 	;[752] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",752
+	SRCFILE "Songs\SMario2.bas",752
 	DECLE 16191,63
-	;[753] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",753
+	;[753] MUSIC s,s,D3
+	SRCFILE "Songs\SMario2.bas",753
+	DECLE 16191,15
+	;[754] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",754
 	DECLE 16191,63
-	;[754] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",754
-	DECLE 6463,31
-	;[755] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",755
-	DECLE 16148,63
+	;[755] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",755
+	DECLE 16191,63
 	;[756] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",756
+	SRCFILE "Songs\SMario2.bas",756
 	DECLE 16191,63
 	;[757] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",757
+	SRCFILE "Songs\SMario2.bas",757
 	DECLE 16191,63
-	;[758] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",758
-	DECLE 6975,32
-	;[759] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",759
+	;[758] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",758
 	DECLE 16191,63
+	;[759] MUSIC F4#,F5#,A2
+	SRCFILE "Songs\SMario2.bas",759
+	DECLE 11039,10
 	;[760] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",760
+	SRCFILE "Songs\SMario2.bas",760
 	DECLE 16191,63
 	;[761] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",761
+	SRCFILE "Songs\SMario2.bas",761
 	DECLE 16191,63
-	;[762] MUSIC s,G3,A4#
-	SRCFILE "Songs\SHarrierC64.bas",762
-	DECLE 5183,35
-	;[763] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",763
-	DECLE 16136,63
+	;[762] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",762
+	DECLE 16191,63
+	;[763] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",763
+	DECLE 16191,63
 	;[764] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",764
+	SRCFILE "Songs\SMario2.bas",764
 	DECLE 16191,63
-	;[765] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",765
+	;[765] MUSIC G4,G5,D3
+	SRCFILE "Songs\SMario2.bas",765
+	DECLE 11296,15
+	;[766] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",766
 	DECLE 16191,63
-	;[766] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",766
-	DECLE 6975,32
 	;[767] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",767
+	SRCFILE "Songs\SMario2.bas",767
 	DECLE 16191,63
 	;[768] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",768
+	SRCFILE "Songs\SMario2.bas",768
 	DECLE 16191,63
 	;[769] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",769
+	SRCFILE "Songs\SMario2.bas",769
 	DECLE 16191,63
-	;[770] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",770
-	DECLE 6463,31
-	;[771] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",771
-	DECLE 16148,63
+	;[770] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",770
+	DECLE 16191,63
+	;[771] MUSIC A4,A5,F3#
+	SRCFILE "Songs\SMario2.bas",771
+	DECLE 11810,19
 	;[772] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",772
+	SRCFILE "Songs\SMario2.bas",772
 	DECLE 16191,63
 	;[773] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",773
+	SRCFILE "Songs\SMario2.bas",773
 	DECLE 16191,63
-	;[774] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",774
-	DECLE 6975,32
+	;[774] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",774
+	DECLE 16191,63
 	;[775] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",775
+	SRCFILE "Songs\SMario2.bas",775
 	DECLE 16191,63
 	;[776] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",776
+	SRCFILE "Songs\SMario2.bas",776
 	DECLE 16191,63
-	;[777] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",777
+	;[777] MUSIC B4,B5,G3
+	SRCFILE "Songs\SMario2.bas",777
+	DECLE 12324,20
+	;[778] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",778
 	DECLE 16191,63
-	;[778] MUSIC s,A3#,D4
-	SRCFILE "Songs\SHarrierC64.bas",778
-	DECLE 5951,27
-	;[779] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",779
-	DECLE 16136,63
+	;[779] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",779
+	DECLE 16191,63
 	;[780] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",780
+	SRCFILE "Songs\SMario2.bas",780
 	DECLE 16191,63
-	;[781] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",781
+	;[781] 
+	SRCFILE "Songs\SMario2.bas",781
+	;[782] MUSIC A4#,s,s
+	SRCFILE "Songs\SMario2.bas",782
+	DECLE 16163,63
+	;[783] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",783
 	DECLE 16191,63
-	;[782] 
-	SRCFILE "Songs\SHarrierC64.bas",782
-	;[783] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",783
-	DECLE 6975,32
-	;[784] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",784
-	DECLE 16191,63
+	;[784] MUSIC B4,s,F3
+	SRCFILE "Songs\SMario2.bas",784
+	DECLE 16164,18
 	;[785] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",785
+	SRCFILE "Songs\SMario2.bas",785
 	DECLE 16191,63
 	;[786] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",786
+	SRCFILE "Songs\SMario2.bas",786
 	DECLE 16191,63
-	;[787] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",787
-	DECLE 6463,31
-	;[788] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",788
-	DECLE 16148,63
+	;[787] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",787
+	DECLE 16191,63
+	;[788] MUSIC B5,s,s
+	SRCFILE "Songs\SMario2.bas",788
+	DECLE 16176,63
 	;[789] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",789
+	SRCFILE "Songs\SMario2.bas",789
 	DECLE 16191,63
-	;[790] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",790
+	;[790] MUSIC A4,A5,D3
+	SRCFILE "Songs\SMario2.bas",790
+	DECLE 11810,15
+	;[791] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",791
 	DECLE 16191,63
-	;[791] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",791
-	DECLE 6975,32
 	;[792] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",792
+	SRCFILE "Songs\SMario2.bas",792
 	DECLE 16191,63
 	;[793] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",793
+	SRCFILE "Songs\SMario2.bas",793
 	DECLE 16191,63
-	;[794] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",794
+	;[794] MUSIC G4#,s,s
+	SRCFILE "Songs\SMario2.bas",794
+	DECLE 16161,63
+	;[795] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",795
 	DECLE 16191,63
-	;[795] MUSIC s,D3#,C5
-	SRCFILE "Songs\SHarrierC64.bas",795
-	DECLE 4159,37
-	;[796] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",796
-	DECLE 16144,63
+	;[796] MUSIC A4,s,B2
+	SRCFILE "Songs\SMario2.bas",796
+	DECLE 16162,12
 	;[797] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",797
+	SRCFILE "Songs\SMario2.bas",797
 	DECLE 16191,63
 	;[798] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",798
+	SRCFILE "Songs\SMario2.bas",798
 	DECLE 16191,63
-	;[799] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",799
-	DECLE 6463,32
-	;[800] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",800
+	;[799] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",799
 	DECLE 16191,63
+	;[800] MUSIC A5,s,s
+	SRCFILE "Songs\SMario2.bas",800
+	DECLE 16174,63
 	;[801] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",801
+	SRCFILE "Songs\SMario2.bas",801
 	DECLE 16191,63
-	;[802] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",802
+	;[802] MUSIC G4#,G5#,D3
+	SRCFILE "Songs\SMario2.bas",802
+	DECLE 11553,15
+	;[803] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",803
 	DECLE 16191,63
-	;[803] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",803
-	DECLE 5695,31
-	;[804] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",804
-	DECLE 16144,63
+	;[804] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",804
+	DECLE 16191,63
 	;[805] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",805
+	SRCFILE "Songs\SMario2.bas",805
 	DECLE 16191,63
-	;[806] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",806
+	;[806] MUSIC G4,s,s
+	SRCFILE "Songs\SMario2.bas",806
+	DECLE 16160,63
+	;[807] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",807
 	DECLE 16191,63
-	;[807] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",807
-	DECLE 6463,32
-	;[808] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",808
-	DECLE 16191,63
+	;[808] MUSIC G4#,s,B2
+	SRCFILE "Songs\SMario2.bas",808
+	DECLE 16161,12
 	;[809] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",809
+	SRCFILE "Songs\SMario2.bas",809
 	DECLE 16191,63
 	;[810] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",810
+	SRCFILE "Songs\SMario2.bas",810
 	DECLE 16191,63
-	;[811] MUSIC s,G3,D4#
-	SRCFILE "Songs\SHarrierC64.bas",811
-	DECLE 5183,28
-	;[812] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",812
-	DECLE 16144,63
+	;[811] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",811
+	DECLE 16191,63
+	;[812] MUSIC G5#,s,s
+	SRCFILE "Songs\SMario2.bas",812
+	DECLE 16173,63
 	;[813] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",813
+	SRCFILE "Songs\SMario2.bas",813
 	DECLE 16191,63
-	;[814] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",814
+	;[814] MUSIC G4,G5,A2
+	SRCFILE "Songs\SMario2.bas",814
+	DECLE 11296,10
+	;[815] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",815
 	DECLE 16191,63
-	;[815] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",815
-	DECLE 6463,32
 	;[816] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",816
+	SRCFILE "Songs\SMario2.bas",816
 	DECLE 16191,63
 	;[817] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",817
+	SRCFILE "Songs\SMario2.bas",817
 	DECLE 16191,63
-	;[818] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",818
+	;[818] MUSIC D4,D5,s
+	SRCFILE "Songs\SMario2.bas",818
+	DECLE 10011,63
+	;[819] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",819
 	DECLE 16191,63
-	;[819] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",819
-	DECLE 5695,31
-	;[820] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",820
-	DECLE 16144,63
+	;[820] MUSIC B3,B4,G2
+	SRCFILE "Songs\SMario2.bas",820
+	DECLE 9240,8
 	;[821] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",821
+	SRCFILE "Songs\SMario2.bas",821
 	DECLE 16191,63
 	;[822] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",822
+	SRCFILE "Songs\SMario2.bas",822
 	DECLE 16191,63
-	;[823] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",823
-	DECLE 6463,32
-	;[824] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",824
+	;[823] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",823
 	DECLE 16191,63
+	;[824] MUSIC G3,G4,s
+	SRCFILE "Songs\SMario2.bas",824
+	DECLE 8212,63
 	;[825] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",825
+	SRCFILE "Songs\SMario2.bas",825
 	DECLE 16191,63
-	;[826] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",826
+	;[826] MUSIC C5,G5,C3
+	SRCFILE "Songs\SMario2.bas",826
+	DECLE 11301,13
+	;[827] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",827
 	DECLE 16191,63
-	;[827] MUSIC s,D3#,C5
-	SRCFILE "Songs\SHarrierC64.bas",827
-	DECLE 4159,37
-	;[828] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",828
-	DECLE 16144,63
+	;[828] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",828
+	DECLE 16191,63
 	;[829] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",829
+	SRCFILE "Songs\SMario2.bas",829
 	DECLE 16191,63
-	;[830] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",830
+	;[830] MUSIC E4,C5,s
+	SRCFILE "Songs\SMario2.bas",830
+	DECLE 9501,63
+	;[831] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",831
 	DECLE 16191,63
-	;[831] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",831
-	DECLE 6463,32
-	;[832] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",832
-	DECLE 16191,63
+	;[832] MUSIC G4,E5,G3
+	SRCFILE "Songs\SMario2.bas",832
+	DECLE 10528,20
 	;[833] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",833
+	SRCFILE "Songs\SMario2.bas",833
 	DECLE 16191,63
 	;[834] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",834
+	SRCFILE "Songs\SMario2.bas",834
 	DECLE 16191,63
-	;[835] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",835
-	DECLE 5695,31
-	;[836] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",836
-	DECLE 16144,63
+	;[835] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",835
+	DECLE 16191,63
+	;[836] MUSIC C5,G5,s
+	SRCFILE "Songs\SMario2.bas",836
+	DECLE 11301,63
 	;[837] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",837
+	SRCFILE "Songs\SMario2.bas",837
 	DECLE 16191,63
-	;[838] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",838
+	;[838] MUSIC s,s,C3
+	SRCFILE "Songs\SMario2.bas",838
+	DECLE 16191,13
+	;[839] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",839
 	DECLE 16191,63
-	;[839] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",839
-	DECLE 6463,32
 	;[840] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",840
+	SRCFILE "Songs\SMario2.bas",840
 	DECLE 16191,63
 	;[841] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",841
+	SRCFILE "Songs\SMario2.bas",841
 	DECLE 16191,63
-	;[842] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",842
+	;[842] MUSIC E4,C5,s
+	SRCFILE "Songs\SMario2.bas",842
+	DECLE 9501,63
+	;[843] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",843
 	DECLE 16191,63
-	;[843] MUSIC s,G3,D4#
-	SRCFILE "Songs\SHarrierC64.bas",843
-	DECLE 5183,28
-	;[844] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",844
-	DECLE 16144,63
+	;[844] MUSIC G4,E5,G3
+	SRCFILE "Songs\SMario2.bas",844
+	DECLE 10528,20
 	;[845] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",845
+	SRCFILE "Songs\SMario2.bas",845
 	DECLE 16191,63
 	;[846] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",846
+	SRCFILE "Songs\SMario2.bas",846
 	DECLE 16191,63
-	;[847] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",847
-	DECLE 6463,32
-	;[848] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",848
+	;[847] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",847
 	DECLE 16191,63
+	;[848] MUSIC C5,G5,s
+	SRCFILE "Songs\SMario2.bas",848
+	DECLE 11301,63
 	;[849] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",849
+	SRCFILE "Songs\SMario2.bas",849
 	DECLE 16191,63
-	;[850] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",850
+	;[850] MUSIC D4#,B4,B2
+	SRCFILE "Songs\SMario2.bas",850
+	DECLE 9244,12
+	;[851] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",851
 	DECLE 16191,63
-	;[851] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",851
-	DECLE 5695,31
-	;[852] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",852
-	DECLE 16144,63
+	;[852] MUSIC G4,D5#,s
+	SRCFILE "Songs\SMario2.bas",852
+	DECLE 10272,63
 	;[853] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",853
+	SRCFILE "Songs\SMario2.bas",853
 	DECLE 16191,63
-	;[854] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",854
+	;[854] MUSIC B4,G5,s
+	SRCFILE "Songs\SMario2.bas",854
+	DECLE 11300,63
+	;[855] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",855
 	DECLE 16191,63
-	;[855] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",855
-	DECLE 6463,32
-	;[856] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",856
-	DECLE 16191,63
+	;[856] MUSIC D5#,B5,G3
+	SRCFILE "Songs\SMario2.bas",856
+	DECLE 12328,20
 	;[857] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",857
+	SRCFILE "Songs\SMario2.bas",857
 	DECLE 16191,63
 	;[858] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",858
+	SRCFILE "Songs\SMario2.bas",858
 	DECLE 16191,63
-	;[859] MUSIC s,D3,A4#
-	SRCFILE "Songs\SHarrierC64.bas",859
-	DECLE 3903,35
-	;[860] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",860
-	DECLE 16143,63
+	;[859] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",859
+	DECLE 16191,63
+	;[860] MUSIC B4,A5,s
+	SRCFILE "Songs\SMario2.bas",860
+	DECLE 11812,63
 	;[861] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",861
+	SRCFILE "Songs\SMario2.bas",861
 	DECLE 16191,63
-	;[862] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",862
+	;[862] MUSIC s,s,B2
+	SRCFILE "Songs\SMario2.bas",862
+	DECLE 16191,12
+	;[863] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",863
 	DECLE 16191,63
-	;[863] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",863
-	DECLE 5951,32
 	;[864] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",864
+	SRCFILE "Songs\SMario2.bas",864
 	DECLE 16191,63
 	;[865] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",865
+	SRCFILE "Songs\SMario2.bas",865
 	DECLE 16191,63
 	;[866] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",866
+	SRCFILE "Songs\SMario2.bas",866
 	DECLE 16191,63
-	;[867] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",867
-	DECLE 5695,31
-	;[868] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",868
-	DECLE 16143,63
+	;[867] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",867
+	DECLE 16191,63
+	;[868] MUSIC s,s,G3
+	SRCFILE "Songs\SMario2.bas",868
+	DECLE 16191,20
 	;[869] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",869
+	SRCFILE "Songs\SMario2.bas",869
 	DECLE 16191,63
 	;[870] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",870
+	SRCFILE "Songs\SMario2.bas",870
 	DECLE 16191,63
-	;[871] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",871
-	DECLE 5951,32
+	;[871] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",871
+	DECLE 16191,63
 	;[872] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",872
+	SRCFILE "Songs\SMario2.bas",872
 	DECLE 16191,63
 	;[873] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",873
+	SRCFILE "Songs\SMario2.bas",873
 	DECLE 16191,63
-	;[874] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",874
+	;[874] MUSIC A4#,G5,A2#
+	SRCFILE "Songs\SMario2.bas",874
+	DECLE 11299,11
+	;[875] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",875
 	DECLE 16191,63
-	;[875] MUSIC s,G3,D4
-	SRCFILE "Songs\SHarrierC64.bas",875
-	DECLE 5183,27
-	;[876] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",876
-	DECLE 16143,63
+	;[876] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",876
+	DECLE 16191,63
 	;[877] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",877
+	SRCFILE "Songs\SMario2.bas",877
 	DECLE 16191,63
-	;[878] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",878
+	;[878] MUSIC D4,A4#,s
+	SRCFILE "Songs\SMario2.bas",878
+	DECLE 8987,63
+	;[879] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",879
 	DECLE 16191,63
-	;[879] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",879
-	DECLE 5951,32
-	;[880] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",880
-	DECLE 16191,63
+	;[880] MUSIC G4,D5,G3
+	SRCFILE "Songs\SMario2.bas",880
+	DECLE 10016,20
 	;[881] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",881
+	SRCFILE "Songs\SMario2.bas",881
 	DECLE 16191,63
 	;[882] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",882
+	SRCFILE "Songs\SMario2.bas",882
 	DECLE 16191,63
-	;[883] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",883
-	DECLE 5695,31
-	;[884] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",884
-	DECLE 16143,63
+	;[883] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",883
+	DECLE 16191,63
+	;[884] MUSIC A4#,G5,s
+	SRCFILE "Songs\SMario2.bas",884
+	DECLE 11299,63
 	;[885] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",885
+	SRCFILE "Songs\SMario2.bas",885
 	DECLE 16191,63
-	;[886] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",886
+	;[886] MUSIC s,s,A2#
+	SRCFILE "Songs\SMario2.bas",886
+	DECLE 16191,11
+	;[887] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",887
 	DECLE 16191,63
-	;[887] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",887
-	DECLE 5951,32
 	;[888] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",888
+	SRCFILE "Songs\SMario2.bas",888
 	DECLE 16191,63
 	;[889] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",889
+	SRCFILE "Songs\SMario2.bas",889
 	DECLE 16191,63
-	;[890] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",890
+	;[890] MUSIC D4,A4#,s
+	SRCFILE "Songs\SMario2.bas",890
+	DECLE 8987,63
+	;[891] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",891
 	DECLE 16191,63
-	;[891] MUSIC s,D3,A4#
-	SRCFILE "Songs\SHarrierC64.bas",891
-	DECLE 3903,35
-	;[892] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",892
-	DECLE 16143,63
+	;[892] MUSIC G4,D5,G3
+	SRCFILE "Songs\SMario2.bas",892
+	DECLE 10016,20
 	;[893] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",893
+	SRCFILE "Songs\SMario2.bas",893
 	DECLE 16191,63
 	;[894] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",894
+	SRCFILE "Songs\SMario2.bas",894
 	DECLE 16191,63
-	;[895] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",895
-	DECLE 5951,32
-	;[896] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",896
+	;[895] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",895
 	DECLE 16191,63
+	;[896] MUSIC A4#,G5,s
+	SRCFILE "Songs\SMario2.bas",896
+	DECLE 11299,63
 	;[897] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",897
+	SRCFILE "Songs\SMario2.bas",897
 	DECLE 16191,63
-	;[898] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",898
+	;[898] MUSIC E4,C5#,A2
+	SRCFILE "Songs\SMario2.bas",898
+	DECLE 9757,10
+	;[899] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",899
 	DECLE 16191,63
-	;[899] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",899
-	DECLE 5695,31
-	;[900] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",900
-	DECLE 16143,63
+	;[900] MUSIC A4,E5,s
+	SRCFILE "Songs\SMario2.bas",900
+	DECLE 10530,63
 	;[901] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",901
+	SRCFILE "Songs\SMario2.bas",901
 	DECLE 16191,63
-	;[902] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",902
+	;[902] MUSIC C5#,G5,s
+	SRCFILE "Songs\SMario2.bas",902
+	DECLE 11302,63
+	;[903] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",903
 	DECLE 16191,63
-	;[903] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",903
-	DECLE 5951,32
-	;[904] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",904
-	DECLE 16191,63
+	;[904] MUSIC E5,B5,G3
+	SRCFILE "Songs\SMario2.bas",904
+	DECLE 12329,20
 	;[905] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",905
+	SRCFILE "Songs\SMario2.bas",905
 	DECLE 16191,63
 	;[906] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",906
+	SRCFILE "Songs\SMario2.bas",906
 	DECLE 16191,63
-	;[907] MUSIC s,G3,D4
-	SRCFILE "Songs\SHarrierC64.bas",907
-	DECLE 5183,27
-	;[908] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",908
-	DECLE 16143,63
+	;[907] MUSIC s,s,s
+	SRCFILE "Songs\SMario2.bas",907
+	DECLE 16191,63
+	;[908] MUSIC C5#,A5,s
+	SRCFILE "Songs\SMario2.bas",908
+	DECLE 11814,63
 	;[909] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",909
-	DECLE 16191,63
-	;[910] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",910
-	DECLE 16191,63
-	;[911] 
-	SRCFILE "Songs\SHarrierC64.bas",911
-	;[912] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",912
-	DECLE 5951,32
-	;[913] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",913
-	DECLE 16191,63
-	;[914] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",914
-	DECLE 16191,63
-	;[915] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",915
-	DECLE 16191,63
-	;[916] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",916
-	DECLE 5695,31
-	;[917] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",917
-	DECLE 16143,63
-	;[918] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",918
-	DECLE 16191,63
-	;[919] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",919
-	DECLE 16191,63
-	;[920] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",920
-	DECLE 5951,32
-	;[921] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",921
-	DECLE 16191,63
-	;[922] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",922
-	DECLE 16191,63
-	;[923] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",923
-	DECLE 16191,63
-	;[924] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",924
-	DECLE 16191,34
-	;[925] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",925
-	DECLE 3855,63
-	;[926] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",926
-	DECLE 16191,63
-	;[927] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",927
-	DECLE 16191,63
-	;[928] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",928
-	DECLE 5695,31
-	;[929] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",929
-	DECLE 16191,63
-	;[930] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",930
-	DECLE 16191,63
-	;[931] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",931
-	DECLE 16191,63
-	;[932] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",932
-	DECLE 5183,29
-	;[933] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",933
-	DECLE 16143,63
-	;[934] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",934
-	DECLE 16191,63
-	;[935] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",935
-	DECLE 16191,63
-	;[936] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",936
-	DECLE 5695,31
-	;[937] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",937
-	DECLE 16191,63
-	;[938] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",938
-	DECLE 16191,63
-	;[939] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",939
-	DECLE 16191,63
-	;[940] MUSIC s,F3#,D4
-	SRCFILE "Songs\SHarrierC64.bas",940
-	DECLE 4927,27
-	;[941] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",941
-	DECLE 16143,63
-	;[942] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",942
-	DECLE 16191,63
-	;[943] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",943
-	DECLE 16191,63
-	;[944] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",944
-	DECLE 5695,31
-	;[945] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",945
-	DECLE 16191,63
-	;[946] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",946
-	DECLE 16191,63
-	;[947] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",947
-	DECLE 16191,63
-	;[948] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",948
-	DECLE 5183,29
-	;[949] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",949
-	DECLE 16143,63
-	;[950] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",950
-	DECLE 16191,63
-	;[951] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",951
-	DECLE 16191,63
-	;[952] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",952
-	DECLE 5695,31
-	;[953] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",953
-	DECLE 16191,63
-	;[954] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",954
-	DECLE 16191,63
-	;[955] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",955
-	DECLE 16191,63
-	;[956] MUSIC s,D3,A4
-	SRCFILE "Songs\SHarrierC64.bas",956
-	DECLE 3903,34
-	;[957] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",957
-	DECLE 16143,63
-	;[958] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",958
-	DECLE 16191,63
-	;[959] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",959
-	DECLE 16191,63
-	;[960] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",960
-	DECLE 5695,31
-	;[961] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",961
-	DECLE 16191,63
-	;[962] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",962
-	DECLE 16191,63
-	;[963] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",963
-	DECLE 16191,63
-	;[964] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",964
-	DECLE 5183,29
-	;[965] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",965
-	DECLE 16143,63
-	;[966] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",966
-	DECLE 16191,63
-	;[967] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",967
-	DECLE 16191,63
-	;[968] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",968
-	DECLE 5695,31
-	;[969] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",969
-	DECLE 16191,63
-	;[970] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",970
-	DECLE 16191,63
-	;[971] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",971
-	DECLE 16191,63
-	;[972] MUSIC s,F3#,D4
-	SRCFILE "Songs\SHarrierC64.bas",972
-	DECLE 4927,27
-	;[973] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",973
-	DECLE 16143,63
-	;[974] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",974
-	DECLE 16191,63
-	;[975] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",975
-	DECLE 16191,63
-	;[976] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",976
-	DECLE 5695,31
-	;[977] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",977
-	DECLE 16191,63
-	;[978] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",978
-	DECLE 16191,63
-	;[979] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",979
-	DECLE 16191,63
-	;[980] MUSIC s,G3,E4
-	SRCFILE "Songs\SHarrierC64.bas",980
-	DECLE 5183,29
-	;[981] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",981
-	DECLE 16143,63
-	;[982] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",982
-	DECLE 16191,63
-	;[983] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",983
-	DECLE 16191,63
-	;[984] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",984
-	DECLE 5695,31
-	;[985] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",985
-	DECLE 16191,63
-	;[986] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",986
-	DECLE 16191,63
-	;[987] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",987
-	DECLE 16191,63
-	;[988] MUSIC s,G3,G4
-	SRCFILE "Songs\SHarrierC64.bas",988
-	DECLE 5183,32
-	;[989] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",989
-	DECLE 16191,63
-	;[990] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",990
-	DECLE 16191,63
-	;[991] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",991
-	DECLE 16191,63
-	;[992] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",992
-	DECLE 6975,63
-	;[993] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",993
-	DECLE 16191,63
-	;[994] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",994
-	DECLE 16191,63
-	;[995] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",995
-	DECLE 16191,63
-	;[996] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",996
-	DECLE 6463,63
-	;[997] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",997
-	DECLE 16191,63
-	;[998] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",998
-	DECLE 16191,63
-	;[999] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",999
-	DECLE 16191,63
-	;[1000] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1000
-	DECLE 6975,63
-	;[1001] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1001
-	DECLE 16191,63
-	;[1002] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1002
-	DECLE 16191,63
-	;[1003] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1003
-	DECLE 16191,63
-	;[1004] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1004
-	DECLE 5951,63
-	;[1005] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1005
-	DECLE 16191,63
-	;[1006] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1006
-	DECLE 16191,63
-	;[1007] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1007
-	DECLE 16191,63
-	;[1008] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1008
-	DECLE 6975,63
-	;[1009] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1009
-	DECLE 16191,63
-	;[1010] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1010
-	DECLE 16191,63
-	;[1011] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1011
-	DECLE 16191,63
-	;[1012] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1012
-	DECLE 5695,63
-	;[1013] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1013
-	DECLE 16191,63
-	;[1014] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1014
-	DECLE 16191,63
-	;[1015] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1015
-	DECLE 16191,63
-	;[1016] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1016
-	DECLE 6975,63
-	;[1017] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1017
-	DECLE 16191,63
-	;[1018] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1018
-	DECLE 16191,63
-	;[1019] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1019
-	DECLE 16191,63
-	;[1020] MUSIC s,D3,A4
-	SRCFILE "Songs\SHarrierC64.bas",1020
-	DECLE 3903,34
-	;[1021] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1021
-	DECLE 16143,63
-	;[1022] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1022
-	DECLE 16191,63
-	;[1023] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1023
-	DECLE 16191,63
-	;[1024] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1024
-	DECLE 6975,63
-	;[1025] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1025
-	DECLE 16191,63
-	;[1026] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1026
-	DECLE 16191,63
-	;[1027] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1027
-	DECLE 16191,63
-	;[1028] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1028
-	DECLE 6463,63
-	;[1029] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1029
-	DECLE 16191,63
-	;[1030] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1030
-	DECLE 16191,63
-	;[1031] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1031
-	DECLE 16191,63
-	;[1032] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1032
-	DECLE 6975,63
-	;[1033] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1033
-	DECLE 16191,63
-	;[1034] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1034
-	DECLE 16191,63
-	;[1035] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1035
-	DECLE 16191,63
-	;[1036] MUSIC s,A3,F5#
-	SRCFILE "Songs\SHarrierC64.bas",1036
-	DECLE 5695,43
-	;[1037] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1037
-	DECLE 16143,63
-	;[1038] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1038
-	DECLE 16191,63
-	;[1039] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1039
-	DECLE 16191,63
-	;[1040] 
-	SRCFILE "Songs\SHarrierC64.bas",1040
-	;[1041] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1041
-	DECLE 6975,63
-	;[1042] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1042
-	DECLE 16191,63
-	;[1043] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1043
-	DECLE 16191,63
-	;[1044] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1044
-	DECLE 16191,63
-	;[1045] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1045
-	DECLE 6463,63
-	;[1046] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1046
-	DECLE 16191,63
-	;[1047] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1047
-	DECLE 16191,63
-	;[1048] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1048
-	DECLE 16191,63
-	;[1049] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1049
-	DECLE 6975,63
-	;[1050] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1050
-	DECLE 16191,63
-	;[1051] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1051
-	DECLE 16191,63
-	;[1052] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1052
-	DECLE 16191,63
-	;[1053] MUSIC s,G3,D5
-	SRCFILE "Songs\SHarrierC64.bas",1053
-	DECLE 5183,39
-	;[1054] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1054
-	DECLE 16136,63
-	;[1055] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1055
-	DECLE 16191,63
-	;[1056] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1056
-	DECLE 16191,63
-	;[1057] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1057
-	DECLE 6975,35
-	;[1058] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1058
-	DECLE 16191,63
-	;[1059] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1059
-	DECLE 16191,63
-	;[1060] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1060
-	DECLE 16191,63
-	;[1061] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1061
-	DECLE 6463,34
-	;[1062] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1062
-	DECLE 16148,63
-	;[1063] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1063
-	DECLE 16191,63
-	;[1064] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1064
-	DECLE 16191,63
-	;[1065] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1065
-	DECLE 6975,35
-	;[1066] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1066
-	DECLE 16191,63
-	;[1067] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1067
-	DECLE 16191,63
-	;[1068] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1068
-	DECLE 16191,63
-	;[1069] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",1069
-	DECLE 5951,32
-	;[1070] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1070
-	DECLE 16136,63
-	;[1071] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1071
-	DECLE 16191,63
-	;[1072] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1072
-	DECLE 16191,63
-	;[1073] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1073
-	DECLE 6975,35
-	;[1074] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1074
-	DECLE 16191,63
-	;[1075] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1075
-	DECLE 16191,63
-	;[1076] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1076
-	DECLE 16191,63
-	;[1077] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1077
-	DECLE 6463,34
-	;[1078] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1078
-	DECLE 16148,63
-	;[1079] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1079
-	DECLE 16191,63
-	;[1080] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1080
-	DECLE 16191,63
-	;[1081] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1081
-	DECLE 6975,35
-	;[1082] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1082
-	DECLE 16191,63
-	;[1083] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1083
-	DECLE 16191,63
-	;[1084] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1084
-	DECLE 16191,63
-	;[1085] MUSIC s,G3,D5
-	SRCFILE "Songs\SHarrierC64.bas",1085
-	DECLE 5183,39
-	;[1086] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1086
-	DECLE 16136,63
-	;[1087] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1087
-	DECLE 16191,63
-	;[1088] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1088
-	DECLE 16191,63
-	;[1089] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1089
-	DECLE 6975,35
-	;[1090] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1090
-	DECLE 16191,63
-	;[1091] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1091
-	DECLE 16191,63
-	;[1092] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1092
-	DECLE 16191,63
-	;[1093] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1093
-	DECLE 6463,34
-	;[1094] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1094
-	DECLE 16148,63
-	;[1095] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1095
-	DECLE 16191,63
-	;[1096] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1096
-	DECLE 16191,63
-	;[1097] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1097
-	DECLE 6975,35
-	;[1098] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1098
-	DECLE 16191,63
-	;[1099] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1099
-	DECLE 16191,63
-	;[1100] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1100
-	DECLE 16191,63
-	;[1101] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",1101
-	DECLE 5951,32
-	;[1102] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1102
-	DECLE 16136,63
-	;[1103] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1103
-	DECLE 16191,63
-	;[1104] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1104
-	DECLE 16191,63
-	;[1105] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1105
-	DECLE 6975,35
-	;[1106] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1106
-	DECLE 16191,63
-	;[1107] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1107
-	DECLE 16191,63
-	;[1108] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1108
-	DECLE 16191,63
-	;[1109] MUSIC s,C4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1109
-	DECLE 6463,34
-	;[1110] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1110
-	DECLE 16148,63
-	;[1111] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1111
-	DECLE 16191,63
-	;[1112] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1112
-	DECLE 16191,63
-	;[1113] MUSIC s,D4,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1113
-	DECLE 6975,35
-	;[1114] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1114
-	DECLE 16191,63
-	;[1115] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1115
-	DECLE 16191,63
-	;[1116] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1116
-	DECLE 16191,63
-	;[1117] MUSIC s,G3,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1117
-	DECLE 5183,40
-	;[1118] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1118
-	DECLE 16136,63
-	;[1119] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1119
-	DECLE 16191,63
-	;[1120] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1120
-	DECLE 16191,63
-	;[1121] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1121
-	DECLE 7231,37
-	;[1122] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1122
-	DECLE 16191,63
-	;[1123] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1123
-	DECLE 16191,63
-	;[1124] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1124
-	DECLE 16191,63
-	;[1125] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",1125
-	DECLE 6975,36
-	;[1126] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1126
-	DECLE 16148,63
-	;[1127] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1127
-	DECLE 16191,63
-	;[1128] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1128
-	DECLE 16191,63
-	;[1129] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1129
-	DECLE 7231,37
-	;[1130] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1130
-	DECLE 16191,63
-	;[1131] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1131
-	DECLE 16191,63
-	;[1132] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1132
-	DECLE 16191,63
-	;[1133] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1133
-	DECLE 6463,32
-	;[1134] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1134
-	DECLE 16136,63
-	;[1135] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1135
-	DECLE 16191,63
-	;[1136] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1136
-	DECLE 16191,63
-	;[1137] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1137
-	DECLE 7231,37
-	;[1138] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1138
-	DECLE 16191,63
-	;[1139] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1139
-	DECLE 16191,63
-	;[1140] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1140
-	DECLE 16191,63
-	;[1141] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",1141
-	DECLE 6975,36
-	;[1142] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1142
-	DECLE 16148,63
-	;[1143] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1143
-	DECLE 16191,63
-	;[1144] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1144
-	DECLE 16191,63
-	;[1145] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1145
-	DECLE 7231,37
-	;[1146] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1146
-	DECLE 16191,63
-	;[1147] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1147
-	DECLE 16191,63
-	;[1148] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1148
-	DECLE 16191,63
-	;[1149] MUSIC s,G3,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1149
-	DECLE 5183,40
-	;[1150] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1150
-	DECLE 16136,63
-	;[1151] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1151
-	DECLE 16191,63
-	;[1152] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1152
-	DECLE 16191,63
-	;[1153] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1153
-	DECLE 7231,37
-	;[1154] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1154
-	DECLE 16191,63
-	;[1155] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1155
-	DECLE 16191,63
-	;[1156] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1156
-	DECLE 16191,63
-	;[1157] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",1157
-	DECLE 6975,36
-	;[1158] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1158
-	DECLE 16148,63
-	;[1159] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1159
-	DECLE 16191,63
-	;[1160] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1160
-	DECLE 16191,63
-	;[1161] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1161
-	DECLE 7231,37
-	;[1162] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1162
-	DECLE 16191,63
-	;[1163] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1163
-	DECLE 16191,63
-	;[1164] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1164
-	DECLE 16191,63
-	;[1165] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1165
-	DECLE 6463,32
-	;[1166] MUSIC G2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1166
-	DECLE 16136,63
-	;[1167] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1167
-	DECLE 16191,63
-	;[1168] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1168
-	DECLE 16191,63
-	;[1169] 
-	SRCFILE "Songs\SHarrierC64.bas",1169
-	;[1170] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1170
-	DECLE 7231,37
-	;[1171] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1171
-	DECLE 16191,63
-	;[1172] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1172
-	DECLE 16191,63
-	;[1173] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1173
-	DECLE 16191,63
-	;[1174] MUSIC s,D4,B4
-	SRCFILE "Songs\SHarrierC64.bas",1174
-	DECLE 6975,36
-	;[1175] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1175
-	DECLE 16148,63
-	;[1176] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1176
-	DECLE 16191,63
-	;[1177] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1177
-	DECLE 16191,63
-	;[1178] MUSIC s,D4#,C5
-	SRCFILE "Songs\SHarrierC64.bas",1178
-	DECLE 7231,37
-	;[1179] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1179
-	DECLE 16191,63
-	;[1180] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1180
-	DECLE 16191,63
-	;[1181] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1181
-	DECLE 16191,63
-	;[1182] MUSIC s,F3#,D5
-	SRCFILE "Songs\SHarrierC64.bas",1182
-	DECLE 4927,39
-	;[1183] MUSIC F2#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1183
-	DECLE 16135,63
-	;[1184] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1184
-	DECLE 16191,63
-	;[1185] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1185
-	DECLE 16191,63
-	;[1186] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1186
-	DECLE 6975,34
-	;[1187] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1187
-	DECLE 16191,63
-	;[1188] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1188
-	DECLE 16191,63
-	;[1189] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1189
-	DECLE 16191,63
-	;[1190] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1190
-	DECLE 16191,63
-	;[1191] MUSIC F3#,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1191
-	DECLE 6419,32
-	;[1192] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1192
-	DECLE 16191,63
-	;[1193] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1193
-	DECLE 16191,63
-	;[1194] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1194
-	DECLE 6975,34
-	;[1195] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1195
-	DECLE 16191,63
-	;[1196] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1196
-	DECLE 16191,63
-	;[1197] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1197
-	DECLE 16191,63
-	;[1198] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1198
-	DECLE 16191,31
-	;[1199] MUSIC F2#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1199
-	DECLE 5639,63
-	;[1200] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1200
-	DECLE 16191,63
-	;[1201] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1201
-	DECLE 16191,63
-	;[1202] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1202
-	DECLE 16191,34
-	;[1203] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1203
-	DECLE 6975,63
-	;[1204] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1204
-	DECLE 16191,63
-	;[1205] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1205
-	DECLE 16191,63
-	;[1206] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1206
-	DECLE 16191,32
-	;[1207] MUSIC F3#,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1207
-	DECLE 6419,63
-	;[1208] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1208
-	DECLE 16191,63
-	;[1209] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1209
-	DECLE 16191,63
-	;[1210] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1210
-	DECLE 6975,34
-	;[1211] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1211
-	DECLE 16191,63
-	;[1212] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1212
-	DECLE 16191,63
-	;[1213] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1213
-	DECLE 16191,63
-	;[1214] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1214
-	DECLE 16191,39
-	;[1215] MUSIC F2#,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1215
-	DECLE 4871,63
-	;[1216] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1216
-	DECLE 16191,63
-	;[1217] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1217
-	DECLE 16191,63
-	;[1218] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1218
-	DECLE 6975,34
-	;[1219] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1219
-	DECLE 16191,63
-	;[1220] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1220
-	DECLE 16191,63
-	;[1221] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1221
-	DECLE 16191,63
-	;[1222] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1222
-	DECLE 16191,32
-	;[1223] MUSIC F3#,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1223
-	DECLE 6419,63
-	;[1224] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1224
-	DECLE 16191,63
-	;[1225] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1225
-	DECLE 16191,63
-	;[1226] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1226
-	DECLE 6975,34
-	;[1227] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1227
-	DECLE 16191,63
-	;[1228] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1228
-	DECLE 16191,63
-	;[1229] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1229
-	DECLE 16191,63
-	;[1230] MUSIC s,A3,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1230
-	DECLE 5695,31
-	;[1231] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1231
-	DECLE 16143,63
-	;[1232] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1232
-	DECLE 16191,63
-	;[1233] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1233
-	DECLE 16191,63
-	;[1234] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1234
-	DECLE 6975,34
-	;[1235] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1235
-	DECLE 16191,63
-	;[1236] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1236
-	DECLE 16191,63
-	;[1237] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1237
-	DECLE 16191,63
-	;[1238] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1238
-	DECLE 6463,32
-	;[1239] MUSIC D3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1239
-	DECLE 16143,63
-	;[1240] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1240
-	DECLE 16191,63
-	;[1241] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1241
-	DECLE 16191,63
-	;[1242] MUSIC s,D4,A4
-	SRCFILE "Songs\SHarrierC64.bas",1242
-	DECLE 6975,34
-	;[1243] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1243
-	DECLE 16191,63
-	;[1244] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1244
-	DECLE 16191,63
-	;[1245] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1245
-	DECLE 16191,63
-	;[1246] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1246
-	DECLE 16191,35
-	;[1247] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1247
-	DECLE 5128,63
-	;[1248] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1248
-	DECLE 16191,63
-	;[1249] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1249
-	DECLE 16191,63
-	;[1250] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1250
-	DECLE 6975,32
-	;[1251] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1251
-	DECLE 16191,63
-	;[1252] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1252
-	DECLE 16191,63
-	;[1253] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1253
-	DECLE 16191,63
-	;[1254] MUSIC s,C4,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1254
-	DECLE 6463,31
-	;[1255] MUSIC G3,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1255
-	DECLE 16148,63
-	;[1256] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1256
-	DECLE 16191,63
-	;[1257] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1257
-	DECLE 16191,63
-	;[1258] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1258
-	DECLE 6975,32
-	;[1259] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1259
-	DECLE 16191,63
-	;[1260] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1260
-	DECLE 16191,63
-	;[1261] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1261
-	DECLE 16191,63
-	;[1262] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",1262
-	DECLE 16191,27
-	;[1263] MUSIC G2,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1263
-	DECLE 5896,63
-	;[1264] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1264
-	DECLE 16191,63
-	;[1265] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1265
-	DECLE 16191,63
-	;[1266] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1266
-	DECLE 6975,32
-	;[1267] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1267
-	DECLE 16191,63
-	;[1268] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1268
-	DECLE 16191,63
-	;[1269] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1269
-	DECLE 16191,63
-	;[1270] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1270
-	DECLE 16191,31
-	;[1271] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1271
-	DECLE 6420,63
-	;[1272] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1272
-	DECLE 16191,63
-	;[1273] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1273
-	DECLE 16191,63
-	;[1274] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1274
-	DECLE 6975,32
-	;[1275] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1275
-	DECLE 16191,63
-	;[1276] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1276
-	DECLE 16191,63
-	;[1277] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1277
-	DECLE 16191,63
-	;[1278] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1278
-	DECLE 16191,35
-	;[1279] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1279
-	DECLE 5128,63
-	;[1280] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1280
-	DECLE 16191,63
-	;[1281] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1281
-	DECLE 16191,63
-	;[1282] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1282
-	DECLE 6975,32
-	;[1283] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1283
-	DECLE 16191,63
-	;[1284] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1284
-	DECLE 16191,63
-	;[1285] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1285
-	DECLE 16191,63
-	;[1286] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1286
-	DECLE 16191,31
-	;[1287] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1287
-	DECLE 6420,63
-	;[1288] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1288
-	DECLE 16191,63
-	;[1289] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1289
-	DECLE 16191,63
-	;[1290] MUSIC s,D4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1290
-	DECLE 6975,32
-	;[1291] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1291
-	DECLE 16191,63
-	;[1292] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1292
-	DECLE 16191,63
-	;[1293] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1293
-	DECLE 16191,63
-	;[1294] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",1294
-	DECLE 16191,27
-	;[1295] MUSIC G2,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1295
-	DECLE 5896,63
-	;[1296] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1296
-	DECLE 16191,63
-	;[1297] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1297
-	DECLE 16191,63
-	;[1298] 
-	SRCFILE "Songs\SHarrierC64.bas",1298
-	;[1299] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1299
-	DECLE 16191,32
-	;[1300] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1300
-	DECLE 6975,63
-	;[1301] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1301
-	DECLE 16191,63
-	;[1302] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1302
-	DECLE 16191,63
-	;[1303] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1303
-	DECLE 16191,31
-	;[1304] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1304
-	DECLE 6420,63
-	;[1305] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1305
-	DECLE 16191,63
-	;[1306] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1306
-	DECLE 16191,63
-	;[1307] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1307
-	DECLE 16191,32
-	;[1308] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1308
-	DECLE 6975,63
-	;[1309] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1309
-	DECLE 16191,63
-	;[1310] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1310
-	DECLE 16191,63
-	;[1311] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1311
-	DECLE 16191,37
-	;[1312] MUSIC D3#,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1312
-	DECLE 4112,63
-	;[1313] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1313
-	DECLE 16191,63
-	;[1314] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1314
-	DECLE 16191,63
-	;[1315] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1315
-	DECLE 16191,32
-	;[1316] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1316
-	DECLE 6463,63
-	;[1317] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1317
-	DECLE 16191,63
-	;[1318] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1318
-	DECLE 16191,63
-	;[1319] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1319
-	DECLE 16191,31
-	;[1320] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1320
-	DECLE 5648,63
-	;[1321] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1321
-	DECLE 16191,63
-	;[1322] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1322
-	DECLE 16191,63
-	;[1323] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1323
-	DECLE 6463,32
-	;[1324] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1324
-	DECLE 16191,63
-	;[1325] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1325
-	DECLE 16191,63
-	;[1326] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1326
-	DECLE 16191,63
-	;[1327] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",1327
-	DECLE 16191,28
-	;[1328] MUSIC D3#,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1328
-	DECLE 5136,63
-	;[1329] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1329
-	DECLE 16191,63
-	;[1330] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1330
-	DECLE 16191,63
-	;[1331] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1331
-	DECLE 6463,32
-	;[1332] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1332
-	DECLE 16191,63
-	;[1333] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1333
-	DECLE 16191,63
-	;[1334] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1334
-	DECLE 16191,63
-	;[1335] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1335
-	DECLE 16191,31
-	;[1336] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1336
-	DECLE 5648,63
-	;[1337] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1337
-	DECLE 16191,63
-	;[1338] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1338
-	DECLE 16191,63
-	;[1339] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1339
-	DECLE 6463,32
-	;[1340] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1340
-	DECLE 16191,63
-	;[1341] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1341
-	DECLE 16191,63
-	;[1342] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1342
-	DECLE 16191,63
-	;[1343] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1343
-	DECLE 16191,37
-	;[1344] MUSIC D3#,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1344
-	DECLE 4112,63
-	;[1345] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1345
-	DECLE 16191,63
-	;[1346] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1346
-	DECLE 16191,63
-	;[1347] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1347
-	DECLE 6463,32
-	;[1348] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1348
-	DECLE 16191,63
-	;[1349] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1349
-	DECLE 16191,63
-	;[1350] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1350
-	DECLE 16191,63
-	;[1351] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1351
-	DECLE 16191,31
-	;[1352] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1352
-	DECLE 5648,63
-	;[1353] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1353
-	DECLE 16191,63
-	;[1354] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1354
-	DECLE 16191,63
-	;[1355] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1355
-	DECLE 16191,32
-	;[1356] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1356
-	DECLE 6463,63
-	;[1357] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1357
-	DECLE 16191,63
-	;[1358] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1358
-	DECLE 16191,63
-	;[1359] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",1359
-	DECLE 16191,28
-	;[1360] MUSIC D3#,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1360
-	DECLE 5136,63
-	;[1361] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1361
-	DECLE 16191,63
-	;[1362] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1362
-	DECLE 16191,63
-	;[1363] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1363
-	DECLE 16191,32
-	;[1364] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1364
-	DECLE 6463,63
-	;[1365] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1365
-	DECLE 16191,63
-	;[1366] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1366
-	DECLE 16191,63
-	;[1367] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1367
-	DECLE 16191,31
-	;[1368] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1368
-	DECLE 5648,63
-	;[1369] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1369
-	DECLE 16191,63
-	;[1370] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1370
-	DECLE 16191,63
-	;[1371] MUSIC s,C4,G4
-	SRCFILE "Songs\SHarrierC64.bas",1371
-	DECLE 6463,32
-	;[1372] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1372
-	DECLE 16191,63
-	;[1373] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1373
-	DECLE 16191,63
-	;[1374] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1374
-	DECLE 16191,63
-	;[1375] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1375
-	DECLE 16191,35
-	;[1376] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",1376
-	DECLE 3855,63
-	;[1377] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1377
-	DECLE 16191,63
-	;[1378] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1378
-	DECLE 16191,63
-	;[1379] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1379
-	DECLE 16191,32
-	;[1380] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1380
-	DECLE 5951,63
-	;[1381] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1381
-	DECLE 16191,63
-	;[1382] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1382
-	DECLE 16191,63
-	;[1383] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1383
-	DECLE 16191,31
-	;[1384] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1384
-	DECLE 5647,63
-	;[1385] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1385
-	DECLE 16191,63
-	;[1386] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1386
-	DECLE 16191,63
-	;[1387] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1387
-	DECLE 16191,32
-	;[1388] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1388
-	DECLE 5951,63
-	;[1389] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1389
-	DECLE 16191,63
-	;[1390] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1390
-	DECLE 16191,63
-	;[1391] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",1391
-	DECLE 16191,27
-	;[1392] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1392
-	DECLE 5135,63
-	;[1393] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1393
-	DECLE 16191,63
-	;[1394] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1394
-	DECLE 16191,63
-	;[1395] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1395
-	DECLE 16191,32
-	;[1396] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1396
-	DECLE 5951,63
-	;[1397] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1397
-	DECLE 16191,63
-	;[1398] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1398
-	DECLE 16191,63
-	;[1399] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1399
-	DECLE 16191,31
-	;[1400] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1400
-	DECLE 5647,63
-	;[1401] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1401
-	DECLE 16191,63
-	;[1402] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1402
-	DECLE 16191,63
-	;[1403] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1403
-	DECLE 16191,32
-	;[1404] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1404
-	DECLE 5951,63
-	;[1405] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1405
-	DECLE 16191,63
-	;[1406] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1406
-	DECLE 16191,63
-	;[1407] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1407
-	DECLE 16191,35
-	;[1408] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",1408
-	DECLE 3855,63
-	;[1409] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1409
-	DECLE 16191,63
-	;[1410] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1410
-	DECLE 16191,63
-	;[1411] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",1411
-	DECLE 5951,32
-	;[1412] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1412
-	DECLE 16191,63
-	;[1413] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1413
-	DECLE 16191,63
-	;[1414] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1414
-	DECLE 16191,63
-	;[1415] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1415
-	DECLE 16191,31
-	;[1416] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1416
-	DECLE 5647,63
-	;[1417] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1417
-	DECLE 16191,63
-	;[1418] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1418
-	DECLE 16191,63
-	;[1419] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",1419
-	DECLE 5951,32
-	;[1420] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1420
-	DECLE 16191,63
-	;[1421] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1421
-	DECLE 16191,63
-	;[1422] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1422
-	DECLE 16191,63
-	;[1423] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",1423
-	DECLE 16191,27
-	;[1424] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1424
-	DECLE 5135,63
-	;[1425] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1425
-	DECLE 16191,63
-	;[1426] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1426
-	DECLE 16191,63
-	;[1427] 
-	SRCFILE "Songs\SHarrierC64.bas",1427
-	;[1428] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",1428
-	DECLE 5951,32
-	;[1429] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1429
-	DECLE 16191,63
-	;[1430] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1430
-	DECLE 16191,63
-	;[1431] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1431
-	DECLE 16191,63
-	;[1432] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1432
-	DECLE 16191,31
-	;[1433] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1433
-	DECLE 5647,63
-	;[1434] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1434
-	DECLE 16191,63
-	;[1435] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1435
-	DECLE 16191,63
-	;[1436] MUSIC s,A3#,G4
-	SRCFILE "Songs\SHarrierC64.bas",1436
-	DECLE 5951,32
-	;[1437] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1437
-	DECLE 16191,63
-	;[1438] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1438
-	DECLE 16191,63
-	;[1439] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1439
-	DECLE 16191,63
-	;[1440] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1440
-	DECLE 16191,34
-	;[1441] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",1441
-	DECLE 3855,63
-	;[1442] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1442
-	DECLE 16191,63
-	;[1443] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1443
-	DECLE 16191,63
-	;[1444] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1444
-	DECLE 16191,31
-	;[1445] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1445
-	DECLE 5695,63
-	;[1446] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1446
-	DECLE 16191,63
-	;[1447] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1447
-	DECLE 16191,63
-	;[1448] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",1448
-	DECLE 16191,29
-	;[1449] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1449
-	DECLE 5135,63
-	;[1450] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1450
-	DECLE 16191,63
-	;[1451] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1451
-	DECLE 16191,63
-	;[1452] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1452
-	DECLE 16191,31
-	;[1453] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1453
-	DECLE 5695,63
-	;[1454] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1454
-	DECLE 16191,63
-	;[1455] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1455
-	DECLE 16191,63
-	;[1456] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",1456
-	DECLE 16191,27
-	;[1457] MUSIC D3,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1457
-	DECLE 4879,63
-	;[1458] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1458
-	DECLE 16191,63
-	;[1459] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1459
-	DECLE 16191,63
-	;[1460] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1460
-	DECLE 16191,31
-	;[1461] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1461
-	DECLE 5695,63
-	;[1462] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1462
-	DECLE 16191,63
-	;[1463] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1463
-	DECLE 16191,63
-	;[1464] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",1464
-	DECLE 16191,29
-	;[1465] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1465
-	DECLE 5135,63
-	;[1466] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1466
-	DECLE 16191,63
-	;[1467] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1467
-	DECLE 16191,63
-	;[1468] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1468
-	DECLE 16191,31
-	;[1469] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1469
-	DECLE 5695,63
-	;[1470] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1470
-	DECLE 16191,63
-	;[1471] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1471
-	DECLE 16191,63
-	;[1472] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1472
-	DECLE 16191,34
-	;[1473] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",1473
-	DECLE 3855,63
-	;[1474] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1474
-	DECLE 16191,63
-	;[1475] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1475
-	DECLE 16191,63
-	;[1476] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1476
-	DECLE 16191,31
-	;[1477] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1477
-	DECLE 5695,63
-	;[1478] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1478
-	DECLE 16191,63
-	;[1479] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1479
-	DECLE 16191,63
-	;[1480] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",1480
-	DECLE 16191,29
-	;[1481] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1481
-	DECLE 5135,63
-	;[1482] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1482
-	DECLE 16191,63
-	;[1483] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1483
-	DECLE 16191,63
-	;[1484] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1484
-	DECLE 16191,31
-	;[1485] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1485
-	DECLE 5695,63
-	;[1486] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1486
-	DECLE 16191,63
-	;[1487] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1487
-	DECLE 16191,63
-	;[1488] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",1488
-	DECLE 16191,27
-	;[1489] MUSIC D3,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1489
-	DECLE 4879,63
-	;[1490] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1490
-	DECLE 16191,63
-	;[1491] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1491
-	DECLE 16191,63
-	;[1492] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1492
-	DECLE 16191,31
-	;[1493] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1493
-	DECLE 5695,63
-	;[1494] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1494
-	DECLE 16191,63
-	;[1495] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1495
-	DECLE 16191,63
-	;[1496] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",1496
-	DECLE 16191,29
-	;[1497] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1497
-	DECLE 5135,63
-	;[1498] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1498
-	DECLE 16191,63
-	;[1499] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1499
-	DECLE 16191,63
-	;[1500] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1500
-	DECLE 16191,31
-	;[1501] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1501
-	DECLE 5695,63
-	;[1502] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1502
-	DECLE 16191,63
-	;[1503] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1503
-	DECLE 16191,63
-	;[1504] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1504
-	DECLE 16191,32
-	;[1505] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1505
-	DECLE 5183,63
-	;[1506] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1506
-	DECLE 16191,63
-	;[1507] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1507
-	DECLE 16191,63
-	;[1508] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1508
-	DECLE 6975,63
-	;[1509] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1509
-	DECLE 16191,63
-	;[1510] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1510
-	DECLE 16191,63
-	;[1511] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1511
-	DECLE 16191,63
-	;[1512] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1512
-	DECLE 6463,63
-	;[1513] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1513
-	DECLE 16191,63
-	;[1514] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1514
-	DECLE 16191,63
-	;[1515] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1515
-	DECLE 16191,63
-	;[1516] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1516
-	DECLE 6975,63
-	;[1517] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1517
-	DECLE 16191,63
-	;[1518] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1518
-	DECLE 16191,63
-	;[1519] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1519
-	DECLE 16191,63
-	;[1520] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1520
-	DECLE 5951,63
-	;[1521] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1521
-	DECLE 16191,63
-	;[1522] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1522
-	DECLE 16191,63
-	;[1523] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1523
-	DECLE 16191,63
-	;[1524] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1524
-	DECLE 6975,63
-	;[1525] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1525
-	DECLE 16191,63
-	;[1526] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1526
-	DECLE 16191,63
-	;[1527] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1527
-	DECLE 16191,63
-	;[1528] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1528
-	DECLE 5695,63
-	;[1529] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1529
-	DECLE 16191,63
-	;[1530] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1530
-	DECLE 16191,63
-	;[1531] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1531
-	DECLE 16191,63
-	;[1532] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1532
-	DECLE 6975,63
-	;[1533] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1533
-	DECLE 16191,63
-	;[1534] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1534
-	DECLE 16191,63
-	;[1535] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1535
-	DECLE 16191,63
-	;[1536] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1536
-	DECLE 16191,34
-	;[1537] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",1537
-	DECLE 3855,63
-	;[1538] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1538
-	DECLE 16191,63
-	;[1539] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1539
-	DECLE 16191,63
-	;[1540] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1540
-	DECLE 6975,63
-	;[1541] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1541
-	DECLE 16191,63
-	;[1542] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1542
-	DECLE 16191,63
-	;[1543] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1543
-	DECLE 16191,63
-	;[1544] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1544
-	DECLE 6463,63
-	;[1545] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1545
-	DECLE 16191,63
-	;[1546] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1546
-	DECLE 16191,63
-	;[1547] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1547
-	DECLE 16191,63
-	;[1548] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1548
-	DECLE 6975,63
-	;[1549] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1549
-	DECLE 16191,63
-	;[1550] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1550
-	DECLE 16191,63
-	;[1551] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1551
-	DECLE 16191,63
-	;[1552] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",1552
-	DECLE 16191,43
-	;[1553] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1553
-	DECLE 5647,63
-	;[1554] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1554
-	DECLE 16191,63
-	;[1555] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1555
-	DECLE 16191,63
-	;[1556] 
-	SRCFILE "Songs\SHarrierC64.bas",1556
-	;[1557] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1557
-	DECLE 6975,63
-	;[1558] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1558
-	DECLE 16191,63
-	;[1559] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1559
-	DECLE 16191,63
-	;[1560] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1560
-	DECLE 16191,63
-	;[1561] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1561
-	DECLE 6463,63
-	;[1562] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1562
-	DECLE 16191,63
-	;[1563] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1563
-	DECLE 16191,63
-	;[1564] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1564
-	DECLE 16191,63
-	;[1565] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1565
-	DECLE 6975,63
-	;[1566] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1566
-	DECLE 16191,63
-	;[1567] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1567
-	DECLE 16191,63
-	;[1568] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1568
-	DECLE 16191,63
-	;[1569] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1569
-	DECLE 16191,40
-	;[1570] MUSIC C3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1570
-	DECLE 6413,63
-	;[1571] MUSIC s,s,D6#
-	SRCFILE "Songs\SHarrierC64.bas",1571
-	DECLE 16191,52
-	;[1572] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1572
-	DECLE 16191,40
-	;[1573] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1573
-	DECLE 16191,37
-	;[1574] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1574
-	DECLE 8255,63
-	;[1575] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1575
-	DECLE 16191,49
-	;[1576] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1576
-	DECLE 16191,37
-	;[1577] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1577
-	DECLE 16191,36
-	;[1578] MUSIC C3,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1578
-	DECLE 7693,63
-	;[1579] MUSIC s,s,B5
-	SRCFILE "Songs\SHarrierC64.bas",1579
-	DECLE 16191,48
-	;[1580] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1580
-	DECLE 16191,36
-	;[1581] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1581
-	DECLE 16191,37
-	;[1582] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1582
-	DECLE 8255,63
-	;[1583] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1583
-	DECLE 16191,49
-	;[1584] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1584
-	DECLE 16191,37
-	;[1585] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1585
-	DECLE 16191,32
-	;[1586] MUSIC C3,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",1586
-	DECLE 7181,63
-	;[1587] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1587
-	DECLE 16191,44
-	;[1588] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1588
-	DECLE 16191,32
-	;[1589] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1589
-	DECLE 16191,37
-	;[1590] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1590
-	DECLE 8255,63
-	;[1591] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1591
-	DECLE 16191,49
-	;[1592] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1592
-	DECLE 16191,37
-	;[1593] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1593
-	DECLE 16191,36
-	;[1594] MUSIC C3,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1594
-	DECLE 7693,63
-	;[1595] MUSIC s,s,B5
-	SRCFILE "Songs\SHarrierC64.bas",1595
-	DECLE 16191,48
-	;[1596] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1596
-	DECLE 16191,36
-	;[1597] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1597
-	DECLE 16191,37
-	;[1598] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1598
-	DECLE 8255,63
-	;[1599] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1599
-	DECLE 16191,49
-	;[1600] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1600
-	DECLE 16191,37
-	;[1601] MUSIC s,F3,s
-	SRCFILE "Songs\SHarrierC64.bas",1601
-	DECLE 4671,63
-	;[1602] MUSIC F2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1602
-	DECLE 16134,63
-	;[1603] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1603
-	DECLE 16191,49
-	;[1604] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1604
-	DECLE 16191,37
-	;[1605] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1605
-	DECLE 16191,34
-	;[1606] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1606
-	DECLE 6463,63
-	;[1607] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1607
-	DECLE 16191,46
-	;[1608] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1608
-	DECLE 16191,34
-	;[1609] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1609
-	DECLE 16191,32
-	;[1610] MUSIC F3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1610
-	DECLE 5906,63
-	;[1611] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1611
-	DECLE 16191,44
-	;[1612] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1612
-	DECLE 16191,32
-	;[1613] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1613
-	DECLE 16191,34
-	;[1614] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1614
-	DECLE 6463,63
-	;[1615] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1615
-	DECLE 16191,46
-	;[1616] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1616
-	DECLE 16191,34
-	;[1617] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1617
-	DECLE 16191,30
-	;[1618] MUSIC F2,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1618
-	DECLE 5638,63
-	;[1619] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1619
-	DECLE 16191,42
-	;[1620] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1620
-	DECLE 16191,30
-	;[1621] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1621
-	DECLE 16191,34
-	;[1622] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1622
-	DECLE 6463,63
-	;[1623] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1623
-	DECLE 16191,46
-	;[1624] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1624
-	DECLE 16191,34
-	;[1625] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1625
-	DECLE 16191,32
-	;[1626] MUSIC F3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1626
-	DECLE 5906,63
-	;[1627] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1627
-	DECLE 16191,44
-	;[1628] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1628
-	DECLE 16191,32
-	;[1629] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1629
-	DECLE 16191,34
-	;[1630] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1630
-	DECLE 6463,63
-	;[1631] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1631
-	DECLE 16191,46
-	;[1632] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1632
-	DECLE 16191,34
-	;[1633] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1633
-	DECLE 16191,39
-	;[1634] MUSIC A2#,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1634
-	DECLE 5899,63
-	;[1635] MUSIC s,s,D6
-	SRCFILE "Songs\SHarrierC64.bas",1635
-	DECLE 16191,51
-	;[1636] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1636
-	DECLE 16191,39
-	;[1637] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1637
-	DECLE 16191,35
-	;[1638] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1638
-	DECLE 7743,63
-	;[1639] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1639
-	DECLE 16191,47
-	;[1640] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1640
-	DECLE 16191,35
-	;[1641] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1641
-	DECLE 16191,34
-	;[1642] MUSIC A3#,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",1642
-	DECLE 7191,63
-	;[1643] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1643
-	DECLE 16191,46
-	;[1644] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1644
-	DECLE 16191,34
-	;[1645] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1645
-	DECLE 16191,35
-	;[1646] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1646
-	DECLE 7743,63
-	;[1647] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1647
-	DECLE 16191,47
-	;[1648] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1648
-	DECLE 16191,35
-	;[1649] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1649
-	DECLE 16191,30
-	;[1650] MUSIC A2#,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1650
-	DECLE 6923,63
-	;[1651] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1651
-	DECLE 16191,42
-	;[1652] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1652
-	DECLE 16191,30
-	;[1653] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1653
-	DECLE 16191,35
-	;[1654] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1654
-	DECLE 7743,63
-	;[1655] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1655
-	DECLE 16191,47
-	;[1656] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1656
-	DECLE 16191,35
-	;[1657] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1657
-	DECLE 16191,34
-	;[1658] MUSIC A3#,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",1658
-	DECLE 7191,63
-	;[1659] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1659
-	DECLE 16191,46
-	;[1660] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1660
-	DECLE 16191,34
-	;[1661] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1661
-	DECLE 16191,35
-	;[1662] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1662
-	DECLE 7743,63
-	;[1663] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1663
-	DECLE 16191,47
-	;[1664] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1664
-	DECLE 16191,35
-	;[1665] MUSIC s,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1665
-	DECLE 4159,63
-	;[1666] MUSIC D3#,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1666
-	DECLE 16144,63
-	;[1667] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1667
-	DECLE 16191,47
-	;[1668] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1668
-	DECLE 16191,35
-	;[1669] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1669
-	DECLE 16191,32
-	;[1670] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1670
-	DECLE 5951,63
-	;[1671] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1671
-	DECLE 16191,44
-	;[1672] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1672
-	DECLE 16191,32
-	;[1673] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1673
-	DECLE 16191,30
-	;[1674] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1674
-	DECLE 5648,63
-	;[1675] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1675
-	DECLE 16191,42
-	;[1676] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1676
-	DECLE 16191,30
-	;[1677] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1677
-	DECLE 16191,32
-	;[1678] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1678
-	DECLE 5951,63
-	;[1679] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1679
-	DECLE 16191,44
-	;[1680] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1680
-	DECLE 16191,32
-	;[1681] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",1681
-	DECLE 16191,28
-	;[1682] MUSIC D3#,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1682
-	DECLE 5136,63
-	;[1683] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1683
-	DECLE 16191,40
-	;[1684] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",1684
-	DECLE 16191,28
-	;[1685] 
-	SRCFILE "Songs\SHarrierC64.bas",1685
-	;[1686] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1686
-	DECLE 16191,32
-	;[1687] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1687
-	DECLE 5951,63
-	;[1688] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1688
-	DECLE 16191,44
-	;[1689] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1689
-	DECLE 16191,32
-	;[1690] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1690
-	DECLE 16191,30
-	;[1691] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1691
-	DECLE 5648,63
-	;[1692] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1692
-	DECLE 16191,42
-	;[1693] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1693
-	DECLE 16191,30
-	;[1694] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1694
-	DECLE 16191,32
-	;[1695] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1695
-	DECLE 5951,63
-	;[1696] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1696
-	DECLE 16191,44
-	;[1697] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1697
-	DECLE 16191,32
-	;[1698] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1698
-	DECLE 16191,37
-	;[1699] MUSIC C3,C3,s
-	SRCFILE "Songs\SHarrierC64.bas",1699
-	DECLE 3341,63
-	;[1700] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1700
-	DECLE 16191,49
-	;[1701] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1701
-	DECLE 16191,37
-	;[1702] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1702
-	DECLE 16191,34
-	;[1703] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1703
-	DECLE 5183,63
-	;[1704] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1704
-	DECLE 16191,46
-	;[1705] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1705
-	DECLE 4927,34
-	;[1706] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1706
-	DECLE 16191,32
-	;[1707] MUSIC C3,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1707
-	DECLE 4109,63
-	;[1708] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1708
-	DECLE 16191,44
-	;[1709] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1709
-	DECLE 16191,32
-	;[1710] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1710
-	DECLE 16191,34
-	;[1711] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1711
-	DECLE 5183,63
-	;[1712] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1712
-	DECLE 16191,46
-	;[1713] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1713
-	DECLE 4927,34
-	;[1714] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1714
-	DECLE 16191,31
-	;[1715] MUSIC C3,C3,s
-	SRCFILE "Songs\SHarrierC64.bas",1715
-	DECLE 3341,63
-	;[1716] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",1716
-	DECLE 16191,43
-	;[1717] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1717
-	DECLE 16191,31
-	;[1718] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1718
-	DECLE 16191,34
-	;[1719] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1719
-	DECLE 5183,63
-	;[1720] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1720
-	DECLE 16191,46
-	;[1721] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1721
-	DECLE 4927,34
-	;[1722] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1722
-	DECLE 16191,32
-	;[1723] MUSIC C3,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1723
-	DECLE 4109,63
-	;[1724] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1724
-	DECLE 16191,44
-	;[1725] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1725
-	DECLE 16191,32
-	;[1726] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1726
-	DECLE 16191,34
-	;[1727] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1727
-	DECLE 5183,63
-	;[1728] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1728
-	DECLE 16191,46
-	;[1729] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1729
-	DECLE 4927,34
-	;[1730] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1730
-	DECLE 16191,37
-	;[1731] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",1731
-	DECLE 3855,63
-	;[1732] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1732
-	DECLE 16191,49
-	;[1733] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1733
-	DECLE 16191,37
-	;[1734] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1734
-	DECLE 16191,34
-	;[1735] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1735
-	DECLE 6463,63
-	;[1736] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1736
-	DECLE 16191,46
-	;[1737] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1737
-	DECLE 16191,34
-	;[1738] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1738
-	DECLE 16191,32
-	;[1739] MUSIC D3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1739
-	DECLE 5903,63
-	;[1740] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1740
-	DECLE 16191,44
-	;[1741] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1741
-	DECLE 16191,32
-	;[1742] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1742
-	DECLE 16191,34
-	;[1743] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1743
-	DECLE 6463,63
-	;[1744] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1744
-	DECLE 16191,46
-	;[1745] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1745
-	DECLE 16191,34
-	;[1746] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1746
-	DECLE 16191,31
-	;[1747] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1747
-	DECLE 5647,63
-	;[1748] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",1748
-	DECLE 16191,43
-	;[1749] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1749
-	DECLE 16191,31
-	;[1750] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1750
-	DECLE 16191,34
-	;[1751] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1751
-	DECLE 6463,63
-	;[1752] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1752
-	DECLE 16191,46
-	;[1753] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1753
-	DECLE 16191,34
-	;[1754] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1754
-	DECLE 16191,32
-	;[1755] MUSIC D3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1755
-	DECLE 5903,63
-	;[1756] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1756
-	DECLE 16191,44
-	;[1757] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1757
-	DECLE 16191,32
-	;[1758] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1758
-	DECLE 16191,34
-	;[1759] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1759
-	DECLE 6463,63
-	;[1760] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1760
-	DECLE 16191,46
-	;[1761] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1761
-	DECLE 16191,34
-	;[1762] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1762
-	DECLE 16191,35
-	;[1763] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1763
-	DECLE 5128,63
-	;[1764] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1764
-	DECLE 16191,47
-	;[1765] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1765
-	DECLE 16191,35
-	;[1766] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1766
-	DECLE 16191,47
-	;[1767] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1767
-	DECLE 6975,63
-	;[1768] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1768
-	DECLE 16191,35
-	;[1769] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1769
-	DECLE 16191,47
-	;[1770] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1770
-	DECLE 16191,35
-	;[1771] MUSIC G3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1771
-	DECLE 5908,63
-	;[1772] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1772
-	DECLE 16191,47
-	;[1773] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1773
-	DECLE 16191,35
-	;[1774] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1774
-	DECLE 16191,47
-	;[1775] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1775
-	DECLE 6975,63
-	;[1776] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1776
-	DECLE 16191,35
-	;[1777] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1777
-	DECLE 16191,47
-	;[1778] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1778
-	DECLE 16191,35
-	;[1779] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1779
-	DECLE 5128,63
-	;[1780] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1780
-	DECLE 16191,47
-	;[1781] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1781
-	DECLE 16191,35
-	;[1782] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1782
-	DECLE 16191,47
-	;[1783] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1783
-	DECLE 6975,63
-	;[1784] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1784
-	DECLE 16191,35
-	;[1785] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1785
-	DECLE 16191,47
-	;[1786] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1786
-	DECLE 16191,35
-	;[1787] MUSIC G3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1787
-	DECLE 5908,63
-	;[1788] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1788
-	DECLE 16191,47
-	;[1789] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1789
-	DECLE 16191,35
-	;[1790] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1790
-	DECLE 16191,47
-	;[1791] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1791
-	DECLE 6975,63
-	;[1792] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1792
-	DECLE 16191,35
-	;[1793] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1793
-	DECLE 16191,47
-	;[1794] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1794
-	DECLE 16191,35
-	;[1795] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1795
-	DECLE 5183,63
-	;[1796] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1796
-	DECLE 16191,47
-	;[1797] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1797
-	DECLE 16191,35
-	;[1798] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1798
-	DECLE 16191,47
-	;[1799] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1799
-	DECLE 6975,63
-	;[1800] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1800
-	DECLE 16191,35
-	;[1801] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1801
-	DECLE 16191,47
-	;[1802] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1802
-	DECLE 16191,37
-	;[1803] MUSIC A3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1803
-	DECLE 5654,63
-	;[1804] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1804
-	DECLE 16191,49
-	;[1805] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1805
-	DECLE 16191,37
-	;[1806] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1806
-	DECLE 16191,49
-	;[1807] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1807
-	DECLE 6975,63
-	;[1808] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1808
-	DECLE 16191,37
-	;[1809] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1809
-	DECLE 16191,49
-	;[1810] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1810
-	DECLE 16191,39
-	;[1811] MUSIC A3#,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1811
-	DECLE 5911,63
-	;[1812] MUSIC s,s,D6
-	SRCFILE "Songs\SHarrierC64.bas",1812
-	DECLE 16191,51
-	;[1813] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1813
-	DECLE 16191,39
-	;[1814] 
-	SRCFILE "Songs\SHarrierC64.bas",1814
-	;[1815] MUSIC s,s,D6
-	SRCFILE "Songs\SHarrierC64.bas",1815
-	DECLE 16191,51
-	;[1816] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1816
-	DECLE 6975,63
-	;[1817] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1817
-	DECLE 16191,39
-	;[1818] MUSIC s,s,D6
-	SRCFILE "Songs\SHarrierC64.bas",1818
-	DECLE 16191,51
-	;[1819] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1819
-	DECLE 16191,35
-	;[1820] MUSIC G3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1820
-	DECLE 5140,63
-	;[1821] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1821
-	DECLE 16191,47
-	;[1822] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1822
-	DECLE 16191,35
-	;[1823] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1823
-	DECLE 16191,47
-	;[1824] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1824
-	DECLE 6975,63
-	;[1825] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1825
-	DECLE 16191,35
-	;[1826] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1826
-	DECLE 16191,47
-	;[1827] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1827
-	DECLE 16191,40
-	;[1828] MUSIC C3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1828
-	DECLE 6413,63
-	;[1829] MUSIC s,s,D6#
-	SRCFILE "Songs\SHarrierC64.bas",1829
-	DECLE 16191,52
-	;[1830] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1830
-	DECLE 16191,40
-	;[1831] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1831
-	DECLE 16191,37
-	;[1832] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1832
-	DECLE 8255,63
-	;[1833] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1833
-	DECLE 16191,49
-	;[1834] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1834
-	DECLE 16191,37
-	;[1835] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1835
-	DECLE 16191,36
-	;[1836] MUSIC C3,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1836
-	DECLE 7693,63
-	;[1837] MUSIC s,s,B5
-	SRCFILE "Songs\SHarrierC64.bas",1837
-	DECLE 16191,48
-	;[1838] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1838
-	DECLE 16191,36
-	;[1839] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1839
-	DECLE 16191,37
-	;[1840] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1840
-	DECLE 8255,63
-	;[1841] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1841
-	DECLE 16191,49
-	;[1842] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1842
-	DECLE 16191,37
-	;[1843] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1843
-	DECLE 16191,32
-	;[1844] MUSIC C3,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",1844
-	DECLE 7181,63
-	;[1845] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1845
-	DECLE 16191,44
-	;[1846] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1846
-	DECLE 16191,32
-	;[1847] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1847
-	DECLE 16191,37
-	;[1848] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1848
-	DECLE 8255,63
-	;[1849] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1849
-	DECLE 16191,49
-	;[1850] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1850
-	DECLE 16191,37
-	;[1851] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1851
-	DECLE 16191,36
-	;[1852] MUSIC C3,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1852
-	DECLE 7693,63
-	;[1853] MUSIC s,s,B5
-	SRCFILE "Songs\SHarrierC64.bas",1853
-	DECLE 16191,48
-	;[1854] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",1854
-	DECLE 16191,36
-	;[1855] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1855
-	DECLE 16191,37
-	;[1856] MUSIC s,G4,s
-	SRCFILE "Songs\SHarrierC64.bas",1856
-	DECLE 8255,63
-	;[1857] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1857
-	DECLE 16191,49
-	;[1858] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1858
-	DECLE 16191,37
-	;[1859] MUSIC s,F3,s
-	SRCFILE "Songs\SHarrierC64.bas",1859
-	DECLE 4671,63
-	;[1860] MUSIC F2,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1860
-	DECLE 16134,63
-	;[1861] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1861
-	DECLE 16191,49
-	;[1862] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1862
-	DECLE 16191,37
-	;[1863] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1863
-	DECLE 16191,34
-	;[1864] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1864
-	DECLE 6463,63
-	;[1865] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1865
-	DECLE 16191,46
-	;[1866] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1866
-	DECLE 16191,34
-	;[1867] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1867
-	DECLE 16191,32
-	;[1868] MUSIC F3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1868
-	DECLE 5906,63
-	;[1869] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1869
-	DECLE 16191,44
-	;[1870] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1870
-	DECLE 16191,32
-	;[1871] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1871
-	DECLE 16191,34
-	;[1872] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1872
-	DECLE 6463,63
-	;[1873] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1873
-	DECLE 16191,46
-	;[1874] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1874
-	DECLE 16191,34
-	;[1875] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1875
-	DECLE 16191,30
-	;[1876] MUSIC F2,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1876
-	DECLE 5638,63
-	;[1877] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1877
-	DECLE 16191,42
-	;[1878] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1878
-	DECLE 16191,30
-	;[1879] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1879
-	DECLE 16191,34
-	;[1880] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1880
-	DECLE 6463,63
-	;[1881] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1881
-	DECLE 16191,46
-	;[1882] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1882
-	DECLE 16191,34
-	;[1883] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1883
-	DECLE 16191,32
-	;[1884] MUSIC F3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1884
-	DECLE 5906,63
-	;[1885] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1885
-	DECLE 16191,44
-	;[1886] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1886
-	DECLE 16191,32
-	;[1887] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1887
-	DECLE 16191,34
-	;[1888] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1888
-	DECLE 6463,63
-	;[1889] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1889
-	DECLE 16191,46
-	;[1890] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1890
-	DECLE 16191,34
-	;[1891] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1891
-	DECLE 16191,39
-	;[1892] MUSIC A2#,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1892
-	DECLE 5899,63
-	;[1893] MUSIC s,s,D6
-	SRCFILE "Songs\SHarrierC64.bas",1893
-	DECLE 16191,51
-	;[1894] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",1894
-	DECLE 16191,39
-	;[1895] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1895
-	DECLE 16191,35
-	;[1896] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1896
-	DECLE 7743,63
-	;[1897] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1897
-	DECLE 16191,47
-	;[1898] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1898
-	DECLE 16191,35
-	;[1899] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1899
-	DECLE 16191,34
-	;[1900] MUSIC A3#,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",1900
-	DECLE 7191,63
-	;[1901] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1901
-	DECLE 16191,46
-	;[1902] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1902
-	DECLE 16191,34
-	;[1903] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1903
-	DECLE 16191,35
-	;[1904] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1904
-	DECLE 7743,63
-	;[1905] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1905
-	DECLE 16191,47
-	;[1906] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1906
-	DECLE 16191,35
-	;[1907] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1907
-	DECLE 16191,30
-	;[1908] MUSIC A2#,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",1908
-	DECLE 6923,63
-	;[1909] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1909
-	DECLE 16191,42
-	;[1910] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1910
-	DECLE 16191,30
-	;[1911] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1911
-	DECLE 16191,35
-	;[1912] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1912
-	DECLE 7743,63
-	;[1913] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1913
-	DECLE 16191,47
-	;[1914] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1914
-	DECLE 16191,35
-	;[1915] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1915
-	DECLE 16191,34
-	;[1916] MUSIC A3#,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",1916
-	DECLE 7191,63
-	;[1917] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1917
-	DECLE 16191,46
-	;[1918] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1918
-	DECLE 16191,34
-	;[1919] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1919
-	DECLE 16191,35
-	;[1920] MUSIC s,F4,s
-	SRCFILE "Songs\SHarrierC64.bas",1920
-	DECLE 7743,63
-	;[1921] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1921
-	DECLE 16191,47
-	;[1922] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1922
-	DECLE 16191,35
-	;[1923] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",1923
-	DECLE 16191,63
-	;[1924] MUSIC D3#,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1924
-	DECLE 4112,63
-	;[1925] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",1925
-	DECLE 16191,47
-	;[1926] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",1926
-	DECLE 16191,35
-	;[1927] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1927
-	DECLE 16191,32
-	;[1928] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1928
-	DECLE 5951,63
-	;[1929] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1929
-	DECLE 16191,44
-	;[1930] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1930
-	DECLE 16191,32
-	;[1931] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1931
-	DECLE 16191,30
-	;[1932] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1932
-	DECLE 5648,63
-	;[1933] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1933
-	DECLE 16191,42
-	;[1934] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1934
-	DECLE 16191,30
-	;[1935] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1935
-	DECLE 16191,32
-	;[1936] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1936
-	DECLE 5951,63
-	;[1937] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1937
-	DECLE 16191,44
-	;[1938] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1938
-	DECLE 16191,32
-	;[1939] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",1939
-	DECLE 16191,28
-	;[1940] MUSIC D3#,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1940
-	DECLE 5136,63
-	;[1941] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",1941
-	DECLE 16191,40
-	;[1942] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",1942
-	DECLE 16191,28
-	;[1943] 
-	SRCFILE "Songs\SHarrierC64.bas",1943
-	;[1944] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1944
-	DECLE 16191,32
-	;[1945] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1945
-	DECLE 5951,63
-	;[1946] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1946
-	DECLE 16191,44
-	;[1947] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1947
-	DECLE 16191,32
-	;[1948] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1948
-	DECLE 16191,30
-	;[1949] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",1949
-	DECLE 5648,63
-	;[1950] MUSIC s,s,F5
-	SRCFILE "Songs\SHarrierC64.bas",1950
-	DECLE 16191,42
-	;[1951] MUSIC s,s,F4
-	SRCFILE "Songs\SHarrierC64.bas",1951
-	DECLE 16191,30
-	;[1952] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1952
-	DECLE 16191,32
-	;[1953] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1953
-	DECLE 5951,63
-	;[1954] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1954
-	DECLE 16191,44
-	;[1955] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1955
-	DECLE 16191,32
-	;[1956] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1956
-	DECLE 16191,37
-	;[1957] MUSIC C3,C3,s
-	SRCFILE "Songs\SHarrierC64.bas",1957
-	DECLE 3341,63
-	;[1958] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1958
-	DECLE 16191,49
-	;[1959] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1959
-	DECLE 16191,37
-	;[1960] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1960
-	DECLE 16191,34
-	;[1961] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1961
-	DECLE 5183,63
-	;[1962] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1962
-	DECLE 16191,46
-	;[1963] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1963
-	DECLE 4927,34
-	;[1964] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1964
-	DECLE 16191,32
-	;[1965] MUSIC C3,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1965
-	DECLE 4109,63
-	;[1966] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1966
-	DECLE 16191,44
-	;[1967] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1967
-	DECLE 16191,32
-	;[1968] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1968
-	DECLE 16191,34
-	;[1969] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1969
-	DECLE 5183,63
-	;[1970] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1970
-	DECLE 16191,46
-	;[1971] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1971
-	DECLE 4927,34
-	;[1972] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1972
-	DECLE 16191,31
-	;[1973] MUSIC C3,C3,s
-	SRCFILE "Songs\SHarrierC64.bas",1973
-	DECLE 3341,63
-	;[1974] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",1974
-	DECLE 16191,43
-	;[1975] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",1975
-	DECLE 16191,31
-	;[1976] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1976
-	DECLE 16191,34
-	;[1977] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1977
-	DECLE 5183,63
-	;[1978] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1978
-	DECLE 16191,46
-	;[1979] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1979
-	DECLE 4927,34
-	;[1980] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1980
-	DECLE 16191,32
-	;[1981] MUSIC C3,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1981
-	DECLE 4109,63
-	;[1982] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1982
-	DECLE 16191,44
-	;[1983] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1983
-	DECLE 16191,32
-	;[1984] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1984
-	DECLE 16191,34
-	;[1985] MUSIC s,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",1985
-	DECLE 5183,63
-	;[1986] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1986
-	DECLE 16191,46
-	;[1987] MUSIC s,F3#,A4
-	SRCFILE "Songs\SHarrierC64.bas",1987
-	DECLE 4927,34
-	;[1988] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1988
-	DECLE 16191,37
-	;[1989] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",1989
-	DECLE 3855,63
-	;[1990] MUSIC s,s,C6
-	SRCFILE "Songs\SHarrierC64.bas",1990
-	DECLE 16191,49
-	;[1991] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",1991
-	DECLE 16191,37
-	;[1992] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1992
-	DECLE 16191,34
-	;[1993] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",1993
-	DECLE 6463,63
-	;[1994] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",1994
-	DECLE 16191,46
-	;[1995] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",1995
-	DECLE 16191,34
-	;[1996] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1996
-	DECLE 16191,32
-	;[1997] MUSIC D3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",1997
-	DECLE 5903,63
-	;[1998] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",1998
-	DECLE 16191,44
-	;[1999] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",1999
-	DECLE 16191,32
-	;[2000] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2000
-	DECLE 16191,34
-	;[2001] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2001
-	DECLE 6463,63
-	;[2002] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",2002
-	DECLE 16191,46
-	;[2003] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2003
-	DECLE 16191,34
-	;[2004] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2004
-	DECLE 16191,31
-	;[2005] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2005
-	DECLE 5647,63
-	;[2006] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",2006
-	DECLE 16191,43
-	;[2007] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2007
-	DECLE 16191,31
-	;[2008] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2008
-	DECLE 16191,34
-	;[2009] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2009
-	DECLE 6463,63
-	;[2010] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",2010
-	DECLE 16191,46
-	;[2011] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2011
-	DECLE 16191,34
-	;[2012] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2012
-	DECLE 16191,32
-	;[2013] MUSIC D3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2013
-	DECLE 5903,63
-	;[2014] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2014
-	DECLE 16191,44
-	;[2015] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2015
-	DECLE 16191,32
-	;[2016] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2016
-	DECLE 16191,34
-	;[2017] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2017
-	DECLE 6463,63
-	;[2018] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",2018
-	DECLE 16191,46
-	;[2019] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2019
-	DECLE 16191,34
-	;[2020] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2020
-	DECLE 16191,35
-	;[2021] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",2021
-	DECLE 3855,63
-	;[2022] MUSIC s,s,A5#
-	SRCFILE "Songs\SHarrierC64.bas",2022
-	DECLE 16191,47
-	;[2023] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2023
-	DECLE 16191,35
-	;[2024] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2024
-	DECLE 16191,32
-	;[2025] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2025
-	DECLE 5951,63
-	;[2026] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2026
-	DECLE 16191,44
-	;[2027] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2027
-	DECLE 16191,32
-	;[2028] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2028
-	DECLE 16191,31
-	;[2029] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2029
-	DECLE 5647,63
-	;[2030] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",2030
-	DECLE 16191,43
-	;[2031] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2031
-	DECLE 16191,31
-	;[2032] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2032
-	DECLE 16191,32
-	;[2033] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2033
-	DECLE 5951,63
-	;[2034] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2034
-	DECLE 16191,44
-	;[2035] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2035
-	DECLE 16191,32
-	;[2036] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2036
-	DECLE 16191,27
-	;[2037] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2037
-	DECLE 5135,63
-	;[2038] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",2038
-	DECLE 16191,39
-	;[2039] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2039
-	DECLE 16191,27
-	;[2040] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2040
-	DECLE 16191,32
-	;[2041] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2041
-	DECLE 5951,63
-	;[2042] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2042
-	DECLE 16191,44
-	;[2043] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2043
-	DECLE 16191,32
-	;[2044] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2044
-	DECLE 16191,31
-	;[2045] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2045
-	DECLE 5647,63
-	;[2046] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",2046
-	DECLE 16191,43
-	;[2047] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2047
-	DECLE 16191,31
-	;[2048] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2048
-	DECLE 16191,32
-	;[2049] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2049
-	DECLE 5951,63
-	;[2050] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2050
-	DECLE 16191,44
-	;[2051] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2051
-	DECLE 16191,32
-	;[2052] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2052
-	DECLE 16191,34
-	;[2053] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",2053
-	DECLE 3855,63
-	;[2054] MUSIC s,s,A5
-	SRCFILE "Songs\SHarrierC64.bas",2054
-	DECLE 16191,46
-	;[2055] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2055
-	DECLE 16191,34
-	;[2056] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2056
-	DECLE 16191,31
-	;[2057] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2057
-	DECLE 5695,63
-	;[2058] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",2058
-	DECLE 16191,43
-	;[2059] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2059
-	DECLE 16191,31
-	;[2060] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2060
-	DECLE 16191,29
-	;[2061] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2061
-	DECLE 5135,63
-	;[2062] MUSIC s,s,E5
-	SRCFILE "Songs\SHarrierC64.bas",2062
-	DECLE 16191,41
-	;[2063] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2063
-	DECLE 16191,29
-	;[2064] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2064
-	DECLE 16191,31
-	;[2065] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2065
-	DECLE 5695,63
-	;[2066] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",2066
-	DECLE 16191,43
-	;[2067] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2067
-	DECLE 16191,31
-	;[2068] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2068
-	DECLE 16191,27
-	;[2069] MUSIC D3,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2069
-	DECLE 4879,63
-	;[2070] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",2070
-	DECLE 16191,39
-	;[2071] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2071
-	DECLE 16191,27
-	;[2072] 
-	SRCFILE "Songs\SHarrierC64.bas",2072
-	;[2073] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2073
-	DECLE 16191,31
-	;[2074] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2074
-	DECLE 5695,63
-	;[2075] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",2075
-	DECLE 16191,43
-	;[2076] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2076
-	DECLE 16191,31
-	;[2077] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2077
-	DECLE 16191,29
-	;[2078] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2078
-	DECLE 5135,63
-	;[2079] MUSIC s,s,E5
-	SRCFILE "Songs\SHarrierC64.bas",2079
-	DECLE 16191,41
-	;[2080] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2080
-	DECLE 16191,29
-	;[2081] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2081
-	DECLE 16191,31
-	;[2082] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2082
-	DECLE 5695,63
-	;[2083] MUSIC s,s,F5#
-	SRCFILE "Songs\SHarrierC64.bas",2083
-	DECLE 16191,43
-	;[2084] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2084
-	DECLE 16191,31
-	;[2085] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2085
-	DECLE 16191,32
-	;[2086] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2086
-	DECLE 5128,63
-	;[2087] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2087
-	DECLE 16191,44
-	;[2088] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2088
-	DECLE 16191,32
-	;[2089] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2089
-	DECLE 16191,44
-	;[2090] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2090
-	DECLE 6975,63
-	;[2091] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2091
-	DECLE 16191,32
-	;[2092] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2092
-	DECLE 16191,44
-	;[2093] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2093
-	DECLE 16191,32
-	;[2094] MUSIC G3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2094
-	DECLE 5908,63
-	;[2095] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2095
-	DECLE 16191,44
-	;[2096] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2096
-	DECLE 16191,32
-	;[2097] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2097
-	DECLE 16191,44
-	;[2098] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2098
-	DECLE 6975,63
-	;[2099] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2099
-	DECLE 16191,32
-	;[2100] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2100
-	DECLE 16191,44
-	;[2101] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2101
-	DECLE 16191,32
-	;[2102] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2102
-	DECLE 5128,63
-	;[2103] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2103
-	DECLE 16191,44
-	;[2104] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2104
-	DECLE 16191,32
-	;[2105] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2105
-	DECLE 16191,44
-	;[2106] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2106
-	DECLE 6975,63
-	;[2107] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2107
-	DECLE 16191,32
-	;[2108] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2108
-	DECLE 16191,44
-	;[2109] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2109
-	DECLE 16191,32
-	;[2110] MUSIC G3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2110
-	DECLE 5908,63
-	;[2111] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2111
-	DECLE 16191,44
-	;[2112] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2112
-	DECLE 16191,32
-	;[2113] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2113
-	DECLE 16191,44
-	;[2114] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2114
-	DECLE 6975,63
-	;[2115] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2115
-	DECLE 16191,32
-	;[2116] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2116
-	DECLE 16191,44
-	;[2117] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2117
-	DECLE 16191,32
-	;[2118] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2118
-	DECLE 5128,63
-	;[2119] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2119
-	DECLE 16191,44
-	;[2120] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2120
-	DECLE 16191,32
-	;[2121] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2121
-	DECLE 16191,44
-	;[2122] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2122
-	DECLE 6975,63
-	;[2123] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2123
-	DECLE 16191,32
-	;[2124] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2124
-	DECLE 16191,44
-	;[2125] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2125
-	DECLE 16191,32
-	;[2126] MUSIC G3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2126
-	DECLE 5908,63
-	;[2127] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2127
-	DECLE 16191,44
-	;[2128] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2128
-	DECLE 16191,32
-	;[2129] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2129
-	DECLE 16191,44
-	;[2130] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2130
-	DECLE 6975,63
-	;[2131] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2131
-	DECLE 16191,32
-	;[2132] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2132
-	DECLE 16191,44
-	;[2133] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2133
-	DECLE 16191,32
-	;[2134] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2134
-	DECLE 5128,63
-	;[2135] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2135
-	DECLE 16191,44
-	;[2136] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2136
-	DECLE 16191,32
-	;[2137] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2137
-	DECLE 16191,44
-	;[2138] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2138
-	DECLE 6975,63
-	;[2139] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2139
-	DECLE 16191,32
-	;[2140] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2140
-	DECLE 16191,44
-	;[2141] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2141
-	DECLE 16191,32
-	;[2142] MUSIC G3,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2142
-	DECLE 5908,63
-	;[2143] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2143
-	DECLE 16191,44
-	;[2144] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2144
-	DECLE 16191,32
-	;[2145] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2145
-	DECLE 16191,44
-	;[2146] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2146
-	DECLE 6975,63
-	;[2147] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2147
-	DECLE 16191,32
-	;[2148] MUSIC s,s,G5
-	SRCFILE "Songs\SHarrierC64.bas",2148
-	DECLE 16191,44
-	;[2149] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2149
-	DECLE 16191,63
-	;[2150] MUSIC G2,G3,D5
-	SRCFILE "Songs\SHarrierC64.bas",2150
-	DECLE 5128,39
-	;[2151] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2151
-	DECLE 16191,63
-	;[2152] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2152
-	DECLE 16191,63
-	;[2153] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2153
-	DECLE 16191,35
-	;[2154] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2154
-	DECLE 6975,63
-	;[2155] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2155
-	DECLE 16191,63
-	;[2156] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2156
-	DECLE 16191,63
-	;[2157] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2157
-	DECLE 16191,34
-	;[2158] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2158
-	DECLE 6420,63
-	;[2159] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2159
-	DECLE 16191,63
-	;[2160] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2160
-	DECLE 16191,63
-	;[2161] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2161
-	DECLE 16191,35
-	;[2162] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2162
-	DECLE 6975,63
-	;[2163] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2163
-	DECLE 16191,63
-	;[2164] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2164
-	DECLE 16191,63
-	;[2165] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2165
-	DECLE 16191,32
-	;[2166] MUSIC G2,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2166
-	DECLE 5896,63
-	;[2167] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2167
-	DECLE 16191,63
-	;[2168] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2168
-	DECLE 16191,63
-	;[2169] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2169
-	DECLE 16191,35
-	;[2170] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2170
-	DECLE 6975,63
-	;[2171] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2171
-	DECLE 16191,63
-	;[2172] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2172
-	DECLE 16191,63
-	;[2173] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2173
-	DECLE 16191,34
-	;[2174] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2174
-	DECLE 6420,63
-	;[2175] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2175
-	DECLE 16191,63
-	;[2176] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2176
-	DECLE 16191,63
-	;[2177] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2177
-	DECLE 16191,35
-	;[2178] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2178
-	DECLE 6975,63
-	;[2179] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2179
-	DECLE 16191,63
-	;[2180] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2180
-	DECLE 16191,63
-	;[2181] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",2181
-	DECLE 16191,39
-	;[2182] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2182
-	DECLE 5128,63
-	;[2183] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2183
-	DECLE 16191,63
-	;[2184] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2184
-	DECLE 16191,63
-	;[2185] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2185
-	DECLE 16191,35
-	;[2186] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2186
-	DECLE 6975,63
-	;[2187] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2187
-	DECLE 16191,63
-	;[2188] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2188
-	DECLE 16191,63
-	;[2189] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2189
-	DECLE 16191,34
-	;[2190] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2190
-	DECLE 6420,63
-	;[2191] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2191
-	DECLE 16191,63
-	;[2192] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2192
-	DECLE 16191,63
-	;[2193] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2193
-	DECLE 16191,35
-	;[2194] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2194
-	DECLE 6975,63
-	;[2195] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2195
-	DECLE 16191,63
-	;[2196] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2196
-	DECLE 16191,63
-	;[2197] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2197
-	DECLE 16191,32
-	;[2198] MUSIC G2,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2198
-	DECLE 5896,63
-	;[2199] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2199
-	DECLE 16191,63
-	;[2200] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2200
-	DECLE 16191,63
-	;[2201] 
-	SRCFILE "Songs\SHarrierC64.bas",2201
-	;[2202] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2202
-	DECLE 16191,35
-	;[2203] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2203
-	DECLE 6975,63
-	;[2204] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2204
-	DECLE 16191,63
-	;[2205] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2205
-	DECLE 16191,63
-	;[2206] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2206
-	DECLE 16191,34
-	;[2207] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2207
-	DECLE 6420,63
-	;[2208] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2208
-	DECLE 16191,63
-	;[2209] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2209
-	DECLE 16191,63
-	;[2210] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2210
-	DECLE 16191,35
-	;[2211] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2211
-	DECLE 6975,63
-	;[2212] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2212
-	DECLE 16191,63
-	;[2213] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2213
-	DECLE 16191,63
-	;[2214] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",2214
-	DECLE 16191,40
-	;[2215] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2215
-	DECLE 5128,63
-	;[2216] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2216
-	DECLE 16191,63
-	;[2217] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2217
-	DECLE 16191,63
-	;[2218] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2218
-	DECLE 16191,37
-	;[2219] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2219
-	DECLE 7231,63
-	;[2220] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2220
-	DECLE 16191,63
-	;[2221] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2221
-	DECLE 16191,63
-	;[2222] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",2222
-	DECLE 16191,36
-	;[2223] MUSIC G3,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2223
-	DECLE 6932,63
-	;[2224] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2224
-	DECLE 16191,63
-	;[2225] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2225
-	DECLE 16191,63
-	;[2226] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2226
-	DECLE 16191,37
-	;[2227] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2227
-	DECLE 7231,63
-	;[2228] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2228
-	DECLE 16191,63
-	;[2229] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2229
-	DECLE 16191,63
-	;[2230] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2230
-	DECLE 16191,32
-	;[2231] MUSIC G2,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2231
-	DECLE 6408,63
-	;[2232] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2232
-	DECLE 16191,63
-	;[2233] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2233
-	DECLE 16191,63
-	;[2234] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2234
-	DECLE 16191,37
-	;[2235] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2235
-	DECLE 7231,63
-	;[2236] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2236
-	DECLE 16191,63
-	;[2237] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2237
-	DECLE 16191,63
-	;[2238] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",2238
-	DECLE 16191,36
-	;[2239] MUSIC G3,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2239
-	DECLE 6932,63
-	;[2240] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2240
-	DECLE 16191,63
-	;[2241] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2241
-	DECLE 16191,63
-	;[2242] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2242
-	DECLE 16191,37
-	;[2243] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2243
-	DECLE 7231,63
-	;[2244] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2244
-	DECLE 16191,63
-	;[2245] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2245
-	DECLE 16191,63
-	;[2246] MUSIC s,s,D5#
-	SRCFILE "Songs\SHarrierC64.bas",2246
-	DECLE 16191,40
-	;[2247] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2247
-	DECLE 5128,63
-	;[2248] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2248
-	DECLE 16191,63
-	;[2249] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2249
-	DECLE 16191,63
-	;[2250] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2250
-	DECLE 16191,37
-	;[2251] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2251
-	DECLE 7231,63
-	;[2252] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2252
-	DECLE 16191,63
-	;[2253] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2253
-	DECLE 16191,63
-	;[2254] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",2254
-	DECLE 16191,36
-	;[2255] MUSIC G3,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2255
-	DECLE 6932,63
-	;[2256] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2256
-	DECLE 16191,63
-	;[2257] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2257
-	DECLE 16191,63
-	;[2258] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2258
-	DECLE 16191,37
-	;[2259] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2259
-	DECLE 7231,63
-	;[2260] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2260
-	DECLE 16191,63
-	;[2261] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2261
-	DECLE 16191,63
-	;[2262] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2262
-	DECLE 16191,32
-	;[2263] MUSIC G2,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2263
-	DECLE 6408,63
-	;[2264] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2264
-	DECLE 16191,63
-	;[2265] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2265
-	DECLE 16191,63
-	;[2266] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2266
-	DECLE 16191,37
-	;[2267] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2267
-	DECLE 7231,63
-	;[2268] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2268
-	DECLE 16191,63
-	;[2269] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2269
-	DECLE 16191,63
-	;[2270] MUSIC s,s,B4
-	SRCFILE "Songs\SHarrierC64.bas",2270
-	DECLE 16191,36
-	;[2271] MUSIC G3,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2271
-	DECLE 6932,63
-	;[2272] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2272
-	DECLE 16191,63
-	;[2273] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2273
-	DECLE 16191,63
-	;[2274] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2274
-	DECLE 16191,37
-	;[2275] MUSIC s,D4#,s
-	SRCFILE "Songs\SHarrierC64.bas",2275
-	DECLE 7231,63
-	;[2276] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2276
-	DECLE 16191,63
-	;[2277] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2277
-	DECLE 16191,63
-	;[2278] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",2278
-	DECLE 16191,39
-	;[2279] MUSIC F2#,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2279
-	DECLE 4871,63
-	;[2280] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2280
-	DECLE 16191,63
-	;[2281] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2281
-	DECLE 16191,63
-	;[2282] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2282
-	DECLE 16191,34
-	;[2283] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2283
-	DECLE 6975,63
-	;[2284] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2284
-	DECLE 16191,63
-	;[2285] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2285
-	DECLE 16191,63
-	;[2286] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2286
-	DECLE 16191,32
-	;[2287] MUSIC F3#,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2287
-	DECLE 6419,63
-	;[2288] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2288
-	DECLE 16191,63
-	;[2289] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2289
-	DECLE 16191,63
-	;[2290] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2290
-	DECLE 16191,34
-	;[2291] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2291
-	DECLE 6975,63
-	;[2292] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2292
-	DECLE 16191,63
-	;[2293] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2293
-	DECLE 16191,63
-	;[2294] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2294
-	DECLE 16191,31
-	;[2295] MUSIC F2#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2295
-	DECLE 5639,63
-	;[2296] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2296
-	DECLE 16191,63
-	;[2297] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2297
-	DECLE 16191,63
-	;[2298] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2298
-	DECLE 16191,34
-	;[2299] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2299
-	DECLE 6975,63
-	;[2300] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2300
-	DECLE 16191,63
-	;[2301] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2301
-	DECLE 16191,63
-	;[2302] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2302
-	DECLE 16191,32
-	;[2303] MUSIC F3#,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2303
-	DECLE 6419,63
-	;[2304] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2304
-	DECLE 16191,63
-	;[2305] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2305
-	DECLE 16191,63
-	;[2306] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2306
-	DECLE 16191,34
-	;[2307] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2307
-	DECLE 6975,63
-	;[2308] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2308
-	DECLE 16191,63
-	;[2309] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2309
-	DECLE 16191,63
-	;[2310] MUSIC s,s,D5
-	SRCFILE "Songs\SHarrierC64.bas",2310
-	DECLE 16191,39
-	;[2311] MUSIC F2#,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2311
-	DECLE 4871,63
-	;[2312] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2312
-	DECLE 16191,63
-	;[2313] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2313
-	DECLE 16191,63
-	;[2314] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2314
-	DECLE 16191,34
-	;[2315] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2315
-	DECLE 6975,63
-	;[2316] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2316
-	DECLE 16191,63
-	;[2317] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2317
-	DECLE 16191,63
-	;[2318] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2318
-	DECLE 16191,32
-	;[2319] MUSIC F3#,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2319
-	DECLE 6419,63
-	;[2320] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2320
-	DECLE 16191,63
-	;[2321] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2321
-	DECLE 16191,63
-	;[2322] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2322
-	DECLE 16191,34
-	;[2323] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2323
-	DECLE 6975,63
-	;[2324] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2324
-	DECLE 16191,63
-	;[2325] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2325
-	DECLE 16191,63
-	;[2326] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2326
-	DECLE 16191,31
-	;[2327] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2327
-	DECLE 5647,63
-	;[2328] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2328
-	DECLE 16191,63
-	;[2329] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2329
-	DECLE 16191,63
-	;[2330] 
-	SRCFILE "Songs\SHarrierC64.bas",2330
-	;[2331] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2331
-	DECLE 16191,34
-	;[2332] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2332
-	DECLE 6975,63
-	;[2333] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2333
-	DECLE 16191,63
-	;[2334] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2334
-	DECLE 16191,63
-	;[2335] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2335
-	DECLE 16191,32
-	;[2336] MUSIC D3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2336
-	DECLE 6415,63
-	;[2337] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2337
-	DECLE 16191,63
-	;[2338] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2338
-	DECLE 16191,63
-	;[2339] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2339
-	DECLE 16191,34
-	;[2340] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2340
-	DECLE 6975,63
-	;[2341] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2341
-	DECLE 16191,63
-	;[2342] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2342
-	DECLE 16191,63
-	;[2343] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2343
-	DECLE 16191,35
-	;[2344] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2344
-	DECLE 5128,63
-	;[2345] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2345
-	DECLE 16191,63
-	;[2346] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2346
-	DECLE 16191,63
-	;[2347] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2347
-	DECLE 16191,32
-	;[2348] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2348
-	DECLE 6975,63
-	;[2349] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2349
-	DECLE 16191,63
-	;[2350] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2350
-	DECLE 16191,63
-	;[2351] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2351
-	DECLE 16191,31
-	;[2352] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2352
-	DECLE 6420,63
-	;[2353] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2353
-	DECLE 16191,63
-	;[2354] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2354
-	DECLE 16191,63
-	;[2355] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2355
-	DECLE 16191,32
-	;[2356] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2356
-	DECLE 6975,63
-	;[2357] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2357
-	DECLE 16191,63
-	;[2358] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2358
-	DECLE 16191,63
-	;[2359] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2359
-	DECLE 16191,27
-	;[2360] MUSIC G2,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2360
-	DECLE 5896,63
-	;[2361] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2361
-	DECLE 16191,63
-	;[2362] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2362
-	DECLE 16191,63
-	;[2363] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2363
-	DECLE 16191,32
-	;[2364] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2364
-	DECLE 6975,63
-	;[2365] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2365
-	DECLE 16191,63
-	;[2366] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2366
-	DECLE 16191,63
-	;[2367] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2367
-	DECLE 16191,31
-	;[2368] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2368
-	DECLE 6420,63
-	;[2369] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2369
-	DECLE 16191,63
-	;[2370] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2370
-	DECLE 16191,63
-	;[2371] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2371
-	DECLE 16191,32
-	;[2372] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2372
-	DECLE 6975,63
-	;[2373] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2373
-	DECLE 16191,63
-	;[2374] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2374
-	DECLE 16191,63
-	;[2375] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2375
-	DECLE 16191,35
-	;[2376] MUSIC G2,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2376
-	DECLE 5128,63
-	;[2377] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2377
-	DECLE 16191,63
-	;[2378] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2378
-	DECLE 16191,63
-	;[2379] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2379
-	DECLE 16191,32
-	;[2380] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2380
-	DECLE 6975,63
-	;[2381] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2381
-	DECLE 16191,63
-	;[2382] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2382
-	DECLE 16191,63
-	;[2383] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2383
-	DECLE 16191,31
-	;[2384] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2384
-	DECLE 6420,63
-	;[2385] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2385
-	DECLE 16191,63
-	;[2386] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2386
-	DECLE 16191,63
-	;[2387] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2387
-	DECLE 16191,32
-	;[2388] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2388
-	DECLE 6975,63
-	;[2389] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2389
-	DECLE 16191,63
-	;[2390] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2390
-	DECLE 16191,63
-	;[2391] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2391
-	DECLE 16191,27
-	;[2392] MUSIC G2,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2392
-	DECLE 5896,63
-	;[2393] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2393
-	DECLE 16191,63
-	;[2394] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2394
-	DECLE 16191,63
-	;[2395] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2395
-	DECLE 16191,32
-	;[2396] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2396
-	DECLE 6975,63
-	;[2397] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2397
-	DECLE 16191,63
-	;[2398] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2398
-	DECLE 16191,63
-	;[2399] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2399
-	DECLE 16191,31
-	;[2400] MUSIC G3,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2400
-	DECLE 6420,63
-	;[2401] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2401
-	DECLE 16191,63
-	;[2402] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2402
-	DECLE 16191,63
-	;[2403] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2403
-	DECLE 16191,32
-	;[2404] MUSIC s,D4,s
-	SRCFILE "Songs\SHarrierC64.bas",2404
-	DECLE 6975,63
-	;[2405] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2405
-	DECLE 16191,63
-	;[2406] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2406
-	DECLE 16191,63
-	;[2407] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2407
-	DECLE 16191,37
-	;[2408] MUSIC D3#,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2408
-	DECLE 4112,63
-	;[2409] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2409
-	DECLE 16191,63
-	;[2410] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2410
-	DECLE 16191,63
-	;[2411] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2411
-	DECLE 16191,32
-	;[2412] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2412
-	DECLE 6463,63
-	;[2413] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2413
-	DECLE 16191,63
-	;[2414] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2414
-	DECLE 16191,63
-	;[2415] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2415
-	DECLE 16191,31
-	;[2416] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2416
-	DECLE 5648,63
-	;[2417] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2417
-	DECLE 16191,63
-	;[2418] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2418
-	DECLE 16191,63
-	;[2419] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2419
-	DECLE 16191,32
-	;[2420] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2420
-	DECLE 6463,63
-	;[2421] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2421
-	DECLE 16191,63
-	;[2422] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2422
-	DECLE 16191,63
-	;[2423] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",2423
-	DECLE 16191,28
-	;[2424] MUSIC D3#,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2424
-	DECLE 5136,63
-	;[2425] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2425
-	DECLE 16191,63
-	;[2426] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2426
-	DECLE 16191,63
-	;[2427] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2427
-	DECLE 16191,32
-	;[2428] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2428
-	DECLE 6463,63
-	;[2429] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2429
-	DECLE 16191,63
-	;[2430] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2430
-	DECLE 16191,63
-	;[2431] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2431
-	DECLE 16191,31
-	;[2432] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2432
-	DECLE 5648,63
-	;[2433] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2433
-	DECLE 16191,63
-	;[2434] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2434
-	DECLE 16191,63
-	;[2435] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2435
-	DECLE 16191,32
-	;[2436] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2436
-	DECLE 6463,63
-	;[2437] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2437
-	DECLE 16191,63
-	;[2438] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2438
-	DECLE 16191,63
-	;[2439] MUSIC s,s,C5
-	SRCFILE "Songs\SHarrierC64.bas",2439
-	DECLE 16191,37
-	;[2440] MUSIC D3#,D3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2440
-	DECLE 4112,63
-	;[2441] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2441
-	DECLE 16191,63
-	;[2442] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2442
-	DECLE 16191,63
-	;[2443] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2443
-	DECLE 16191,32
-	;[2444] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2444
-	DECLE 6463,63
-	;[2445] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2445
-	DECLE 16191,63
-	;[2446] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2446
-	DECLE 16191,63
-	;[2447] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2447
-	DECLE 16191,31
-	;[2448] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2448
-	DECLE 5648,63
-	;[2449] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2449
-	DECLE 16191,63
-	;[2450] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2450
-	DECLE 16191,63
-	;[2451] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2451
-	DECLE 16191,32
-	;[2452] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2452
-	DECLE 6463,63
-	;[2453] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2453
-	DECLE 16191,63
-	;[2454] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2454
-	DECLE 16191,63
-	;[2455] MUSIC s,s,D4#
-	SRCFILE "Songs\SHarrierC64.bas",2455
-	DECLE 16191,28
-	;[2456] MUSIC D3#,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2456
-	DECLE 5136,63
-	;[2457] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2457
-	DECLE 16191,63
-	;[2458] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2458
-	DECLE 16191,63
-	;[2459] 
-	SRCFILE "Songs\SHarrierC64.bas",2459
-	;[2460] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2460
-	DECLE 16191,32
-	;[2461] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2461
-	DECLE 6463,63
-	;[2462] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2462
-	DECLE 16191,63
-	;[2463] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2463
-	DECLE 16191,63
-	;[2464] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2464
-	DECLE 16191,31
-	;[2465] MUSIC D3#,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2465
-	DECLE 5648,63
-	;[2466] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2466
-	DECLE 16191,63
-	;[2467] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2467
-	DECLE 16191,63
-	;[2468] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2468
-	DECLE 16191,32
-	;[2469] MUSIC s,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2469
-	DECLE 6463,63
-	;[2470] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2470
-	DECLE 16191,63
-	;[2471] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2471
-	DECLE 16191,63
-	;[2472] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2472
-	DECLE 16191,35
-	;[2473] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",2473
-	DECLE 3855,63
-	;[2474] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2474
-	DECLE 16191,63
-	;[2475] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2475
-	DECLE 16191,63
-	;[2476] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2476
-	DECLE 16191,32
-	;[2477] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2477
-	DECLE 5951,63
-	;[2478] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2478
-	DECLE 16191,63
-	;[2479] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2479
-	DECLE 16191,63
-	;[2480] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2480
-	DECLE 16191,31
-	;[2481] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2481
-	DECLE 5647,63
-	;[2482] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2482
-	DECLE 16191,63
-	;[2483] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2483
-	DECLE 16191,63
-	;[2484] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2484
-	DECLE 16191,32
-	;[2485] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2485
-	DECLE 5951,63
-	;[2486] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2486
-	DECLE 16191,63
-	;[2487] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2487
-	DECLE 16191,63
-	;[2488] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2488
-	DECLE 16191,27
-	;[2489] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2489
-	DECLE 5135,63
-	;[2490] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2490
-	DECLE 16191,63
-	;[2491] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2491
-	DECLE 16191,63
-	;[2492] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2492
-	DECLE 16191,32
-	;[2493] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2493
-	DECLE 5951,63
-	;[2494] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2494
-	DECLE 16191,63
-	;[2495] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2495
-	DECLE 16191,63
-	;[2496] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2496
-	DECLE 16191,31
-	;[2497] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2497
-	DECLE 5647,63
-	;[2498] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2498
-	DECLE 16191,63
-	;[2499] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2499
-	DECLE 16191,63
-	;[2500] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2500
-	DECLE 16191,32
-	;[2501] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2501
-	DECLE 5951,63
-	;[2502] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2502
-	DECLE 16191,63
-	;[2503] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2503
-	DECLE 16191,63
-	;[2504] MUSIC s,s,A4#
-	SRCFILE "Songs\SHarrierC64.bas",2504
-	DECLE 16191,35
-	;[2505] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",2505
-	DECLE 3855,63
-	;[2506] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2506
-	DECLE 16191,63
-	;[2507] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2507
-	DECLE 16191,63
-	;[2508] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2508
-	DECLE 16191,32
-	;[2509] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2509
-	DECLE 5951,63
-	;[2510] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2510
-	DECLE 16191,63
-	;[2511] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2511
-	DECLE 16191,63
-	;[2512] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2512
-	DECLE 16191,31
-	;[2513] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2513
-	DECLE 5647,63
-	;[2514] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2514
-	DECLE 16191,63
-	;[2515] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2515
-	DECLE 16191,63
-	;[2516] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2516
-	DECLE 16191,32
-	;[2517] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2517
-	DECLE 5951,63
-	;[2518] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2518
-	DECLE 16191,63
-	;[2519] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2519
-	DECLE 16191,63
-	;[2520] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2520
-	DECLE 16191,27
-	;[2521] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2521
-	DECLE 5135,63
-	;[2522] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2522
-	DECLE 16191,63
-	;[2523] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2523
-	DECLE 16191,63
-	;[2524] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2524
-	DECLE 16191,32
-	;[2525] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2525
-	DECLE 5951,63
-	;[2526] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2526
-	DECLE 16191,63
-	;[2527] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2527
-	DECLE 16191,63
-	;[2528] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2528
-	DECLE 16191,31
-	;[2529] MUSIC D3,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2529
-	DECLE 5647,63
-	;[2530] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2530
-	DECLE 16191,63
-	;[2531] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2531
-	DECLE 16191,63
-	;[2532] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2532
-	DECLE 16191,32
-	;[2533] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2533
-	DECLE 5951,63
-	;[2534] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2534
-	DECLE 16191,63
-	;[2535] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2535
-	DECLE 16191,63
-	;[2536] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2536
-	DECLE 16191,34
-	;[2537] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",2537
-	DECLE 3855,63
-	;[2538] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2538
-	DECLE 16191,63
-	;[2539] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2539
-	DECLE 16191,63
-	;[2540] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2540
-	DECLE 16191,31
-	;[2541] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2541
-	DECLE 5695,63
-	;[2542] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2542
-	DECLE 16191,63
-	;[2543] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2543
-	DECLE 16191,63
-	;[2544] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2544
-	DECLE 16191,29
-	;[2545] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2545
-	DECLE 5135,63
-	;[2546] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2546
-	DECLE 16191,63
-	;[2547] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2547
-	DECLE 16191,63
-	;[2548] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2548
-	DECLE 16191,31
-	;[2549] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2549
-	DECLE 5695,63
-	;[2550] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2550
-	DECLE 16191,63
-	;[2551] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2551
-	DECLE 16191,63
-	;[2552] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2552
-	DECLE 16191,27
-	;[2553] MUSIC D3,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2553
-	DECLE 4879,63
-	;[2554] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2554
-	DECLE 16191,63
-	;[2555] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2555
-	DECLE 16191,63
-	;[2556] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2556
-	DECLE 16191,31
-	;[2557] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2557
-	DECLE 5695,63
-	;[2558] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2558
-	DECLE 16191,63
-	;[2559] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2559
-	DECLE 16191,63
-	;[2560] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2560
-	DECLE 16191,29
-	;[2561] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2561
-	DECLE 5135,63
-	;[2562] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2562
-	DECLE 16191,63
-	;[2563] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2563
-	DECLE 16191,63
-	;[2564] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2564
-	DECLE 16191,31
-	;[2565] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2565
-	DECLE 5695,63
-	;[2566] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2566
-	DECLE 16191,63
-	;[2567] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2567
-	DECLE 16191,63
-	;[2568] MUSIC s,s,A4
-	SRCFILE "Songs\SHarrierC64.bas",2568
-	DECLE 16191,34
-	;[2569] MUSIC D3,D3,s
-	SRCFILE "Songs\SHarrierC64.bas",2569
-	DECLE 3855,63
-	;[2570] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2570
-	DECLE 16191,63
-	;[2571] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2571
-	DECLE 16191,63
-	;[2572] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2572
-	DECLE 16191,31
-	;[2573] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2573
-	DECLE 5695,63
-	;[2574] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2574
-	DECLE 16191,63
-	;[2575] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2575
-	DECLE 16191,63
-	;[2576] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2576
-	DECLE 16191,29
-	;[2577] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2577
-	DECLE 5135,63
-	;[2578] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2578
-	DECLE 16191,63
-	;[2579] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2579
-	DECLE 16191,63
-	;[2580] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2580
-	DECLE 16191,31
-	;[2581] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2581
-	DECLE 5695,63
-	;[2582] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2582
-	DECLE 16191,63
-	;[2583] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2583
-	DECLE 16191,63
-	;[2584] MUSIC s,s,D4
-	SRCFILE "Songs\SHarrierC64.bas",2584
-	DECLE 16191,27
-	;[2585] MUSIC D3,F3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2585
-	DECLE 4879,63
-	;[2586] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2586
-	DECLE 16191,63
-	;[2587] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2587
-	DECLE 16191,63
-	;[2588] 
-	SRCFILE "Songs\SHarrierC64.bas",2588
-	;[2589] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2589
-	DECLE 16191,31
-	;[2590] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2590
-	DECLE 5695,63
-	;[2591] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2591
-	DECLE 16191,63
-	;[2592] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2592
-	DECLE 16191,63
-	;[2593] MUSIC s,s,E4
-	SRCFILE "Songs\SHarrierC64.bas",2593
-	DECLE 16191,29
-	;[2594] MUSIC D3,G3,s
-	SRCFILE "Songs\SHarrierC64.bas",2594
-	DECLE 5135,63
-	;[2595] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2595
-	DECLE 16191,63
-	;[2596] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2596
-	DECLE 16191,63
-	;[2597] MUSIC s,s,F4#
-	SRCFILE "Songs\SHarrierC64.bas",2597
-	DECLE 16191,31
-	;[2598] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2598
-	DECLE 5695,63
-	;[2599] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2599
-	DECLE 16191,63
-	;[2600] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2600
-	DECLE 16191,63
-	;[2601] MUSIC s,s,G4
-	SRCFILE "Songs\SHarrierC64.bas",2601
-	DECLE 16191,32
-	;[2602] MUSIC G2,C4,s
-	SRCFILE "Songs\SHarrierC64.bas",2602
-	DECLE 6408,63
-	;[2603] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2603
-	DECLE 16191,63
-	;[2604] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2604
-	DECLE 16191,63
-	;[2605] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2605
-	DECLE 16191,63
-	;[2606] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2606
-	DECLE 16191,63
-	;[2607] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2607
-	DECLE 16191,63
-	;[2608] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2608
-	DECLE 16191,63
-	;[2609] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2609
-	DECLE 16191,63
-	;[2610] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2610
-	DECLE 16191,63
-	;[2611] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2611
-	DECLE 16191,63
-	;[2612] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2612
-	DECLE 16191,63
-	;[2613] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2613
-	DECLE 16191,63
-	;[2614] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2614
-	DECLE 16191,63
-	;[2615] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2615
-	DECLE 16191,63
-	;[2616] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2616
-	DECLE 16191,63
-	;[2617] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2617
-	DECLE 16191,63
-	;[2618] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2618
-	DECLE 5951,63
-	;[2619] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2619
-	DECLE 16191,63
-	;[2620] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2620
-	DECLE 16191,63
-	;[2621] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2621
-	DECLE 16191,63
-	;[2622] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2622
-	DECLE 16191,63
-	;[2623] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2623
-	DECLE 16191,63
-	;[2624] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2624
-	DECLE 16191,63
-	;[2625] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2625
-	DECLE 16191,63
-	;[2626] MUSIC s,A3,s
-	SRCFILE "Songs\SHarrierC64.bas",2626
-	DECLE 5695,63
-	;[2627] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2627
-	DECLE 16191,63
-	;[2628] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2628
-	DECLE 16191,63
-	;[2629] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2629
-	DECLE 16191,63
-	;[2630] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2630
-	DECLE 16191,63
-	;[2631] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2631
-	DECLE 16191,63
-	;[2632] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2632
-	DECLE 16191,63
-	;[2633] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2633
-	DECLE 16191,63
-	;[2634] MUSIC s,A3#,s
-	SRCFILE "Songs\SHarrierC64.bas",2634
-	DECLE 5951,63
-	;[2635] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2635
-	DECLE 16191,63
-	;[2636] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2636
-	DECLE 16191,63
-	;[2637] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2637
-	DECLE 16191,63
-	;[2638] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2638
-	DECLE 16191,63
-	;[2639] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2639
-	DECLE 16191,63
-	;[2640] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2640
-	DECLE 16191,63
-	;[2641] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2641
-	DECLE 16191,63
-	;[2642] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2642
-	DECLE 16191,63
-	;[2643] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2643
-	DECLE 16191,63
-	;[2644] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2644
-	DECLE 16191,63
-	;[2645] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2645
-	DECLE 16191,63
-	;[2646] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2646
-	DECLE 16191,63
-	;[2647] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2647
-	DECLE 16191,63
-	;[2648] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2648
-	DECLE 16191,63
-	;[2649] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2649
-	DECLE 16191,63
-	;[2650] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2650
-	DECLE 16191,63
-	;[2651] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2651
-	DECLE 16191,63
-	;[2652] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2652
-	DECLE 16191,63
-	;[2653] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2653
-	DECLE 16191,63
-	;[2654] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2654
-	DECLE 16191,63
-	;[2655] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2655
-	DECLE 16191,63
-	;[2656] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2656
-	DECLE 16191,63
-	;[2657] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2657
-	DECLE 16191,63
-	;[2658] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2658
-	DECLE 16191,63
-	;[2659] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2659
-	DECLE 16191,63
-	;[2660] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2660
-	DECLE 16191,63
-	;[2661] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2661
-	DECLE 16191,63
-	;[2662] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2662
-	DECLE 16191,63
-	;[2663] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2663
-	DECLE 16191,63
-	;[2664] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2664
-	DECLE 16191,63
-	;[2665] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2665
-	DECLE 16191,63
-	;[2666] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2666
-	DECLE 16191,63
-	;[2667] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2667
-	DECLE 16191,63
-	;[2668] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2668
-	DECLE 16191,63
-	;[2669] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2669
-	DECLE 16191,63
-	;[2670] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2670
-	DECLE 16191,63
-	;[2671] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2671
-	DECLE 16191,63
-	;[2672] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2672
-	DECLE 16191,63
-	;[2673] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2673
-	DECLE 16191,63
-	;[2674] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2674
-	DECLE 16191,63
-	;[2675] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2675
-	DECLE 16191,63
-	;[2676] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2676
-	DECLE 16191,63
-	;[2677] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2677
-	DECLE 16191,63
-	;[2678] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2678
-	DECLE 16191,63
-	;[2679] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2679
-	DECLE 16191,63
-	;[2680] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2680
-	DECLE 16191,63
-	;[2681] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2681
-	DECLE 16191,63
-	;[2682] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2682
-	DECLE 16191,63
-	;[2683] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2683
-	DECLE 16191,63
-	;[2684] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2684
-	DECLE 16191,63
-	;[2685] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2685
-	DECLE 16191,63
-	;[2686] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2686
-	DECLE 16191,63
-	;[2687] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2687
-	DECLE 16191,63
-	;[2688] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2688
-	DECLE 16191,63
-	;[2689] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2689
-	DECLE 16191,63
-	;[2690] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2690
-	DECLE 16191,63
-	;[2691] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2691
-	DECLE 16191,63
-	;[2692] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2692
-	DECLE 16191,63
-	;[2693] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2693
-	DECLE 16191,63
-	;[2694] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2694
-	DECLE 16191,63
-	;[2695] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2695
-	DECLE 16191,63
-	;[2696] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2696
-	DECLE 16191,63
-	;[2697] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2697
-	DECLE 16191,63
-	;[2698] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2698
-	DECLE 16191,63
-	;[2699] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2699
-	DECLE 16191,63
-	;[2700] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2700
-	DECLE 16191,63
-	;[2701] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2701
-	DECLE 16191,63
-	;[2702] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2702
-	DECLE 16191,63
-	;[2703] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2703
-	DECLE 16191,63
-	;[2704] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2704
-	DECLE 16191,63
-	;[2705] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2705
-	DECLE 16191,63
-	;[2706] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2706
-	DECLE 16191,63
-	;[2707] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2707
-	DECLE 16191,63
-	;[2708] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2708
-	DECLE 16191,63
-	;[2709] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2709
-	DECLE 16191,63
-	;[2710] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2710
-	DECLE 16191,63
-	;[2711] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2711
-	DECLE 16191,63
-	;[2712] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2712
-	DECLE 16191,63
-	;[2713] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2713
-	DECLE 16191,63
-	;[2714] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2714
-	DECLE 16191,63
-	;[2715] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2715
-	DECLE 16191,63
-	;[2716] MUSIC s,s,s
-	SRCFILE "Songs\SHarrierC64.bas",2716
-	DECLE 16191,63
-	;[2717] 
-	SRCFILE "Songs\SHarrierC64.bas",2717
-	;[2718] 
-	SRCFILE "Songs\SHarrierC64.bas",2718
-	;[2719] MUSIC -,-,-
-	SRCFILE "Songs\SHarrierC64.bas",2719
-	DECLE 0,0
-	;[2720] MUSIC -,-,-
-	SRCFILE "Songs\SHarrierC64.bas",2720
-	DECLE 0,0
-	;[2721] MUSIC -,-,-
-	SRCFILE "Songs\SHarrierC64.bas",2721
-	DECLE 0,0
-	;[2722] MUSIC STOP
-	SRCFILE "Songs\SHarrierC64.bas",2722
-	DECLE 254,0
+	SRCFILE "Songs\SMario2.bas",909
+	DECLE 16191,63
+	;[910] MUSIC JUMP MyLoop
+	SRCFILE "Songs\SMario2.bas",910
+	DECLE 254
+	DECLE Q53
 	;ENDFILE
 	;FILE IntyMusic.bas
-	;[59] 
-	SRCFILE "IntyMusic.bas",59
-	;[60] '--- song name ------ Must be 12 characters or less! -----
-	SRCFILE "IntyMusic.bas",60
-	;[61] MyMusicName:
-	SRCFILE "IntyMusic.bas",61
+	;[66] 
+	SRCFILE "IntyMusic.bas",66
+	;[67] '--- song name, printed vertically --- Must be 12 characters or less! -----
+	SRCFILE "IntyMusic.bas",67
+	;[68] MyMusicName:
+	SRCFILE "IntyMusic.bas",68
 	; MYMUSICNAME
-Q29:	;[62] DATA "SHarrier C64"
-	SRCFILE "IntyMusic.bas",62
+Q29:	;[69] DATA "Super Mario2"
+	SRCFILE "IntyMusic.bas",69
 	DECLE 51
-	DECLE 40
-	DECLE 65
-	DECLE 82
-	DECLE 82
-	DECLE 73
+	DECLE 85
+	DECLE 80
 	DECLE 69
 	DECLE 82
 	DECLE 0
-	DECLE 35
-	DECLE 22
-	DECLE 20
-	;[63] REM "123456789012"
-	SRCFILE "IntyMusic.bas",63
-	;[64] 
-	SRCFILE "IntyMusic.bas",64
-	;[65] '----dont remove----
-	SRCFILE "IntyMusic.bas",65
-	;[66] DATA 0,0,0,0,0,0,0,0,0,0,0,0
-	SRCFILE "IntyMusic.bas",66
+	DECLE 45
+	DECLE 65
+	DECLE 82
+	DECLE 73
+	DECLE 79
+	DECLE 18
+	;[70] REM "123456789012"
+	SRCFILE "IntyMusic.bas",70
+	;[71] 
+	SRCFILE "IntyMusic.bas",71
+	;[72] '======= Options #2 End =======
+	SRCFILE "IntyMusic.bas",72
+	;[73] DATA 0,0,0,0,0,0,0,0,0,0,0,0
+	SRCFILE "IntyMusic.bas",73
 	DECLE 0
 	DECLE 0
 	DECLE 0

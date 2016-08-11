@@ -1,13 +1,8 @@
 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/3/2016
 'IntyMusic_Player.bas | Main code.
 'Public domain, feel free to use/modify. Feel free to contact me in the Intellivision Programming forum @ AtariAge.com
-
-'MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
-WAIT
-
-BORDER BORDER_WHITE,0
-DEFINE 0,16,Sprite0:WAIT
-DEFINE 16,16,Sprite16
+WAIT:DEFINE 0,16,Sprite0
+WAIT:DEFINE 16,16,Sprite16
 
 '--- variables to copy values from IntyBasic_epilogue -----
 DIM #iMusicNote(3)		'Notes 0,1,2	(from IntyBasic_epilogue)
@@ -17,35 +12,25 @@ DIM #iMusicTime(2)		'Time counter (from IntyBasic_epilogue, _music_tc, Time base
 
 DIM iMusicNoteLast(3)		'Previous notes
 DIM iMusicVolumeLast(3)	'store last volume values, compare with instrument... sigh...
+DIM iMusicDrawNote(3)		'Draw new note?
+
+IF INTYMUSIC_FANFOLD THEN #IntyMusicBlink=CS_ADVANCE ELSE #IntyMusicBlink=0
 
 '---------------
 IntyMusicReset:
-CLS
-resetsprite(0):resetsprite(1):resetsprite(2)	
-WAIT
 
-'-----
+'----show title screen and credits--- also prints vertical song name ---
+GOSUB IntyMusicInit
+
+'-----init----
 iMusicScroll=0			'Need to scroll screen?
-DIM iMusicDrawNote(3)		'Draw new note?
-#x=0
 Toggle=1
 KeyClear=0
-#IntyMusicBlink=0: IF INTYMUSIC_FANFOLD THEN #IntyMusicBlink=CS_ADVANCE
-
-'----initialize---
-WAIT
-GOSUB IntyMusicInit
 
 '---- main loop -----
 PLAY MyMusic
 PlayLoop:
-	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
-	FOR iMusicX=0 to 2
-		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
-		iMusicVolumeLast(iMusicX)=#iMusicVol(iMusicX)
-	NEXT iMusicX	
-	
-	'---- reset? ----
+	'---- user reset? ----
 	IF Cont.KEY=12 THEN 
 		KeyClear=1
 	ELSE
@@ -60,13 +45,22 @@ PlayLoop:
 		KeyClear=0
 	END IF	
 	'-------------------
-	
-	'--Get values from IntyBasic_epilogue	
+
+	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
+	'---it seems it does not work most times...
+	FOR iMusicX=0 to 2
+		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
+		iMusicVolumeLast(iMusicX)=#iMusicVol(iMusicX)
+	NEXT iMusicX	
+		
+	'--Get values from IntyBasic_epilogue ASM
 	Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
 	
 	'Use IntyBasic music counter (_music_tc), if its 1 I can check if new notes are playing	
-	IF #iMusicTime(1)=#iMusicTime(0) THEN	 'IF Song Speed is 1, player will freeze.. use this code instead: 'IF #iMusicTime(1)=1 THEN	
+	IF #iMusicTime(1)=#iMusicTime(0) THEN	 '<----IF Song Speed is 1, player will freeze.. comment this, uncomment below:
+	'IF #iMusicTime(1)=1 THEN	
 	
+		'--- check if note changed, or, if same note plays again by checking instrument volume 
 		iMusicScroll=0		
 		FOR iMusicX=0 to 2	
 			IntyNote=0
@@ -83,50 +77,45 @@ PlayLoop:
 			GOTO GotIntyNoteFail
 
 		GotIntyNote:			
-			IntyNote=1
+			IntyNote=iMusicNoteColor(iMusicX)	'NonZero, indicating note will play
+			IF IntyNote=0 THEN IntyNote=1
 			
 		GotIntyNoteFail:
 			iMusicDrawNote(iMusicX)=IntyNote
-			iMusicScroll=iMusicScroll+IntyNote
-			
+			iMusicScroll=iMusicScroll+IntyNote			
 		NEXT iMusicX
 		
 		'---------------- SCROLL, DRAW MUSIC ----------------------------		
 		'--- Theres very little time after VBLANK, I had to rearrange things here to draw bottom display first
 		IF (INTYMUSIC_AUTO_SCROLL OR iMusicScroll) THEN 			
 			Toggle=Toggle XOR 1	'Toggle piano key color
-			
-			SCROLL 0,0,3			'Scroll upwards (move things down), just about...
-			WAIT					'....NOW!
-			
-			'- Draw piano---
-			FOR iMusicX=0 TO 18
-				#BACKTAB(200+iMusicX)= IntyPiano(iMusicX)
-			NEXT iMusicX	
+							
+			WAIT:CALL MUSICSCROLL		'Scroll... I am only scrolling part of the screen
+						
+			'- Draw piano--- (not needed, it will not scroll away anymore)
+			'FOR iMusicX=0 TO 18:#BACKTAB(200+iMusicX)= IntyPiano(iMusicX):NEXT iMusicX	
 			
 			'---Alternate colors---
-			'IF INTYMUSIC_FANFOLD THEN	#BACKTAB(0)=CS_ADVANCE			
-			#BACKTAB(0)=#IntyMusicBlink			
-			PRINT AT 220, CS_ADVANCE
-			'---Draw lower bottom note data-----	
+			#BACKTAB(0)=#IntyMusicBlink						
+			#BACKTAB(220)=#IntyMusicBlink
+			
+			PRINT AT 221		'<--- Do NOT remove!	
+			
+			'---Draw lower bottom note data,ex. C3# A4 B5-----	
 			FOR iMusicX=0 TO 2
 				IntyNote=#iMusicNote(iMusicX)	'Get note value to use in look-up tables 
 				#x=iMusicNoteColor(iMusicX)	'Get note color
+								
+				PRINT 2280+iMusicDrawNote(iMusicX)	'Note + blink	'Print "\285" (2280=285*8)
 				
-				PRINT COLOR #x,2280 + iMusicDrawNote(iMusicX)
-				PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x		'Note text,ex. C5#
+				'Note text,ex. C5#
+				PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,0,0
 			NEXT iMusicX
-						
-			'--Print song name 
-			#x=19
-			FOR iMusicX=0 TO 11
-				#BACKTAB(#x)=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
-				#x=#x+20
-			NEXT iMusicX
+								
+			'---Draw bottom left piano, lefmost key... I cannot waste time erasing other piano keys that scrolled down
+			'RINT 2272 'PRINT "\284"			
 			
-			'---Draw bottom left piano, lefmost key... to avoid erasing other keys that scrolled down. 
-			PRINT 2272 'PRINT "\284"
-			'----Clear top line, draw staff---
+			'----Done updating lower screen. Clear top line, draw staff---
 			FOR iMusicX=1 TO 18
 				#BACKTAB(iMusicX)=IntyNoteBlankLine(iMusicX)	+ INTYMUSIC_STAFF_COLOR
 			NEXT iMusicX
@@ -135,10 +124,10 @@ PlayLoop:
 			FOR iMusicX=0 TO 2
 				IntyNote=#iMusicNote(iMusicX)	'--Get note 
 				
-				'Draw Note
+				'---Draw Note. Up to 2 notes per card. I used a spreadsheet to create lookup data, card, position, etc.--
 				IF iMusicDrawNote(iMusicX) THEN #BACKTAB(IntyNoteOnscreen(IntyNote))=IntyNoteGRAM(IntyNote) + iMusicNoteColor(iMusicX)				
 				
-				'Overlay sprites on piano keys. Flash colors 
+				'---Overlay sprites on piano keys. Flash colors---
 				IF Toggle THEN #x=#iMusicPianoColorA(iMusicX) ELSE #x=#iMusicPianoColorB(iMusicX)
 				SPRITE iMusicX,16 + VISIBLE + IntyPianoSpriteOffset(IntyNote),88 + ZOOMY2, IntyPianoSprite(IntyNote) + #x
 			NEXT iMusicX		
@@ -146,15 +135,9 @@ PlayLoop:
 	ELSE	
 		WAIT
 	END IF '<-----#iMusicTime()
+	
 GOTO PlayLoop
 
-'--Prints song name, after last PRINT position
-Print_Song_Name: PROCEDURE
-	FOR iMusicX=0 TO 11
-		#BACKTAB(iMusicX+POS(0))=MyMusicName(iMusicX)*8 + INTYMUSIC_TITLE_COLOR
-	NEXT iMusicX
-RETURN
-END
 '    _______________
 '___/ IMUSICGETINFO \________________________________________________________________
 'Get IntyBasic_epilogue data onto IntyBasic. Ill copy note and volume
@@ -211,8 +194,36 @@ ASM IMUSICGETINFO: PROC
 asm ENDP
 
 '    ____________
-'___/ IMUSICKILL \________________________________________________________________
-'PLAY NONE seems not to work....
+'___/ MUSICSCROLL \____________________ 
+'Only Scroll 10 rows, and only columns 2 to 18 (17 lines)
+ASM MUSICSCROLL: PROC	
+		
+	asm mvii #$0200 + 198,r2		;#BackTAB + 198--> R2
+	asm mvii	#$0200 + 178,r3		;Line above --> r3 
+	asm mvii #9,r1				;Loop 9 lines
+	asm mvii #2,r4				;Skip 2 chars
+	
+asm @@CopyLoop:
+	asm REPEAT 18
+		asm mvi@ r3,r0		;[r3] --> R0
+		asm decr r3
+		asm mvo@ r0,r2		;r0 --> [R2]		
+		asm decr r2 
+	asm ENDR
+	
+	asm subr r4,r2		;skip 3 chars 
+	asm subr r4,r3 
+	
+	asm decr r1			;done row..
+	asm bne @@CopyLoop
+	
+	asm jr	r5				;return
+	'asm	pulr pc				;return 
+asm ENDP		
+
+'    ____________
+'___/ IMUSICKILL \___________________________
+'PLAY NONE seems not to work.... 
 ASM IMUSICKILL: PROC	
 		
 '--- kill notes ---
@@ -223,8 +234,7 @@ ASM IMUSICKILL: PROC
 	asm jr	r5				;return 
 asm ENDP
 
-
-'============================================================================================================
+'==============================================================================
 'From IntyBasic_epilogue.asm
 '_music_table:	RMB 1	; Note table
 '_music_start:	RMB 1	; Start of music
@@ -259,17 +269,3 @@ asm ENDP
 '_music_vol3:	RMB 1   ; Volume C
 '_music_vol:	RMB 1	; Global music volume
 
-
-'--- get volume, to know if note just started to play ---
-'	asm movr	r0,r4			;r0 --> r4 (r4=r0=#iMusicVol)
-'	asm mvi	_music_vol1,r3	;_music_vol1 --> r3
-'	'asm mvi	_music_s1,r3		; --> r3
-'	asm mvo@ r3,r4			;r3 --> [r4++]
-'	
-'	asm mvi	_music_vol2,r3	;_music_vol2 --> r3
-'	'asm mvi	_music_s2,r3		; --> r3
-'	asm mvo@ r3,r4			;r3 --> [r4++]
-'
-'	asm mvi	_music_vol3,r3	;_music_vol3 --> r3
-'	'asm mvi	_music_s3,r3		; --> r3
-'	asm mvo@ r3,r4			;r3 --> [r4++]

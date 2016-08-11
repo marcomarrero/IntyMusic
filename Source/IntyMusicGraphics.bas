@@ -312,14 +312,14 @@ Sprite16:
 
 '===MOV:28 == Chr:284===== [8,8]
 'Sprite28:
-	BITMAP " ..#####"	
-	BITMAP "  .#..##"	
-	BITMAP " ..#..##"	
-	BITMAP "   #..##"	
-	BITMAP " ..#..##"	
-	BITMAP "  .#...#"
-	BITMAP " ..#...#"
-	BITMAP "  .#####"	
+	BITMAP "########"	
+	BITMAP "####...#"	
+	BITMAP "####...#"	
+	BITMAP "####...#"	
+	BITMAP "####...#"	
+	BITMAP "####...#"
+	BITMAP "####...#"
+	BITMAP "########"	
 
 '===MOV:29 == Chr:285===== [8,8]
 'Sprite29:
@@ -329,29 +329,29 @@ Sprite16:
 	BITMAP "....#.#."	'$0A
 	BITMAP "....#.#."	'$0A
 	BITMAP "..###..."	'$38
-	BITMAP ".####..."	'$78
+	BITMAP ".####..."		'$78
 	BITMAP "..##...."	'$30
 
 '===MOV:30 == Chr:286===== [8,8]
 'Sprite30:
-	BITMAP "..####.."	'$3C
-	BITMAP ".#....#."	'$42
-	BITMAP "#..##..#"	'$99
-	BITMAP "#.#....#"	'$A1
-	BITMAP "#.#....#"	'$A1
-	BITMAP "#..##..#"	'$99
-	BITMAP ".#....#."	'$42
-	BITMAP "..####.."	'$3C
+	BITMAP "...#...."
+	BITMAP "...##..."
+	BITMAP "...###.."
+	BITMAP "...#.#.."
+	BITMAP "...#.#.."
+	BITMAP ".###...."
+	BITMAP "####...."
+	BITMAP ".##....."
 
 '===MOV:31 == Chr:287===== [8,8]
 'Sprite31:
 	BITMAP "########"	'$FF
 	BITMAP "#.###..#"	'$B9
+	BITMAP "#.###. #"	'$B9
 	BITMAP "#.###..#"	'$B9
-	BITMAP "#.###..#"	'$B9
-	BITMAP "#.###..#"	'$B9
+	BITMAP "#.###. #"	'$B9
 	BITMAP "...#...#"	'$11
-	BITMAP "...#...#"	'$11
+	BITMAP "...#.. #"	'$11
 	BITMAP "########"	'$FF
 
 

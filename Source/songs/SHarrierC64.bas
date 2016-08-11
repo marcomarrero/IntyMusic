@@ -1,10 +1,9 @@
-'Space Harrier C64 hi-score, from MIDI source file.
+'Space Harrier C64 hi-score, source file:MIDI
+'Arrangement of Bach prelude, BWV 847, Prelude No. 2 in C Minor book 1 of The Well-Tempered Clavie
+'by Mark Cooksey
 '
-
 MyMusic:
-
 DATA 2
-
 
 MUSIC E3,G4,B4
 MUSIC s,s,s
@@ -1167,6 +1166,8 @@ MUSIC G2,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 
+'--------
+
 MUSIC s,D4#,C5
 MUSIC s,s,s
 MUSIC s,s,s
@@ -1187,8 +1188,10 @@ MUSIC s,D4,A4
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC s,s,s
-MUSIC F3#,C4,G4
+
+MUSIC F3#,C4,G4	'<-- fixed?
+
+MUSIC s,s,s		
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,D4,A4
@@ -2667,56 +2670,4 @@ MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-
-
-MUSIC -,-,-
-MUSIC -,-,-
-MUSIC -,-,-
 MUSIC STOP
