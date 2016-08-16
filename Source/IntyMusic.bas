@@ -54,23 +54,23 @@ IntyMusicInit_Credits: PROCEDURE
 	'--colors:FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
 	PRINT COLOR FG_DARKGREEN
 	'20 char max 1234567890123456789
-	PRINT AT 060,"---Space Harrier---"	
+	PRINT AT 060," "	
 	
 	PRINT COLOR FG_GREEN
-	PRINT AT 080,"Bach prelude-BWV 847"
-	PRINT AT 100,"  by Mark Cooksey  "	
-	PRINT AT 120,"for the Commodore 64"
+	PRINT AT 080,"Tchaikovsky 1812"	
+	PRINT AT 100,"   "	
+	PRINT AT 120," "
 	'-----------------------------------------------------------------
 END	
 
 '-----Music to use------
 'MyMusic:
 asm org $A000
-INCLUDE "Songs\SHarrierC64.bas"		 '<---- Music data. Data label *must* be named "MyMusic"
+INCLUDE "tchaikovsky1812.bas"		 '<---- Music data. Data label *must* be named "MyMusic"
 
 '--- song name, printed vertically --- Must be 12 characters or less! -----
 MyMusicName:
-DATA "SHarrier C64"
+DATA "     Demo"
 REM "123456789012"
 '--- To disable this text, change this above: CONST INTYMUSIC_SONG_TITLE = 0 
 
