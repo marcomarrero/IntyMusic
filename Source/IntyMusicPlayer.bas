@@ -1,8 +1,12 @@
 'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/3/2016
 'IntyMusic_Player.bas | Main code.
 'Public domain, feel free to use/modify. Feel free to contact me in the Intellivision Programming forum @ AtariAge.com
-WAIT:DEFINE 0,16,Sprite0
-WAIT:DEFINE 16,16,Sprite16
+
+WAIT
+DEFINE 0,16,Sprite0:WAIT
+DEFINE 16,16,Sprite16:WAIT
+DEFINE 32,16,Sprite32:WAIT
+DEFINE 48,8,Sprite48:WAIT
 
 '--- variables to copy values from IntyBasic_epilogue -----
 DIM #iMusicNote(3)		'Notes 0,1,2	(from IntyBasic_epilogue)
@@ -27,6 +31,10 @@ iMusicScroll=0			'Need to scroll screen?
 Toggle=1
 KeyClear=0
 
+'--Volume graph display----
+CONST CharVolume = (43*8) + 2048		'GRAM card 40, 41 or 43
+CONST NotePosition = 96+ZOOMY2+13
+
 '---- main loop -----
 PLAY MyMusic
 PlayLoop:
@@ -46,8 +54,8 @@ PlayLoop:
 	END IF	
 	'-------------------
 
-	'--I will keep track of notes playing for each voice, and also keep track of volume to know if same note played again
-	'---it seems it does not work most times...
+	'--I will keep track of notes playing for each voice, and also keep track of volume. 
+	'--I need to know if same note was played again.
 	FOR iMusicX=0 to 2
 		iMusicNoteLast(iMusicX)=#iMusicNote(iMusicX)	
 		iMusicVolumeLast(iMusicX)=#iMusicVol(iMusicX)
@@ -56,8 +64,8 @@ PlayLoop:
 	'--Get values from IntyBasic_epilogue ASM
 	Call IMUSICGETINFO(VARPTR #iMusicVol(0), VARPTR #iMusicNote(0), VARPTR #iMusicTime(0), VARPTR #iMusicInst(0))	
 	
-	'Use IntyBasic music counter (_music_tc), if its 1 I can check if new notes are playing	
-	IF #iMusicTime(1)=#iMusicTime(0) THEN	 '<----IF Song Speed is 1, player will freeze.. comment this, uncomment below:
+	'--Use IntyBasic music counter (_music_tc), if its 1 I can check if new notes are playing	
+	IF #iMusicTime(1)=#iMusicTime(0) THEN	 '<----IF Song Speed is 1, this will never happen.. comment this, uncomment below:
 	'IF #iMusicTime(1)=1 THEN	
 	
 		'--- check if note changed, or, if same note plays again by checking instrument volume 
@@ -70,6 +78,9 @@ PlayLoop:
 			iMusicVolCheck=#iMusicVol(iMusicX)
 			iMusicVolLast=iMusicVolumeLast(iMusicX)
 			iMusicInst=#iMusicInst(iMusicX)
+			
+			'--These values are from volume tables in IntyBasic source code.
+			'--TODO: Adjust these according to main volume
 			IF iMusicInst=0 THEN IF iMusicVolLast=14 AND iMusicVolCheck=13 THEN GOTO GotIntyNote	'piano
 			IF iMusicInst=64 THEN IF iMusicVolLast=13 AND iMusicVolCheck=14 THEN GOTO GotIntyNote	'clarinet
 			IF iMusicInst=128 THEN IF iMusicVolLast=10 AND iMusicVolCheck=12 THEN GOTO GotIntyNote	'flute 
@@ -85,11 +96,16 @@ PlayLoop:
 			iMusicScroll=iMusicScroll+IntyNote			
 		NEXT iMusicX
 		
+		'--Draw sprites behind of volume meter, slide up/down, part offscreen
+		SPRITE 5,16 + VISIBLE + 8,NotePosition-#iMusicVol(0), SPR42 + #iMusicPianoColorA(0) + BEHIND
+		SPRITE 6,16 + VISIBLE + 56,NotePosition-#iMusicVol(1), SPR42 + #iMusicPianoColorA(1) + BEHIND
+		SPRITE 7,16 + VISIBLE + 104,NotePosition-#iMusicVol(2), SPR42 + #iMusicPianoColorA(2) + BEHIND
+		
 		'---------------- SCROLL, DRAW MUSIC ----------------------------		
-		'--- Theres very little time after VBLANK, I had to rearrange things here to draw bottom display first
+		'--- Theres very little time after VBLANK, I had to rearrange code to draw bottom display first
 		IF (INTYMUSIC_AUTO_SCROLL OR iMusicScroll) THEN 			
-			Toggle=Toggle XOR 1	'Toggle piano key color
-							
+			Toggle=Toggle XOR 1	'Toggle piano key hilite
+			
 			WAIT:CALL MUSICSCROLL		'Scroll... I am only scrolling part of the screen
 						
 			'- Draw piano--- (not needed, it will not scroll away anymore)
@@ -99,7 +115,7 @@ PlayLoop:
 			#BACKTAB(0)=#IntyMusicBlink						
 			#BACKTAB(220)=#IntyMusicBlink
 			
-			PRINT AT 221		'<--- Do NOT remove!	
+			PRINT AT 221		'<--- Do NOT remove! 	
 			
 			'---Draw lower bottom note data,ex. C3# A4 B5-----	
 			FOR iMusicX=0 TO 2
@@ -109,11 +125,15 @@ PlayLoop:
 				PRINT 2280+iMusicDrawNote(iMusicX)	'Note + blink	'Print "\285" (2280=285*8)
 				
 				'Note text,ex. C5#
-				PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,0,0
+				'PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x Old one
+				PRINT CharVolume+#iMusicPianoColorB(iMusicX),IntyNoteLetter(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,0				
 			NEXT iMusicX
-								
+			
+			'Volume graph for each voice
+			'FOR #x=0 to 2:PRINT IntyVolumeGraph(iMusicVolumeLast(#x)),IntyVolumeGraph(#iMusicVol(#x)):NEXT #x
+											
 			'---Draw bottom left piano, lefmost key... I cannot waste time erasing other piano keys that scrolled down
-			'RINT 2272 'PRINT "\284"			
+			'RINT 2272 'PRINT "\284" Right column does not scroll down anymore, title overwrites piano anyway
 			
 			'----Done updating lower screen. Clear top line, draw staff---
 			FOR iMusicX=1 TO 18

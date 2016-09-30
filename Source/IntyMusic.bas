@@ -1,4 +1,4 @@
-'IntyMusic by Marco A. Marrero.  Started at 7-30-2016, version 8/10/2016
+'IntyMusic by Marco A. Marrero.  Started at 7/30/2016, v8/10/2016, v9/28/2016
 
 '----Required----
 INCLUDE "constants.bas"
@@ -8,7 +8,7 @@ DIM #iMusicPianoColorA(3)
 DIM #iMusicPianoColorB(3)
 
 '========================== Options #1 - customization ========================================
-CONST INTYMUSIC_AUTO_SCROLL = 1			'0 to pause at notes, 1 to always scroll
+INTYMUSIC_AUTO_SCROLL = 1					'0 to pause at notes, 1 to always scroll
 CONST INTYMUSIC_FANFOLD = 1				'1 to alternate colors, like classic dot-matrix paper
 
 '--colors:FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
@@ -20,7 +20,8 @@ iMusicNoteColor(0)=FG_DARKGREEN
 iMusicNoteColor(1)=FG_RED
 iMusicNoteColor(2)=FG_BLUE
 
-'--- Piano key color, by voice channel ---- 2nd set for flash effect. Use same colors on 2nd set to disable blink
+'--- Piano key and Volume colors, by voice channel -- 2nd set flash effect. Use same colors on 2nd to disable hilite/blink
+'--- 
 ' SPR_BLACK,SPR_BLUE,SPR_RED,SPR_TAN,SPR_DARKGREEN,SPR_GREEN,SPR_YELLOW,SPR_WHITE,SPR_GREY,SPR_CYAN,SPR_ORANGE,SPR_BROWN,SPR_PINK,SPR_LIGHTBLUE,SPR_YELLOWGREEN,SPR_PURPLE			7
 '--1st set---
 #iMusicPianoColorA(0)=SPR_DARKGREEN
@@ -32,12 +33,14 @@ iMusicNoteColor(2)=FG_BLUE
 #iMusicPianoColorB(2)=SPR_LIGHTBLUE
 
 '----Color stack----alternating background colors 
-'STACK_BLACK,STACK_BLUE,STACK_RED,STACK_TAN,STACK_DARKGREEN,STACK_GREEN,STACK_YELLOW,STACK_WHITE,STACK_GREY,STACK_CYAN,STACK_ORANGE,STACK_BROWN,STACK_PINK,STACK_LIGHTBLUE,STACK_YELLOWGREEN,STACK_PURPLE
+'STACK_BLACK,STACK_BLUE,STACK_RED,STACK_TAN,STACK_DARKGREEN,STACK_GREEN,STACK_YELLOW,STACK_WHITE
+'STACK_GREY,STACK_CYAN,STACK_ORANGE,STACK_BROWN,STACK_PINK,STACK_LIGHTBLUE,STACK_YELLOWGREEN,STACK_PURPLE
 BORDER BORDER_WHITE,0
 MODE 0,STACK_WHITE,STACK_TAN,STACK_WHITE,STACK_TAN
-'MODE 0,STACK_GREY,STACK_LIGHTBLUE,STACK_WHITE,STACK_CYAN
+'MODE 0,STACK_GREY,STACK_LIGHTBLUE,STACK_WHITE,STACK_GREEN
+'MODE 0,STACK_YELLOWGREEN,STACK_DARKGREEN,STACK_WHITE,STACK_GREEN
 
-CONST INTYMUSIC_SONG_TITLE = 1		'0 to disable song title, should eliminate flicker 
+CONST INTYMUSIC_SONG_TITLE = 1		'0 to disable vertical song title
 
 '========================== Options #1 End =============================================
 
@@ -52,25 +55,24 @@ INCLUDE "IntyMusicGraphics.bas"
 IntyMusicInit_Credits: PROCEDURE
 	'---------------- ADD INFORMATION BELOW -------------------------
 	'--colors:FG_BLACK,FG_BLUE,FG_RED,FG_TAN,FG_DARKGREEN,FG_GREEN,FG_YELLOW,FG_WHITE
-	PRINT COLOR FG_DARKGREEN
-	'20 char max 1234567890123456789
+	PRINT COLOR FG_DARKGREEN	
 	PRINT AT 060," "	
-	
+	'20 char max 1234567890123456789
 	PRINT COLOR FG_GREEN
-	PRINT AT 080,"Tchaikovsky 1812"	
-	PRINT AT 100,"   "	
-	PRINT AT 120," "
+	PRINT AT 080,"Song title goes here"
+	PRINT AT 100,"Additional text here"
+	PRINT AT 120,"Extra text goes here"
 	'-----------------------------------------------------------------
 END	
 
 '-----Music to use------
 'MyMusic:
 asm org $A000
-INCLUDE "tchaikovsky1812.bas"		 '<---- Music data. Data label *must* be named "MyMusic"
+INCLUDE "songs\NG\TeddyBoy.bas"		 '<---- Music data. Data label *must* be named "MyMusic"
 
 '--- song name, printed vertically --- Must be 12 characters or less! -----
 MyMusicName:
-DATA "     Demo"
+DATA "Example Name"
 REM "123456789012"
 '--- To disable this text, change this above: CONST INTYMUSIC_SONG_TITLE = 0 
 

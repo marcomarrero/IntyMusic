@@ -2,7 +2,7 @@
 	
 'Draw initial screen... otherwise it will flicker badly, especially fanfold
 IntyMusicInit: PROCEDURE
-	resetsprite(0):resetsprite(1):resetsprite(2)	
+	FOR #x=0 TO 7:resetsprite(#x):NEXT #x
 	CLS
 	WAIT
 	iMusicX=0			
@@ -20,13 +20,13 @@ IntyMusicInit: PROCEDURE
 	PRINT AT 5,"\271\263"
 	PRINT AT 25,"\273\262"
 	PRINT AT 46,"\279"
-		
+
 	IntyNote=19:GOSUB DrawPiano	'Draw all 20 piano keys
 
 	'---me---		
 	PRINT AT 160 COLOR FG_BLUE,"\285"
 	PRINT COLOR FG_BLACK," IntyMusic Player "
-	PRINT COLOR FG_BLUE,"\285"
+	PRINT COLOR FG_BLUE,"\286"
 	PRINT AT 182 COLOR FG_BLACK,"by Marco Marrero"
 
 	GOSUB IntyMusicInit_Credits
