@@ -1,4 +1,5 @@
 'Rastan Ending
+'way too slow....
 myMusic:
 DATA 2
 '
