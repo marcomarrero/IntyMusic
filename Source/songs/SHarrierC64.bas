@@ -2,7 +2,6 @@
 'Arrangement of Bach prelude, BWV 847, Prelude No. 2 in C Minor book 1 of The Well-Tempered Clavie
 'by Mark Cooksey
 '
-MyMusic:
 DATA 2
 
 MUSIC E3,G4,B4

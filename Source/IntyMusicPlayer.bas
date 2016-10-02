@@ -18,28 +18,32 @@ DIM iMusicNoteLast(3)		'Previous notes
 DIM iMusicVolumeLast(3)	'store last volume values
 DIM iMusicDrawNote(3)		'Draw new note?
 
-IF INTYMUSIC_FANFOLD THEN #IntyMusicBlink=CS_ADVANCE ELSE #IntyMusicBlink=0
+'-----
+DIM MyMusicName(16)		'Song Name
 
 '---------------
 IntyMusicReset:
 
 '----show title screen and credits--- also prints vertical song name ---
-GOSUB IntyMusicInit
+IF INTYMUSIC_FANFOLD THEN #IntyMusicBlink=CS_ADVANCE ELSE #IntyMusicBlink=0
+GOSUB IntyMusicCredits
+GOSUB WaitForKeyDownThenUp	
+ScrollDelay=5
+
+'--Volume graph display----
+IF INTYMUSIC_PLAY_VOLUME<2 OR INTYMUSIC_PLAY_VOLUME>15 THEN INTYMUSIC_PLAY_VOLUME=15	'-- Too low, must be a mistake
+#NotePosition = 96+13 +(15-INTYMUSIC_PLAY_VOLUME) + ZOOMY2
+#CharVolume = (INTYMUSIC_VOLUMECARD*8) + 2048			'--GRAM card 40, 41 or 43 for volume bar. I prefer 43.
+
+'==== Pick song and PLAY! ====
+'PLAY VOLUME INTYMUSIC_PLAY_VOLUME
+GOSUB IntyMusic_Playlist_Play
 
 '-----init----
 iMusicScroll=0			'Need to scroll screen?
 iMusicScrollCount=0		'Scroll counter
 Toggle=1					'Piano hilite index, 0 or 1 (Ill XOR it later)
 KeyClear=0
-
-
-'--Volume graph display----
-CONST CharVolume = (iMusic_VolumeCard*8) + 2048		'GRAM card 40, 41 or 43 for volume bar. I prefer 43.
-CONST NotePosition = 96+ZOOMY2+13
-
-'--- PLAY! -----
-WAIT
-PLAY MyMusic
 
 '---- main loop -----
 PlayLoop:
@@ -63,7 +67,7 @@ PlayLoop:
 			
 			'Note text,ex. C5#
 			'PRINT IntyNoteLetter(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x Old one
-			PRINT CharVolume+#iMusicPianoColorB(iMusicX),IntyNoteLetter(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,0				
+			PRINT #CharVolume+#iMusicPianoColorB(iMusicX),IntyNoteLetter(IntyNote)+#x,IntyNoteSharp(IntyNote)+#x,IntyNoteOctave(IntyNote)+#x,0				
 		NEXT iMusicX
 			
 		'----Done updating lower screen. Clear top line, draw staff---
@@ -96,7 +100,7 @@ PlayLoop:
 	iMusicX=8		'8th char
 	FOR #x=0 TO 2
 		'Volume meter...
-		SPRITE #x+5,16 + VISIBLE + iMusicX,NotePosition-iMusicVol(#x), SPR42 + #iMusicPianoColorA(#x) + BEHIND
+		SPRITE #x+5,16 + VISIBLE + iMusicX,(#NotePosition-iMusicVol(#x)), SPR40 + BEHIND + #iMusicPianoColorA(#x) 
 		iMusicX=iMusicX+48		
 	NEXT #x	
 	
@@ -123,8 +127,6 @@ KillMusicAndRestart:
 	WAIT:SOUND 0,1,0:	SOUND 1,1,0:	SOUND 2,1,0:SOUND 4,1,$38
 	CALL IMUSICKILL	'works too well...
 GOTO IntyMusicReset
-
-'----------------------------------------------------------------------
 
 '-- New way to synchronize. Now I am sure I am not skipping any frame in any way
 '-- This is called at every frame, I skip every 6th frame ---
