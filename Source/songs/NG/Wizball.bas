@@ -1,9 +1,6 @@
 
 
-MyMusic:
 DATA 2
-
-
 
 
 MUSIC G3,D3,D4

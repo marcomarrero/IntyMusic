@@ -1,5 +1,5 @@
 'FF2WORLD
-myMusic:
+
 DATA 3
 '
 

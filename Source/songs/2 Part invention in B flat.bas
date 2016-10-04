@@ -1,18 +1,17 @@
 'BWV.0785 No.14 '2 Part invention in B-flat' (Michael L. Taylor)
 
-myMusic:
+
 DATA 3
 '
 
-
 'Pattern1:
-MUSIC A3#,s,s
+MUSIC A3#W,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC s,A4#,s
+MUSIC s,A4#W,s
 MUSIC s,s,s
-MUSIC s,s,C5
+MUSIC s,s,C5W
 MUSIC s,s,s
 MUSIC A2#,D5,s
 MUSIC s,s,s

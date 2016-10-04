@@ -4,10 +4,9 @@ REM Coverted to .MID, to .MOD, then to IntyBasic by Marco A. Marrero
 REM Thanks to the OpenMT software
 REM --------------------------------------------
 
-MyMusic:
 DATA 3
 
-MUSIC A3,s,s
+MUSIC A3W,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
@@ -43,7 +42,7 @@ MUSIC C3#,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC s,E4,s
+MUSIC s,E4W,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
@@ -119,7 +118,7 @@ MUSIC G4,E3,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC F4,D3,D5
+MUSIC F4,D3,D5W
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s

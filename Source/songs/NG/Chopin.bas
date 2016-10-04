@@ -1,6 +1,6 @@
 'Chopin
 'Im pretty sure its wrong..
-myMusic:
+
 DATA 2
 '
 

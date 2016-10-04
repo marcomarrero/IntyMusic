@@ -4,7 +4,7 @@
 '
 DATA 2
 
-MUSIC E3,G4,B4
+MUSIC E3W,G4W,B4W
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s

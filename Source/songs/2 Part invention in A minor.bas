@@ -1,18 +1,17 @@
 'BWV.0784 No.13 "2 Part invention in A minor" (Michael L. Taylor)
 
-MyMusic:
 DATA 2
 
 
-MUSIC A2,s,s
+MUSIC A2W,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC s,E4,s
+MUSIC s,E4W,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC A3,s,A4
+MUSIC A3,s,A4W
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
@@ -1626,20 +1625,5 @@ MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
-MUSIC s,s,s
+MUSIC -,-,-
 MUSIC STOP

@@ -1,10 +1,8 @@
 'Mario2
 
-MyMusic:
-
 DATA 3
 
-MUSIC D4,B4,G5
+MUSIC D4W,B4W,G5W
 MUSIC s,s,s
 MUSIC C4#,A4#,F5#
 MUSIC s,s,s

@@ -1,10 +1,8 @@
 'K.545 mov.1 Allegro 'Piano Sonata No15 in C' (Robert Fisher)
-'Seems wrong. Don't use.
+'Seems wrong. Dont use.
 
-myMusic:
+
 DATA 2
-'
-
 
 'Pattern1:
 MUSIC C5,C4,s

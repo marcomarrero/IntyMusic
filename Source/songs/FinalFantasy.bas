@@ -1,11 +1,11 @@
 'FinalFantasy
-myMusic:
+
 DATA 3
 '
 
 
 'Pattern1:
-MUSIC G2,s,s
+MUSIC G2W,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
@@ -13,7 +13,7 @@ MUSIC G2,s,s
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s
-MUSIC s,D4,B4Y
+MUSIC s,D4W,B4Y
 MUSIC s,s,s
 MUSIC s,s,s
 MUSIC s,s,s

@@ -1,10 +1,9 @@
 'Typewriter song
 '
 
-MyMusic:
 DATA 3
 
-MUSIC F5#,D5,D6
+MUSIC F5#W,D5W,D6W
 MUSIC s,s,s
 MUSIC s,s,C6
 MUSIC s,s,s

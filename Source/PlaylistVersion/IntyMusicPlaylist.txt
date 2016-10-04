@@ -1,0 +1,6 @@
+This version has a playlist and menu. It is a bit older.
+It is a bit tricky to use, and when setting up segments, compiled code starts to act erratically.
+(Maybe part of IntyBasic_epilogue or compiled code is wrong)
+
+ - M.Marrero
+
